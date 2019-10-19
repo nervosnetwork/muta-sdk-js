@@ -1,0 +1,121 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Epoch"
+type Epoch {
+  header: EpochHeader!
+  orderedTxHashes: [Hash!]!
+}
+
+"Epoch header"
+type EpochHeader {
+  chainId: Hash!
+  confirmRoot: [Hash!]!
+  cyclesUsed: Uint64!
+  epochId: Uint64!
+  orderRoot: Hash!
+  preHash: Hash!
+  proposer: Address!
+  receiptRoot: [Hash!]!
+  stateRoot: Hash!
+  timestamp: Uint64!
+  validatorVersion: Uint64!
+}
+
+type Mutation {
+  "Send a transfer transaction to the blockchain."
+  sendCallTransaction(inputAction: InputCallAction!, inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
+  "Send deployment contract transactions to the blockchain."
+  sendDeployTransaction(inputAction: InputDeployAction!, inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
+  "Send a transfer transaction to the blockchain."
+  sendTransferTransaction(inputAction: InputTransferAction!, inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
+  sendUnsafeCallTransaction(inputAction: InputCallAction!, inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "Don't use it! This is just for development testing.")
+  sendUnsafeDeployTransaction(inputAction: InputDeployAction!, inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "Don't use it! This is just for development testing.")
+  sendUnsafeTransferTransaction(inputAction: InputTransferAction!, inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "Don't use it! This is just for development testing.")
+}
+
+type Query {
+  "execute readonly call to contract"
+  Readonly(inputReadonly: InputReadonly!): String!
+  "Get account balance"
+  getBalance(address: Address!, id: Hash!): Balance!
+  "get latest epoch"
+  getLatestEpoch: Epoch!
+}
+
+enum ContractType {
+  APP
+  ASSET
+  LIBRARY
+}
+
+"carrying asset"
+input CarryingAsset {
+  amount: Balance!
+  assetId: Hash!
+}
+
+"input call action."
+input InputCallAction {
+  args: [String!]!
+  carryingAsset: CarryingAsset
+  contract: Address!
+  method: String!
+}
+
+"input deploy action."
+input InputDeployAction {
+  code: Bytes!
+  contractType: ContractType!
+}
+
+"input raw transaction."
+input InputRawTransaction {
+  chainId: Hash!
+  feeAssetId: Hash!
+  feeCycle: Uint64!
+  nonce: Hash!
+  timeout: Uint64!
+}
+
+"input readonly params."
+input InputReadonly {
+  args: [String!]!
+  contract: Address!
+  epochId: Uint64
+  method: String!
+}
+
+"input signature, hash, pubkey"
+input InputTransactionEncryption {
+  pubkey: Bytes!
+  signature: Bytes!
+  txHash: Hash!
+}
+
+"input transfer action."
+input InputTransferAction {
+  carryingAmount: Balance!
+  carryingAssetId: Hash!
+  receiver: Address!
+}
+
+
+"Bytes corresponding hex string."
+scalar Bytes
+
+"Uint64"
+scalar Uint64
+
+"21 bytes of account address, the first bytes of which is the identifier."
+scalar Address
+
+"Keccak hash of hex string"
+scalar Hash
+
+"uint256"
+scalar Balance
