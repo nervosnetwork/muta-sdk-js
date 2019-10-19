@@ -24,19 +24,27 @@ class Client {
    * get epoch id(or height as a hex string)
    */
   public getLatestEpochId(): Promise<string> {
-    return this.client
-      .query<any>({
-        query: gql`
-          {
-            getLatestEpoch {
-              header {
-                epochId
-              }
+    return this.query(
+      gql`
+        {
+          getLatestEpoch {
+            header {
+              epochId
             }
           }
-        `
-      })
-      .then(res => res.data.getLatestEpoch.header.epochId);
+        }
+      `
+    ).then(res => res.data.getLatestEpoch.header.epochId);
+  }
+
+  public getBalance(address: string, id: string): Promise<number> {
+    return this.query(
+      gql`{ getBalance(address: "${address}", id: "${id}") }`
+    ).then(res => Number(res.data.getBalance));
+  }
+
+  private query(query) {
+    return this.client.query<any>({ query });
   }
 }
 
