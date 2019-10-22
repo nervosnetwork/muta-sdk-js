@@ -1,3 +1,5 @@
+import createKeccakHash from 'keccak';
+
 export function rm0x(hex: string) {
   return hex.startsWith('0x') ? hex.slice(2) : hex;
 }
@@ -16,4 +18,10 @@ export function toHex(x: Buffer | number | string): string {
 
 export function toBuffer(x: string): Buffer {
   return Buffer.from(rm0x(x), 'hex');
+}
+
+export function hash(buffer: Buffer): Buffer {
+  return createKeccakHash('keccak256')
+    .update(buffer)
+    .digest();
 }
