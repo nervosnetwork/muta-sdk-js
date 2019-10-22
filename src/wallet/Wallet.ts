@@ -1,0 +1,3 @@
+interface Wallet {}
+
+export { Wallet };
