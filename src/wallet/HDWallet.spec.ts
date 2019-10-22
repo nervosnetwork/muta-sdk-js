@@ -1,5 +1,5 @@
 import test from 'ava';
-import {HDWallet} from './HDWallet';
+import { HDWallet } from './HDWallet';
 
 test('Test HDWallet', t => {
   t.is(HDWallet.generateMnemonic().split(' ').length, 12);

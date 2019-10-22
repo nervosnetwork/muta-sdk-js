@@ -2,7 +2,7 @@ import {
   publicKeyCreate,
   addressFromPublicKey,
   signTransferTx
-} from './Account';
+} from '../core';
 import { toHex, toBuffer } from '../utils';
 
 /**

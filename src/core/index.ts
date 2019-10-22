@@ -1,6 +1,14 @@
-import * as RLP from 'rlp';
-import { publicKeyCreate, sign } from 'secp256k1';
-import { toHex, hash } from '../utils';
+import { encode } from 'rlp';
+import { sign, publicKeyCreate } from 'secp256k1';
+import createKeccakHash from 'keccak';
+import { toHex } from '../utils';
+import { PREFIX_ADDRESS_ACCOUNT } from './constant';
+
+function hash(buffer: Buffer): Buffer {
+  return createKeccakHash('keccak256')
+    .update(buffer)
+    .digest();
+}
 
 /**
  * create a public key from private key
@@ -8,13 +16,13 @@ import { toHex, hash } from '../utils';
 export { publicKeyCreate };
 
 /**
- * calc an account address from a public key
+ * calculate an account address from a public key
  * @param publicKey
  */
 export function addressFromPublicKey(publicKey: Buffer): Buffer {
   const hashed = hash(publicKey);
   const address = hashed.slice(0, 20);
-  const magicAddressPrefix = Buffer.from([0x10]);
+  const magicAddressPrefix = Buffer.from([PREFIX_ADDRESS_ACCOUNT]);
   return Buffer.concat([Buffer.from(magicAddressPrefix), Buffer.from(address)]);
 }
 
@@ -40,7 +48,7 @@ export function signTransferTx(
     tx.receiver
   ]);
 
-  const encoded = RLP.encode(orderedTx);
+  const encoded = encode(orderedTx);
   const txHash = hash(encoded);
 
   const { signature } = sign(txHash, privateKey);
