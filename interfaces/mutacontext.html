@@ -83,6 +83,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="mutacontext.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="mutacontext.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="mutacontext.html#timeoutgap" class="tsd-kind-icon">timeout<wbr>Gap</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,9 +97,15 @@
 					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/6604522/src/lib/Muta.ts#L6">lib/Muta.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/dc4008d/src/Muta.ts#L11">Muta.ts:11</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>for more information about ChainID proposal,
+							look at <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md">eip155</a></p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
 					<a name="endpoint" class="tsd-anchor"></a>
@@ -106,9 +113,29 @@
 					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/6604522/src/lib/Muta.ts#L7">lib/Muta.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/dc4008d/src/Muta.ts#L15">Muta.ts:15</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>a <a href="https://graphql.org/">GraplQL</a> endpoint of remote node, ie. <a href="http://127.0.0.1:8000/graphql">http://127.0.0.1:8000/graphql</a></p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="timeoutgap" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> timeout<wbr>Gap</h3>
+					<div class="tsd-signature tsd-kind-icon">timeout<wbr>Gap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/dc4008d/src/Muta.ts#L19">Muta.ts:19</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>defaults to 30. <a href="../globals.html#default_timeout_gap">DEFAULT_TIMEOUT_GAP</a></p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -145,6 +172,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
 								<a href="mutacontext.html#endpoint" class="tsd-kind-icon">endpoint</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="mutacontext.html#timeoutgap" class="tsd-kind-icon">timeout<wbr>Gap</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -152,10 +182,16 @@
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="wallet.html" class="tsd-kind-icon">Wallet</a>
 					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#default_timeout_gap" class="tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#prefix_address_account" class="tsd-kind-icon">PREFIX_<wbr>ADDRESS_<wbr>ACCOUNT</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a>
 					</li>
-					<li class=" tsd-kind-function">
+					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="../globals.html#hash" class="tsd-kind-icon">hash</a>
 					</li>
 					<li class=" tsd-kind-function">
