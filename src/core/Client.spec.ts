@@ -2,7 +2,10 @@ import test from 'ava';
 import * as _ from 'lodash';
 import { Client } from './Client';
 
-const client = new Client('http://localhost:8000/graphql');
+const client = new Client(
+  'http://127.0.0.1:8000/graphql',
+  '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'
+);
 
 function randHex(len: number): string {
   return _.random(2 ** 256)
