@@ -1,8 +1,15 @@
-
+/**
+ * remove 0x from a hex string
+ * @param hex
+ */
 export function rm0x(hex: string) {
   return hex.startsWith('0x') ? hex.slice(2) : hex;
 }
 
+/**
+ * parse to hex string
+ * @param x
+ */
 export function toHex(x: Buffer | number | string): string {
   if (typeof x === 'string') {
     if (x.startsWith('0x')) return x;
@@ -15,6 +22,10 @@ export function toHex(x: Buffer | number | string): string {
   return '0x' + x.toString('hex');
 }
 
+/**
+ * parse a hex string to buffer
+ * @param x
+ */
 export function toBuffer(x: string): Buffer {
   return Buffer.from(rm0x(x), 'hex');
 }
