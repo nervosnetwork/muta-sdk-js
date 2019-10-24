@@ -66,3 +66,9 @@ async function example() {
 ## Links
 
 - [API](https://homura.github.io/muta-sdk-js)
+
+## Development
+
+- nodejs >= 10
+- typescript >= 3.7
+
