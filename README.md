@@ -1,7 +1,6 @@
 # Muta SDK(WIP)
 
-The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(A High performance Blockchain framework).
-
+The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework).
 Allow you interact with Muta node's GraphQL service.
 
 ## Quick Start
@@ -11,6 +10,8 @@ npm install homura/muta-sdk-js
 ```
 
 ## Example
+
+The bellow code shows how to create account and how to transfer 
 
 ```js
 import { Muta } from './src/Muta';
@@ -62,6 +63,6 @@ async function example() {
 }
 ```
 
-## Documentation
+## Links
 
 - [API](https://homura.github.io/muta-sdk-js)

@@ -1,8 +1,11 @@
-import { encode } from 'rlp';
-import { sign, publicKeyCreate } from 'secp256k1';
 import createKeccakHash from 'keccak';
+import { encode } from 'rlp';
+import { publicKeyCreate, sign } from 'secp256k1';
 import { toHex } from '../utils';
-import { PREFIX_ADDRESS_ACCOUNT } from './constant';
+import {
+  PREFIX_ADDRESS_ACCOUNT,
+  PREFIX_TRANSACTION_TRANSFER
+} from './constant';
 
 function hash(buffer: Buffer): Buffer {
   return createKeccakHash('keccak256')
@@ -36,9 +39,10 @@ export function signTransferTx(
   privateKey: Buffer
 ): InputEncryption {
   let orderedTx = [
+    PREFIX_TRANSACTION_TRANSFER,
     tx.chainId,
-    tx.feeCycle,
     tx.feeAssetId,
+    tx.feeCycle,
     tx.nonce,
     tx.timeout
   ];
@@ -53,8 +57,8 @@ export function signTransferTx(
 
   const { signature } = sign(txHash, privateKey);
   return {
-    txHash: toHex(txHash),
     pubkey: toHex(publicKeyCreate(privateKey)),
-    signature: toHex(signature)
+    signature: toHex(signature),
+    txHash: toHex(txHash)
   };
 }
