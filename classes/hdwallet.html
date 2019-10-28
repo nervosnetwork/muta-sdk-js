@@ -69,7 +69,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>HD Wallet, for more we can see
+						<p>HD Wallet, for more see
 							<a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">bip32</a>,
 							<a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">bip39</a>
 						and <a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki">bip44</a></p>
@@ -87,7 +87,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/wallet.html" class="tsd-signature-type">Wallet</a></li>
+					<li><a href="../interfaces/syncwallet.html" class="tsd-signature-type">SyncWallet</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -109,6 +109,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hdwallet.html#accountbyindex" class="tsd-kind-icon">account<wbr>ByIndex</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hdwallet.html#getprivatekey" class="tsd-kind-icon">get<wbr>Private<wbr>Key</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="hdwallet.html#frommnemonic" class="tsd-kind-icon">from<wbr>Mnemonic</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="hdwallet.html#generatemnemonic" class="tsd-kind-icon">generate<wbr>Mnemonic</a></li>
@@ -130,7 +131,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L12">wallet/HDWallet.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L26">wallet/HDWallet.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -152,13 +153,37 @@
 					<div class="tsd-signature tsd-kind-icon">mnemonic<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L12">wallet/HDWallet.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L26">wallet/HDWallet.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="accountbyindex" class="tsd-anchor"></a>
+					<h3>account<wbr>ByIndex</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">account<wbr>ByIndex<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/syncwallet.html">SyncWallet</a>.<a href="../interfaces/syncwallet.html#accountbyindex">accountByIndex</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L43">wallet/HDWallet.ts:43</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getprivatekey" class="tsd-anchor"></a>
 					<h3>get<wbr>Private<wbr>Key</h3>
@@ -169,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L26">wallet/HDWallet.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L36">wallet/HDWallet.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +224,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L33">wallet/HDWallet.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L15">wallet/HDWallet.ts:15</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -222,7 +247,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L37">wallet/HDWallet.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L19">wallet/HDWallet.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -239,7 +264,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L18">wallet/HDWallet.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/b8f6884/src/wallet/HDWallet.ts#L23">wallet/HDWallet.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -279,6 +304,9 @@
 								<a href="hdwallet.html#mnemonic" class="tsd-kind-icon">mnemonic</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="hdwallet.html#accountbyindex" class="tsd-kind-icon">account<wbr>ByIndex</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="hdwallet.html#getprivatekey" class="tsd-kind-icon">get<wbr>Private<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
@@ -304,7 +332,10 @@
 						<a href="../interfaces/mutacontext.html" class="tsd-kind-icon">Muta<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="../interfaces/wallet.html" class="tsd-kind-icon">Wallet</a>
+						<a href="../interfaces/syncwallet.html" class="tsd-kind-icon">Sync<wbr>Wallet</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#coin_type" class="tsd-kind-icon">COIN_<wbr>TYPE</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="../globals.html#default_timeout_gap" class="tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP</a>
