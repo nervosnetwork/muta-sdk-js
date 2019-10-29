@@ -6,7 +6,7 @@ Allow you interact with Muta node's GraphQL service.
 ## Quick Start
 
 ```shell
-npm install homura/muta-sdk-js
+npm install nervosnetwork/muta-sdk-js
 ```
 
 ## Example
@@ -65,7 +65,7 @@ async function example() {
 
 ## Links
 
-- [API](https://homura.github.io/muta-sdk-js)
+- [API](https://nervosnetwork.github.io/muta-sdk-js)
 
 ## Development
 
