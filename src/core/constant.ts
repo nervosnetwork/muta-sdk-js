@@ -1,4 +1,9 @@
 /**
+ * HD Wallet coin type
+ */
+export const COIN_TYPE = 2;
+
+/**
  * The account address starts with "10"
  */
 export const PREFIX_ADDRESS_ACCOUNT = 0x10;

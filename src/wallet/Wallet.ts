@@ -1,3 +1,0 @@
-interface Wallet {}
-
-export { Wallet };

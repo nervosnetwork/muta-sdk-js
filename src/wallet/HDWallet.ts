@@ -1,22 +1,32 @@
-import { mnemonicToSeedSync, generateMnemonic } from 'bip39';
+import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import * as HDKey from 'hdkey';
-import { Wallet } from '..';
+import { SyncWallet } from '..';
+import { SyncAccount } from '../account';
+import { COIN_TYPE } from '../core/constant';
+import { toHex } from '../utils';
 
 /**
- * HD Wallet, for more we can see
+ * HD Wallet, for more information see
  * [bip32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki),
  * [bip39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)
  * and [bip44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
  */
-export class HDWallet implements Wallet {
+export class HDWallet implements SyncWallet {
+  public static fromMnemonic(mnemonic: string): HDWallet {
+    return new HDWallet(mnemonic);
+  }
+
+  public static generateMnemonic() {
+    return generateMnemonic();
+  }
+
+  private static getHDPath(index: number): string {
+    return `m/44'/${COIN_TYPE}'/${index}'/0/0`;
+  }
   private readonly mnemonic: string;
 
   constructor(mnemonic: string) {
     this.mnemonic = mnemonic;
-  }
-
-  private static getHDPath(index: number): string {
-    return `m/44'/60'/${index}'/0/0`;
   }
 
   /**
@@ -30,11 +40,7 @@ export class HDWallet implements Wallet {
     return hdInstance._privateKey;
   }
 
-  public static fromMnemonic(mnemonic: string): HDWallet {
-    return new HDWallet(mnemonic);
-  }
-
-  public static generateMnemonic() {
-    return generateMnemonic();
+  public accountByIndex(index: number): SyncAccount {
+    return SyncAccount.fromPrivateKey(toHex(this.getPrivateKey(index)));
   }
 }
