@@ -24,5 +24,5 @@ test('get balance', async t => {
   const id = '0x' + randHex(64);
 
   const balance = await client.getBalance(address, id);
-  t.is(balance, 0);
+  t.is(balance, 0, 'a random address should has no assert');
 });
