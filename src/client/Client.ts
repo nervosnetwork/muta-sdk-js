@@ -26,6 +26,7 @@ export class Client {
 
     this.client = new ApplloClient({
       uri: this.endpoint,
+      // tslint:disable-next-line:object-literal-sort-keys
       fetchOptions: {
         fetchOptions: {
           mode: 'no-cors'
@@ -86,8 +87,8 @@ export class Client {
       carryingAssetId: options.carryingAssetId,
       receiver: options.receiver,
 
-      feeCycle: options.feeCycle ?? '0xff',
-      feeAssetId: options.feeAssetId ?? options.carryingAssetId
+      feeAssetId: options.feeAssetId ?? options.carryingAssetId,
+      feeCycle: options.feeCycle ?? '0xff'
     };
   }
 
