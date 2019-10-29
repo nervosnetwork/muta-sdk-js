@@ -1,7 +1,7 @@
-import { Client } from './index';
-import { HDWallet } from './wallet';
 import { SyncAccount } from './account';
 import { DEFAULT_TIMEOUT_GAP } from './core/constant';
+import { Client } from './index';
+import { HDWallet } from './wallet';
 
 interface MutaContext {
   /**
@@ -27,8 +27,8 @@ export class Muta {
 
   constructor(context: MutaContext) {
     this.context = {
-      endpoint: context.endpoint,
       chainId: context.chainId,
+      endpoint: context.endpoint,
       timeoutGap: DEFAULT_TIMEOUT_GAP
     };
   }

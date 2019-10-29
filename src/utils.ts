@@ -12,7 +12,7 @@ export function rm0x(hex: string) {
  */
 export function toHex(x: Buffer | number | string): string {
   if (typeof x === 'string') {
-    if (x.startsWith('0x')) return x;
+    if (x.startsWith('0x')) { return x; }
     return '0x' + x;
   }
   if (typeof x === 'number') {
