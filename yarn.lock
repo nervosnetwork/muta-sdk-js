@@ -4755,10 +4755,10 @@ typescript@3.5.x:
   resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
   integrity sha1-yDD2V/k/HqhGgZ6SkJL1/lmD6Xc=
 
-typescript@^3.7.0-beta:
-  version "3.7.0-dev.20191018"
-  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.7.0-dev.20191018.tgz#6b98a655b124ca697364e2d7977c469a2bfede3d"
-  integrity sha1-a5imVbEkymlzZOLXl3xGmiv+3j0=
+typescript@^3.7-rc:
+  version "3.7.1-rc"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.7.1-rc.tgz#2054b872d67f8dc732e36c1df397f9327f37ada0"
+  integrity sha1-IFS4ctZ/jccy42wd85f5Mn83raA=
 
 uglify-js@^3.1.4:
   version "3.6.2"
@@ -4868,6 +4868,11 @@ util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/util-deprecate/download/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+
+utility-types@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.npm.taobao.org/utility-types/download/utility-types-3.9.0.tgz#c322d974e7062ec967077384c3b75077a955d83b"
+  integrity sha1-wyLZdOcGLslnB3OEw7dQd6lV2Ds=
 
 uuid@^3.3.2:
   version "3.3.3"

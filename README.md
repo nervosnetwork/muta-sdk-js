@@ -38,7 +38,7 @@ async function example() {
   /*** transfer asset to another account ***/
   const client = muta.client;
   // create TransferTransaction object
-  const tx = await client.createTransferTx({
+  const tx = await client.prepareTransferTransaction({
     carryingAmount: '0x10000',
     carryingAssetId:
       '0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5',
@@ -46,7 +46,7 @@ async function example() {
   });
 
   // create a signature
-  const signedTx = account.signTransferTx(tx);
+  const signedTx = account.signTransaction(tx);
   // and send the transfer
   await client.sendTransferTransaction(signedTx);
 

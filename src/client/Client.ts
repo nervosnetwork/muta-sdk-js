@@ -1,8 +1,10 @@
-import ApplloClient from 'apollo-boost';
+import ApplloClient, { DocumentNode } from 'apollo-boost';
 // tslint:disable-next-line:no-submodule-imports
 import 'cross-fetch/polyfill';
 import gql from 'graphql-tag';
 import randomBytes from 'random-bytes';
+import { Required } from 'utility-types';
+import { DEFAULT_TIMEOUT_GAP } from '../core/constant';
 import { toHex } from '../utils';
 
 /**
@@ -25,22 +27,17 @@ export class Client {
     this.chainId = chainId;
 
     this.client = new ApplloClient({
-      uri: this.endpoint,
-      // tslint:disable-next-line:object-literal-sort-keys
       fetchOptions: {
         fetchOptions: {
           mode: 'no-cors'
         }
-      }
+      },
+      uri: this.endpoint
     });
   }
 
-  public getEndPoint(): string {
-    return this.endpoint;
-  }
-
   /**
-   * get epoch id(or height as a hex string)
+   * get epoch id(or epoch height as a hex string)
    */
   public getLatestEpochId(): Promise<string> {
     return this.query(
@@ -61,22 +58,32 @@ export class Client {
     return Number('0x' + epochId);
   }
 
-  public getBalance(address: string, id: string): Promise<number> {
+  /**
+   *
+   * @param address
+   * @param assetId Identifier of asset in Muta. ie.
+   */
+  public getBalance(address: string, assetId: string): Promise<number> {
     return this.query(
-      gql`{ getBalance(address: "${address}", id: "${id}") }`
+      gql`{ getBalance(address: "${address}", id: "${assetId}") }`
     ).then(res => Number('0x' + res.data.getBalance));
   }
 
-  public async createTransferTx(options: {
-    carryingAmount;
-    carryingAssetId;
-    receiver;
-    feeAssetId?;
-    feeCycle?;
-  }): Promise<TransferTx> {
+  /**
+   * A transaction often takes a lot of message like nonce, block height,
+   * timeout and so on. This function helps you to assemble a transaction quickly
+   * with some commonly used parameters.
+   * @param options
+   */
+  public async prepareTransferTransaction(
+    options: Required<
+      Partial<TransferTransaction>,
+      'carryingAmount' | 'carryingAssetId' | 'receiver'
+    >
+  ): Promise<TransferTransaction> {
     const nonce = toHex(randomBytes.sync(32).toString('hex'));
     const height = await this.getEpochHeight();
-    const timeout = toHex(height + 29);
+    const timeout = toHex(height + DEFAULT_TIMEOUT_GAP - 1);
 
     return {
       chainId: this.chainId,
@@ -92,43 +99,38 @@ export class Client {
     };
   }
 
-  public sendTransferTransaction({
-    nonce,
-    timeout,
-    feeCycle,
-    feeAssetId,
-    carryingAmount,
-    carryingAssetId,
-    receiver,
-    inputEncryption
-  }) {
-    return this.mutation(gql`mutation {
+  /**
+   * Return a transaction hash after sentTransferTransaction
+   */
+  public async sendTransferTransaction(options: SignedTransferTransaction): Promise<string> {
+    const res = await this.mutation(gql`mutation {
       sendTransferTransaction(
         inputRaw: {
-          chainId: "${this.chainId}",
-          feeCycle: "${feeCycle}",
-          feeAssetId: "${feeAssetId}",
-          nonce: "${nonce}",
-          timeout: "${timeout}"
+          chainId: "${options.chainId}",
+          feeCycle: "${options.feeCycle}",
+          feeAssetId: "${options.feeAssetId}",
+          nonce: "${options.nonce}",
+          timeout: "${options.timeout}"
         },
         inputAction: {
-          carryingAmount: "${carryingAmount}",
-          carryingAssetId: "${carryingAssetId}",
-          receiver: "${receiver}",
+          carryingAmount: "${options.carryingAmount}",
+          carryingAssetId: "${options.carryingAssetId}",
+          receiver: "${options.receiver}",
         },
         inputEncryption: {
-          txHash: "${inputEncryption.txHash}",
-          pubkey: "${inputEncryption.pubkey}",
-          signature: "${inputEncryption.signature}"
+          txHash: "${options.txHash}",
+          pubkey: "${options.pubkey}",
+          signature: "${options.signature}"
         }
       )}`);
+    return res?.data?.sendTransferTransaction;
   }
 
-  private query(query) {
+  public query(query: DocumentNode) {
     return this.client.query<any>({ query });
   }
 
-  private mutation(mutation) {
+  public mutation(mutation: DocumentNode) {
     return this.client.mutate({ mutation });
   }
 }

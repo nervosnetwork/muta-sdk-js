@@ -1,4 +1,4 @@
-import { addressFromPublicKey, publicKeyCreate, signTransferTx } from '../core';
+import { addressFromPublicKey, publicKeyCreate, signTransferTransaction } from '../core';
 import { toBuffer, toHex } from '../utils';
 
 /**
@@ -51,7 +51,7 @@ export class SyncAccount {
     this._privateKey = privateKey;
   }
 
-  public signTransaction(tx: TransferTx): InputEncryption {
-    return signTransferTx(tx, this._privateKey);
+  public signTransaction(tx: TransferTransaction): SignedTransferTransaction {
+    return signTransferTransaction(tx, this._privateKey);
   }
 }

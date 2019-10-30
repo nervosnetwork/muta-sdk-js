@@ -34,10 +34,10 @@ export function addressFromPublicKey(publicKey: Buffer): Buffer {
  * @param tx
  * @param privateKey
  */
-export function signTransferTx(
-  tx: TransferTx,
+export function signTransferTransaction(
+  tx: TransferTransaction,
   privateKey: Buffer
-): InputEncryption {
+): SignedTransferTransaction {
   let orderedTx = [
     PREFIX_TRANSACTION_TRANSFER,
     tx.chainId,
@@ -57,6 +57,7 @@ export function signTransferTx(
 
   const { signature } = sign(txHash, privateKey);
   return {
+    ...tx,
     pubkey: toHex(publicKeyCreate(privateKey)),
     signature: toHex(signature),
     txHash: toHex(txHash)

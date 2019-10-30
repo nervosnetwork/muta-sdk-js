@@ -65,7 +65,8 @@
     "lodash": "^4.17.15",
     "random-bytes": "^1.0.0",
     "rlp": "^2.2.3",
-    "secp256k1": "^3.7.1"
+    "secp256k1": "^3.7.1",
+    "utility-types": "^3.9.0"
   },
   "devDependencies": {
     "@bitjson/npm-scripts-info": "^1.0.0",
@@ -85,7 +86,7 @@
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-immutable": "^6.0.1",
-    "typescript": "^3.7-rc"
+    "typescript": "^3.7.1-rc"
   },
   "ava": {
     "failFast": true,

@@ -1,5 +1,6 @@
 import test from 'ava';
-import * as _ from 'lodash';
+import randomBytes from 'random-bytes';
+import { SyncAccount } from '../account';
 import { Client } from './Client';
 
 const client = new Client(
@@ -8,10 +9,7 @@ const client = new Client(
 );
 
 function randHex(len: number): string {
-  return _.random(2 ** 256)
-    .toString(16)
-    .padStart(len, '0')
-    .slice(0, len);
+  return randomBytes.sync(len / 2).toString('hex');
 }
 
 test('test get epoch height', async t => {
@@ -25,4 +23,22 @@ test('get balance', async t => {
 
   const balance = await client.getBalance(address, id);
   t.is(balance, 0, 'a random address should has no assert');
+});
+
+test('should return hash after sent transaction', async t => {
+  const receiver = '0x10' + randHex(40);
+  const carryingAssetId = '0x' + randHex(64);
+  const carryingAmount = '0xffff';
+
+  const transferTx = await client.prepareTransferTransaction({
+    carryingAmount,
+    carryingAssetId,
+    receiver
+  });
+
+  const account = SyncAccount.fromPrivateKey(`0x${randHex(64)}`);
+  const signed = account.signTransaction(transferTx);
+  const txHash = await client.sendTransferTransaction(signed);
+
+  t.truthy(txHash);
 });

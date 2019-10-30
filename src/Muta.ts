@@ -14,7 +14,7 @@ interface MutaContext {
    */
   endpoint: string;
   /**
-   * defaults to 30. {@link DEFAULT_TIMEOUT_GAP}
+   * defaults to 20. {@link DEFAULT_TIMEOUT_GAP}
    */
   timeoutGap?: number;
 }
