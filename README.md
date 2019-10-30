@@ -29,7 +29,7 @@ async function example() {
   const wallet = muta.hdWalletFromMnemonic(mnemonic);
 
   // get pk from account0
-  const account = wallet.getPrivateKey(0);
+  const account = wallet.accountByIndex(0);
   console.log(account.address); // 0x10...
 
   // also we can just create account from a private key
@@ -49,10 +49,9 @@ async function example() {
   const signedTx = account.signTransferTx(tx);
   // and send the transfer
   await client.sendTransferTransaction(signedTx);
-  const beforeEpochHeight = await client.getEpochHeight();
 
   /* await for consensus about 3 seconds */
-  const latestEpochHeight = await client.getEpochHeight();
+  await new Promise(resolve => setTimeout(resolve, 3000));
 
   // check balance
   const balance = await client.getBalance(
@@ -65,10 +64,18 @@ async function example() {
 
 ## Links
 
-- [API](https://nervosnetwork.github.io/muta-sdk-js)
+- [API Documentation](https://nervosnetwork.github.io/muta-sdk-js)
+- [Muta](https://github.com/nervosnetwork/muta)
 
 ## Development
 
 - nodejs >= 10
 - typescript >= 3.7
+- yarn
 
+```shell
+git clone https://github.com/nervosnetwork/muta-sdk-js
+cd muta-sdk-js
+yarn
+yarn start
+```
