@@ -14,7 +14,7 @@ npm install muta-sdk
 The bellow code shows how to create account and how to transfer 
 
 ```js
-import { Muta } from './src/Muta';
+import { Muta } from 'muta-sdk';
 
 async function example() {
   const muta = new Muta({
