@@ -6,7 +6,7 @@ Allow you interact with Muta node's GraphQL service.
 ## Quick Start
 
 ```shell
-npm install nervosnetwork/muta-sdk-js
+npm install muta-sdk
 ```
 
 ## Example
@@ -39,7 +39,7 @@ async function example() {
   const client = muta.client;
   // create TransferTransaction object
   const tx = await client.prepareTransferTransaction({
-    carryingAmount: '0x10000',
+    carryingAmount: '0x1000',
     carryingAssetId:
       '0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5',
     receiver: '0x103e9b982b443592ffc3d4c2a484c220fb3e29e2e4'
