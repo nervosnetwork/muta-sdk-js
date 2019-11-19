@@ -1,4 +1,10 @@
-import ApplloClient, { DocumentNode } from 'apollo-boost';
+import {
+  DefaultOptions,
+  DocumentNode,
+  HttpLink,
+  InMemoryCache
+} from 'apollo-boost';
+import { ApolloClient } from 'apollo-client';
 // tslint:disable-next-line:no-submodule-imports
 import 'cross-fetch/polyfill';
 import gql from 'graphql-tag';
@@ -20,19 +26,34 @@ export class Client {
    */
   private readonly chainId;
 
-  private readonly client: ApplloClient<null>;
+  private readonly client: ApolloClient<any>;
 
   constructor(entry: string, chainId: string) {
     this.endpoint = entry;
     this.chainId = chainId;
 
-    this.client = new ApplloClient({
+    const link = new HttpLink({
       fetchOptions: {
-        fetchOptions: {
-          mode: 'no-cors'
-        }
+        mode: 'no-cors'
       },
       uri: this.endpoint
+    });
+
+    // create ApolloClient without cache
+    const defaultOptions: DefaultOptions = {
+      query: {
+        errorPolicy: 'all',
+        fetchPolicy: 'no-cache'
+      },
+      watchQuery: {
+        errorPolicy: 'ignore',
+        fetchPolicy: 'no-cache'
+      }
+    };
+    this.client = new ApolloClient({
+      cache: new InMemoryCache(),
+      defaultOptions,
+      link
     });
   }
 
@@ -102,7 +123,9 @@ export class Client {
   /**
    * Return a transaction hash after sentTransferTransaction
    */
-  public async sendTransferTransaction(options: SignedTransferTransaction): Promise<string> {
+  public async sendTransferTransaction(
+    options: SignedTransferTransaction
+  ): Promise<string> {
     const res = await this.mutation(gql`mutation {
       sendTransferTransaction(
         inputRaw: {
@@ -127,7 +150,7 @@ export class Client {
   }
 
   public query(query: DocumentNode) {
-    return this.client.query<any>({ query });
+    return this.client.query({ query });
   }
 
   public mutation(mutation: DocumentNode) {

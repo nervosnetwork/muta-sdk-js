@@ -54,6 +54,7 @@
     "@types/lodash": "^4.14.144",
     "@types/secp256k1": "^3.5.0",
     "apollo-boost": "^0.4.4",
+    "apollo-client": "^2.6.4",
     "bip39": "^3.0.2",
     "cross-fetch": "^3.0.4",
     "graphql": "^14.5.8",

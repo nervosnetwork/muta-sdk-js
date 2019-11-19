@@ -24,6 +24,7 @@ interface MutaContext {
  */
 export class Muta {
   private readonly context: MutaContext;
+  private readonly rpcClient: Client;
 
   constructor(context: MutaContext) {
     this.context = {
@@ -31,11 +32,13 @@ export class Muta {
       endpoint: context.endpoint,
       timeoutGap: DEFAULT_TIMEOUT_GAP
     };
+
+    const { endpoint, chainId } = this.context;
+    this.rpcClient = new Client(endpoint, chainId);
   }
 
   get client(): Client {
-    const { endpoint, chainId } = this.context;
-    return new Client(endpoint, chainId);
+    return this.rpcClient;
   }
 
   /**
