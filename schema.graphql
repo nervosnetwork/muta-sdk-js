@@ -5,103 +5,139 @@ schema {
   mutation: Mutation
 }
 
-"Epoch"
+"Epoch is a single digital record created within a blockchain. Each epoch contains a record of the previous Epoch, and when linked together these become the âchainâ.An epoch is always composed of header and body."
 type Epoch {
+  "The header section of an epoch"
   header: EpochHeader!
+  "The body section of an epoch"
   orderedTxHashes: [Hash!]!
 }
 
-"Epoch header"
+"An epoch header is like the metadata of an epoch."
 type EpochHeader {
+  "Identifier of a chain in order to prevent replay attacks across channels "
   chainId: Hash!
+  "The merkle roots of all the confirms"
   confirmRoot: [Hash!]!
-  cyclesUsed: Uint64!
+  "The sum of all transactions costs"
+  cyclesUsed: [Uint64!]!
+  "Known as the block height like other blockchain"
   epochId: Uint64!
+  "The merkle root of ordered transactions"
   orderRoot: Hash!
+  "The hash of the serialized previous epoch"
   preHash: Hash!
+  proof: Proof!
+  "The address descirbed who packed the epoch"
   proposer: Address!
+  "The merkle roots of receipts"
   receiptRoot: [Hash!]!
+  "The merkle root of state root"
   stateRoot: Hash!
+  "A timestamp that records when the epoch was created"
   timestamp: Uint64!
+  "The version of validator is designed for cross chain"
   validatorVersion: Uint64!
+  validators: [Validator!]!
+}
+
+type Event {
+  data: String!
+  service: String!
+}
+
+type ExecResp {
+  isError: Boolean!
+  ret: String!
 }
 
 type Mutation {
-  "Send a transfer transaction to the blockchain."
-  sendCallTransaction(inputAction: InputCallAction!, inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
-  "Send deployment contract transactions to the blockchain."
-  sendDeployTransaction(inputAction: InputDeployAction!, inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
-  "Send a transfer transaction to the blockchain."
-  sendTransferTransaction(inputAction: InputTransferAction!, inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
-  sendUnsafeCallTransaction(inputAction: InputCallAction!, inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "Don't use it! This is just for development testing.")
-  sendUnsafeDeployTransaction(inputAction: InputDeployAction!, inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "Don't use it! This is just for development testing.")
-  sendUnsafeTransferTransaction(inputAction: InputTransferAction!, inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "Don't use it! This is just for development testing.")
+  "send transaction"
+  sendTransaction(inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
+  unsafeSendTransaction(inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "DON'T use it in production! This is just for development.")
+}
+
+"The verifier of the epoch header proved"
+type Proof {
+  bitmap: Bytes!
+  epochHash: Hash!
+  epochId: Uint64!
+  round: Uint64!
+  signature: Bytes!
 }
 
 type Query {
-  "execute readonly call to contract"
-  Readonly(inputReadonly: InputReadonly!): String!
-  "Get account balance"
-  getBalance(address: Address!, id: Hash!): Balance!
-  "get latest epoch"
-  getLatestEpoch: Epoch!
+  "Get the epoch"
+  getEpoch(epochId: Uint64): Epoch!
+  "Get the receipt by transaction hash"
+  getReceipt(txHash: Hash!): Receipt!
+  "Get the transaction by hash"
+  getTransaction(txHash: Hash!): SignedTransaction!
+  "query service"
+  queryService(caller: Address!, cyclesLimit: Uint64, cyclesPrice: Uint64, epochId: Uint64, method: String!, payload: String!, serviceName: String!): ExecResp!
 }
 
-enum ContractType {
-  APP
-  ASSET
-  LIBRARY
-}
-
-"carrying asset"
-input CarryingAsset {
-  amount: Balance!
-  assetId: Hash!
-}
-
-"input call action."
-input InputCallAction {
-  args: [String!]!
-  carryingAsset: CarryingAsset
-  contract: Address!
-  method: String!
-}
-
-"input deploy action."
-input InputDeployAction {
-  code: Bytes!
-  contractType: ContractType!
-}
-
-"input raw transaction."
-input InputRawTransaction {
-  chainId: Hash!
-  feeAssetId: Hash!
-  feeCycle: Uint64!
-  nonce: Hash!
-  timeout: Uint64!
-}
-
-"input readonly params."
-input InputReadonly {
-  args: [String!]!
-  contract: Address!
-  epochId: Uint64
-  method: String!
-}
-
-"input signature, hash, pubkey"
-input InputTransactionEncryption {
-  pubkey: Bytes!
-  signature: Bytes!
+type Receipt {
+  cyclesUsed: Uint64!
+  epochId: Uint64!
+  events: [Event!]!
+  response: ReceiptResponse!
+  stateRoot: Hash!
   txHash: Hash!
 }
 
-"input transfer action."
-input InputTransferAction {
-  carryingAmount: Balance!
-  carryingAssetId: Hash!
-  receiver: Address!
+type ReceiptResponse {
+  isError: Boolean!
+  method: String!
+  ret: String!
+  serviceName: String!
+}
+
+type SignedTransaction {
+  chainId: Hash!
+  cyclesLimit: Uint64!
+  cyclesPrice: Uint64!
+  method: String!
+  nonce: Hash!
+  payload: String!
+  pubkey: Bytes!
+  serviceName: String!
+  signature: Bytes!
+  timeout: Uint64!
+  txHash: Hash!
+}
+
+"Validator address set"
+type Validator {
+  address: Address!
+  proposeWeight: Int!
+  voteWeight: Int!
+}
+
+"There was many types of transaction in Muta, A transaction often require computing resources or write data to chain,these resources are valuable so we need to pay some token for them.InputRawTransaction describes information above"
+input InputRawTransaction {
+  "Identifier of the chain."
+  chainId: Hash!
+  "Mostly like the gas limit in Ethereum, describes the fee that you are willing to pay the highest price for the transaction"
+  cyclesLimit: Uint64!
+  cyclesPrice: Uint64!
+  method: String!
+  "Every transaction has its own id, unlike Ethereum's nonce,the nonce in Muta is an hash"
+  nonce: Hash!
+  payload: String!
+  serviceName: String!
+  "For security and performance reasons, Muta will only deal with trade request over a period of time,the `timeout` should be `timeout > current_epoch_height` and `timeout < current_epoch_height + timeout_gap`,the `timeout_gap` generally equal to 20."
+  timeout: Uint64!
+}
+
+"Signature of the transaction"
+input InputTransactionEncryption {
+  "The public key of transfer"
+  pubkey: Bytes!
+  "The signature of the transaction"
+  signature: Bytes!
+  "The digest of the transaction"
+  txHash: Hash!
 }
 
 
@@ -111,11 +147,8 @@ scalar Bytes
 "Uint64"
 scalar Uint64
 
-"21 bytes of account address, the first bytes of which is the identifier."
+"20 bytes of account address"
 scalar Address
 
-"Keccak hash of hex string"
+"The output digest of Keccak hash function"
 scalar Hash
-
-"uint256"
-scalar Balance
