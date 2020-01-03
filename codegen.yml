@@ -1,0 +1,14 @@
+schema: http://localhost:8000/graphql
+documents: src/client/*.graphql
+generates:
+  src/client/codegen/sdk.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request
+config:
+  scalars:
+    Uint64: string
+    Hash: string
+    Address: string
+    Bytes: string

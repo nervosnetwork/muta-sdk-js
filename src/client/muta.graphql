@@ -1,0 +1,37 @@
+query getEpochId($epochId: Uint64) {
+  getEpoch(epochId: $epochId) {
+    header {
+      epochId
+    }
+  }
+}
+
+query queryService(
+  $serviceName: String!
+  $method: String!
+  $payload: String!
+  $epochId: Uint64
+  $caller: Address = "0x0000000000000000000000000000000000000000"
+  $cyclePrice: Uint64
+  $cycleLimit: Uint64
+) {
+  queryService(
+    epochId: $epochId
+    serviceName: $serviceName
+    method: $method
+    payload: $payload
+    caller: $caller
+    cyclesPrice: $cyclePrice
+    cyclesLimit: $cycleLimit
+  ) {
+    isError
+    ret
+  }
+}
+
+mutation sendTransaction(
+  $inputRaw: InputRawTransaction!
+  $inputEncryption: InputTransactionEncryption!
+) {
+  sendTransaction(inputRaw: $inputRaw, inputEncryption: $inputEncryption)
+}
