@@ -35,3 +35,74 @@ mutation sendTransaction(
 ) {
   sendTransaction(inputRaw: $inputRaw, inputEncryption: $inputEncryption)
 }
+
+fragment ServicePayload on SignedTransaction {
+  serviceName
+  method
+  payload
+}
+
+query getTransaction($txHash: Hash!) {
+  getTransaction(txHash: $txHash) {
+    ...ServicePayload
+    nonce
+    chainId
+    cyclesLimit
+    cyclesPrice
+    timeout
+    txHash
+    pubkey
+    signature
+  }
+}
+
+query getReceipt($txHash:Hash!) {
+  getReceipt(txHash: $txHash) {
+    txHash
+    epochId
+    cyclesUsed
+    events {
+      data
+      service
+    }
+    stateRoot
+    response {
+      serviceName
+      method
+      ret
+      isError
+    }
+  }
+}
+
+query getEpoch($epochId: Uint64!) {
+  getEpoch(epochId: $epochId) {
+    header{
+      chainId
+      confirmRoot
+      cyclesUsed
+      epochId
+      orderRoot
+      preHash
+
+      proposer
+      receiptRoot
+      stateRoot
+      timestamp
+      validatorVersion
+      proof {
+        bitmap
+        epochHash
+        epochId
+        round
+        signature
+      }
+      validators{
+        address
+        proposeWeight
+        voteWeight
+      }
+    }
+    orderedTxHashes
+  }
+}

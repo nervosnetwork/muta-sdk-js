@@ -218,7 +218,76 @@ export type SendTransactionMutation = (
   & Pick<Mutation, 'sendTransaction'>
 );
 
+export type ServicePayloadFragment = (
+  { __typename?: 'SignedTransaction' }
+  & Pick<SignedTransaction, 'serviceName' | 'method' | 'payload'>
+);
 
+export type GetTransactionQueryVariables = {
+  txHash: Scalars['Hash']
+};
+
+
+export type GetTransactionQuery = (
+  { __typename?: 'Query' }
+  & { getTransaction: (
+    { __typename?: 'SignedTransaction' }
+    & Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'pubkey' | 'signature'>
+    & ServicePayloadFragment
+  ) }
+);
+
+export type GetReceiptQueryVariables = {
+  txHash: Scalars['Hash']
+};
+
+
+export type GetReceiptQuery = (
+  { __typename?: 'Query' }
+  & { getReceipt: (
+    { __typename?: 'Receipt' }
+    & Pick<Receipt, 'txHash' | 'epochId' | 'cyclesUsed' | 'stateRoot'>
+    & { events: Array<(
+      { __typename?: 'Event' }
+      & Pick<Event, 'data' | 'service'>
+    )>, response: (
+      { __typename?: 'ReceiptResponse' }
+      & Pick<ReceiptResponse, 'serviceName' | 'method' | 'ret' | 'isError'>
+    ) }
+  ) }
+);
+
+export type GetEpochQueryVariables = {
+  epochId: Scalars['Uint64']
+};
+
+
+export type GetEpochQuery = (
+  { __typename?: 'Query' }
+  & { getEpoch: (
+    { __typename?: 'Epoch' }
+    & Pick<Epoch, 'orderedTxHashes'>
+    & { header: (
+      { __typename?: 'EpochHeader' }
+      & Pick<EpochHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'epochId' | 'orderRoot' | 'preHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
+      & { proof: (
+        { __typename?: 'Proof' }
+        & Pick<Proof, 'bitmap' | 'epochHash' | 'epochId' | 'round' | 'signature'>
+      ), validators: Array<(
+        { __typename?: 'Validator' }
+        & Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>
+      )> }
+    ) }
+  ) }
+);
+
+export const ServicePayloadFragmentDoc = gql`
+    fragment ServicePayload on SignedTransaction {
+  serviceName
+  method
+  payload
+}
+    `;
 export const GetEpochIdDocument = gql`
     query getEpochId($epochId: Uint64) {
   getEpoch(epochId: $epochId) {
@@ -241,6 +310,73 @@ export const SendTransactionDocument = gql`
   sendTransaction(inputRaw: $inputRaw, inputEncryption: $inputEncryption)
 }
     `;
+export const GetTransactionDocument = gql`
+    query getTransaction($txHash: Hash!) {
+  getTransaction(txHash: $txHash) {
+    ...ServicePayload
+    nonce
+    chainId
+    cyclesLimit
+    cyclesPrice
+    timeout
+    txHash
+    pubkey
+    signature
+  }
+}
+    ${ServicePayloadFragmentDoc}`;
+export const GetReceiptDocument = gql`
+    query getReceipt($txHash: Hash!) {
+  getReceipt(txHash: $txHash) {
+    txHash
+    epochId
+    cyclesUsed
+    events {
+      data
+      service
+    }
+    stateRoot
+    response {
+      serviceName
+      method
+      ret
+      isError
+    }
+  }
+}
+    `;
+export const GetEpochDocument = gql`
+    query getEpoch($epochId: Uint64!) {
+  getEpoch(epochId: $epochId) {
+    header {
+      chainId
+      confirmRoot
+      cyclesUsed
+      epochId
+      orderRoot
+      preHash
+      proposer
+      receiptRoot
+      stateRoot
+      timestamp
+      validatorVersion
+      proof {
+        bitmap
+        epochHash
+        epochId
+        round
+        signature
+      }
+      validators {
+        address
+        proposeWeight
+        voteWeight
+      }
+    }
+    orderedTxHashes
+  }
+}
+    `;
 export function getSdk(client: GraphQLClient) {
   return {
     getEpochId(variables?: GetEpochIdQueryVariables): Promise<GetEpochIdQuery> {
@@ -251,6 +387,15 @@ export function getSdk(client: GraphQLClient) {
     },
     sendTransaction(variables: SendTransactionMutationVariables): Promise<SendTransactionMutation> {
       return client.request<SendTransactionMutation>(print(SendTransactionDocument), variables);
+    },
+    getTransaction(variables: GetTransactionQueryVariables): Promise<GetTransactionQuery> {
+      return client.request<GetTransactionQuery>(print(GetTransactionDocument), variables);
+    },
+    getReceipt(variables: GetReceiptQueryVariables): Promise<GetReceiptQuery> {
+      return client.request<GetReceiptQuery>(print(GetReceiptDocument), variables);
+    },
+    getEpoch(variables: GetEpochQueryVariables): Promise<GetEpochQuery> {
+      return client.request<GetEpochQuery>(print(GetEpochDocument), variables);
     }
   };
 }
