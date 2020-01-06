@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>muta-sdk</title>
+	<title>muta-sdk - v0.2.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">muta-sdk</a>
+					<a href="index.html" class="title">muta-sdk - v0.2.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> muta-sdk</h1>
+			<h1> muta-sdk - v0.2.0</h1>
 		</div>
 	</div>
 </header>
@@ -67,61 +67,67 @@
 				<a href="#muta-sdkwip" id="muta-sdkwip" style="color: inherit; text-decoration: none;">
 					<h1>Muta SDK(WIP)</h1>
 				</a>
-				<p>The JS/TS SDK for <a href="https://github.com/nervosnetwork/muta">Muta</a>(a High performance Blockchain framework).
-				Allow you interact with Muta node&#39;s GraphQL service.</p>
+				<p>The JS/TS SDK for <a href="https://github.com/nervosnetwork/muta">Muta</a>(a High performance Blockchain framework). Allow you interact with Muta node&#39;s GraphQL service.</p>
 				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
 					<h2>Quick Start</h2>
 				</a>
-				<pre><code class="language-shell">npm install nervosnetwork/muta-sdk-js</code></pre>
+				<pre><code class="language-shell">npm install muta-sdk@next</code></pre>
 				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 					<h2>Example</h2>
 				</a>
-				<p>The bellow code shows how to create account and how to transfer </p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Muta } <span class="hljs-keyword">from</span> <span class="hljs-string">'./src/Muta'</span>;
+				<p>Suppose the <a href="https://github.com/nervosnetwork/muta/blob/master/built-in-services/asset/src/lib.rs">AssetService</a> is in use, the bellow code shows how to create UDT(user define token) and how to transfer</p>
+				<ol>
+					<li>create an UDT call BTC</li>
+					<li>check the balance</li>
+					<li>transfer to another account</li>
+					<li>check the balance again</li>
+				</ol>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Muta, utils } <span class="hljs-keyword">from</span> <span class="hljs-string">'./src'</span>;
+<span class="hljs-keyword">import</span> { AssetService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./src/builtin'</span>;
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> muta = <span class="hljs-keyword">new</span> Muta({
-    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://127.0.0.1:8000/graphql'</span>,
-    <span class="hljs-attr">chainId</span>:
-      <span class="hljs-string">'0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'</span>
+<span class="hljs-keyword">const</span> muta = <span class="hljs-keyword">new</span> Muta({
+  <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://127.0.0.1:8000/graphql'</span>,
+  <span class="hljs-attr">chainId</span>: <span class="hljs-string">'0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'</span>
+});
+
+<span class="hljs-keyword">const</span> client = muta.client;
+<span class="hljs-keyword">const</span> account = muta.accountFromPrivateKey(
+  <span class="hljs-string">'0x10000000000000000000000000000000000000000000000000000000000000000'</span>
+);
+
+<span class="hljs-keyword">const</span> service = <span class="hljs-keyword">new</span> AssetService(client, account);
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> supply = <span class="hljs-number">22000000</span>;
+  <span class="hljs-comment">/* create an UDT call BTC */</span>
+  <span class="hljs-keyword">const</span> txHash = <span class="hljs-keyword">await</span> service.createAsset({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'BitCoin'</span>,
+    supply,
+    <span class="hljs-attr">symbol</span>: <span class="hljs-string">'BTC'</span>
   });
+  <span class="hljs-keyword">const</span> receipt = <span class="hljs-keyword">await</span> client.getReceipt(toHex(txHash));
+  <span class="hljs-keyword">const</span> createdAsset = <span class="hljs-built_in">JSON</span>.parse(receipt);
+  <span class="hljs-built_in">console</span>.log(utils.toHex(createdAsset.owner) === utils.toHex(account.address));
 
-  <span class="hljs-comment">// create a HD wallet from mnemonic</span>
-  <span class="hljs-comment">// const mnemonic = HDWallet.generateMnemonic();</span>
-  <span class="hljs-keyword">const</span> mnemonic = <span class="hljs-string">'12 mnemonic words to create a HD wallet'</span>;
-  <span class="hljs-keyword">const</span> wallet = muta.hdWalletFromMnemonic(mnemonic);
+  <span class="hljs-comment">/* check the balance */</span>
+  <span class="hljs-keyword">await</span> client.waitForNextNEpoch(<span class="hljs-number">2</span>);
+  <span class="hljs-keyword">const</span> assetId = createdAsset.id;
+  <span class="hljs-keyword">const</span> balance = <span class="hljs-keyword">await</span> service.getBalance(assetId, account.address);
+  <span class="hljs-built_in">console</span>.log(balance === supply);
 
-  <span class="hljs-comment">// get pk from account0</span>
-  <span class="hljs-keyword">const</span> account = wallet.accountByIndex(<span class="hljs-number">0</span>);
-  <span class="hljs-built_in">console</span>.log(account.address); <span class="hljs-comment">// 0x10...</span>
-
-  <span class="hljs-comment">// also we can just create account from a private key</span>
-  <span class="hljs-comment">// const accountFromPK = muta.accountFromPrivateKey('0xc404e991a36c3f92967f6c1cdcd1167999005c71b53e760b2a77831edd048009')</span>
-
-  <span class="hljs-comment">/*** transfer asset to another account ***/</span>
-  <span class="hljs-keyword">const</span> client = muta.client;
-  <span class="hljs-comment">// create TransferTransaction object</span>
-  <span class="hljs-keyword">const</span> tx = <span class="hljs-keyword">await</span> client.prepareTransferTransaction({
-    <span class="hljs-attr">carryingAmount</span>: <span class="hljs-string">'0x10000'</span>,
-    <span class="hljs-attr">carryingAssetId</span>:
-      <span class="hljs-string">'0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5'</span>,
-    <span class="hljs-attr">receiver</span>: <span class="hljs-string">'0x103e9b982b443592ffc3d4c2a484c220fb3e29e2e4'</span>
+  <span class="hljs-comment">/* transfer to another account */</span>
+  <span class="hljs-keyword">const</span> to = <span class="hljs-string">'0x2000000000000000000000000000000000000000'</span>;
+  <span class="hljs-keyword">const</span> transferHash = <span class="hljs-keyword">await</span> service.transfer({
+    <span class="hljs-attr">asset_id</span>: assetId,
+    to,
+    <span class="hljs-attr">value</span>: <span class="hljs-number">500</span>
   });
+  <span class="hljs-keyword">await</span> client.getReceipt(transferHash);
 
-  <span class="hljs-comment">// create a signature</span>
-  <span class="hljs-keyword">const</span> signedTx = account.signTransaction(tx);
-  <span class="hljs-comment">// and send the transfer</span>
-  <span class="hljs-keyword">await</span> client.sendTransferTransaction(signedTx);
-
-  <span class="hljs-comment">/* await for consensus about 3 seconds */</span>
-  <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> setTimeout(resolve, <span class="hljs-number">3000</span>));
-
-  <span class="hljs-comment">// check balance</span>
-  <span class="hljs-keyword">const</span> balance = <span class="hljs-keyword">await</span> client.getBalance(
-    account.address,
-    <span class="hljs-string">'0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5'</span>
-  );
-  <span class="hljs-built_in">console</span>.log(balance);
+  <span class="hljs-comment">/* check the balance again */</span>
+  <span class="hljs-keyword">await</span> client.waitForNextNEpoch(<span class="hljs-number">1</span>);
+  <span class="hljs-keyword">const</span> balance2 = <span class="hljs-keyword">await</span> service.getBalance(assetId, to);
+  <span class="hljs-built_in">console</span>.log(balance2 === <span class="hljs-number">500</span>);
 }</code></pre>
 				<a href="#links" id="links" style="color: inherit; text-decoration: none;">
 					<h2>Links</h2>
@@ -155,6 +161,9 @@ yarn start</code></pre>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
+						<a href="classes/assetservice.html" class="tsd-kind-icon">Asset<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/client.html" class="tsd-kind-icon">Client</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -163,14 +172,137 @@ yarn start</code></pre>
 					<li class=" tsd-kind-class">
 						<a href="classes/muta.html" class="tsd-kind-icon">Muta</a>
 					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/retry.html" class="tsd-kind-icon">Retry</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/syncaccount.html" class="tsd-kind-icon">Sync<wbr>Account</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter tsd-is-not-exported">
+						<a href="interfaces/callservice.html" class="tsd-kind-icon">Call<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/createassetpayload.html" class="tsd-kind-icon">Create<wbr>Asset<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/getbalancepayload.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/getbalanceret.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Ret</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="interfaces/mutacontext.html" class="tsd-kind-icon">Muta<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="interfaces/syncwallet.html" class="tsd-kind-icon">Sync<wbr>Wallet</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/transferpayload.html" class="tsd-kind-icon">Transfer<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-not-exported">
+						<a href="globals.html#checkpromise" class="tsd-kind-icon">Check<wbr>Promise</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#epoch" class="tsd-kind-icon">Epoch</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#epochheader" class="tsd-kind-icon">Epoch<wbr>Header</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#event" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#execresp" class="tsd-kind-icon">Exec<wbr>Resp</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#getepochidquery" class="tsd-kind-icon">Get<wbr>Epoch<wbr>IdQuery</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#getepochidqueryvariables" class="tsd-kind-icon">Get<wbr>Epoch<wbr>IdQuery<wbr>Variables</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#getepochquery" class="tsd-kind-icon">Get<wbr>Epoch<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#getepochqueryvariables" class="tsd-kind-icon">Get<wbr>Epoch<wbr>Query<wbr>Variables</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#getreceiptquery" class="tsd-kind-icon">Get<wbr>Receipt<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#getreceiptqueryvariables" class="tsd-kind-icon">Get<wbr>Receipt<wbr>Query<wbr>Variables</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#gettransactionquery" class="tsd-kind-icon">Get<wbr>Transaction<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#gettransactionqueryvariables" class="tsd-kind-icon">Get<wbr>Transaction<wbr>Query<wbr>Variables</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#inputrawtransaction" class="tsd-kind-icon">Input<wbr>Raw<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#inputtransactionencryption" class="tsd-kind-icon">Input<wbr>Transaction<wbr>Encryption</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#maybe" class="tsd-kind-icon">Maybe</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mutation" class="tsd-kind-icon">Mutation</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mutationsendtransactionargs" class="tsd-kind-icon">Mutation<wbr>Send<wbr>Transaction<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mutationunsafesendtransactionargs" class="tsd-kind-icon">Mutation<wbr>Unsafe<wbr>Send<wbr>Transaction<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#proof" class="tsd-kind-icon">Proof</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#query" class="tsd-kind-icon">Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#querygetepochargs" class="tsd-kind-icon">Query<wbr>Get<wbr>Epoch<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#querygetreceiptargs" class="tsd-kind-icon">Query<wbr>Get<wbr>Receipt<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#querygettransactionargs" class="tsd-kind-icon">Query<wbr>Get<wbr>Transaction<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#queryqueryserviceargs" class="tsd-kind-icon">Query<wbr>Query<wbr>Service<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#queryservicequery" class="tsd-kind-icon">Query<wbr>Service<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#queryservicequeryvariables" class="tsd-kind-icon">Query<wbr>Service<wbr>Query<wbr>Variables</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#receipt" class="tsd-kind-icon">Receipt</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#receiptresponse" class="tsd-kind-icon">Receipt<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#scalars" class="tsd-kind-icon">Scalars</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#sendtransactionmutation" class="tsd-kind-icon">Send<wbr>Transaction<wbr>Mutation</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#sendtransactionmutationvariables" class="tsd-kind-icon">Send<wbr>Transaction<wbr>Mutation<wbr>Variables</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#servicepayloadfragment" class="tsd-kind-icon">Service<wbr>Payload<wbr>Fragment</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#signedtransaction" class="tsd-kind-icon">Signed<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#validator" class="tsd-kind-icon">Validator</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#coin_type" class="tsd-kind-icon">COIN_<wbr>TYPE</a>
@@ -179,28 +311,64 @@ yarn start</code></pre>
 						<a href="globals.html#default_timeout_gap" class="tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#prefix_address_account" class="tsd-kind-icon">PREFIX_<wbr>ADDRESS_<wbr>ACCOUNT</a>
+						<a href="globals.html#getepochdocument" class="tsd-kind-icon">Get<wbr>Epoch<wbr>Document</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#prefix_transaction_transfer" class="tsd-kind-icon">PREFIX_<wbr>TRANSACTION_<wbr>TRANSFER</a>
+						<a href="globals.html#getepochiddocument" class="tsd-kind-icon">Get<wbr>Epoch<wbr>IdDocument</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#getreceiptdocument" class="tsd-kind-icon">Get<wbr>Receipt<wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#gettransactiondocument" class="tsd-kind-icon">Get<wbr>Transaction<wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#queryservicedocument" class="tsd-kind-icon">Query<wbr>Service<wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#sendtransactiondocument" class="tsd-kind-icon">Send<wbr>Transaction<wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#servicepayloadfragmentdoc" class="tsd-kind-icon">Service<wbr>Payload<wbr>Fragment<wbr>Doc</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#muta" class="tsd-kind-icon">muta</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a>
 					</li>
-					<li class=" tsd-kind-function tsd-is-not-exported">
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdefaultmutainstance" class="tsd-kind-icon">create<wbr>Default<wbr>Muta<wbr>Instance</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getdefaultmutainstance" class="tsd-kind-icon">get<wbr>Default<wbr>Muta<wbr>Instance</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getsdk" class="tsd-kind-icon">get<wbr>Sdk</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="globals.html#hash" class="tsd-kind-icon">hash</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#randomaddress" class="tsd-kind-icon">random<wbr>Address</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#randomhex" class="tsd-kind-icon">random<wbr>Hex</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#rm0x" class="tsd-kind-icon">rm0x</a>
 					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#signtransfertransaction" class="tsd-kind-icon">sign<wbr>Transfer<wbr>Transaction</a>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#tobuffer" class="tsd-kind-icon">to<wbr>Buffer</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#tohex" class="tsd-kind-icon">to<wbr>Hex</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#wait" class="tsd-kind-icon">wait</a>
 					</li>
 				</ul>
 			</nav>
