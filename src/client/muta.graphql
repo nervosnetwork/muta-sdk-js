@@ -11,7 +11,7 @@ query queryService(
   $method: String!
   $payload: String!
   $epochId: Uint64
-  $caller: Address = "0x0000000000000000000000000000000000000000"
+  $caller: Address = "0x1000000000000000000000000000000000000000"
   $cyclePrice: Uint64
   $cycleLimit: Uint64
 ) {

@@ -1,25 +1,41 @@
 import test from 'ava';
 import { SyncAccount } from './SyncAccount';
 
-test('signature', t => {
-  const account = SyncAccount.fromPrivateKey("0x45c56be699dca666191ad3446897e0f480da234da896270202514a0e1a587c3f");
+test('account address should be correct', t => {
+  const account = SyncAccount.fromPrivateKey(
+    '0x1000000000000000000000000000000000000000000000000000000000000000'
+  );
+  t.is(account.address, '0xd17b9e27ef454ce597f3f05a5b5d4dcc96a423f9');
+});
 
-  const { pubkey, signature, txHash } = account.signTransaction({
-    "carryingAmount": "0x01",
-    "carryingAssetId": "0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5",
-    "chainId": "0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036",
-    "feeAssetId": "0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5",
-    "feeCycle": "0xff",
-    "nonce": "0x00000000000000000000000000000000bcc53bb0e6b57f561ebf1f0bc65fa8b1",
-    "receiver": "0x103e9b982b443592ffc3d4c2a484c220fb3e29e2e4",
-    "timeout": "0x22752"
+test('sign by account should be coreect', t => {
+  const account = SyncAccount.fromPrivateKey(
+    '0x1000000000000000000000000000000000000000000000000000000000000000'
+  );
+
+  const signedTransaction = account.signTransaction({
+    chainId:
+      '0x0000000000000000000000000000000000000000000000000000000000000000',
+    cyclesLimit: '0x00',
+    cyclesPrice: '0x00',
+    method: 'method',
+    nonce: '0x0000000000000000000000000000000000000000000000000000000000000000',
+    payload: 'payload',
+    serviceName: 'service_name',
+    timeout: '0x9999'
   });
 
-  t.deepEqual(
-    { pubkey, signature, txHash },
-    {
-      "pubkey": "0x031288a6788678c25952eba8693b2f278f66e2187004b64ac09416d07f83f96d5b",
-      "signature": "0xf89f73cf4896cabd59a2abf38a7b070c37a4fff88a50001fd93693bf033eb54700156db2ff775cd74789f793abb28d56a2f93e551a4076f003f02bd705041015",
-      "txHash": "0x402b883d9f7f25fe8d98bd8549e5741c82f4dddf583f8c9d14874ffe36601af2"
-    });
+  const { pubkey, signature, txHash } = signedTransaction.inputEncryption;
+  t.is(
+    pubkey,
+    '0x0308ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0'
+  );
+  t.is(
+    signature,
+    '0xb911f4c58d9ae2c8ea4a546c426f4167813dd0d7a8b5de7f2a7d40e07d7df4572b5670744954ea1f2ff831d5c579fa5d937beb0ddd544d18f8bc069547ac5295'
+  );
+  t.is(
+    txHash,
+    '0x26e4ec1c25cc0c6fc084f358b97a7615fee1b229d271ba40bcfc5be80b6dd0d4'
+  );
 });

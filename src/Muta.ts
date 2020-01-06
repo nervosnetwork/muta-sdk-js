@@ -42,18 +42,20 @@ export class Muta {
   }
 
   /**
-   * create a HD wallet from mnemonic
-   * @param mnemonic 12 mnemonic words
-   */
-  public hdWalletFromMnemonic(mnemonic: string): HDWallet {
-    return HDWallet.fromMnemonic(mnemonic);
-  }
-
-  /**
    * create a account from private key
    * @param privateKey
    */
   public accountFromPrivateKey(privateKey: string): SyncAccount {
     return SyncAccount.fromPrivateKey(privateKey);
+  }
+
+  /**
+   * create a HD wallet from mnemonic. Now Muta positioning for a block chain framework,
+   * so the wallet seems to be not a must
+   * @deprecated
+   * @param mnemonic 12 mnemonic words
+   */
+  public hdWalletFromMnemonic(mnemonic: string): HDWallet {
+    return HDWallet.fromMnemonic(mnemonic);
   }
 }

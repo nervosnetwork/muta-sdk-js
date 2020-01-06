@@ -1,8 +1,10 @@
+import { hash as hashBuf } from './core';
+
 /**
  * remove 0x from a hex string
  * @param hex
  */
-export function rm0x(hex: string) {
+export function rm0x(hex: string): string {
   return hex.startsWith('0x') ? hex.slice(2) : hex;
 }
 
@@ -12,7 +14,9 @@ export function rm0x(hex: string) {
  */
 export function toHex(x: Buffer | number | string): string {
   if (typeof x === 'string') {
-    if (x.startsWith('0x')) { return x; }
+    if (x.startsWith('0x')) {
+      return x;
+    }
     return '0x' + x;
   }
   if (typeof x === 'number') {
@@ -26,6 +30,13 @@ export function toHex(x: Buffer | number | string): string {
  * parse a hex string to buffer
  * @param x
  */
-export function toBuffer(x: string): Buffer {
+export function toBuffer(x: string | Buffer): Buffer {
+  if (Buffer.isBuffer(x)) {
+    return x;
+  }
   return Buffer.from(rm0x(x), 'hex');
+}
+
+export function hash(x: string | Buffer): string {
+  return toHex(hashBuf(toBuffer(x)));
 }

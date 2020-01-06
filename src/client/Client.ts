@@ -1,22 +1,25 @@
-import {
-  DefaultOptions,
-  DocumentNode,
-  HttpLink,
-  InMemoryCache
-} from 'apollo-boost';
-import { ApolloClient } from 'apollo-client';
 // tslint:disable-next-line:no-submodule-imports
 import 'cross-fetch/polyfill';
-import gql from 'graphql-tag';
+import { GraphQLClient } from 'graphql-request';
 import randomBytes from 'random-bytes';
-import { Required } from 'utility-types';
 import { DEFAULT_TIMEOUT_GAP } from '../core/constant';
 import { toHex } from '../utils';
+import { getSdk, InputRawTransaction } from './codegen/sdk';
+import { Retry } from './retry';
+
+interface CallService<Pld> {
+  timeout?: string;
+  serviceName: string;
+  method: string;
+  payload: Pld;
+}
 
 /**
  * Client for call Muta GraphQL API
  */
 export class Client {
+  private readonly rawClient: ReturnType<typeof getSdk>;
+
   /**
    * GraphQL endpoint, ie. htto://127.0.0.1:8000/graphql
    */
@@ -26,52 +29,23 @@ export class Client {
    */
   private readonly chainId;
 
-  private readonly client: ApolloClient<any>;
-
   constructor(entry: string, chainId: string) {
     this.endpoint = entry;
     this.chainId = chainId;
 
-    const link = new HttpLink({
-      fetchOptions: {
-        mode: 'no-cors'
-      },
-      uri: this.endpoint
-    });
-
-    // create ApolloClient without cache
-    const defaultOptions: DefaultOptions = {
-      query: {
-        errorPolicy: 'all',
-        fetchPolicy: 'no-cache'
-      },
-      watchQuery: {
-        errorPolicy: 'ignore',
-        fetchPolicy: 'no-cache'
-      }
-    };
-    this.client = new ApolloClient({
-      cache: new InMemoryCache(),
-      defaultOptions,
-      link
-    });
+    this.rawClient = getSdk(
+      new GraphQLClient(this.endpoint, {
+        cache: 'no-cache'
+      })
+    );
   }
 
   /**
    * get epoch id(or epoch height as a hex string)
    */
-  public getLatestEpochId(): Promise<string> {
-    return this.query(
-      gql`
-        {
-          getLatestEpoch {
-            header {
-              epochId
-            }
-          }
-        }
-      `
-    ).then(res => res.data.getLatestEpoch.header.epochId);
+  public async getLatestEpochId(): Promise<string> {
+    const res = await this.rawClient.getEpochId();
+    return res.getEpoch.header.epochId;
   }
 
   public async getEpochHeight(): Promise<number> {
@@ -79,81 +53,94 @@ export class Client {
     return Number('0x' + epochId);
   }
 
-  /**
-   *
-   * @param address
-   * @param assetId Identifier of asset in Muta. ie.
-   */
-  public getBalance(address: string, assetId: string): Promise<number> {
-    return this.query(
-      gql`{ getBalance(address: "${address}", id: "${assetId}") }`
-    ).then(res => Number('0x' + res.data.getBalance));
-  }
-
-  /**
-   * A transaction often takes a lot of message like nonce, block height,
-   * timeout and so on. This function helps you to assemble a transaction quickly
-   * with some commonly used parameters.
-   * @param options
-   */
-  public async prepareTransferTransaction(
-    options: Required<
-      Partial<TransferTransaction>,
-      'carryingAmount' | 'carryingAssetId' | 'receiver'
-    >
-  ): Promise<TransferTransaction> {
-    const nonce = toHex(randomBytes.sync(32).toString('hex'));
-    const height = await this.getEpochHeight();
-    const timeout = toHex(height + DEFAULT_TIMEOUT_GAP - 1);
+  public async prepareTransaction<Pld>(
+    tx: CallService<Pld>
+  ): Promise<InputRawTransaction> {
+    const timeout = await (tx.timeout
+      ? Promise.resolve(tx.timeout)
+      : toHex((await this.getEpochHeight()) + DEFAULT_TIMEOUT_GAP - 1));
 
     return {
       chainId: this.chainId,
-      nonce,
+      // TODO change cyclesLimit by last epoch
+      cyclesLimit: '0x9999',
+      // TODO change cyclesLimit by last epoch
+      cyclesPrice: '0x9999',
+      nonce: toHex(randomBytes.sync(32).toString('hex')),
       timeout,
-
-      carryingAmount: options.carryingAmount,
-      carryingAssetId: options.carryingAssetId,
-      receiver: options.receiver,
-
-      feeAssetId: options.feeAssetId ?? options.carryingAssetId,
-      feeCycle: options.feeCycle ?? '0xff'
+      ...tx,
+      payload: JSON.stringify(tx.payload)
     };
   }
 
   /**
-   * Return a transaction hash after sentTransferTransaction
+   * sendTransaction
+   * @param signedTransaction
    */
-  public async sendTransferTransaction(
-    options: SignedTransferTransaction
+  public async sendTransaction<R>(
+    signedTransaction: SignedTransaction<R>
   ): Promise<string> {
-    const res = await this.mutation(gql`mutation {
-      sendTransferTransaction(
-        inputRaw: {
-          chainId: "${options.chainId}",
-          feeCycle: "${options.feeCycle}",
-          feeAssetId: "${options.feeAssetId}",
-          nonce: "${options.nonce}",
-          timeout: "${options.timeout}"
-        },
-        inputAction: {
-          carryingAmount: "${options.carryingAmount}",
-          carryingAssetId: "${options.carryingAssetId}",
-          receiver: "${options.receiver}",
-        },
-        inputEncryption: {
-          txHash: "${options.txHash}",
-          pubkey: "${options.pubkey}",
-          signature: "${options.signature}"
-        }
-      )}`);
-    return res?.data?.sendTransferTransaction;
+    const inputRaw = signedTransaction.inputRaw;
+
+    const rawPayload = inputRaw.payload;
+    const payload =
+      typeof rawPayload === 'string' ? rawPayload : JSON.stringify(rawPayload);
+
+    const res = await this.rawClient.sendTransaction({
+      inputEncryption: signedTransaction.inputEncryption,
+      inputRaw: { ...inputRaw, payload }
+    });
+
+    return res.sendTransaction;
   }
 
-  public query(query: DocumentNode) {
-    return this.client.query({ query });
+  public async queryService<Ret, Pld extends string | object>(
+    variables: ServicePayload<Pld>
+  ): Promise<{
+    isError: boolean;
+    ret: Ret;
+  }> {
+    const payload: string =
+      typeof variables.payload !== 'string'
+        ? JSON.stringify(variables.payload)
+        : variables.payload;
+
+    const parsedPayload = { ...variables, payload };
+    const res = await this.rawClient.queryService(parsedPayload);
+
+    return {
+      isError: res.queryService.isError,
+      ret: JSON.parse(res.queryService.ret) as Ret
+    };
   }
 
-  public mutation(mutation: DocumentNode) {
-    return this.client.mutate({ mutation });
+  public async getReceipt(txHash) {
+    const res = await Retry.from(() =>
+      this.rawClient.getReceipt({ txHash })
+    ).start();
+
+    return res.getReceipt.response.ret;
+  }
+
+  /**
+   * wait for next _n_ epoch
+   * @example
+   * ```typescript
+   * async main() {
+   *   const before =  await client.getEpochHeight();
+   *   await client.waitForNextNEpoch(2);
+   *   const after =  await client.getEpochHeight();
+   *   console.log(after - before)
+   * }
+   * ```
+   * @param n epoch count
+   */
+  public async waitForNextNEpoch(n: number) {
+    const before = await this.getEpochHeight();
+    return Retry.from(() => this.getEpochHeight())
+      .withCheck(height => height - before >= n)
+      .withInternal(1000)
+      .withTimeout((n + 1) * 3000)
+      .start();
   }
 }

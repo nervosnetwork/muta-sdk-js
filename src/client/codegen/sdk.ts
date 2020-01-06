@@ -298,7 +298,7 @@ export const GetEpochIdDocument = gql`
 }
     `;
 export const QueryServiceDocument = gql`
-    query queryService($serviceName: String!, $method: String!, $payload: String!, $epochId: Uint64, $caller: Address = "0x0000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
+    query queryService($serviceName: String!, $method: String!, $payload: String!, $epochId: Uint64, $caller: Address = "0x1000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
   queryService(epochId: $epochId, serviceName: $serviceName, method: $method, payload: $payload, caller: $caller, cyclesPrice: $cyclePrice, cyclesLimit: $cycleLimit) {
     isError
     ret

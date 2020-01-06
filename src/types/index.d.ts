@@ -14,32 +14,28 @@ interface InputEncryption {
   signature: Bytes;
 }
 
-/**
- * There are many types of transaction in Muta, the RawTransaction is the base of
- * a transaction. A transaction often consists of three parts, InputRaw, InputAction,
- * and InputEncryption.
- */
-interface RawTransaction {
+interface TransactionRaw<R> {
   chainId: Hash;
-
-  feeCycle: Uint64;
-  feeAssetId: Hash;
+  cyclesLimit: Uint64;
+  cyclesPrice: Uint64;
   nonce: Hash;
   timeout: Uint64;
+  serviceName: string;
+  method: string;
+  payload: R;
 }
 
-interface TransferTransactionAction {
-  carryingAmount: Uint64;
-  carryingAssetId: Hash;
-  receiver: Address;
+interface SignedTransaction<R> {
+  inputRaw: TransactionRaw<R>;
+  inputEncryption: InputEncryption;
 }
 
-type TransferTransaction = import('utility-types').Assign<
-  RawTransaction,
-  TransferTransactionAction
->;
-
-type SignedTransferTransaction = import('utility-types').Assign<
-  TransferTransaction,
-  InputEncryption
->;
+interface ServicePayload<P> {
+  epochId?: Uint64;
+  cyclesLimit?: Uint64;
+  cyclesPrice?: Uint64;
+  caller?: Address;
+  serviceName: string;
+  method: string;
+  payload: P;
+}

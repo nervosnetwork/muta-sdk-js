@@ -1,64 +1,69 @@
 # Muta SDK(WIP)
 
-The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework).
-Allow you interact with Muta node's GraphQL service.
+The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). Allow you interact with Muta node's GraphQL service.
 
 ## Quick Start
 
 ```shell
-npm install muta-sdk
+npm install muta-sdk@next
 ```
 
 ## Example
 
-The bellow code shows how to create account and how to transfer 
+Suppose the [AssetService](https://github.com/nervosnetwork/muta/blob/master/built-in-services/asset/src/lib.rs) is in use, the bellow code shows how to create UDT(user define token) and how to transfer
+
+1. create an UDT call BTC
+2. check the balance
+3. transfer to another account
+4. check the balance again
 
 ```js
-import { Muta } from 'muta-sdk';
+import { Muta, utils } from './src';
+import { AssetService } from './src/builtin';
 
-async function example() {
-  const muta = new Muta({
-    endpoint: 'http://127.0.0.1:8000/graphql',
-    chainId:
-      '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'
+const muta = new Muta({
+  endpoint: 'http://127.0.0.1:8000/graphql',
+  chainId: '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'
+});
+
+const client = muta.client;
+const account = muta.accountFromPrivateKey(
+  '0x10000000000000000000000000000000000000000000000000000000000000000'
+);
+
+const service = new AssetService(client, account);
+
+async function main() {
+  const supply = 22000000;
+  /* create an UDT call BTC */
+  const txHash = await service.createAsset({
+    name: 'BitCoin',
+    supply,
+    symbol: 'BTC'
   });
+  const receipt = await client.getReceipt(toHex(txHash));
+  const createdAsset = JSON.parse(receipt);
+  console.log(utils.toHex(createdAsset.owner) === utils.toHex(account.address));
 
-  // create a HD wallet from mnemonic
-  // const mnemonic = HDWallet.generateMnemonic();
-  const mnemonic = '12 mnemonic words to create a HD wallet';
-  const wallet = muta.hdWalletFromMnemonic(mnemonic);
+  /* check the balance */
+  await client.waitForNextNEpoch(2);
+  const assetId = createdAsset.id;
+  const balance = await service.getBalance(assetId, account.address);
+  console.log(balance === supply);
 
-  // get pk from account0
-  const account = wallet.accountByIndex(0);
-  console.log(account.address); // 0x10...
-
-  // also we can just create account from a private key
-  // const accountFromPK = muta.accountFromPrivateKey('0xc404e991a36c3f92967f6c1cdcd1167999005c71b53e760b2a77831edd048009')
-
-  /*** transfer asset to another account ***/
-  const client = muta.client;
-  // create TransferTransaction object
-  const tx = await client.prepareTransferTransaction({
-    carryingAmount: '0x1000',
-    carryingAssetId:
-      '0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5',
-    receiver: '0x103e9b982b443592ffc3d4c2a484c220fb3e29e2e4'
+  /* transfer to another account */
+  const to = '0x2000000000000000000000000000000000000000';
+  const transferHash = await service.transfer({
+    asset_id: assetId,
+    to,
+    value: 500
   });
+  await client.getReceipt(transferHash);
 
-  // create a signature
-  const signedTx = account.signTransaction(tx);
-  // and send the transfer
-  await client.sendTransferTransaction(signedTx);
-
-  /* await for consensus about 3 seconds */
-  await new Promise(resolve => setTimeout(resolve, 3000));
-
-  // check balance
-  const balance = await client.getBalance(
-    account.address,
-    '0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5'
-  );
-  console.log(balance);
+  /* check the balance again */
+  await client.waitForNextNEpoch(1);
+  const balance2 = await service.getBalance(assetId, to);
+  console.log(balance2 === 500);
 }
 ```
 

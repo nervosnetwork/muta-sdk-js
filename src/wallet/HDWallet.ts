@@ -1,9 +1,9 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import * as HDKey from 'hdkey';
-import { SyncWallet } from '..';
 import { SyncAccount } from '../account';
 import { COIN_TYPE } from '../core/constant';
 import { toHex } from '../utils';
+import { SyncWallet } from './SyncWallet';
 
 /**
  * HD Wallet, for more information see
