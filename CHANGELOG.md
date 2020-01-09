@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.2.0...v0.3.0) (2020-01-09)
+
+
+### Features
+
+* supported creating a signature from a transaction ([c63b852](https://github.com/nervosnetwork/muta-sdk-js/commit/c63b852))
+
+
+### Tests
+
+* update test case ([ac48a65](https://github.com/nervosnetwork/muta-sdk-js/commit/ac48a65))
+
+
+
 ## [0.2.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.1.0...v0.2.0) (2020-01-06)
 
 
