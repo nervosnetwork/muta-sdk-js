@@ -18,18 +18,15 @@ Suppose the [AssetService](https://github.com/nervosnetwork/muta/blob/master/bui
 4. check the balance again
 
 ```js
-import { Muta, utils } from './src';
-import { AssetService } from './src/builtin';
+const { Muta, utils, AssetService } = require("muta-sdk");
 
 const muta = new Muta({
-  endpoint: 'http://127.0.0.1:8000/graphql',
-  chainId: '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'
+  endpoint: "http://127.0.0.1:8000/graphql",
+  chainId: "0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036"
 });
 
 const client = muta.client;
-const account = muta.accountFromPrivateKey(
-  '0x10000000000000000000000000000000000000000000000000000000000000000'
-);
+const account = muta.accountFromPrivateKey("0x10000000000000000000000000000000000000000000000000000000000000000");
 
 const service = new AssetService(client, account);
 
@@ -37,22 +34,21 @@ async function main() {
   const supply = 22000000;
   /* create an UDT call BTC */
   const txHash = await service.createAsset({
-    name: 'BitCoin',
+    name: "BitCoin",
     supply,
-    symbol: 'BTC'
+    symbol: "BTC"
   });
-  const receipt = await client.getReceipt(toHex(txHash));
+  const receipt = await client.getReceipt(utils.toHex(txHash));
   const createdAsset = JSON.parse(receipt);
   console.log(utils.toHex(createdAsset.owner) === utils.toHex(account.address));
 
   /* check the balance */
-  await client.waitForNextNEpoch(2);
   const assetId = createdAsset.id;
   const balance = await service.getBalance(assetId, account.address);
   console.log(balance === supply);
 
   /* transfer to another account */
-  const to = '0x2000000000000000000000000000000000000000';
+  const to = "0x2000000000000000000000000000000000000000";
   const transferHash = await service.transfer({
     asset_id: assetId,
     to,
@@ -61,10 +57,11 @@ async function main() {
   await client.getReceipt(transferHash);
 
   /* check the balance again */
-  await client.waitForNextNEpoch(1);
   const balance2 = await service.getBalance(assetId, to);
   console.log(balance2 === 500);
 }
+main();
+
 ```
 
 ## Links
