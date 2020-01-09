@@ -24,16 +24,14 @@ export function addressFromPublicKey(publicKey: Buffer): Buffer {
 }
 
 /**
- * sign a transaction
+ * create a signature from a transaction
  * @param tx
  * @param privateKey
  */
-export function signTransaction<P>(
+export function createInputEncryption<P>(
   tx: TransactionRaw<P>,
   privateKey: Buffer
-): SignedTransaction<P> {
-  const inputRaw = tx;
-
+): InputEncryption {
   const orderedRaw = [
     tx.chainId,
     tx.cyclesLimit,
@@ -49,11 +47,24 @@ export function signTransaction<P>(
 
   const { signature } = sign(txHash, privateKey);
 
-  const inputEncryption: InputEncryption = {
+  return {
     pubkey: toHex(publicKeyCreate(privateKey)),
     signature: toHex(signature),
     txHash: toHex(txHash)
   };
+}
+
+/**
+ * sign a transaction
+ * @param tx
+ * @param privateKey
+ */
+export function signTransaction<P>(
+  tx: TransactionRaw<P>,
+  privateKey: Buffer
+): SignedTransaction<P> {
+  const inputRaw = tx;
+  const inputEncryption = createInputEncryption(tx, privateKey);
 
   return {
     inputEncryption,
