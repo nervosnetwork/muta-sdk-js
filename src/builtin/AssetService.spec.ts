@@ -24,7 +24,6 @@ test('a fully example', async t => {
   const createdAsset = JSON.parse(receipt);
   t.is(createdAsset.owner, rm0x(account.address));
 
-  await client.waitForNextNEpoch(2);
   const assetId = createdAsset.id;
   const balance = await service.getBalance(assetId, account.address);
   t.is(balance, supply);
@@ -36,7 +35,6 @@ test('a fully example', async t => {
     value: 500
   });
   await client.getReceipt(transferHash);
-  await client.waitForNextNEpoch(1);
   const balance2 = await service.getBalance(assetId, to);
   t.is(balance2, 500);
 });
