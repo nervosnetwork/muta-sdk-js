@@ -13,15 +13,15 @@ export class Retry<T> {
 
   private timeout: number = 6000;
 
-  private internal: number = 500;
+  private interval: number = 500;
 
   public withPromise(promiseThunk: () => Promise<T>): this {
     this.promiseThunk = promiseThunk;
     return this;
   }
 
-  public withInternal(internal: number): this {
-    this.internal = internal;
+  public withInterval(interval: number): this {
+    this.interval = interval;
     return this;
   }
 
@@ -44,9 +44,9 @@ export class Retry<T> {
         if (this.check(res)) {
           return res;
         }
-        await wait(this.internal);
+        await wait(this.interval);
       } catch (e) {
-        await wait(this.internal);
+        await wait(this.interval);
         err = e;
       }
     }

@@ -1,6 +1,7 @@
 import * as utils from './utils';
 
-export { signTransaction, publicKeyCreate, hash } from './core';
+export * from './core';
+
 export { Muta } from './Muta';
 export { Client, Retry } from './client';
 export { utils };

@@ -2,7 +2,10 @@
 import 'cross-fetch/polyfill';
 import { GraphQLClient } from 'graphql-request';
 import randomBytes from 'random-bytes';
-import { DEFAULT_TIMEOUT_GAP } from '../core/constant';
+import {
+  DEFAULT_CONSENSUS_INTERVAL,
+  DEFAULT_TIMEOUT_GAP
+} from '../core/constant';
 import { toHex } from '../utils';
 import { getSdk, InputRawTransaction } from './codegen/sdk';
 import { Retry } from './retry';
@@ -115,9 +118,9 @@ export class Client {
   }
 
   public async getReceipt(txHash) {
-    const res = await Retry.from(() =>
-      this.rawClient.getReceipt({ txHash })
-    ).start();
+    const res = await Retry.from(() => this.rawClient.getReceipt({ txHash }))
+      .withTimeout((DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL)
+      .start();
 
     return res.getReceipt.response.ret;
   }
@@ -130,7 +133,7 @@ export class Client {
    *   const before =  await client.getEpochHeight();
    *   await client.waitForNextNEpoch(2);
    *   const after =  await client.getEpochHeight();
-   *   console.log(after - before)
+   *   console.log(after - before);
    * }
    * ```
    * @param n epoch count
@@ -139,8 +142,8 @@ export class Client {
     const before = await this.getEpochHeight();
     return Retry.from(() => this.getEpochHeight())
       .withCheck(height => height - before >= n)
-      .withInternal(1000)
-      .withTimeout((n + 1) * 3000)
+      .withInterval(1000)
+      .withTimeout((n + 1) * DEFAULT_CONSENSUS_INTERVAL)
       .start();
   }
 }

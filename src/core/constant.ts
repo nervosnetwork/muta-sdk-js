@@ -8,3 +8,8 @@ export const COIN_TYPE = 2;
  * Muta only process request a period of time according to the epoch height
  */
 export const DEFAULT_TIMEOUT_GAP = 20;
+
+/**
+ * Interval of consensus engine executed each block
+ */
+export const DEFAULT_CONSENSUS_INTERVAL = 3000;
