@@ -17,24 +17,36 @@ interface CallService<Pld> {
   payload: Pld;
 }
 
+interface ClientOption {
+  entry: string;
+  chainId: string;
+  maxTimeout: number;
+}
+
+type RawClient = ReturnType<typeof getSdk>;
+
 /**
  * Client for call Muta GraphQL API
  */
 export class Client {
-  private readonly rawClient: ReturnType<typeof getSdk>;
+  private readonly rawClient: RawClient;
 
   /**
    * GraphQL endpoint, ie. htto://127.0.0.1:8000/graphql
    */
-  private readonly endpoint;
+  private readonly endpoint: string;
   /**
    * the ChainID
    */
-  private readonly chainId;
+  private readonly chainId: string;
 
-  constructor(entry: string, chainId: string) {
-    this.endpoint = entry;
-    this.chainId = chainId;
+  private readonly options: ClientOption;
+
+  constructor(options: ClientOption) {
+    this.endpoint = options.entry;
+    this.chainId = options.chainId;
+
+    this.options = options;
 
     this.rawClient = getSdk(
       new GraphQLClient(this.endpoint, {
@@ -47,7 +59,7 @@ export class Client {
    * get epoch id(or epoch height as a hex string)
    */
   public async getLatestEpochId(): Promise<string> {
-    const res = await this.rawClient.getEpochId();
+    const res = await this.rawClient.getEpoch();
     return res.getEpoch.header.epochId;
   }
 
@@ -118,8 +130,12 @@ export class Client {
   }
 
   public async getReceipt(txHash) {
+    const timeout = Math.max(
+      this.options.maxTimeout,
+      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL
+    );
     const res = await Retry.from(() => this.rawClient.getReceipt({ txHash }))
-      .withTimeout((DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL)
+      .withTimeout(timeout)
       .start();
 
     return res.getReceipt.response.ret;
@@ -140,10 +156,14 @@ export class Client {
    */
   public async waitForNextNEpoch(n: number) {
     const before = await this.getEpochHeight();
+    const timeout = Math.max(
+      (n + 1) * DEFAULT_CONSENSUS_INTERVAL,
+      this.options.maxTimeout
+    );
     return Retry.from(() => this.getEpochHeight())
       .withCheck(height => height - before >= n)
       .withInterval(1000)
-      .withTimeout((n + 1) * DEFAULT_CONSENSUS_INTERVAL)
+      .withTimeout(timeout)
       .start();
   }
 }

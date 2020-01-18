@@ -1,11 +1,3 @@
-query getEpochId($epochId: Uint64) {
-  getEpoch(epochId: $epochId) {
-    header {
-      epochId
-    }
-  }
-}
-
 query queryService(
   $serviceName: String!
   $method: String!
@@ -56,7 +48,7 @@ query getTransaction($txHash: Hash!) {
   }
 }
 
-query getReceipt($txHash:Hash!) {
+query getReceipt($txHash: Hash!) {
   getReceipt(txHash: $txHash) {
     txHash
     epochId
@@ -75,9 +67,9 @@ query getReceipt($txHash:Hash!) {
   }
 }
 
-query getEpoch($epochId: Uint64!) {
+query getEpoch($epochId: Uint64) {
   getEpoch(epochId: $epochId) {
-    header{
+    header {
       chainId
       confirmRoot
       cyclesUsed

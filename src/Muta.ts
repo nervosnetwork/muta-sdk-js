@@ -1,5 +1,8 @@
 import { SyncAccount } from './account';
-import { DEFAULT_TIMEOUT_GAP } from './core/constant';
+import {
+  DEFAULT_CONSENSUS_INTERVAL,
+  DEFAULT_TIMEOUT_GAP
+} from './core/constant';
 import { Client } from './index';
 import { HDWallet } from './wallet';
 
@@ -34,7 +37,11 @@ export class Muta {
     };
 
     const { endpoint, chainId } = this.context;
-    this.rpcClient = new Client(endpoint, chainId);
+    this.rpcClient = new Client({
+      chainId,
+      entry: endpoint,
+      maxTimeout: DEFAULT_TIMEOUT_GAP * DEFAULT_CONSENSUS_INTERVAL
+    });
   }
 
   get client(): Client {

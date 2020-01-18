@@ -40,3 +40,7 @@ export function toBuffer(x: string | Buffer): Buffer {
 export function hash(x: string | Buffer): string {
   return toHex(hashBuf(toBuffer(x)));
 }
+
+export function hexToNum(x:string):number {
+  return Number(toHex(x));
+}
