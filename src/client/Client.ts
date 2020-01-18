@@ -55,6 +55,10 @@ export class Client {
     );
   }
 
+  public getRawClient(): RawClient {
+    return this.rawClient;
+  }
+
   /**
    * get epoch id(or epoch height as a hex string)
    */

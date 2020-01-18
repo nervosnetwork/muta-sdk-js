@@ -172,22 +172,6 @@ export type Validator = {
   voteWeight: Scalars['Int'],
 };
 
-export type GetEpochIdQueryVariables = {
-  epochId?: Maybe<Scalars['Uint64']>
-};
-
-
-export type GetEpochIdQuery = (
-  { __typename?: 'Query' }
-  & { getEpoch: (
-    { __typename?: 'Epoch' }
-    & { header: (
-      { __typename?: 'EpochHeader' }
-      & Pick<EpochHeader, 'epochId'>
-    ) }
-  ) }
-);
-
 export type QueryServiceQueryVariables = {
   serviceName: Scalars['String'],
   method: Scalars['String'],
@@ -258,7 +242,7 @@ export type GetReceiptQuery = (
 );
 
 export type GetEpochQueryVariables = {
-  epochId: Scalars['Uint64']
+  epochId?: Maybe<Scalars['Uint64']>
 };
 
 
@@ -286,15 +270,6 @@ export const ServicePayloadFragmentDoc = gql`
   serviceName
   method
   payload
-}
-    `;
-export const GetEpochIdDocument = gql`
-    query getEpochId($epochId: Uint64) {
-  getEpoch(epochId: $epochId) {
-    header {
-      epochId
-    }
-  }
 }
     `;
 export const QueryServiceDocument = gql`
@@ -346,7 +321,7 @@ export const GetReceiptDocument = gql`
 }
     `;
 export const GetEpochDocument = gql`
-    query getEpoch($epochId: Uint64!) {
+    query getEpoch($epochId: Uint64) {
   getEpoch(epochId: $epochId) {
     header {
       chainId
@@ -379,9 +354,6 @@ export const GetEpochDocument = gql`
     `;
 export function getSdk(client: GraphQLClient) {
   return {
-    getEpochId(variables?: GetEpochIdQueryVariables): Promise<GetEpochIdQuery> {
-      return client.request<GetEpochIdQuery>(print(GetEpochIdDocument), variables);
-    },
     queryService(variables: QueryServiceQueryVariables): Promise<QueryServiceQuery> {
       return client.request<QueryServiceQuery>(print(QueryServiceDocument), variables);
     },
@@ -394,7 +366,7 @@ export function getSdk(client: GraphQLClient) {
     getReceipt(variables: GetReceiptQueryVariables): Promise<GetReceiptQuery> {
       return client.request<GetReceiptQuery>(print(GetReceiptDocument), variables);
     },
-    getEpoch(variables: GetEpochQueryVariables): Promise<GetEpochQuery> {
+    getEpoch(variables?: GetEpochQueryVariables): Promise<GetEpochQuery> {
       return client.request<GetEpochQuery>(print(GetEpochDocument), variables);
     }
   };
