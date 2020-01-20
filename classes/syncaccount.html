@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SyncAccount | muta-sdk - v0.3.0</title>
+	<title>SyncAccount | muta-sdk - v0.4.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">muta-sdk - v0.3.0</a>
+					<a href="../index.html" class="title">muta-sdk - v0.4.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -70,24 +70,7 @@
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>SyncAccount provides the API in sync way, convenient but not so safe.
-						use case:</p>
-						<pre><code class="language-typescript"><span class="hljs-keyword">var</span> account = SyncAccount.fromPrivateKey(<span class="hljs-string">"0x45c56be699dca666191ad3446897e0f480da234da896270202514a0e1a587c3f"</span>);
-<span class="hljs-keyword">var</span> signature = account.signTransaction({
-   <span class="hljs-string">"carryingAssetId"</span>: <span class="hljs-string">"0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5"</span>,
-   <span class="hljs-string">"chainId"</span>: <span class="hljs-string">"0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036"</span>,
-    <span class="hljs-string">"feeAssetId"</span>: <span class="hljs-string">"0xfee0decb4f6a76d402f200b5642a9236ba455c22aa80ef82d69fc70ea5ba20b5"</span>,
-   <span class="hljs-string">"feeCycle"</span>: <span class="hljs-string">"0xff"</span>,
-    <span class="hljs-string">"receiver"</span>: <span class="hljs-string">"0x103e9b982b443592ffc3d4c2a484c220fb3e29e2e4"</span>,
-    <span class="hljs-string">"nonce"</span>: <span class="hljs-string">"0x00000000000000000000000000000000bcc53bb0e6b57f561ebf1f0bc65fa8b1"</span>,
-    <span class="hljs-string">"timeout"</span>: <span class="hljs-string">"0x22752"</span>,
-    <span class="hljs-string">"carryingAmount"</span>: <span class="hljs-string">"0x01"</span>
-  });
-<span class="hljs-comment">// output:</span>
-<span class="hljs-comment">// {</span>
-<span class="hljs-comment">//       "txHash": "0x2cb89cbdd613f7af728a095e3949d38de45e4fd56ce5618a076bd40becd5f9de",</span>
-<span class="hljs-comment">//       "pubkey": "0x031288a6788678c25952eba8693b2f278f66e2187004b64ac09416d07f83f96d5b",</span>
-<span class="hljs-comment">//       "signature": "0xd1dc56336facdcbff3caeec4f5c179f50709aa16f1f981d00b0cad543c14e9e631392b974c52b1f4478730f3f0c501b81d302eb2665d8d8b11297466d2aa8bac"</span>
-<span class="hljs-comment">// }</span></code></pre>
+						```</p>
 					</div>
 				</div>
 			</section>
@@ -146,7 +129,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L52">account/SyncAccount.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L33">account/SyncAccount.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -168,7 +151,7 @@
 					<div class="tsd-signature tsd-kind-icon">_private<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L52">account/SyncAccount.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L33">account/SyncAccount.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -185,7 +168,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L36">account/SyncAccount.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L17">account/SyncAccount.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
@@ -202,7 +185,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L32">account/SyncAccount.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L13">account/SyncAccount.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
@@ -219,7 +202,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L44">account/SyncAccount.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L25">account/SyncAccount.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -236,7 +219,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L40">account/SyncAccount.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L21">account/SyncAccount.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -256,7 +239,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L58">account/SyncAccount.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L39">account/SyncAccount.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -285,7 +268,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/8c2b211/src/account/SyncAccount.ts#L48">account/SyncAccount.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L29">account/SyncAccount.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>

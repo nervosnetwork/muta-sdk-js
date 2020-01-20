@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GetBalanceRet | muta-sdk - v0.4.0</title>
+	<title>ClientOption | muta-sdk - v0.4.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="getbalanceret.html">GetBalanceRet</a>
+					<a href="clientoption.html">ClientOption</a>
 				</li>
 			</ul>
-			<h1>Interface GetBalanceRet</h1>
+			<h1>Interface ClientOption</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GetBalanceRet</span>
+						<span class="target">ClientOption</span>
 					</li>
 				</ul>
 			</section>
@@ -81,8 +81,9 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="getbalanceret.html#asset_id" class="tsd-kind-icon">asset_<wbr>id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="getbalanceret.html#balance" class="tsd-kind-icon">balance</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="clientoption.html#entry" class="tsd-kind-icon">entry</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,22 +92,32 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="asset_id" class="tsd-anchor"></a>
-					<h3>asset_<wbr>id</h3>
-					<div class="tsd-signature tsd-kind-icon">asset_<wbr>id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="chainid" class="tsd-anchor"></a>
+					<h3>chain<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L9">builtin/AssetService.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L22">client/Client.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="balance" class="tsd-anchor"></a>
-					<h3>balance</h3>
-					<div class="tsd-signature tsd-kind-icon">balance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="entry" class="tsd-anchor"></a>
+					<h3>entry</h3>
+					<div class="tsd-signature tsd-kind-icon">entry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L10">builtin/AssetService.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L21">client/Client.ts:21</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="maxtimeout" class="tsd-anchor"></a>
+					<h3>max<wbr>Timeout</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L23">client/Client.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -125,13 +136,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-is-not-exported">
-						<a href="getbalanceret.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Ret</a>
+						<a href="clientoption.html" class="tsd-kind-icon">Client<wbr>Option</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="getbalanceret.html#asset_id" class="tsd-kind-icon">asset_<wbr>id</a>
+								<a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="getbalanceret.html#balance" class="tsd-kind-icon">balance</a>
+								<a href="clientoption.html#entry" class="tsd-kind-icon">entry</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a>
 							</li>
 						</ul>
 					</li>
