@@ -769,9 +769,21 @@
 					<div class="tsd-signature tsd-kind-icon">Raw<wbr>Client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><a href="globals.html#getsdk" class="tsd-signature-type">getSdk</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L26">client/Client.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L35">client/Client.ts:35</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>RawClient is the same with Muta GraphQL RPC</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>example</dt>
+							<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> epoch = <span class="hljs-keyword">await</span> rowClient.getEpoch({epochId: <span class="hljs-string">'0x01'</span>})
+<span class="hljs-keyword">const</span> { orderedTxHash, header } = epoch.getEpoch;
+...</code></pre>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="receipt" class="tsd-anchor"></a>
