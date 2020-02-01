@@ -60,15 +60,11 @@ export class Client {
   }
 
   /**
-   * get block height as a hex string
+   * get latest block height
    */
-  public async getLatestHeight(): Promise<string> {
+  public async getLatestBlockHeight(): Promise<number> {
     const res = await this.rawClient.getBlock();
-    return res.getBlock.header.height;
-  }
-
-  public async getBlockHeight(): Promise<number> {
-    const height = await this.getLatestHeight();
+    const height = res.getBlock.header.height;
     return Number('0x' + height);
   }
 
@@ -77,7 +73,7 @@ export class Client {
   ): Promise<InputRawTransaction> {
     const timeout = await (tx.timeout
       ? Promise.resolve(tx.timeout)
-      : toHex((await this.getBlockHeight()) + DEFAULT_TIMEOUT_GAP - 1));
+      : toHex((await this.getLatestBlockHeight()) + DEFAULT_TIMEOUT_GAP - 1));
 
     return {
       chainId: this.chainId,
@@ -150,21 +146,21 @@ export class Client {
    * @example
    * ```typescript
    * async main() {
-   *   const before =  await client.getBlockHeight();
+   *   const before =  await client.getLatestBlockHeight();
    *   await client.waitForNextNBlock(2);
-   *   const after =  await client.getBlockHeight();
+   *   const after =  await client.getLatestBlockHeight();
    *   console.log(after - before);
    * }
    * ```
    * @param n block count
    */
   public async waitForNextNBlock(n: number) {
-    const before = await this.getBlockHeight();
+    const before = await this.getLatestBlockHeight();
     const timeout = Math.max(
       (n + 1) * DEFAULT_CONSENSUS_INTERVAL,
       this.options.maxTimeout
     );
-    return Retry.from(() => this.getBlockHeight())
+    return Retry.from(() => this.getLatestBlockHeight())
       .withCheck(height => height - before >= n)
       .withInterval(1000)
       .withTimeout(timeout)
