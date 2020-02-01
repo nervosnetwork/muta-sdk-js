@@ -2,13 +2,13 @@ query queryService(
   $serviceName: String!
   $method: String!
   $payload: String!
-  $epochId: Uint64
+  $height: Uint64
   $caller: Address = "0x1000000000000000000000000000000000000000"
   $cyclePrice: Uint64
   $cycleLimit: Uint64
 ) {
   queryService(
-    epochId: $epochId
+    height: $height
     serviceName: $serviceName
     method: $method
     payload: $payload
@@ -51,7 +51,7 @@ query getTransaction($txHash: Hash!) {
 query getReceipt($txHash: Hash!) {
   getReceipt(txHash: $txHash) {
     txHash
-    epochId
+    height
     cyclesUsed
     events {
       data
@@ -67,13 +67,13 @@ query getReceipt($txHash: Hash!) {
   }
 }
 
-query getEpoch($epochId: Uint64) {
-  getEpoch(epochId: $epochId) {
+query getBlock($height: Uint64) {
+  getBlock(height: $height) {
     header {
       chainId
       confirmRoot
       cyclesUsed
-      epochId
+      height
       orderRoot
       preHash
 
@@ -84,8 +84,8 @@ query getEpoch($epochId: Uint64) {
       validatorVersion
       proof {
         bitmap
-        epochHash
-        epochId
+        blockHash
+        height
         round
         signature
       }

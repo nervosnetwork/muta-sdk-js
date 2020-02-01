@@ -31,7 +31,7 @@ interface SignedTransaction<R> {
 }
 
 interface ServicePayload<P> {
-  epochId?: Uint64;
+  height?: Uint64;
   cyclesLimit?: Uint64;
   cyclesPrice?: Uint64;
   caller?: Address;

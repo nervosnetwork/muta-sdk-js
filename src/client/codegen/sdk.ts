@@ -17,16 +17,16 @@ export type Scalars = {
 
 
 
-export type Epoch = {
-   __typename?: 'Epoch',
-  header: EpochHeader,
+export type Block = {
+   __typename?: 'Block',
+  header: BlockHeader,
   orderedTxHashes: Array<Scalars['Hash']>,
 };
 
-export type EpochHeader = {
-   __typename?: 'EpochHeader',
+export type BlockHeader = {
+   __typename?: 'BlockHeader',
   chainId: Scalars['Hash'],
-  epochId: Scalars['Uint64'],
+  height: Scalars['Uint64'],
   preHash: Scalars['Hash'],
   timestamp: Scalars['Uint64'],
   orderRoot: Scalars['Hash'],
@@ -90,24 +90,24 @@ export type MutationUnsafeSendTransactionArgs = {
 
 export type Proof = {
    __typename?: 'Proof',
-  epochId: Scalars['Uint64'],
+  height: Scalars['Uint64'],
   round: Scalars['Uint64'],
-  epochHash: Scalars['Hash'],
+  blockHash: Scalars['Hash'],
   signature: Scalars['Bytes'],
   bitmap: Scalars['Bytes'],
 };
 
 export type Query = {
    __typename?: 'Query',
-  getEpoch: Epoch,
+  getBlock: Block,
   getTransaction: SignedTransaction,
   getReceipt: Receipt,
   queryService: ExecResp,
 };
 
 
-export type QueryGetEpochArgs = {
-  epochId?: Maybe<Scalars['Uint64']>
+export type QueryGetBlockArgs = {
+  height?: Maybe<Scalars['Uint64']>
 };
 
 
@@ -122,7 +122,7 @@ export type QueryGetReceiptArgs = {
 
 
 export type QueryQueryServiceArgs = {
-  epochId?: Maybe<Scalars['Uint64']>,
+  height?: Maybe<Scalars['Uint64']>,
   cyclesLimit?: Maybe<Scalars['Uint64']>,
   cyclesPrice?: Maybe<Scalars['Uint64']>,
   caller: Scalars['Address'],
@@ -134,7 +134,7 @@ export type QueryQueryServiceArgs = {
 export type Receipt = {
    __typename?: 'Receipt',
   stateRoot: Scalars['Hash'],
-  epochId: Scalars['Uint64'],
+  height: Scalars['Uint64'],
   txHash: Scalars['Hash'],
   cyclesUsed: Scalars['Uint64'],
   events: Array<Event>,
@@ -176,7 +176,7 @@ export type QueryServiceQueryVariables = {
   serviceName: Scalars['String'],
   method: Scalars['String'],
   payload: Scalars['String'],
-  epochId?: Maybe<Scalars['Uint64']>,
+  height?: Maybe<Scalars['Uint64']>,
   caller?: Maybe<Scalars['Address']>,
   cyclePrice?: Maybe<Scalars['Uint64']>,
   cycleLimit?: Maybe<Scalars['Uint64']>
@@ -230,7 +230,7 @@ export type GetReceiptQuery = (
   { __typename?: 'Query' }
   & { getReceipt: (
     { __typename?: 'Receipt' }
-    & Pick<Receipt, 'txHash' | 'epochId' | 'cyclesUsed' | 'stateRoot'>
+    & Pick<Receipt, 'txHash' | 'height' | 'cyclesUsed' | 'stateRoot'>
     & { events: Array<(
       { __typename?: 'Event' }
       & Pick<Event, 'data' | 'service'>
@@ -241,22 +241,22 @@ export type GetReceiptQuery = (
   ) }
 );
 
-export type GetEpochQueryVariables = {
-  epochId?: Maybe<Scalars['Uint64']>
+export type GetBlockQueryVariables = {
+  height?: Maybe<Scalars['Uint64']>
 };
 
 
-export type GetEpochQuery = (
+export type GetBlockQuery = (
   { __typename?: 'Query' }
-  & { getEpoch: (
-    { __typename?: 'Epoch' }
-    & Pick<Epoch, 'orderedTxHashes'>
+  & { getBlock: (
+    { __typename?: 'Block' }
+    & Pick<Block, 'orderedTxHashes'>
     & { header: (
-      { __typename?: 'EpochHeader' }
-      & Pick<EpochHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'epochId' | 'orderRoot' | 'preHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
+      { __typename?: 'BlockHeader' }
+      & Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'orderRoot' | 'preHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
       & { proof: (
         { __typename?: 'Proof' }
-        & Pick<Proof, 'bitmap' | 'epochHash' | 'epochId' | 'round' | 'signature'>
+        & Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>
       ), validators: Array<(
         { __typename?: 'Validator' }
         & Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>
@@ -273,8 +273,8 @@ export const ServicePayloadFragmentDoc = gql`
 }
     `;
 export const QueryServiceDocument = gql`
-    query queryService($serviceName: String!, $method: String!, $payload: String!, $epochId: Uint64, $caller: Address = "0x1000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
-  queryService(epochId: $epochId, serviceName: $serviceName, method: $method, payload: $payload, caller: $caller, cyclesPrice: $cyclePrice, cyclesLimit: $cycleLimit) {
+    query queryService($serviceName: String!, $method: String!, $payload: String!, $height: Uint64, $caller: Address = "0x1000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
+  queryService(height: $height, serviceName: $serviceName, method: $method, payload: $payload, caller: $caller, cyclesPrice: $cyclePrice, cyclesLimit: $cycleLimit) {
     isError
     ret
   }
@@ -304,7 +304,7 @@ export const GetReceiptDocument = gql`
     query getReceipt($txHash: Hash!) {
   getReceipt(txHash: $txHash) {
     txHash
-    epochId
+    height
     cyclesUsed
     events {
       data
@@ -320,14 +320,14 @@ export const GetReceiptDocument = gql`
   }
 }
     `;
-export const GetEpochDocument = gql`
-    query getEpoch($epochId: Uint64) {
-  getEpoch(epochId: $epochId) {
+export const GetBlockDocument = gql`
+    query getBlock($height: Uint64) {
+  getBlock(height: $height) {
     header {
       chainId
       confirmRoot
       cyclesUsed
-      epochId
+      height
       orderRoot
       preHash
       proposer
@@ -337,8 +337,8 @@ export const GetEpochDocument = gql`
       validatorVersion
       proof {
         bitmap
-        epochHash
-        epochId
+        blockHash
+        height
         round
         signature
       }
@@ -366,8 +366,8 @@ export function getSdk(client: GraphQLClient) {
     getReceipt(variables: GetReceiptQueryVariables): Promise<GetReceiptQuery> {
       return client.request<GetReceiptQuery>(print(GetReceiptDocument), variables);
     },
-    getEpoch(variables?: GetEpochQueryVariables): Promise<GetEpochQuery> {
-      return client.request<GetEpochQuery>(print(GetEpochDocument), variables);
+    getBlock(variables?: GetBlockQueryVariables): Promise<GetBlockQuery> {
+      return client.request<GetBlockQuery>(print(GetBlockDocument), variables);
     }
   };
 }
