@@ -60,7 +60,7 @@ export class Client {
   }
 
   /**
-   * get block id(or block height as a hex string)
+   * get block height as a hex string
    */
   public async getLatestHeight(): Promise<string> {
     const res = await this.rawClient.getBlock();
