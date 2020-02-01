@@ -60,16 +60,12 @@ export class Client {
   }
 
   /**
-   * get epoch id(or epoch height as a hex string)
+   * get latest block height
    */
-  public async getLatestEpochId(): Promise<string> {
-    const res = await this.rawClient.getEpoch();
-    return res.getEpoch.header.epochId;
-  }
-
-  public async getEpochHeight(): Promise<number> {
-    const epochId = await this.getLatestEpochId();
-    return Number('0x' + epochId);
+  public async getLatestBlockHeight(): Promise<number> {
+    const res = await this.rawClient.getBlock();
+    const height = res.getBlock.header.height;
+    return Number('0x' + height);
   }
 
   public async prepareTransaction<Pld>(
@@ -77,13 +73,13 @@ export class Client {
   ): Promise<InputRawTransaction> {
     const timeout = await (tx.timeout
       ? Promise.resolve(tx.timeout)
-      : toHex((await this.getEpochHeight()) + DEFAULT_TIMEOUT_GAP - 1));
+      : toHex((await this.getLatestBlockHeight()) + DEFAULT_TIMEOUT_GAP - 1));
 
     return {
       chainId: this.chainId,
-      // TODO change cyclesLimit by last epoch
+      // TODO change cyclesLimit by last block
       cyclesLimit: '0x9999',
-      // TODO change cyclesLimit by last epoch
+      // TODO change cyclesLimit by last block
       cyclesPrice: '0x9999',
       nonce: toHex(randomBytes.sync(32).toString('hex')),
       timeout,
@@ -146,25 +142,25 @@ export class Client {
   }
 
   /**
-   * wait for next _n_ epoch
+   * wait for next _n_ block
    * @example
    * ```typescript
    * async main() {
-   *   const before =  await client.getEpochHeight();
-   *   await client.waitForNextNEpoch(2);
-   *   const after =  await client.getEpochHeight();
+   *   const before =  await client.getLatestBlockHeight();
+   *   await client.waitForNextNBlock(2);
+   *   const after =  await client.getLatestBlockHeight();
    *   console.log(after - before);
    * }
    * ```
-   * @param n epoch count
+   * @param n block count
    */
-  public async waitForNextNEpoch(n: number) {
-    const before = await this.getEpochHeight();
+  public async waitForNextNBlock(n: number) {
+    const before = await this.getLatestBlockHeight();
     const timeout = Math.max(
       (n + 1) * DEFAULT_CONSENSUS_INTERVAL,
       this.options.maxTimeout
     );
-    return Retry.from(() => this.getEpochHeight())
+    return Retry.from(() => this.getLatestBlockHeight())
       .withCheck(height => height - before >= n)
       .withInterval(1000)
       .withTimeout(timeout)

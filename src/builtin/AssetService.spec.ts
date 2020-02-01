@@ -22,7 +22,7 @@ test('a fully example', async t => {
 
   const receipt = await client.getReceipt(toHex(txHash));
   const createdAsset = JSON.parse(receipt);
-  t.is(createdAsset.owner, rm0x(account.address));
+  t.is(createdAsset.issuer, rm0x(account.address));
 
   const assetId = createdAsset.id;
   const balance = await service.getBalance(assetId, account.address);

@@ -5,16 +5,16 @@ schema {
   mutation: Mutation
 }
 
-"Epoch is a single digital record created within a blockchain. Each epoch contains a record of the previous Epoch, and when linked together these become the âchainâ.An epoch is always composed of header and body."
-type Epoch {
-  "The header section of an epoch"
-  header: EpochHeader!
-  "The body section of an epoch"
+"Block is a single digital record created within a blockchain. Each block contains a record of the previous Block, and when linked together these become the âchainâ.An block is always composed of header and body."
+type Block {
+  "The header section of an block"
+  header: BlockHeader!
+  "The body section of an block"
   orderedTxHashes: [Hash!]!
 }
 
-"An epoch header is like the metadata of an epoch."
-type EpochHeader {
+"An block header is like the metadata of an block."
+type BlockHeader {
   "Identifier of a chain in order to prevent replay attacks across channels "
   chainId: Hash!
   "The merkle roots of all the confirms"
@@ -22,19 +22,19 @@ type EpochHeader {
   "The sum of all transactions costs"
   cyclesUsed: [Uint64!]!
   "Known as the block height like other blockchain"
-  epochId: Uint64!
+  height: Uint64!
   "The merkle root of ordered transactions"
   orderRoot: Hash!
-  "The hash of the serialized previous epoch"
+  "The hash of the serialized previous block"
   preHash: Hash!
   proof: Proof!
-  "The address descirbed who packed the epoch"
+  "The address descirbed who packed the block"
   proposer: Address!
   "The merkle roots of receipts"
   receiptRoot: [Hash!]!
   "The merkle root of state root"
   stateRoot: Hash!
-  "A timestamp that records when the epoch was created"
+  "A timestamp that records when the block was created"
   timestamp: Uint64!
   "The version of validator is designed for cross chain"
   validatorVersion: Uint64!
@@ -57,29 +57,29 @@ type Mutation {
   unsafeSendTransaction(inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "DON'T use it in production! This is just for development.")
 }
 
-"The verifier of the epoch header proved"
+"The verifier of the block header proved"
 type Proof {
   bitmap: Bytes!
-  epochHash: Hash!
-  epochId: Uint64!
+  blockHash: Hash!
+  height: Uint64!
   round: Uint64!
   signature: Bytes!
 }
 
 type Query {
-  "Get the epoch"
-  getEpoch(epochId: Uint64): Epoch!
+  "Get the block"
+  getBlock(height: Uint64): Block!
   "Get the receipt by transaction hash"
   getReceipt(txHash: Hash!): Receipt!
   "Get the transaction by hash"
   getTransaction(txHash: Hash!): SignedTransaction!
   "query service"
-  queryService(caller: Address!, cyclesLimit: Uint64, cyclesPrice: Uint64, epochId: Uint64, method: String!, payload: String!, serviceName: String!): ExecResp!
+  queryService(caller: Address!, cyclesLimit: Uint64, cyclesPrice: Uint64, height: Uint64, method: String!, payload: String!, serviceName: String!): ExecResp!
 }
 
 type Receipt {
   cyclesUsed: Uint64!
-  epochId: Uint64!
+  height: Uint64!
   events: [Event!]!
   response: ReceiptResponse!
   stateRoot: Hash!
@@ -126,7 +126,7 @@ input InputRawTransaction {
   nonce: Hash!
   payload: String!
   serviceName: String!
-  "For security and performance reasons, Muta will only deal with trade request over a period of time,the `timeout` should be `timeout > current_epoch_height` and `timeout < current_epoch_height + timeout_gap`,the `timeout_gap` generally equal to 20."
+  "For security and performance reasons, Muta will only deal with trade request over a period of time,the `timeout` should be `timeout > current_block_height` and `timeout < current_block_height + timeout_gap`,the `timeout_gap` generally equal to 20."
   timeout: Uint64!
 }
 

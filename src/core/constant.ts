@@ -5,7 +5,7 @@ export const COIN_TYPE = 2;
 
 /**
  * There is a timeout gap in Muta chain, by default,
- * Muta only process request a period of time according to the epoch height
+ * Muta only process request a period of time according to the block height
  */
 export const DEFAULT_TIMEOUT_GAP = 20;
 

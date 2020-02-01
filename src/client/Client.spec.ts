@@ -3,10 +3,8 @@ import { getDefaultMutaInstance } from '../builtin';
 
 const client = getDefaultMutaInstance().client;
 
-test('test get epoch height', async t => {
-  const id = await client.getLatestEpochId();
-  t.is(typeof id, 'string');
-
-  const height = await client.getEpochHeight();
+test('test get block height', async t => {
+  const height = await client.getLatestBlockHeight();
+  t.is(typeof height, 'number');
   t.true(height >= 0);
 });
