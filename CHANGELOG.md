@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.4.0...v0.5.0) (2020-02-01)
+
+
+### Features
+
+* replace epoch with block to make code more clear ([#1](https://github.com/nervosnetwork/muta-sdk-js/issues/1)) ([472be5c](https://github.com/nervosnetwork/muta-sdk-js/commit/472be5c))
+
+
+
 ## [0.4.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.3.0...v0.4.0) (2020-01-18)
 
 
