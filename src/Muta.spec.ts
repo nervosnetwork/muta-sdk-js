@@ -1,26 +1,11 @@
-# Muta SDK(WIP)
+import test from 'ava';
+import { AssetService } from './builtin';
+import { Muta } from './Muta';
 
-The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). Allow you interact with Muta node's GraphQL service.
 
-## Quick Start
+test('Muta example', async t => {
 
-```shell
-npm install muta-sdk@next
-```
 
-## Example
-
-Suppose the [AssetService](https://github.com/nervosnetwork/muta/blob/master/built-in-services/asset/src/lib.rs) is stable, the bellow code shows how to create a UDT(user define token) and how to transfer UDTs
-
-1. create a default Muta Instance of Muta chain
-2. generate random Mnemonic and use it as HDWallet's seed
-3. derive a Account, which contains privateKey, as our account for later use
-4. get a client to communicate with Muta chain thru the Node given is step 1
-5. use Asset Service to create an Asset called LOVE_COIN
-6. send certain asset to another address
-
-```js
-async function example(){
   const muta = Muta.createDefaultMutaInstance();
 
   // get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum
@@ -56,7 +41,9 @@ async function example(){
   // get the Asset info back, this should equals to createdAsset above :)
   const asset = await service.getAsset(assetId);
 
+  // we replacing it is Okay, cause they are equal, isn't it?
   t.is(asset.asset_id, assetId);
+
 
   // get the balance of our account, should equal 1314
   const balance = await service.getBalance(assetId, account.address);
@@ -73,23 +60,5 @@ async function example(){
 
   const balance0x2000000000000000000000000000000000000000 = await service.getBalance(assetId, to);
   t.is(balance0x2000000000000000000000000000000000000000, 520);
-}
-```
 
-## Links
-
-- [API Documentation](https://nervosnetwork.github.io/muta-sdk-js)
-- [Muta](https://github.com/nervosnetwork/muta)
-
-## Development
-
-- nodejs >= 10
-- typescript >= 3.7
-- yarn
-
-```shell
-git clone https://github.com/nervosnetwork/muta-sdk-js
-cd muta-sdk-js
-yarn
-yarn start
-```
+});

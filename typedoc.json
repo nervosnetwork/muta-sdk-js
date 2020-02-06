@@ -1,0 +1,10 @@
+{
+  "inputFiles": ["./src"],
+  "externalPattern":
+  ["./src/client/codegen/**",
+    "./src/types/global-fetch.d.ts",
+    "./src/types/three-party.d.ts"],
+  "excludePrivate" : true,
+  "mode": "modules",
+  "out": "doc"
+}

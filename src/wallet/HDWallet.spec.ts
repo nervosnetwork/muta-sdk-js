@@ -4,7 +4,7 @@ import { HDWallet } from './HDWallet';
 test('Test HDWallet', t => {
   t.is(HDWallet.generateMnemonic().split(' ').length, 12);
 
-  const wallet = HDWallet.fromMnemonic(
+  const wallet = new HDWallet(
     'drastic behave exhaust enough tube judge real logic escape critic horror gold'
   );
   const pk0 = wallet.derivePrivateKey(0);

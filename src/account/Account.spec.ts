@@ -1,15 +1,15 @@
 import test from 'ava';
-import { SyncAccount } from './SyncAccount';
+import { Account } from './Account';
 
 test('account address should be correct', t => {
-  const account = SyncAccount.fromPrivateKey(
+  const account = Account.fromPrivateKey(
     '0x1000000000000000000000000000000000000000000000000000000000000000'
   );
   t.is(account.address, '0xd17b9e27ef454ce597f3f05a5b5d4dcc96a423f9');
 });
 
 test('sign by account should be correct', t => {
-  const account = SyncAccount.fromPrivateKey(
+  const account = Account.fromPrivateKey(
     '0x1000000000000000000000000000000000000000000000000000000000000000'
   );
 
@@ -25,10 +25,6 @@ test('sign by account should be correct', t => {
     timeout: '0x9999'
   });
 
-  /*  const pubkey = signedTransaction.pubkey;
-  const signature = signedTransaction.signature;
-  const txHash = signedTransaction.txHash;
-  */
   const { pubkey, signature, txHash } = signedTransaction;
 
   t.is(

@@ -1,1 +1,1 @@
-export { SyncAccount } from './SyncAccount';
+export { Account } from './Account';

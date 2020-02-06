@@ -1,7 +1,7 @@
-import { SyncAccount } from '../account';
+import { Account } from '../account';
 
 interface SyncWallet {
-  deriveAccount(accountIndex: number): SyncAccount;
+  deriveAccount(accountIndex: number): Account;
   derivePrivateKey(accountIndex: number): Buffer;
 }
 

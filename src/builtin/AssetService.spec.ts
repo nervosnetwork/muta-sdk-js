@@ -5,7 +5,7 @@ import { AssetService } from './AssetService';
 
 const muta = Muta.createDefaultMutaInstance();
 
-const client = muta.client;
+const client = muta.client();
 const account = Muta.accountFromPrivateKey(
   '0x1000000000000000000000000000000000000000000000000000000000000000'
 );
@@ -32,12 +32,12 @@ test('a fully AssetService example', async t => {
   t.is(balance, supply);
 
   const to = '0x2000000000000000000000000000000000000000';
-  const transferHash = await service.transfer({
+
+  await service.transfer({
     asset_id: assetId,
     to,
     value: 500
   });
-  await client.getReceipt(transferHash);
 
   const balance2 = await service.getBalance(assetId, to);
   t.is(balance2, 500);
