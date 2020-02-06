@@ -1,7 +1,7 @@
 import test from 'ava';
-import { getDefaultMutaInstance } from '../builtin';
+import { Muta } from '../Muta';
 
-const client = getDefaultMutaInstance().client;
+const client = Muta.createDefaultMutaInstance().client;
 
 test('test get block height', async t => {
   const height = await client.getLatestBlockHeight();
