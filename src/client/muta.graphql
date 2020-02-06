@@ -74,6 +74,7 @@ query getBlock($height: Uint64) {
       confirmRoot
       cyclesUsed
       height
+      execHeight
       orderRoot
       preHash
 
