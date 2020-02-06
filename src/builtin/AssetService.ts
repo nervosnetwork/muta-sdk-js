@@ -1,6 +1,6 @@
 import { Client } from '..';
 import { SyncAccount } from '../account';
-import { Address, ExecRespDyn, Hash, Receipt, ServicePayload } from '../types';
+import { Address, ExecRespDyn, Hash, Receipt, ServicePayload } from '../type';
 import * as utils from '../utils';
 
 export interface GetBalancePayParam {
@@ -32,10 +32,9 @@ export interface Asset {
   issuer: Address;
 }
 
-export interface GetAssetParam{
-  asset_id : Hash;
+export interface GetAssetParam {
+  asset_id: Hash;
 }
-
 
 export class AssetService {
   private client: Client;
@@ -51,7 +50,6 @@ export class AssetService {
     assetId: string,
     address: string = this.account.address
   ): Promise<number> {
-
     const servicePayload: ServicePayload<GetBalancePayParam> = {
       caller: address,
       method: 'get_balance',
@@ -59,7 +57,10 @@ export class AssetService {
       serviceName: 'asset'
     };
 
-    const res: ExecRespDyn<Balance> = await this.client.queryServiceDyn<GetBalancePayParam, Balance>(servicePayload);
+    const res: ExecRespDyn<Balance> = await this.client.queryServiceDyn<
+      GetBalancePayParam,
+      Balance
+    >(servicePayload);
 
     return res.ret.balance;
   }
@@ -74,7 +75,7 @@ export class AssetService {
     return this.client.sendTransaction(this.account.signTransaction(tx));
   }
 
-/*  public async createAsset(payload: CreateAssetParam) {
+  /*  public async createAsset(payload: CreateAssetParam) {
     const tx = await this.client.prepareTransaction({
       method: 'create_asset',
       payload,
@@ -84,9 +85,7 @@ export class AssetService {
     return this.client.sendTransaction(this.account.signTransaction(tx));
   }*/
 
-  public async createAsset(
-    payload: CreateAssetParam
-  ): Promise<Asset> {
+  public async createAsset(payload: CreateAssetParam): Promise<Asset> {
     const tx = await this.client.prepareTransaction({
       method: 'create_asset',
       payload,
@@ -96,7 +95,7 @@ export class AssetService {
     const txHash = await this.client.sendTransaction(
       this.account.signTransaction(tx)
     );
-    const receipt : Receipt= await this.client.getReceipt(utils.toHex(txHash));
+    const receipt: Receipt = await this.client.getReceipt(utils.toHex(txHash));
 
     let createdAssetResult = JSON.parse(receipt.response.ret);
     createdAssetResult = this.changeIdToAssetId(createdAssetResult);
@@ -104,8 +103,10 @@ export class AssetService {
     return createdAssetResult;
   }
 
-
-  public async getAsset(assetId: Hash,address: string = this.account.address) : Promise<Asset>{
+  public async getAsset(
+    assetId: Hash,
+    address: string = this.account.address
+  ): Promise<Asset> {
     const servicePayload: ServicePayload<GetAssetParam> = {
       caller: address,
       method: 'get_balance',
@@ -113,7 +114,10 @@ export class AssetService {
       serviceName: 'asset'
     };
 
-    const res: ExecRespDyn<Asset> = await this.client.queryServiceDyn<GetAssetParam, Asset>(servicePayload);
+    const res: ExecRespDyn<Asset> = await this.client.queryServiceDyn<
+      GetAssetParam,
+      Asset
+    >(servicePayload);
 
     return res.ret;
   }

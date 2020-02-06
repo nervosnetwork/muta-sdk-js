@@ -27,12 +27,11 @@ interface MutaContext {
  * Main module of the SDK
  */
 export class Muta {
-
   get client(): Client {
     return this.rpcClient;
   }
 
-  public static util = util ;
+  public static util = util;
   /**
    * create a HD wallet from mnemonic. Now Muta positioning for a block chain framework,
    * so the wallet seems to be not a must
@@ -77,4 +76,3 @@ export class Muta {
     });
   }
 }
-

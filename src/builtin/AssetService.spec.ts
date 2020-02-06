@@ -25,8 +25,7 @@ test('a fully AssetService example', async t => {
 
   const assetId = createdAsset.asset_id;
 
-
-  const asset= await service.getAsset(assetId);
+  const asset = await service.getAsset(assetId);
   t.is(asset.asset_id, assetId);
 
   const balance = await service.getBalance(assetId, account.address);

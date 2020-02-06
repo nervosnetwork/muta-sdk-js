@@ -25,9 +25,12 @@ test('sign by account should be correct', t => {
     timeout: '0x9999'
   });
 
-  const pubkey = signedTransaction.pubkey;
+  /*  const pubkey = signedTransaction.pubkey;
   const signature = signedTransaction.signature;
   const txHash = signedTransaction.txHash;
+  */
+  const { pubkey, signature, txHash } = signedTransaction;
+
   t.is(
     pubkey,
     '0x0308ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0'

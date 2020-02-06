@@ -8,13 +8,16 @@ import {
 } from '../constant/constant';
 import {
   Block,
-  ExecResp, ExecRespDyn,
+  ExecResp,
+  ExecRespDyn,
   Hash,
   QueryBlockParam,
   QueryServiceQueryParam,
-  Receipt, ServicePayload,
-  SignedTransaction, Transaction
-} from '../types';
+  Receipt,
+  ServicePayload,
+  SignedTransaction,
+  Transaction
+} from '../type';
 import { hexToNum, toHex } from '../utils';
 import {
   getSdk,
@@ -126,13 +129,13 @@ export class Client {
         ? JSON.stringify(pld.payload)
         : pld.payload;
 
-    const queryServiceQueryParam : QueryServiceQueryParam = { ...pld, payload };
+    const queryServiceQueryParam: QueryServiceQueryParam = { ...pld, payload };
     const res = await this.rawClient.queryService(queryServiceQueryParam);
 
     return {
       isError: res.queryService.isError,
       ret: JSON.parse(res.queryService.ret) as R
-    } ;
+    };
   }
 
   /**
