@@ -1,9 +1,7 @@
-import {
-  addressFromPublicKey,
-  publicKeyCreate,
-  signTransaction
-} from '../core';
-import { toBuffer, toHex } from '../utils';
+import { encode } from 'rlp';
+import { sign } from 'secp256k1';
+import { SignedTransaction, Transaction, TransactionSignature } from '../types';
+import { hashBuf, publicKeyCreate, toBuffer, toHex } from '../utils';
 
 /**
  * SyncAccount provides the API in sync way, convenient but not so safe.
@@ -34,7 +32,7 @@ export class SyncAccount {
   }
 
   private get _address(): Buffer {
-    return addressFromPublicKey(this._publicKey);
+    return SyncAccount.addressFromPublicKey(this._publicKey);
   }
 
   get publicKey(): string {
@@ -48,6 +46,16 @@ export class SyncAccount {
   public static fromPrivateKey(privateKey: string): SyncAccount {
     return new SyncAccount(toBuffer(privateKey));
   }
+
+  /**
+   * get an account address from a public key
+   * @param publicKey
+   */
+  public static addressFromPublicKey(publicKey: Buffer): Buffer {
+    const hashed = hashBuf(publicKey);
+    return hashed.slice(0, 20);
+  }
+
   // tslint:disable-next-line:variable-name
   private readonly _privateKey: Buffer;
 
@@ -55,7 +63,40 @@ export class SyncAccount {
     this._privateKey = privateKey;
   }
 
-  public signTransaction<Pld>(tx: TransactionRaw<Pld>): SignedTransaction<Pld> {
-    return signTransaction<Pld>(tx, this._privateKey);
+  public signTransaction(tx: Transaction): SignedTransaction {
+    const orderedTx = [
+      tx.chainId,
+      tx.cyclesLimit,
+      tx.cyclesPrice,
+      tx.nonce,
+      tx.method,
+      tx.serviceName,
+      tx.payload,
+      tx.timeout
+    ];
+    const encoded = encode(orderedTx);
+    const txHash = hashBuf(encoded);
+
+    const { signature } = sign(txHash, this._privateKey);
+
+    const txSig: TransactionSignature = {
+      pubkey: toHex(publicKeyCreate(this._privateKey)),
+      signature: toHex(signature),
+      txHash: toHex(txHash)
+    };
+
+    return {
+      chainId: tx.chainId,
+      cyclesLimit: tx.cyclesLimit,
+      cyclesPrice: tx.cyclesPrice,
+      method: tx.method,
+      nonce: tx.nonce,
+      payload: tx.payload,
+      pubkey: txSig.pubkey,
+      serviceName: tx.serviceName,
+      signature: txSig.signature,
+      timeout: tx.timeout,
+      txHash: txSig.txHash
+    };
   }
 }

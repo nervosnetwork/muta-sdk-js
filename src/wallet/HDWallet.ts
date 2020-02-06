@@ -1,7 +1,7 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import * as HDKey from 'hdkey';
 import { SyncAccount } from '../account';
-import { COIN_TYPE } from '../core/constant';
+import { COIN_TYPE } from '../constant/constant';
 import { toHex } from '../utils';
 import { SyncWallet } from './SyncWallet';
 
@@ -24,23 +24,26 @@ export class HDWallet implements SyncWallet {
     return `m/44'/${COIN_TYPE}'/${index}'/0/0`;
   }
   private readonly mnemonic: string;
+  private readonly masterNode: HDKey;
 
   constructor(mnemonic: string) {
     this.mnemonic = mnemonic;
+    const seed = mnemonicToSeedSync(this.mnemonic);
+    this.masterNode = HDKey.fromMasterSeed(seed);
   }
 
   /**
    * // https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#account
    * @param accountIndex
    */
-  public getPrivateKey(accountIndex: number): Buffer {
-    const seed = mnemonicToSeedSync(this.mnemonic);
-    const hd = HDKey.fromMasterSeed(seed);
-    const hdInstance = hd.derive(HDWallet.getHDPath(accountIndex));
-    return hdInstance._privateKey;
+  public derivePrivateKey(accountIndex: number): Buffer {
+    const hdNode = this.masterNode.derive(HDWallet.getHDPath(accountIndex));
+    return hdNode._privateKey;
   }
 
-  public accountByIndex(index: number): SyncAccount {
-    return SyncAccount.fromPrivateKey(toHex(this.getPrivateKey(index)));
+  public deriveAccount(accountIndex: number): SyncAccount {
+    return SyncAccount.fromPrivateKey(
+      toHex(this.derivePrivateKey(accountIndex))
+    );
   }
 }

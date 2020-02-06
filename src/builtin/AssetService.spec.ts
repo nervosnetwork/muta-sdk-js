@@ -1,30 +1,34 @@
 import test from 'ava';
-import { rm0x, toHex } from '../utils';
+import { Muta } from '../Muta';
+import { rm0x } from '../utils';
 import { AssetService } from './AssetService';
-import { getDefaultMutaInstance } from './index';
 
-const muta = getDefaultMutaInstance();
+const muta = Muta.createDefaultMutaInstance();
+
 const client = muta.client;
-const account = muta.accountFromPrivateKey(
+const account = Muta.accountFromPrivateKey(
   '0x1000000000000000000000000000000000000000000000000000000000000000'
 );
 const service = new AssetService(client, account);
 
-test('a fully example', async t => {
+test('a fully AssetService example', async t => {
   /* create UDT */
   const supply = 22000000;
 
-  const txHash = await service.createAsset({
+  const createdAsset = await service.createAsset({
     name: Math.random().toString(),
     supply,
     symbol: Math.random().toString()
   });
 
-  const receipt = await client.getReceipt(toHex(txHash));
-  const createdAsset = JSON.parse(receipt);
   t.is(createdAsset.issuer, rm0x(account.address));
 
-  const assetId = createdAsset.id;
+  const assetId = createdAsset.asset_id;
+
+
+  const asset= await service.getAsset(assetId);
+  t.is(asset.asset_id, assetId);
+
   const balance = await service.getBalance(assetId, account.address);
   t.is(balance, supply);
 
@@ -35,6 +39,7 @@ test('a fully example', async t => {
     value: 500
   });
   await client.getReceipt(transferHash);
+
   const balance2 = await service.getBalance(assetId, to);
   t.is(balance2, 500);
 });
