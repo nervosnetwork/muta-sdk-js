@@ -5,15 +5,15 @@ schema {
   mutation: Mutation
 }
 
-"Block is a single digital record created within a blockchain. Each block contains a record of the previous Block, and when linked together these become the âchainâ.An block is always composed of header and body."
+"Block is a single digital record created within a blockchain. Each block contains a record of the previous Block, and when linked together these become the âchainâ.A block is always composed of header and body."
 type Block {
-  "The header section of an block"
+  "The header section of a block"
   header: BlockHeader!
-  "The body section of an block"
+  "The body section of a block"
   orderedTxHashes: [Hash!]!
 }
 
-"An block header is like the metadata of an block."
+"A block header is like the metadata of a block."
 type BlockHeader {
   "Identifier of a chain in order to prevent replay attacks across channels "
   chainId: Hash!
@@ -21,7 +21,9 @@ type BlockHeader {
   confirmRoot: [Hash!]!
   "The sum of all transactions costs"
   cyclesUsed: [Uint64!]!
-  "Known as the block height like other blockchain"
+  "The height to which the block has been executed"
+  execHeight: Uint64!
+  "block height"
   height: Uint64!
   "The merkle root of ordered transactions"
   orderRoot: Hash!
@@ -79,8 +81,8 @@ type Query {
 
 type Receipt {
   cyclesUsed: Uint64!
-  height: Uint64!
   events: [Event!]!
+  height: Uint64!
   response: ReceiptResponse!
   stateRoot: Hash!
   txHash: Hash!
@@ -144,11 +146,11 @@ input InputTransactionEncryption {
 "Bytes corresponding hex string."
 scalar Bytes
 
-"Uint64"
-scalar Uint64
-
 "20 bytes of account address"
 scalar Address
+
+"Uint64"
+scalar Uint64
 
 "The output digest of Keccak hash function"
 scalar Hash

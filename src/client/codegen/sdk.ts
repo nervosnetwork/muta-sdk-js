@@ -16,7 +16,6 @@ export type Scalars = {
 };
 
 
-
 export type Block = {
    __typename?: 'Block',
   header: BlockHeader,
@@ -27,6 +26,7 @@ export type BlockHeader = {
    __typename?: 'BlockHeader',
   chainId: Scalars['Hash'],
   height: Scalars['Uint64'],
+  execHeight: Scalars['Uint64'],
   preHash: Scalars['Hash'],
   timestamp: Scalars['Uint64'],
   orderRoot: Scalars['Hash'],
@@ -39,6 +39,7 @@ export type BlockHeader = {
   validatorVersion: Scalars['Uint64'],
   validators: Array<Validator>,
 };
+
 
 export type Event = {
    __typename?: 'Event',
@@ -253,7 +254,7 @@ export type GetBlockQuery = (
     & Pick<Block, 'orderedTxHashes'>
     & { header: (
       { __typename?: 'BlockHeader' }
-      & Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'orderRoot' | 'preHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
+      & Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'execHeight' | 'orderRoot' | 'preHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
       & { proof: (
         { __typename?: 'Proof' }
         & Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>
@@ -328,6 +329,7 @@ export const GetBlockDocument = gql`
       confirmRoot
       cyclesUsed
       height
+      execHeight
       orderRoot
       preHash
       proposer
