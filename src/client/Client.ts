@@ -5,9 +5,25 @@ import randomBytes from 'random-bytes';
 import {
   DEFAULT_CONSENSUS_INTERVAL,
   DEFAULT_TIMEOUT_GAP
-} from '../core/constant';
-import { toHex } from '../utils';
-import { getSdk, InputRawTransaction } from './codegen/sdk';
+} from '../constant/constant';
+import {
+  Block,
+  ExecResp,
+  ExecRespDyn,
+  Hash,
+  QueryBlockParam,
+  QueryServiceQueryParam,
+  Receipt,
+  ServicePayload,
+  SignedTransaction,
+  Transaction
+} from '../type';
+import { hexToNum, toHex } from '../utils';
+import {
+  getSdk,
+  InputRawTransaction,
+  InputTransactionEncryption
+} from './codegen/sdk';
 import { Retry } from './retry';
 
 interface CallService<Pld> {
@@ -59,18 +75,108 @@ export class Client {
     return this.rawClient;
   }
 
+  public async getBlock(height: QueryBlockParam): Promise<Block> {
+    const res = await this.rawClient.getBlock(height);
+    return res.getBlock as Block;
+  }
+
   /**
    * get latest block height
    */
   public async getLatestBlockHeight(): Promise<number> {
-    const res = await this.rawClient.getBlock();
-    const height = res.getBlock.header.height;
-    return Number('0x' + height);
+    const block = await this.getBlock({});
+    return hexToNum(block.header.height);
   }
 
+  public async getTransaction(txHash: Hash): Promise<SignedTransaction> {
+    const timeout = Math.max(
+      this.options.maxTimeout,
+      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL
+    );
+    const res = await Retry.from(() =>
+      this.rawClient.getTransaction({ txHash })
+    )
+      .withTimeout(timeout)
+      .start();
+
+    return res.getTransaction;
+  }
+
+  public async getReceipt(txHash: Hash): Promise<Receipt> {
+    const timeout = Math.max(
+      this.options.maxTimeout,
+      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL
+    );
+    const res = await Retry.from(() => this.rawClient.getReceipt({ txHash }))
+      .withTimeout(timeout)
+      .start();
+
+    return res.getReceipt;
+  }
+
+  public async queryService(param: QueryServiceQueryParam): Promise<ExecResp> {
+    const res = await this.rawClient.queryService(param);
+
+    // tslint:disable-next-line:no-object-literal-type-assertion
+    return res.queryService;
+  }
+
+  public async queryServiceDyn<P extends string | object, R>(
+    pld: ServicePayload<P>
+  ): Promise<ExecRespDyn<R>> {
+    const payload: string =
+      typeof pld.payload !== 'string'
+        ? JSON.stringify(pld.payload)
+        : pld.payload;
+
+    const queryServiceQueryParam: QueryServiceQueryParam = { ...pld, payload };
+    const res = await this.rawClient.queryService(queryServiceQueryParam);
+
+    return {
+      isError: res.queryService.isError,
+      ret: JSON.parse(res.queryService.ret) as R
+    };
+  }
+
+  /**
+   * sendTransaction
+   * @param signedTransaction
+   */
+  public async sendTransaction(
+    signedTransaction: SignedTransaction
+  ): Promise<string> {
+    const inputRaw: InputRawTransaction = {
+      chainId: signedTransaction.chainId,
+      cyclesLimit: signedTransaction.cyclesLimit,
+      cyclesPrice: signedTransaction.cyclesPrice,
+      method: signedTransaction.method,
+      nonce: signedTransaction.nonce,
+      payload: signedTransaction.payload,
+      serviceName: signedTransaction.serviceName,
+      timeout: signedTransaction.timeout
+    };
+
+    const inputEncryption: InputTransactionEncryption = {
+      pubkey: signedTransaction.pubkey,
+      signature: signedTransaction.signature,
+      txHash: signedTransaction.txHash
+    };
+
+    const res = await this.rawClient.sendTransaction({
+      inputEncryption,
+      inputRaw
+    });
+
+    return res.sendTransaction;
+  }
+
+  /**
+   * easy for use
+   * @param tx
+   */
   public async prepareTransaction<Pld>(
     tx: CallService<Pld>
-  ): Promise<InputRawTransaction> {
+  ): Promise<Transaction> {
     const timeout = await (tx.timeout
       ? Promise.resolve(tx.timeout)
       : toHex((await this.getLatestBlockHeight()) + DEFAULT_TIMEOUT_GAP - 1));
@@ -86,59 +192,6 @@ export class Client {
       ...tx,
       payload: JSON.stringify(tx.payload)
     };
-  }
-
-  /**
-   * sendTransaction
-   * @param signedTransaction
-   */
-  public async sendTransaction<R>(
-    signedTransaction: SignedTransaction<R>
-  ): Promise<string> {
-    const inputRaw = signedTransaction.inputRaw;
-
-    const rawPayload = inputRaw.payload;
-    const payload =
-      typeof rawPayload === 'string' ? rawPayload : JSON.stringify(rawPayload);
-
-    const res = await this.rawClient.sendTransaction({
-      inputEncryption: signedTransaction.inputEncryption,
-      inputRaw: { ...inputRaw, payload }
-    });
-
-    return res.sendTransaction;
-  }
-
-  public async queryService<Ret, Pld extends string | object>(
-    variables: ServicePayload<Pld>
-  ): Promise<{
-    isError: boolean;
-    ret: Ret;
-  }> {
-    const payload: string =
-      typeof variables.payload !== 'string'
-        ? JSON.stringify(variables.payload)
-        : variables.payload;
-
-    const parsedPayload = { ...variables, payload };
-    const res = await this.rawClient.queryService(parsedPayload);
-
-    return {
-      isError: res.queryService.isError,
-      ret: JSON.parse(res.queryService.ret) as Ret
-    };
-  }
-
-  public async getReceipt(txHash) {
-    const timeout = Math.max(
-      this.options.maxTimeout,
-      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL
-    );
-    const res = await Retry.from(() => this.rawClient.getReceipt({ txHash }))
-      .withTimeout(timeout)
-      .start();
-
-    return res.getReceipt.response.ret;
   }
 
   /**

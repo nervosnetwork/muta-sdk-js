@@ -1,4 +1,6 @@
-import { hash as hashBuf } from './core';
+import createKeccakHash from 'keccak';
+import randomBytes from 'random-bytes';
+import { publicKeyCreate } from 'secp256k1';
 
 /**
  * remove 0x from a hex string
@@ -41,6 +43,22 @@ export function hash(x: string | Buffer): string {
   return toHex(hashBuf(toBuffer(x)));
 }
 
-export function hexToNum(x:string):number {
+export function hexToNum(x: string): number {
   return Number(toHex(x));
 }
+
+export function randomAddress() {
+  return randomHex(20);
+}
+
+export function randomHex(n: number) {
+  return toHex(randomBytes.sync(n).toString('hex'));
+}
+
+export function hashBuf(buffer: Buffer): Buffer {
+  return createKeccakHash('keccak256')
+    .update(buffer)
+    .digest();
+}
+
+export { publicKeyCreate };

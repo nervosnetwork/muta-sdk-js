@@ -1,7 +1,7 @@
 /**
  * Muta has no native token(coin), but the _coin_type_ is required  by HD Wallet
  */
-export const COIN_TYPE = 2;
+export const COIN_TYPE = 918;
 
 /**
  * There is a timeout gap in Muta chain, by default,
