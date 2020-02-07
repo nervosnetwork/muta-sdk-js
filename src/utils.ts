@@ -125,6 +125,15 @@ export function signTransaction(
 }
 
 /**
+ * convert a public key to an account address
+ * @param publicKey
+ */
+export function addressFromPublicKey(publicKey: Buffer | string): Buffer {
+  const hashed = hashBuf(toBuffer(publicKey));
+  return hashed.slice(0, 20);
+}
+
+/**
  * re-export secp256k1's publicKeyCreate
  */
 export { publicKeyCreate };
