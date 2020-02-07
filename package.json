@@ -8,6 +8,9 @@
   "repository": "https://github.com/nervosnetwork/muta-sdk-js",
   "license": "MIT",
   "keywords": [],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "scripts": {
     "describe": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
