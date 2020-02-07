@@ -3,8 +3,9 @@ import randomBytes from 'random-bytes';
 import { publicKeyCreate } from 'secp256k1';
 
 /**
- * remove 0x from a hex string
- * @param hex
+ * TRY to remove 0x from a hex string
+ * if no 0x starts, do nothing
+ * @param hex string
  */
 export function rm0x(hex: string): string {
   return hex.startsWith('0x') ? hex.slice(2) : hex;
@@ -12,7 +13,7 @@ export function rm0x(hex: string): string {
 
 /**
  * parse to hex string
- * @param x
+ * @param x , may be Buffer, number or string(add 0x if needed or do nothing if already find 0x)
  */
 export function toHex(x: Buffer | number | string): string {
   if (typeof x === 'string') {
@@ -29,8 +30,8 @@ export function toHex(x: Buffer | number | string): string {
 }
 
 /**
- * parse a hex string to buffer
- * @param x
+ * parse a hex string to buffer, if x is already a Buffer, do nothing
+ * @param x , string or Buffer,
  */
 export function toBuffer(x: string | Buffer): Buffer {
   if (Buffer.isBuffer(x)) {
@@ -39,26 +40,49 @@ export function toBuffer(x: string | Buffer): Buffer {
   return Buffer.from(rm0x(x), 'hex');
 }
 
+/**
+ * it will first try to call [[toBuffer]] to contains string | Buffer to Buffer
+ * then use keccak256 to hash input
+ * @param x
+ */
 export function hash(x: string | Buffer): string {
   return toHex(hashBuf(toBuffer(x)));
 }
 
+/**
+ * convert a hex string to number
+ * @param x
+ */
 export function hexToNum(x: string): number {
   return Number(toHex(x));
 }
 
+/**
+ * generate a random [[Address]]
+ */
 export function randomAddress() {
   return randomHex(20);
 }
 
+/**
+ * generate given length random hex string
+ * @param n
+ */
 export function randomHex(n: number) {
   return toHex(randomBytes.sync(n).toString('hex'));
 }
 
+/**
+ * us keccak256 to has the input
+ * @param buffer
+ */
 export function hashBuf(buffer: Buffer): Buffer {
   return createKeccakHash('keccak256')
     .update(buffer)
     .digest();
 }
 
+/**
+ * re-export secp256k1's publicKeyCreate
+ */
 export { publicKeyCreate };
