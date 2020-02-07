@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SyncAccount | muta-sdk - v0.4.0</title>
+	<title>Account | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">muta-sdk - v0.4.0</a>
+					<a href="../index.html" class="title">muta-sdk - v0.6.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="syncaccount.html">SyncAccount</a>
+					<a href="account.html">Account</a>
 				</li>
 			</ul>
-			<h1>Class SyncAccount</h1>
+			<h1>Class Account</h1>
 		</div>
 	</div>
 </header>
@@ -69,16 +69,36 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>SyncAccount provides the API in sync way, convenient but not so safe.
-						```</p>
+						<p>Account is concept of A use on Muta chain.
+							it like other block chain, address is only identifier for different users, so as Muta
+							Account contains a privateKey, and could extract its publicKey and address
+						what&#39;s more, Account takes job of <a href="account.html#signtransaction">signTransaction</a></p>
 					</div>
+					<p>Here is an example:</p>
+					<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">const</span> account = Account.fromPrivateKey(
+    <span class="hljs-string">'0x1000000000000000000000000000000000000000000000000000000000000000'</span>
+);
+
+<span class="hljs-keyword">const</span> signedTransaction = account.signTransaction({
+ <span class="hljs-attr">chainId</span>:
+   <span class="hljs-string">'0x0000000000000000000000000000000000000000000000000000000000000000'</span>,
+ <span class="hljs-attr">cyclesLimit</span>: <span class="hljs-string">'0x00'</span>,
+ <span class="hljs-attr">cyclesPrice</span>: <span class="hljs-string">'0x00'</span>,
+ <span class="hljs-attr">method</span>: <span class="hljs-string">'method'</span>,
+ <span class="hljs-attr">nonce</span>: <span class="hljs-string">'0x0000000000000000000000000000000000000000000000000000000000000000'</span>,
+ <span class="hljs-attr">payload</span>: <span class="hljs-string">'payload'</span>,
+ <span class="hljs-attr">serviceName</span>: <span class="hljs-string">'service_name'</span>,
+ <span class="hljs-attr">timeout</span>: <span class="hljs-string">'0x9999'</span>
+});
+}</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SyncAccount</span>
+						<span class="target">Account</span>
 					</li>
 				</ul>
 			</section>
@@ -89,29 +109,22 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="syncaccount.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="syncaccount.html#_privatekey" class="tsd-kind-icon">_private<wbr>Key</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="account.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-private"><a href="syncaccount.html#_address" class="tsd-kind-icon">_address</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-private"><a href="syncaccount.html#_publickey" class="tsd-kind-icon">_public<wbr>Key</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="syncaccount.html#address" class="tsd-kind-icon">address</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="syncaccount.html#publickey" class="tsd-kind-icon">public<wbr>Key</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="account.html#address" class="tsd-kind-icon">address</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="account.html#publickey" class="tsd-kind-icon">public<wbr>Key</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="syncaccount.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="syncaccount.html#fromprivatekey" class="tsd-kind-icon">from<wbr>Private<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="account.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="account.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="account.html#fromprivatekey" class="tsd-kind-icon">from<wbr>Private<wbr>Key</a></li>
 							</ul>
 						</section>
 					</div>
@@ -123,75 +136,39 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Sync<wbr>Account<span class="tsd-signature-symbol">(</span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Account<span class="tsd-signature-symbol">(</span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="account.html" class="tsd-signature-type">Account</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L33">account/SyncAccount.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/account/Account.ts#L70">account/Account.ts:70</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>create an Account by pass a buffer containing private key
+									this is not recommended, consider using <a href="account.html#fromprivatekey">fromPrivateKey</a></p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>privateKey: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Buffer | Buffer-like</p>
+										</div>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="account.html" class="tsd-signature-type">Account</a></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_privatekey" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _private<wbr>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">_private<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L33">account/SyncAccount.ts:33</a></li>
-						</ul>
-					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
-					<a name="_address" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _address</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> _address<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L17">account/SyncAccount.ts:17</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
-					<a name="_publickey" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _public<wbr>Key</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> _publicKey<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L13">account/SyncAccount.ts:13</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="address" class="tsd-anchor"></a>
 					<h3>address</h3>
@@ -202,7 +179,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L25">account/SyncAccount.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/account/Account.ts#L46">account/Account.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -219,7 +196,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L21">account/SyncAccount.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/account/Account.ts#L42">account/Account.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -229,32 +206,96 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="signtransaction" class="tsd-anchor"></a>
 					<h3>sign<wbr>Transaction</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">sign<wbr>Transaction&lt;Pld&gt;<span class="tsd-signature-symbol">(</span>tx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TransactionRaw</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SignedTransaction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">sign<wbr>Transaction<span class="tsd-signature-symbol">(</span>tx<span class="tsd-signature-symbol">: </span><a href="../interfaces/transaction.html" class="tsd-signature-type">Transaction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/signedtransaction.html" class="tsd-signature-type">SignedTransaction</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L39">account/SyncAccount.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/account/Account.ts#L123">account/Account.ts:123</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>Pld</h4>
-								</li>
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sign a Muta transaction with this Account&#39;s internal private key
+										use case:
+									```typescript</p>
+								</div>
+								<p>  const account = Account.fromPrivateKey(
+									&#39;0x1000000000000000000000000000000000000000000000000000000000000000&#39;
+									);
+									const signedTransaction = account.signTransaction({
+									chainId:
+									&#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
+									cyclesLimit: &#39;0x00&#39;,
+									cyclesPrice: &#39;0x00&#39;,
+									method: &#39;method&#39;,
+									nonce: &#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
+									payload: &#39;payload&#39;,
+									serviceName: &#39;service_name&#39;,
+									timeout: &#39;0x9999&#39;
+								});</p>
+								<p>  const { pubkey, signature, txHash } = signedTransaction;</p>
+								<p>```
+									the output is
+									{ chainId:
+									&#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
+									cyclesLimit: &#39;0x00&#39;,
+									cyclesPrice: &#39;0x00&#39;,
+									method: &#39;method&#39;,
+									nonce:
+									&#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
+									payload: &#39;payload&#39;,
+									pubkey:
+									&#39;0x0308ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0&#39;,
+									serviceName: &#39;service_name&#39;,
+									signature:
+									&#39;0xb911f4c58d9ae2c8ea4a546c426f4167813dd0d7a8b5de7f2a7d40e07d7df4572b5670744954ea1f2ff831d5c579fa5d937beb0ddd544d18f8bc069547ac5295&#39;,
+									timeout: &#39;0x9999&#39;,
+									txHash:
+								&#39;0x26e4ec1c25cc0c6fc084f358b97a7615fee1b229d271ba40bcfc5be80b6dd0d4&#39; }</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>tx: <span class="tsd-signature-type">TransactionRaw</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>tx: <a href="../interfaces/transaction.html" class="tsd-signature-type">Transaction</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SignedTransaction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/signedtransaction.html" class="tsd-signature-type">SignedTransaction</a></h4>
+							<p><a href="../interfaces/signedtransaction.html">SignedTransaction</a></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="addressfrompublickey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> address<wbr>From<wbr>Public<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key<span class="tsd-signature-symbol">(</span>publicKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/account/Account.ts#L64">account/Account.ts:64</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get the account address from a public key</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>publicKey: <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+							<p>Buffer,</p>
 						</li>
 					</ul>
 				</section>
@@ -262,22 +303,25 @@
 					<a name="fromprivatekey" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Private<wbr>Key</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">from<wbr>Private<wbr>Key<span class="tsd-signature-symbol">(</span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></li>
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Private<wbr>Key<span class="tsd-signature-symbol">(</span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="account.html" class="tsd-signature-type">Account</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/account/SyncAccount.ts#L29">account/SyncAccount.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/account/Account.ts#L55">account/Account.ts:55</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>privateKey: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="account.html" class="tsd-signature-type">Account</a></h4>
+							<p><a href="account.html">Account</a></p>
 						</li>
 					</ul>
 				</section>
@@ -296,31 +340,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="syncaccount.html" class="tsd-kind-icon">Sync<wbr>Account</a>
+						<a href="account.html" class="tsd-kind-icon">Account</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="syncaccount.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="syncaccount.html#_privatekey" class="tsd-kind-icon">_private<wbr>Key</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
-								<a href="syncaccount.html#_address" class="tsd-kind-icon">_address</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private">
-								<a href="syncaccount.html#_publickey" class="tsd-kind-icon">_public<wbr>Key</a>
+								<a href="account.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="syncaccount.html#address" class="tsd-kind-icon">address</a>
+								<a href="account.html#address" class="tsd-kind-icon">address</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="syncaccount.html#publickey" class="tsd-kind-icon">public<wbr>Key</a>
+								<a href="account.html#publickey" class="tsd-kind-icon">public<wbr>Key</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="syncaccount.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="account.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="syncaccount.html#fromprivatekey" class="tsd-kind-icon">from<wbr>Private<wbr>Key</a>
+								<a href="account.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="account.html#fromprivatekey" class="tsd-kind-icon">from<wbr>Private<wbr>Key</a>
 							</li>
 						</ul>
 					</li>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Client | muta-sdk - v0.4.0</title>
+	<title>Client | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">muta-sdk - v0.4.0</a>
+					<a href="../index.html" class="title">muta-sdk - v0.6.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -69,8 +69,34 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Client for call Muta GraphQL API</p>
+						<p>Client is a tool for calling Muta GraphQL API
+							shortly, it implements js code for you to send raw <strong>GrapghQL</strong> rpc to node and do some prepare job <strong>locally</strong>.
+							you can <a href="client.html#getblock">getBlock</a> infos, <a href="client.html#queryservicedyn">queryServiceDyn</a>, <a href="client.html#sendtransaction">sendTransaction</a> and <a href="client.html#getreceipt">getReceipt</a> to node,
+						more, you can <a href="client.html#composetransaction">composeTransaction</a> locally, please see more function details,</p>
 					</div>
+					<p>The Muta GraphQL API consists of 2 kinds and the concept is corresponding to GraphQL.
+					thus Muta GraphQL API has 2 types, Query and Mutation, as normal as in GraphQL.</p>
+					<ol>
+						<li>Query just retrieves data and makes call without side-effect to the Muta chain, which means no modification should happen. Like eth_call in json_rpc of Ethereum</li>
+						<li>Mutation can trigger the logic and modify the state of Muta chain. Like eth_sendTransaction in json_rpc of Ethereum</li>
+					</ol>
+					<p>Currently:</p>
+					<p><strong>Query</strong></p>
+					<ol>
+						<li><a href="client.html#getblock">getBlock</a>, <a href="client.html#getlatestblockheight">getLatestBlockHeight</a> and [[[waitForNextNBlock]]</li>
+						<li><a href="client.html#gettransaction">getTransaction</a></li>
+						<li><a href="client.html#getreceipt">getReceipt</a></li>
+						<li><a href="client.html#queryservice">queryService</a> and <a href="client.html#queryservicedyn">queryServiceDyn</a></li>
+					</ol>
+					<p><strong>Mutation</strong></p>
+					<ol>
+						<li><a href="client.html#sendtransaction">sendTransaction</a></li>
+					</ol>
+					<p><strong>Locally</strong></p>
+					<ol>
+						<li><a href="client.html#composetransaction">composeTransaction</a></li>
+					</ol>
+					<p>Please check <a href="assetservice.html">AssetService</a> &#39;s source code to get the usage of this Client.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -91,26 +117,18 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="client.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="client.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="client.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="client.html#options" class="tsd-kind-icon">options</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="client.html#rawclient" class="tsd-kind-icon">raw<wbr>Client</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#getepochheight" class="tsd-kind-icon">get<wbr>Epoch<wbr>Height</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#getlatestepochid" class="tsd-kind-icon">get<wbr>Latest<wbr>Epoch<wbr>Id</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#getrawclient" class="tsd-kind-icon">get<wbr>Raw<wbr>Client</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#composetransaction" class="tsd-kind-icon">compose<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#getblock" class="tsd-kind-icon">get<wbr>Block</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#getlatestblockheight" class="tsd-kind-icon">get<wbr>Latest<wbr>Block<wbr>Height</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#getreceipt" class="tsd-kind-icon">get<wbr>Receipt</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#preparetransaction" class="tsd-kind-icon">prepare<wbr>Transaction</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#queryservice" class="tsd-kind-icon">query<wbr>Service</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#waitfornextnepoch" class="tsd-kind-icon">wait<wbr>For<wbr>NextNEpoch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#gettransaction" class="tsd-kind-icon">get<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#queryservice" class="tsd-kind-icon">query<wbr>Service</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="client.html#queryservicedyn" class="tsd-kind-icon">query<wbr>Service<wbr>Dyn</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.html#waitfornextnblock" class="tsd-kind-icon">wait<wbr>For<wbr>NextNBlock</a></li>
 							</ul>
 						</section>
 					</div>
@@ -128,9 +146,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L52">client/Client.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L86">client/Client.ts:86</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>construct a Client by given <a href="../interfaces/clientoption.html">ClientOption</a></p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -142,114 +165,99 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="chainid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> chain<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L50">client/Client.ts:50</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>the ChainID</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="endpoint" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> endpoint</h3>
-					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L46">client/Client.ts:46</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>GraphQL endpoint, ie. htto://127.0.0.1:8000/graphql</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="options" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> options</h3>
-					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/clientoption.html" class="tsd-signature-type">ClientOption</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L52">client/Client.ts:52</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="rawclient" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> raw<wbr>Client</h3>
-					<div class="tsd-signature tsd-kind-icon">raw<wbr>Client<span class="tsd-signature-symbol">:</span> <a href="../globals.html#rawclient" class="tsd-signature-type">RawClient</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L41">client/Client.ts:41</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getepochheight" class="tsd-anchor"></a>
-					<h3>get<wbr>Epoch<wbr>Height</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Epoch<wbr>Height<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="composetransaction" class="tsd-anchor"></a>
+					<h3>compose<wbr>Transaction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">compose<wbr>Transaction&lt;P&gt;<span class="tsd-signature-symbol">(</span>param<span class="tsd-signature-symbol">: </span><a href="../interfaces/composetransactionparam.html" class="tsd-signature-type">ComposeTransactionParam</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/transaction.html" class="tsd-signature-type">Transaction</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L79">client/Client.ts:79</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getlatestepochid" class="tsd-anchor"></a>
-					<h3>get<wbr>Latest<wbr>Epoch<wbr>Id</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Latest<wbr>Epoch<wbr>Id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L74">client/Client.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L243">client/Client.ts:243</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>get epoch id(or epoch height as a hex string)</p>
+									<p>easy tool for compose a <a href="../interfaces/transaction.html">Transaction</a> stuffed with preset <a href="../interfaces/clientoption.html">ClientOption</a></p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h4>
+									<div class="tsd-comment tsd-typography">
+										<p>generic of object which will be JSON.stringify to payload string in <a href="../interfaces/transaction.html">Transaction</a></p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>param: <a href="../interfaces/composetransactionparam.html" class="tsd-signature-type">ComposeTransactionParam</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>your params</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/transaction.html" class="tsd-signature-type">Transaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getrawclient" class="tsd-anchor"></a>
-					<h3>get<wbr>Raw<wbr>Client</h3>
+					<a name="getblock" class="tsd-anchor"></a>
+					<h3>get<wbr>Block</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Raw<wbr>Client<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#rawclient" class="tsd-signature-type">RawClient</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Block<span class="tsd-signature-symbol">(</span>height<span class="tsd-signature-symbol">?: </span><a href="../globals.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/block.html" class="tsd-signature-type">Block</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L67">client/Client.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L113">client/Client.ts:113</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#rawclient" class="tsd-signature-type">RawClient</a></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get the <a href="../interfaces/block.html">Block</a> of given height</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> height: <a href="../globals.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the target height you want search, null for the latest</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/block.html" class="tsd-signature-type">Block</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getlatestblockheight" class="tsd-anchor"></a>
+					<h3>get<wbr>Latest<wbr>Block<wbr>Height</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Latest<wbr>Block<wbr>Height<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L123">client/Client.ts:123</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get latest block height</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>the latest block height</p>
 						</li>
 					</ul>
 				</section>
@@ -257,145 +265,194 @@
 					<a name="getreceipt" class="tsd-anchor"></a>
 					<h3>get<wbr>Receipt</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Receipt<span class="tsd-signature-symbol">(</span>txHash<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Receipt<span class="tsd-signature-symbol">(</span>txHash<span class="tsd-signature-symbol">: </span><a href="../globals.html#hash" class="tsd-signature-type">Hash</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/receipt.html" class="tsd-signature-type">Receipt</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L145">client/Client.ts:145</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>txHash: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<a name="preparetransaction" class="tsd-anchor"></a>
-					<h3>prepare<wbr>Transaction</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">prepare<wbr>Transaction&lt;Pld&gt;<span class="tsd-signature-symbol">(</span>tx<span class="tsd-signature-symbol">: </span><a href="../interfaces/callservice.html" class="tsd-signature-type">CallService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#inputrawtransaction" class="tsd-signature-type">InputRawTransaction</a><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L84">client/Client.ts:84</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>Pld</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>tx: <a href="../interfaces/callservice.html" class="tsd-signature-type">CallService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#inputrawtransaction" class="tsd-signature-type">InputRawTransaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<a name="queryservice" class="tsd-anchor"></a>
-					<h3>query<wbr>Service</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">query<wbr>Service&lt;Ret, Pld&gt;<span class="tsd-signature-symbol">(</span>variables<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ServicePayload</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L125">client/Client.ts:125</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>Ret</h4>
-								</li>
-								<li>
-									<h4>Pld<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>variables: <span class="tsd-signature-type">ServicePayload</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pld</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<a name="sendtransaction" class="tsd-anchor"></a>
-					<h3>send<wbr>Transaction</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">send<wbr>Transaction&lt;R&gt;<span class="tsd-signature-symbol">(</span>signedTransaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SignedTransaction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L108">client/Client.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L151">client/Client.ts:151</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>sendTransaction</p>
+									<p>get <a href="../interfaces/receipt.html">Receipt</a> by give its transaction hash
+									you can only get a <a href="../interfaces/receipt.html">Receipt</a> when the related <a href="../interfaces/transaction.html">Transaction</a> has been committed/mined</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>txHash: <a href="../globals.html#hash" class="tsd-signature-type">Hash</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the target transaction hash, you can call <a href="client.html#sendtransaction">sendTransaction</a> to send a <a href="../interfaces/transaction.html">Transaction</a> and get its txHash</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/receipt.html" class="tsd-signature-type">Receipt</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettransaction" class="tsd-anchor"></a>
+					<h3>get<wbr>Transaction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Transaction<span class="tsd-signature-symbol">(</span>txHash<span class="tsd-signature-symbol">: </span><a href="../globals.html#hash" class="tsd-signature-type">Hash</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/signedtransaction.html" class="tsd-signature-type">SignedTransaction</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L132">client/Client.ts:132</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get <a href="../interfaces/signedtransaction.html">SignedTransaction</a> by give its transaction hash</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>txHash: <a href="../globals.html#hash" class="tsd-signature-type">Hash</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the transaction target hash, you can call <a href="client.html#sendtransaction">sendTransaction</a> to send a tx and get its txHash</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/signedtransaction.html" class="tsd-signature-type">SignedTransaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="queryservice" class="tsd-anchor"></a>
+					<h3>query<wbr>Service</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Service<span class="tsd-signature-symbol">(</span>param<span class="tsd-signature-symbol">: </span><a href="../interfaces/queryserviceparam.html" class="tsd-signature-type">QueryServiceParam</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/execresp.html" class="tsd-signature-type">ExecResp</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L171">client/Client.ts:171</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>In Muta, there are 2 kinds of call to the chain,
+										one is <a href="client.html#queryservice">queryService</a>, that&#39;s for getting info from chain but committing <strong>NO MODIFICATION</strong>,
+										another is <a href="client.html#sendtransaction">sendTransaction</a>
+									it somehow like eth_call in Ethereum</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>param: <a href="../interfaces/queryserviceparam.html" class="tsd-signature-type">QueryServiceParam</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/execresp.html" class="tsd-signature-type">ExecResp</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="queryservicedyn" class="tsd-anchor"></a>
+					<h3>query<wbr>Service<wbr>Dyn</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Service<wbr>Dyn&lt;P, R&gt;<span class="tsd-signature-symbol">(</span>param<span class="tsd-signature-symbol">: </span><a href="../interfaces/servicepayload.html" class="tsd-signature-type">ServicePayload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/execrespdyn.html" class="tsd-signature-type">ExecRespDyn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L186">client/Client.ts:186</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>like <a href="client.html#queryservice">queryService</a>, but with generic, which means if you give object param and generic type,
+										it will auto encode and decode data for you,
+									the encode and decode method is JSON.stringfy and JSON.parse</p>
 								</div>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>R</h4>
+									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the payload object which will be (tried to )encoded by JSON.stringfy</p>
+									</div>
+								</li>
+								<li>
+									<h4>R<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the return object which will be decoded by JSON.parse</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>signedTransaction: <span class="tsd-signature-type">SignedTransaction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
+									<h5>param: <a href="../interfaces/servicepayload.html" class="tsd-signature-type">ServicePayload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/execrespdyn.html" class="tsd-signature-type">ExecRespDyn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="waitfornextnepoch" class="tsd-anchor"></a>
-					<h3>wait<wbr>For<wbr>NextNEpoch</h3>
+					<a name="sendtransaction" class="tsd-anchor"></a>
+					<h3>send<wbr>Transaction</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">wait<wbr>For<wbr>NextNEpoch<span class="tsd-signature-symbol">(</span>n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Transaction<span class="tsd-signature-symbol">(</span>signedTransaction<span class="tsd-signature-symbol">: </span><a href="../interfaces/signedtransaction.html" class="tsd-signature-type">SignedTransaction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#hash" class="tsd-signature-type">Hash</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/Client.ts#L170">client/Client.ts:170</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L210">client/Client.ts:210</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>wait for next <em>n</em> epoch</p>
+									<p>In Muta, there are 2 kinds of call to the chain,
+										one is <a href="client.html#sendtransaction">sendTransaction</a>, that&#39;s for sending transactions to communicate with chain, the transaction may or may not modify the state of chain
+									another is <a href="client.html#queryservice">queryService</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>signedTransaction: <a href="../interfaces/signedtransaction.html" class="tsd-signature-type">SignedTransaction</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#hash" class="tsd-signature-type">Hash</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="waitfornextnblock" class="tsd-anchor"></a>
+					<h3>wait<wbr>For<wbr>NextNBlock</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">wait<wbr>For<wbr>NextNBlock<span class="tsd-signature-symbol">(</span>n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L279">client/Client.ts:279</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>wait for next <em>n</em> block</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
 									<dd><pre><code class="language-typescript"><span class="hljs-keyword">async</span> main() {
-  <span class="hljs-keyword">const</span> before =  <span class="hljs-keyword">await</span> client.getEpochHeight();
-  <span class="hljs-keyword">await</span> client.waitForNextNEpoch(<span class="hljs-number">2</span>);
-  <span class="hljs-keyword">const</span> after =  <span class="hljs-keyword">await</span> client.getEpochHeight();
+  <span class="hljs-keyword">const</span> before =  <span class="hljs-keyword">await</span> client.getLatestBlockHeight();
+  <span class="hljs-keyword">await</span> client.waitForNextNBlock(<span class="hljs-number">2</span>);
+  <span class="hljs-keyword">const</span> after =  <span class="hljs-keyword">await</span> client.getLatestBlockHeight();
   <span class="hljs-built_in">console</span>.log(after - before);
 }</code></pre>
 									</dd>
@@ -406,7 +463,7 @@
 								<li>
 									<h5>n: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>epoch count</p>
+										<p>block count</p>
 									</div>
 								</li>
 							</ul>
@@ -434,41 +491,32 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="client.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="client.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="client.html#endpoint" class="tsd-kind-icon">endpoint</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="client.html#options" class="tsd-kind-icon">options</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="client.html#rawclient" class="tsd-kind-icon">raw<wbr>Client</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="client.html#composetransaction" class="tsd-kind-icon">compose<wbr>Transaction</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="client.html#getepochheight" class="tsd-kind-icon">get<wbr>Epoch<wbr>Height</a>
+								<a href="client.html#getblock" class="tsd-kind-icon">get<wbr>Block</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="client.html#getlatestepochid" class="tsd-kind-icon">get<wbr>Latest<wbr>Epoch<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="client.html#getrawclient" class="tsd-kind-icon">get<wbr>Raw<wbr>Client</a>
+								<a href="client.html#getlatestblockheight" class="tsd-kind-icon">get<wbr>Latest<wbr>Block<wbr>Height</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.html#getreceipt" class="tsd-kind-icon">get<wbr>Receipt</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="client.html#preparetransaction" class="tsd-kind-icon">prepare<wbr>Transaction</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="client.html#gettransaction" class="tsd-kind-icon">get<wbr>Transaction</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.html#queryservice" class="tsd-kind-icon">query<wbr>Service</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="client.html#queryservicedyn" class="tsd-kind-icon">query<wbr>Service<wbr>Dyn</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.html#sendtransaction" class="tsd-kind-icon">send<wbr>Transaction</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="client.html#waitfornextnepoch" class="tsd-kind-icon">wait<wbr>For<wbr>NextNEpoch</a>
+								<a href="client.html#waitfornextnblock" class="tsd-kind-icon">wait<wbr>For<wbr>NextNBlock</a>
 							</li>
 						</ul>
 					</li>

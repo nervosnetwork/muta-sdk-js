@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Retry | muta-sdk - v0.4.0</title>
+	<title>Retry | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">muta-sdk - v0.4.0</a>
+					<a href="../index.html" class="title">muta-sdk - v0.6.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -86,18 +86,9 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="retry.html#interval" class="tsd-kind-icon">interval</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="retry.html#promisethunk" class="tsd-kind-icon">promise<wbr>Thunk</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="retry.html#timeout" class="tsd-kind-icon">timeout</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="retry.html#check" class="tsd-kind-icon">check</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="retry.html#start" class="tsd-kind-icon">start</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="retry.html#withcheck" class="tsd-kind-icon">with<wbr>Check</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="retry.html#withinterval" class="tsd-kind-icon">with<wbr>Interval</a></li>
@@ -109,73 +100,8 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="interval" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> interval</h3>
-					<div class="tsd-signature tsd-kind-icon">interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;500</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L16">client/retry.ts:16</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="promisethunk" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> promise<wbr>Thunk</h3>
-					<div class="tsd-signature tsd-kind-icon">promise<wbr>Thunk<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L12">client/retry.ts:12</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="timeout" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> timeout</h3>
-					<div class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;6000</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L14">client/retry.ts:14</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="check" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> check</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">check<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L57">client/retry.ts:57</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">true</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="start" class="tsd-anchor"></a>
 					<h3>start</h3>
@@ -186,7 +112,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L38">client/retry.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/retry.ts#L38">client/retry.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -203,7 +129,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L33">client/retry.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/retry.ts#L33">client/retry.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -226,7 +152,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L23">client/retry.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/retry.ts#L23">client/retry.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -249,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L18">client/retry.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/retry.ts#L18">client/retry.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -284,7 +210,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L28">client/retry.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/retry.ts#L28">client/retry.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -307,7 +233,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/client/retry.ts#L8">client/retry.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/retry.ts#L8">client/retry.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -355,18 +281,6 @@
 					<li class="current tsd-kind-class tsd-has-type-parameter">
 						<a href="retry.html" class="tsd-kind-icon">Retry</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="retry.html#interval" class="tsd-kind-icon">interval</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="retry.html#promisethunk" class="tsd-kind-icon">promise<wbr>Thunk</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="retry.html#timeout" class="tsd-kind-icon">timeout</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="retry.html#check" class="tsd-kind-icon">check</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="retry.html#start" class="tsd-kind-icon">start</a>
 							</li>

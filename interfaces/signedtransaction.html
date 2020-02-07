@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ClientOption | muta-sdk - v0.6.0</title>
+	<title>SignedTransaction | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="clientoption.html">ClientOption</a>
+					<a href="signedtransaction.html">SignedTransaction</a>
 				</li>
 			</ul>
-			<h1>Interface ClientOption</h1>
+			<h1>Interface SignedTransaction</h1>
 		</div>
 	</div>
 </header>
@@ -69,9 +69,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>the preset <a href="clientoption.html">ClientOption</a> when you construct <a href="../classes/client.html">Client</a>
-							you may manually construct by Construct
-						or from Muta&#39;s [[client]]</p>
+						<p>SignedTransaction, contains all info from <a href="transaction.html">Transaction</a> and <a href="transactionsignature.html">TransactionSignature</a>
+						you may sign it by <a href="../globals.html#signtransaction">signTransaction</a></p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +78,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ClientOption</span>
+						<span class="target">SignedTransaction</span>
 					</li>
 				</ul>
 			</section>
@@ -90,11 +89,17 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#cycleslimit" class="tsd-kind-icon">cycles<wbr>Limit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#cyclesprice" class="tsd-kind-icon">cycles<wbr>Price</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#method" class="tsd-kind-icon">method</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#nonce" class="tsd-kind-icon">nonce</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#payload" class="tsd-kind-icon">payload</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#pubkey" class="tsd-kind-icon">pubkey</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#signature" class="tsd-kind-icon">signature</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#timeout" class="tsd-kind-icon">timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="signedtransaction.html#txhash" class="tsd-kind-icon">tx<wbr>Hash</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,47 +113,107 @@
 					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L48">client/Client.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L136">type.ts:136</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultcycleslimit" class="tsd-anchor"></a>
-					<h3>default<wbr>Cycles<wbr>Limit</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="cycleslimit" class="tsd-anchor"></a>
+					<h3>cycles<wbr>Limit</h3>
+					<div class="tsd-signature tsd-kind-icon">cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L50">client/Client.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L137">type.ts:137</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultcyclesprice" class="tsd-anchor"></a>
-					<h3>default<wbr>Cycles<wbr>Price</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="cyclesprice" class="tsd-anchor"></a>
+					<h3>cycles<wbr>Price</h3>
+					<div class="tsd-signature tsd-kind-icon">cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L51">client/Client.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L138">type.ts:138</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="endpoint" class="tsd-anchor"></a>
-					<h3>endpoint</h3>
-					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="method" class="tsd-anchor"></a>
+					<h3>method</h3>
+					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L47">client/Client.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L142">type.ts:142</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxtimeout" class="tsd-anchor"></a>
-					<h3>max<wbr>Timeout</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="nonce" class="tsd-anchor"></a>
+					<h3>nonce</h3>
+					<div class="tsd-signature tsd-kind-icon">nonce<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L49">client/Client.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L139">type.ts:139</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="payload" class="tsd-anchor"></a>
+					<h3>payload</h3>
+					<div class="tsd-signature tsd-kind-icon">payload<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L143">type.ts:143</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="pubkey" class="tsd-anchor"></a>
+					<h3>pubkey</h3>
+					<div class="tsd-signature tsd-kind-icon">pubkey<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L145">type.ts:145</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="servicename" class="tsd-anchor"></a>
+					<h3>service<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L141">type.ts:141</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="signature" class="tsd-anchor"></a>
+					<h3>signature</h3>
+					<div class="tsd-signature tsd-kind-icon">signature<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L146">type.ts:146</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="timeout" class="tsd-anchor"></a>
+					<h3>timeout</h3>
+					<div class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L140">type.ts:140</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="txhash" class="tsd-anchor"></a>
+					<h3>tx<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">tx<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L144">type.ts:144</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,22 +232,40 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="clientoption.html" class="tsd-kind-icon">Client<wbr>Option</a>
+						<a href="signedtransaction.html" class="tsd-kind-icon">Signed<wbr>Transaction</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a>
+								<a href="signedtransaction.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a>
+								<a href="signedtransaction.html#cycleslimit" class="tsd-kind-icon">cycles<wbr>Limit</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a>
+								<a href="signedtransaction.html#cyclesprice" class="tsd-kind-icon">cycles<wbr>Price</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a>
+								<a href="signedtransaction.html#method" class="tsd-kind-icon">method</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a>
+								<a href="signedtransaction.html#nonce" class="tsd-kind-icon">nonce</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="signedtransaction.html#payload" class="tsd-kind-icon">payload</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="signedtransaction.html#pubkey" class="tsd-kind-icon">pubkey</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="signedtransaction.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="signedtransaction.html#signature" class="tsd-kind-icon">signature</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="signedtransaction.html#timeout" class="tsd-kind-icon">timeout</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="signedtransaction.html#txhash" class="tsd-kind-icon">tx<wbr>Hash</a>
 							</li>
 						</ul>
 					</li>

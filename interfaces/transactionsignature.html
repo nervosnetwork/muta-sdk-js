@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ClientOption | muta-sdk - v0.6.0</title>
+	<title>TransactionSignature | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="clientoption.html">ClientOption</a>
+					<a href="transactionsignature.html">TransactionSignature</a>
 				</li>
 			</ul>
-			<h1>Interface ClientOption</h1>
+			<h1>Interface TransactionSignature</h1>
 		</div>
 	</div>
 </header>
@@ -69,9 +69,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>the preset <a href="clientoption.html">ClientOption</a> when you construct <a href="../classes/client.html">Client</a>
-							you may manually construct by Construct
-						or from Muta&#39;s [[client]]</p>
+						<p>Signature of the transaction, this should not be used separately
+						you may sign it by <a href="../globals.html#signtransaction">signTransaction</a></p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +78,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ClientOption</span>
+						<span class="target">TransactionSignature</span>
 					</li>
 				</ul>
 			</section>
@@ -90,11 +89,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="transactionsignature.html#pubkey" class="tsd-kind-icon">pubkey</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="transactionsignature.html#signature" class="tsd-kind-icon">signature</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="transactionsignature.html#txhash" class="tsd-kind-icon">tx<wbr>Hash</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,52 +100,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="chainid" class="tsd-anchor"></a>
-					<h3>chain<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="pubkey" class="tsd-anchor"></a>
+					<h3>pubkey</h3>
+					<div class="tsd-signature tsd-kind-icon">pubkey<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L48">client/Client.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L127">type.ts:127</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultcycleslimit" class="tsd-anchor"></a>
-					<h3>default<wbr>Cycles<wbr>Limit</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="signature" class="tsd-anchor"></a>
+					<h3>signature</h3>
+					<div class="tsd-signature tsd-kind-icon">signature<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L50">client/Client.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L128">type.ts:128</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultcyclesprice" class="tsd-anchor"></a>
-					<h3>default<wbr>Cycles<wbr>Price</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="txhash" class="tsd-anchor"></a>
+					<h3>tx<wbr>Hash</h3>
+					<div class="tsd-signature tsd-kind-icon">tx<wbr>Hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L51">client/Client.ts:51</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="endpoint" class="tsd-anchor"></a>
-					<h3>endpoint</h3>
-					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L47">client/Client.ts:47</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxtimeout" class="tsd-anchor"></a>
-					<h3>max<wbr>Timeout</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L49">client/Client.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L126">type.ts:126</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,22 +144,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="clientoption.html" class="tsd-kind-icon">Client<wbr>Option</a>
+						<a href="transactionsignature.html" class="tsd-kind-icon">Transaction<wbr>Signature</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a>
+								<a href="transactionsignature.html#pubkey" class="tsd-kind-icon">pubkey</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a>
+								<a href="transactionsignature.html#signature" class="tsd-kind-icon">signature</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a>
+								<a href="transactionsignature.html#txhash" class="tsd-kind-icon">tx<wbr>Hash</a>
 							</li>
 						</ul>
 					</li>

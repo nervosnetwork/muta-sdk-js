@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AssetService | muta-sdk - v0.4.0</title>
+	<title>AssetService | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">muta-sdk - v0.4.0</a>
+					<a href="../index.html" class="title">muta-sdk - v0.6.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -66,6 +66,41 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Muta chain has many built-in services, you can leverage these built-in service and then compose your own service</p>
+					</div>
+					<p>AssetService service is a template which provides you capability to manipulate
+					UDT(user defined token), which is non-distinguishable asset, in Muta chain, like ERC20 in Ethereum</p>
+					<p>Here is an example:</p>
+					<pre><code class="language-js"><span class="hljs-keyword">async</span> funtion example(){
+<span class="hljs-keyword">const</span> supply = <span class="hljs-number">22000000</span>;
+<span class="hljs-keyword">const</span> createdAsset = <span class="hljs-keyword">await</span> service.createAsset({
+   <span class="hljs-attr">name</span>: <span class="hljs-built_in">Math</span>.random().toString(),
+  supply,
+ <span class="hljs-attr">symbol</span>: <span class="hljs-built_in">Math</span>.random().toString()
+});
+
+<span class="hljs-keyword">const</span> assetId = createdAsset.asset_id;
+
+<span class="hljs-keyword">const</span> asset = <span class="hljs-keyword">await</span> service.getAsset(assetId);
+
+<span class="hljs-keyword">const</span> balance = <span class="hljs-keyword">await</span> service.getBalance(assetId, account.address);
+
+<span class="hljs-keyword">const</span> to = <span class="hljs-string">'0x2000000000000000000000000000000000000000'</span>;
+
+<span class="hljs-keyword">await</span> service.transfer({
+ <span class="hljs-attr">asset_id</span>: assetId,
+ to,
+ <span class="hljs-attr">value</span>: <span class="hljs-number">500</span>
+});
+
+<span class="hljs-keyword">const</span> balance2 = <span class="hljs-keyword">await</span> service.getBalance(assetId, to);
+t.is(balance2, <span class="hljs-number">500</span>);
+}</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -84,17 +119,11 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="assetservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="assetservice.html#account" class="tsd-kind-icon">account</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="assetservice.html#client" class="tsd-kind-icon">client</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="assetservice.html#createasset" class="tsd-kind-icon">create<wbr>Asset</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="assetservice.html#getasset" class="tsd-kind-icon">get<wbr>Asset</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="assetservice.html#getbalance" class="tsd-kind-icon">get<wbr>Balance</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="assetservice.html#transfer" class="tsd-kind-icon">transfer</a></li>
 							</ul>
@@ -108,50 +137,44 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Asset<wbr>Service<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type">Client</a>, account<span class="tsd-signature-symbol">: </span><a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="assetservice.html" class="tsd-signature-type">AssetService</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Asset<wbr>Service<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type">Client</a>, account<span class="tsd-signature-symbol">: </span><a href="account.html" class="tsd-signature-type">Account</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="assetservice.html" class="tsd-signature-type">AssetService</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L28">builtin/AssetService.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/builtin/AssetService.ts#L90">builtin/AssetService.ts:90</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>create an Asset service,
+										if you want to send transaction like <a href="assetservice.html#createasset">createAsset</a> and <a href="assetservice.html#transfer">transfer</a> with another account,
+									please new an another AssetService</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>client: <a href="client.html" class="tsd-signature-type">Client</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the client which take responsibility of communicate to the chain</p>
+										</div>
+									</div>
 								</li>
 								<li>
-									<h5>account: <a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></h5>
+									<h5>account: <a href="account.html" class="tsd-signature-type">Account</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the default address while send queries to the chain</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="assetservice.html" class="tsd-signature-type">AssetService</a></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="account" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> account</h3>
-					<div class="tsd-signature tsd-kind-icon">account<span class="tsd-signature-symbol">:</span> <a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L28">builtin/AssetService.ts:28</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="client" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> client</h3>
-					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="client.html" class="tsd-signature-type">Client</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L26">builtin/AssetService.ts:26</a></li>
-						</ul>
-					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -160,22 +183,68 @@
 					<a name="createasset" class="tsd-anchor"></a>
 					<h3>create<wbr>Asset</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Asset<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="../interfaces/createassetpayload.html" class="tsd-signature-type">CreateAssetPayload</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Asset<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="../interfaces/createassetparam.html" class="tsd-signature-type">CreateAssetParam</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/asset.html" class="tsd-signature-type">Asset</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L62">builtin/AssetService.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/builtin/AssetService.ts#L156">builtin/AssetService.ts:156</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>send a transaction to create an asset
+										all the info are in <a href="../interfaces/createassetparam.html">CreateAssetParam</a>
+									the issuer is the <strong>account created in Constructor</strong></p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>payload: <a href="../interfaces/createassetpayload.html" class="tsd-signature-type">CreateAssetPayload</a></h5>
+									<h5>payload: <a href="../interfaces/createassetparam.html" class="tsd-signature-type">CreateAssetParam</a></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/asset.html" class="tsd-signature-type">Asset</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getasset" class="tsd-anchor"></a>
+					<h3>get<wbr>Asset</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Asset<span class="tsd-signature-symbol">(</span>assetId<span class="tsd-signature-symbol">: </span><a href="../globals.html#hash" class="tsd-signature-type">Hash</a>, address<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/asset.html" class="tsd-signature-type">Asset</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/builtin/AssetService.ts#L179">builtin/AssetService.ts:179</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>send a query to Muta to get the info of target asset</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>assetId: <a href="../globals.html#hash" class="tsd-signature-type">Hash</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p><a href="../globals.html#hash">Hash</a>, asset_id, you can get when you <a href="assetservice.html#createasset">createAsset</a></p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> address: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;this.account.address</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the default query sender, this should be useless in this query</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/asset.html" class="tsd-signature-type">Asset</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -189,16 +258,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L35">builtin/AssetService.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/builtin/AssetService.ts#L109">builtin/AssetService.ts:109</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>send a query to Muta to get the balance of target account&#39;s address in given asset</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>assetId: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the asset id of asset, you can <a href="assetservice.html#createasset">createAsset</a></p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> address: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;this.account.address</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>optional, the address whose balance you want check, default is the address of <a href="account.html">Account</a> you passed by Constructor</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -209,22 +289,30 @@
 					<a name="transfer" class="tsd-anchor"></a>
 					<h3>transfer</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">transfer<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="../interfaces/transferpayload.html" class="tsd-signature-type">TransferPayload</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">transfer<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><a href="../interfaces/transferpayparam.html" class="tsd-signature-type">TransferPayParam</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/builtin/AssetService.ts#L52">builtin/AssetService.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/builtin/AssetService.ts#L132">builtin/AssetService.ts:132</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>send a transaction to transfer the given amount of given asset to given address from the <strong>account created in Constructor</strong></p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>payload: <a href="../interfaces/transferpayload.html" class="tsd-signature-type">TransferPayload</a></h5>
+									<h5>payload: <a href="../interfaces/transferpayparam.html" class="tsd-signature-type">TransferPayParam</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>give the asset, amount and to-address</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -248,14 +336,11 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="assetservice.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="assetservice.html#account" class="tsd-kind-icon">account</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="assetservice.html#client" class="tsd-kind-icon">client</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="assetservice.html#createasset" class="tsd-kind-icon">create<wbr>Asset</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="assetservice.html#getasset" class="tsd-kind-icon">get<wbr>Asset</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="assetservice.html#getbalance" class="tsd-kind-icon">get<wbr>Balance</a>

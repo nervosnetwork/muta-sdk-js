@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>HDWallet | muta-sdk - v0.4.0</title>
+	<title>HDWallet | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">muta-sdk - v0.4.0</a>
+					<a href="../index.html" class="title">muta-sdk - v0.6.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -69,11 +69,24 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>HD Wallet, for more information see
-							<a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">bip32</a>,
-							<a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">bip39</a>
-						and <a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki">bip44</a></p>
+						<p>An HDWallet inside Muta JS SDK.
+						Nothing special like other HDWallets.</p>
 					</div>
+					<p>for more information see
+						<a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">bip32</a>,
+						<a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">bip39</a>
+					<a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki">bip44</a></p>
+					<p>Here is an example</p>
+					<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>)</span>{
+   <span class="hljs-comment">// use HDWallet to generate random mnemonic</span>
+   <span class="hljs-keyword">const</span> mnemonic = Muta.hdWallet.generateMnemonic();
+
+   <span class="hljs-comment">// use the mnemonic to build an HDWallet</span>
+   <span class="hljs-keyword">const</span> wallet = <span class="hljs-keyword">new</span> Muta.hdWallet(mnemonic);
+
+   <span class="hljs-comment">// derive an account from the HDWallet</span>
+   <span class="hljs-keyword">const</span> account = wallet.deriveAccount(<span class="hljs-number">1</span>);
+}</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -100,20 +113,12 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="hdwallet.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="hdwallet.html#mnemonic" class="tsd-kind-icon">mnemonic</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hdwallet.html#accountbyindex" class="tsd-kind-icon">account<wbr>ByIndex</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hdwallet.html#getprivatekey" class="tsd-kind-icon">get<wbr>Private<wbr>Key</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="hdwallet.html#frommnemonic" class="tsd-kind-icon">from<wbr>Mnemonic</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hdwallet.html#deriveaccount" class="tsd-kind-icon">derive<wbr>Account</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="hdwallet.html#deriveprivatekey" class="tsd-kind-icon">derive<wbr>Private<wbr>Key</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="hdwallet.html#generatemnemonic" class="tsd-kind-icon">generate<wbr>Mnemonic</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="hdwallet.html#gethdpath" class="tsd-kind-icon">getHDPath</a></li>
 							</ul>
 						</section>
 					</div>
@@ -131,13 +136,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/wallet/HDWallet.ts#L26">wallet/HDWallet.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/wallet/HDWallet.ts#L43">wallet/HDWallet.ts:43</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>generate an HDWallet from given mnemonic</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>mnemonic: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>string, 12 English word split by space</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="hdwallet.html" class="tsd-signature-type">HDWallet</a></h4>
@@ -145,61 +160,26 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="mnemonic" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> mnemonic</h3>
-					<div class="tsd-signature tsd-kind-icon">mnemonic<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/wallet/HDWallet.ts#L26">wallet/HDWallet.ts:26</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="accountbyindex" class="tsd-anchor"></a>
-					<h3>account<wbr>ByIndex</h3>
+					<a name="deriveaccount" class="tsd-anchor"></a>
+					<h3>derive<wbr>Account</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">account<wbr>ByIndex<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></li>
+						<li class="tsd-signature tsd-kind-icon">derive<wbr>Account<span class="tsd-signature-symbol">(</span>accountIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="account.html" class="tsd-signature-type">Account</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/syncwallet.html">SyncWallet</a>.<a href="../interfaces/syncwallet.html#accountbyindex">accountByIndex</a></p>
+								<p>Implementation of <a href="../interfaces/syncwallet.html">SyncWallet</a>.<a href="../interfaces/syncwallet.html#deriveaccount">deriveAccount</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/wallet/HDWallet.ts#L43">wallet/HDWallet.ts:43</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>index: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getprivatekey" class="tsd-anchor"></a>
-					<h3>get<wbr>Private<wbr>Key</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Private<wbr>Key<span class="tsd-signature-symbol">(</span>accountIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/wallet/HDWallet.ts#L36">wallet/HDWallet.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/wallet/HDWallet.ts#L70">wallet/HDWallet.ts:70</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>// <a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#account">https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#account</a></p>
+									<p>Get the Account with with accountIndex in the <code>m/44&#39;/${COIN_TYPE}&#39;/${accountIndex}&#39;/0/0</code>
+									the private key is in the return <a href="account.html">Account</a></p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -207,33 +187,44 @@
 								<li>
 									<h5>accountIndex: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
+										<p>the accountIndex in the Path, please refer to bip-0044</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="account.html" class="tsd-signature-type">Account</a></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="frommnemonic" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Mnemonic</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">from<wbr>Mnemonic<span class="tsd-signature-symbol">(</span>mnemonic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="hdwallet.html" class="tsd-signature-type">HDWallet</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="deriveprivatekey" class="tsd-anchor"></a>
+					<h3>derive<wbr>Private<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">derive<wbr>Private<wbr>Key<span class="tsd-signature-symbol">(</span>accountIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/syncwallet.html">SyncWallet</a>.<a href="../interfaces/syncwallet.html#deriveprivatekey">derivePrivateKey</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/wallet/HDWallet.ts#L15">wallet/HDWallet.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/wallet/HDWallet.ts#L60">wallet/HDWallet.ts:60</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the private key with accountIndex in the <code>m/44&#39;/${COIN_TYPE}&#39;/${accountIndex}&#39;/0/0</code>
+									<a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#account">https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki#account</a></p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>mnemonic: <span class="tsd-signature-type">string</span></h5>
+									<h5>accountIndex: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the accountIndex in the Path, please refer to bip-0044</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="hdwallet.html" class="tsd-signature-type">HDWallet</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -247,32 +238,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/wallet/HDWallet.ts#L19">wallet/HDWallet.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/wallet/HDWallet.ts#L35">wallet/HDWallet.ts:35</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-					<a name="gethdpath" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> getHDPath</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">getHDPath<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/wallet/HDWallet.ts#L23">wallet/HDWallet.ts:23</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>index: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>generate random mnemonic phrases</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
@@ -297,23 +270,14 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="hdwallet.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="hdwallet.html#mnemonic" class="tsd-kind-icon">mnemonic</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="hdwallet.html#deriveaccount" class="tsd-kind-icon">derive<wbr>Account</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="hdwallet.html#accountbyindex" class="tsd-kind-icon">account<wbr>ByIndex</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="hdwallet.html#getprivatekey" class="tsd-kind-icon">get<wbr>Private<wbr>Key</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="hdwallet.html#frommnemonic" class="tsd-kind-icon">from<wbr>Mnemonic</a>
+								<a href="hdwallet.html#deriveprivatekey" class="tsd-kind-icon">derive<wbr>Private<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="hdwallet.html#generatemnemonic" class="tsd-kind-icon">generate<wbr>Mnemonic</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
-								<a href="hdwallet.html#gethdpath" class="tsd-kind-icon">getHDPath</a>
 							</li>
 						</ul>
 					</li>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Muta | muta-sdk - v0.4.0</title>
+	<title>Muta | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">muta-sdk - v0.4.0</a>
+					<a href="../index.html" class="title">muta-sdk - v0.6.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -91,24 +91,21 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="muta.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="muta.html#context" class="tsd-kind-icon">context</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="muta.html#rpcclient" class="tsd-kind-icon">rpc<wbr>Client</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Accessors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="muta.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="muta.html#account" class="tsd-kind-icon">account</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="muta.html#hdwallet" class="tsd-kind-icon">hd<wbr>Wallet</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="muta.html#util" class="tsd-kind-icon">util</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="muta.html#accountfromprivatekey" class="tsd-kind-icon">account<wbr>From<wbr>Private<wbr>Key</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="muta.html#hdwalletfrommnemonic" class="tsd-kind-icon">hd<wbr>Wallet<wbr>From<wbr>Mnemonic</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="muta.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="muta.html#accountfromprivatekey" class="tsd-kind-icon">account<wbr>From<wbr>Private<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="muta.html#createdefaultmutainstance" class="tsd-kind-icon">create<wbr>Default<wbr>Muta<wbr>Instance</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="muta.html#hdwalletfrommnemonic" class="tsd-kind-icon">hd<wbr>Wallet<wbr>From<wbr>Mnemonic</a></li>
 							</ul>
 						</section>
 					</div>
@@ -126,13 +123,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/Muta.ts#L30">Muta.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L66">Muta.ts:66</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>construct a Muta object</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context: <a href="../interfaces/mutacontext.html" class="tsd-signature-type">MutaContext</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="muta.html" class="tsd-signature-type">Muta</a></h4>
@@ -140,67 +146,90 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="context" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> context</h3>
-					<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <a href="../interfaces/mutacontext.html" class="tsd-signature-type">MutaContext</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/Muta.ts#L29">Muta.ts:29</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="rpcclient" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> rpc<wbr>Client</h3>
-					<div class="tsd-signature tsd-kind-icon">rpc<wbr>Client<span class="tsd-signature-symbol">:</span> <a href="client.html" class="tsd-signature-type">Client</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/Muta.ts#L30">Muta.ts:30</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="client" class="tsd-anchor"></a>
-					<h3>client</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> client<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type">Client</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/Muta.ts#L47">Muta.ts:47</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="client.html" class="tsd-signature-type">Client</a></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="account" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> account</h3>
+					<div class="tsd-signature tsd-kind-icon">account<span class="tsd-signature-symbol">:</span> <a href="account.html" class="tsd-signature-type">Account</a><span class="tsd-signature-symbol"> =&nbsp;Account</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L32">Muta.ts:32</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="hdwallet" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> hd<wbr>Wallet</h3>
+					<div class="tsd-signature tsd-kind-icon">hd<wbr>Wallet<span class="tsd-signature-symbol">:</span> <a href="hdwallet.html" class="tsd-signature-type">HDWallet</a><span class="tsd-signature-symbol"> =&nbsp;HDWallet</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L31">Muta.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="util" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> util</h3>
+					<div class="tsd-signature tsd-kind-icon">util<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;/Users/yonghui/toolchain/muta-sdk/src/utils&quot;</span><span class="tsd-signature-symbol"> =&nbsp;util</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L30">Muta.ts:30</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="accountfromprivatekey" class="tsd-anchor"></a>
-					<h3>account<wbr>From<wbr>Private<wbr>Key</h3>
+					<a name="client" class="tsd-anchor"></a>
+					<h3>client</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">account<wbr>From<wbr>Private<wbr>Key<span class="tsd-signature-symbol">(</span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></li>
+						<li class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">(</span>defaultCyclesLimit<span class="tsd-signature-symbol">?: </span><a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a>, defaultCyclesPrice<span class="tsd-signature-symbol">?: </span><a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="client.html" class="tsd-signature-type">Client</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/Muta.ts#L55">Muta.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L81">Muta.ts:81</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>create a account from private key</p>
+									<p>get a <a href="client.html">Client</a> for communication with chain thru Muta node</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> defaultCyclesLimit: <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a><span class="tsd-signature-symbol"> =&nbsp;&quot;0xffff&quot;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> defaultCyclesPrice: <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a><span class="tsd-signature-symbol"> =&nbsp;&quot;0xffff&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="client.html" class="tsd-signature-type">Client</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="accountfromprivatekey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> account<wbr>From<wbr>Private<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">account<wbr>From<wbr>Private<wbr>Key<span class="tsd-signature-symbol">(</span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="account.html" class="tsd-signature-type">Account</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L47">Muta.ts:47</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>create an Account directly from private key</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -211,40 +240,59 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="syncaccount.html" class="tsd-signature-type">SyncAccount</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="account.html" class="tsd-signature-type">Account</a></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="createdefaultmutainstance" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> create<wbr>Default<wbr>Muta<wbr>Instance</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Default<wbr>Muta<wbr>Instance<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="muta.html" class="tsd-signature-type">Muta</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L57">Muta.ts:57</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>create a default Muta Instance
+										chainId is set to &#39;0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036&#39;
+										endpoint is set to &#39;<a href="http://127.0.0.1:8000/graphql&#39;">http://127.0.0.1:8000/graphql&#39;</a>,
+									timeoutGap is set to <a href="../globals.html#default_timeout_gap">DEFAULT_TIMEOUT_GAP</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="muta.html" class="tsd-signature-type">Muta</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="hdwalletfrommnemonic" class="tsd-anchor"></a>
-					<h3>hd<wbr>Wallet<wbr>From<wbr>Mnemonic</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> hd<wbr>Wallet<wbr>From<wbr>Mnemonic</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
 						<li class="tsd-signature tsd-kind-icon">hd<wbr>Wallet<wbr>From<wbr>Mnemonic<span class="tsd-signature-symbol">(</span>mnemonic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="hdwallet.html" class="tsd-signature-type">HDWallet</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/50eab9a/src/Muta.ts#L65">Muta.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/Muta.ts#L39">Muta.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>create a HD wallet from mnemonic. Now Muta positioning for a block chain framework,
-									so the wallet seems to be not a must</p>
+									<p>create a HD wallet from mnemonic.
+										the HD path is set to <code>m/44&#39;/${COIN_TYPE}&#39;/${index}&#39;/0/0</code>
+									<a href="../globals.html#coin_type">COIN_TYPE</a> is 918</p>
 								</div>
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd></dd>
-								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>mnemonic: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>12 mnemonic words</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="hdwallet.html" class="tsd-signature-type">HDWallet</a></h4>
@@ -271,19 +319,25 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="muta.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="muta.html#context" class="tsd-kind-icon">context</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="muta.html#account" class="tsd-kind-icon">account</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="muta.html#rpcclient" class="tsd-kind-icon">rpc<wbr>Client</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="muta.html#hdwallet" class="tsd-kind-icon">hd<wbr>Wallet</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="muta.html#util" class="tsd-kind-icon">util</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="muta.html#client" class="tsd-kind-icon">client</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="muta.html#accountfromprivatekey" class="tsd-kind-icon">account<wbr>From<wbr>Private<wbr>Key</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="muta.html#createdefaultmutainstance" class="tsd-kind-icon">create<wbr>Default<wbr>Muta<wbr>Instance</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="muta.html#hdwalletfrommnemonic" class="tsd-kind-icon">hd<wbr>Wallet<wbr>From<wbr>Mnemonic</a>
 							</li>
 						</ul>

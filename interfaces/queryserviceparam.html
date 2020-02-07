@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ClientOption | muta-sdk - v0.6.0</title>
+	<title>QueryServiceParam | muta-sdk - v0.6.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="clientoption.html">ClientOption</a>
+					<a href="queryserviceparam.html">QueryServiceParam</a>
 				</li>
 			</ul>
-			<h1>Interface ClientOption</h1>
+			<h1>Interface QueryServiceParam</h1>
 		</div>
 	</div>
 </header>
@@ -69,9 +69,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>the preset <a href="clientoption.html">ClientOption</a> when you construct <a href="../classes/client.html">Client</a>
-							you may manually construct by Construct
-						or from Muta&#39;s [[client]]</p>
+						<p>data structure when you call <a href="../globals.html#query.__type.queryservice">queryService</a> to chain
+						compare to <a href="servicepayload.html">ServicePayload</a>, which enables generic for &#39;payload&#39;</p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +78,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ClientOption</span>
+						<span class="target">QueryServiceParam</span>
 					</li>
 				</ul>
 			</section>
@@ -90,11 +89,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryserviceparam.html#caller" class="tsd-kind-icon">caller</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryserviceparam.html#cyclelimit" class="tsd-kind-icon">cycle<wbr>Limit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryserviceparam.html#cycleprice" class="tsd-kind-icon">cycle<wbr>Price</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryserviceparam.html#height" class="tsd-kind-icon">height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryserviceparam.html#method" class="tsd-kind-icon">method</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryserviceparam.html#payload" class="tsd-kind-icon">payload</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="queryserviceparam.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,52 +104,72 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="chainid" class="tsd-anchor"></a>
-					<h3>chain<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="caller" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> caller</h3>
+					<div class="tsd-signature tsd-kind-icon">caller<span class="tsd-signature-symbol">:</span> <a href="../globals.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L48">client/Client.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L163">type.ts:163</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultcycleslimit" class="tsd-anchor"></a>
-					<h3>default<wbr>Cycles<wbr>Limit</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="cyclelimit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cycle<wbr>Limit</h3>
+					<div class="tsd-signature tsd-kind-icon">cycle<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../globals.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L50">client/Client.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L165">type.ts:165</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultcyclesprice" class="tsd-anchor"></a>
-					<h3>default<wbr>Cycles<wbr>Price</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../globals.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="cycleprice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cycle<wbr>Price</h3>
+					<div class="tsd-signature tsd-kind-icon">cycle<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../globals.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L51">client/Client.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L164">type.ts:164</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="endpoint" class="tsd-anchor"></a>
-					<h3>endpoint</h3>
-					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="height" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> height</h3>
+					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <a href="../globals.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L47">client/Client.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L162">type.ts:162</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxtimeout" class="tsd-anchor"></a>
-					<h3>max<wbr>Timeout</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="method" class="tsd-anchor"></a>
+					<h3>method</h3>
+					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/client/Client.ts#L49">client/Client.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L160">type.ts:160</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="payload" class="tsd-anchor"></a>
+					<h3>payload</h3>
+					<div class="tsd-signature tsd-kind-icon">payload<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L161">type.ts:161</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="servicename" class="tsd-anchor"></a>
+					<h3>service<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/c4b073f/src/type.ts#L159">type.ts:159</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,22 +188,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="clientoption.html" class="tsd-kind-icon">Client<wbr>Option</a>
+						<a href="queryserviceparam.html" class="tsd-kind-icon">Query<wbr>Service<wbr>Param</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a>
+								<a href="queryserviceparam.html#caller" class="tsd-kind-icon">caller</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a>
+								<a href="queryserviceparam.html#cyclelimit" class="tsd-kind-icon">cycle<wbr>Limit</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a>
+								<a href="queryserviceparam.html#cycleprice" class="tsd-kind-icon">cycle<wbr>Price</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a>
+								<a href="queryserviceparam.html#height" class="tsd-kind-icon">height</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a>
+								<a href="queryserviceparam.html#method" class="tsd-kind-icon">method</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="queryserviceparam.html#payload" class="tsd-kind-icon">payload</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="queryserviceparam.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
 							</li>
 						</ul>
 					</li>
