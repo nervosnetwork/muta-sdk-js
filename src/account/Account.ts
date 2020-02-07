@@ -10,7 +10,7 @@ import { hashBuf, publicKeyCreate, toBuffer, toHex } from '../utils';
  * what's more, Account takes job of [[signTransaction]]
  *
  * Here is an example:
- *```js
+ * ```js
  * async function example(){
  *   const account = Account.fromPrivateKey(
  *     '0x1000000000000000000000000000000000000000000000000000000000000000'
@@ -129,7 +129,7 @@ export class Account {
       tx.method,
       tx.serviceName,
       tx.payload,
-      tx.timeout
+      tx.timeout,
     ];
     const encoded = encode(orderedTx);
     const txHash = hashBuf(encoded);
@@ -139,7 +139,7 @@ export class Account {
     const txSig: TransactionSignature = {
       pubkey: toHex(publicKeyCreate(this._privateKey)),
       signature: toHex(signature),
-      txHash: toHex(txHash)
+      txHash: toHex(txHash),
     };
 
     return {
@@ -153,7 +153,7 @@ export class Account {
       serviceName: tx.serviceName,
       signature: txSig.signature,
       timeout: tx.timeout,
-      txHash: txSig.txHash
+      txHash: txSig.txHash,
     };
   }
 }

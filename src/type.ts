@@ -25,15 +25,15 @@ export type Int = number;
 /**
  * something like Option<T>
  */
-export type Maybe<T> =  T | null;
+export type Maybe<T> = T | null;
 
 /**
  * represents the events logged in txs
  * see [[Receipt]]
  */
 export interface Event {
-  service: string,
-  data: string,
+  service: string;
+  data: string;
 }
 
 /**
@@ -41,8 +41,8 @@ export interface Event {
  * see [[BlockHeader]]
  */
 export interface Block {
-  header: BlockHeader,
-  orderedTxHashes: string[],
+  header: BlockHeader;
+  orderedTxHashes: string[];
 }
 
 /**
@@ -51,19 +51,19 @@ export interface Block {
  * so the tx ordered and tx committed(runs properly and commit changes to state machine) may differ
  */
 export interface BlockHeader {
-  chainId: string,
-  height: string,
-  preHash: string,
-  timestamp: string,
-  orderRoot: string,
-  confirmRoot: string[],
-  stateRoot: string,
-  receiptRoot: Hash[],
-  cyclesUsed: Uint64[],
-  proposer: string,
-  proof: Proof,
-  validatorVersion: string,
-  validators: Validator[],
+  chainId: string;
+  height: string;
+  preHash: string;
+  timestamp: string;
+  orderRoot: string;
+  confirmRoot: string[];
+  stateRoot: string;
+  receiptRoot: Hash[];
+  cyclesUsed: Uint64[];
+  proposer: string;
+  proof: Proof;
+  validatorVersion: string;
+  validators: Validator[];
 }
 
 /**
@@ -71,20 +71,20 @@ export interface BlockHeader {
  * Overload runs likes tendermint, which means in one Block, there may be more than one **round** to achieve consensus,
  */
 export interface Proof {
-  height: string,
-  round: string,
-  blockHash: string,
-  signature: string,
-  bitmap: string,
+  height: string;
+  round: string;
+  blockHash: string;
+  signature: string;
+  bitmap: string;
 }
 
 /**
  * Validator address, contains its propose weight and vote weight
  */
 export interface Validator {
-  address: string,
-  proposeWeight: Int,
-  voteWeight: Int,
+  address: string;
+  proposeWeight: Int;
+  voteWeight: Int;
 }
 
 /**
@@ -93,8 +93,8 @@ export interface Validator {
  * @param ret  the raw data returns by service, maybe need decoding
  */
 export interface ExecResp {
-  ret: string,
-  isError: boolean,
+  ret: string;
+  isError: boolean;
 }
 
 /**
@@ -108,14 +108,14 @@ export interface ExecResp {
  * you may stuff this by [[prepareTransaction]]
  */
 export interface Transaction {
-  chainId: string,
-  cyclesLimit: string,
-  cyclesPrice: string,
-  nonce: string,
-  timeout: string,
-  serviceName: string,
-  method: string,
-  payload: string,
+  chainId: string;
+  cyclesLimit: string;
+  cyclesPrice: string;
+  nonce: string;
+  timeout: string;
+  serviceName: string;
+  method: string;
+  payload: string;
 }
 
 /**
@@ -123,27 +123,32 @@ export interface Transaction {
  * you may sign it by [[signTransaction]]
  */
 export interface TransactionSignature {
-  txHash: string,
-  pubkey: string,
-  signature: string,
+  txHash: string;
+  pubkey: string;
+  signature: string;
 }
 
 /**
  * SignedTransaction, contains all info from [[Transaction]] and [[TransactionSignature]]
  * you may sign it by [[signTransaction]]
  */
-export interface SignedTransaction  {
-  chainId: string,
-  cyclesLimit: string,
-  cyclesPrice: string,
-  nonce: string,
-  timeout: string,
-  serviceName: string,
-  method: string,
-  payload: string,
-  txHash: string,
-  pubkey: string,
-  signature: string,
+export interface SignedTransaction {
+  chainId: string;
+  cyclesLimit: string;
+  cyclesPrice: string;
+  nonce: string;
+  timeout: string;
+  serviceName: string;
+  method: string;
+  payload: string;
+  txHash: string;
+  pubkey: string;
+  signature: string;
+}
+
+export interface InputSignedTransaction {
+  inputRaw: Transaction;
+  inputEncryption: TransactionSignature;
 }
 
 /**
@@ -151,13 +156,13 @@ export interface SignedTransaction  {
  * compare to [[ServicePayload]], which enables generic for 'payload'
  */
 export interface QueryServiceParam {
-  serviceName: string,
-  method: string,
-  payload: string,
-  height?: Maybe<string>,
-  caller?: Maybe<string>,
-  cyclePrice?: Maybe<string>,
-  cycleLimit?: Maybe<string>
+  serviceName: string;
+  method: string;
+  payload: string;
+  height?: Maybe<string>;
+  caller?: Maybe<string>;
+  cyclePrice?: Maybe<string>;
+  cycleLimit?: Maybe<string>;
 }
 
 /**
@@ -165,7 +170,7 @@ export interface QueryServiceParam {
  * @param height , note that this could be null
  */
 export interface QueryBlockParam {
-  height?: Maybe<string>
+  height?: Maybe<string>;
 }
 
 /**
@@ -179,12 +184,12 @@ export interface QueryBlockParam {
  * see [[getReceipt]] for more details
  */
 export interface Receipt {
-  stateRoot: string,
-  height: string,
-  txHash: string,
-  cyclesUsed: string,
-  events: Event[],
-  response: ReceiptResponse,
+  stateRoot: string;
+  height: string;
+  txHash: string;
+  cyclesUsed: string;
+  events: Event[];
+  response: ReceiptResponse;
 }
 
 /**
@@ -192,10 +197,10 @@ export interface Receipt {
  * serviceName and method should equals submitted [[Transaction]]
  */
 export interface ReceiptResponse {
-  serviceName: string,
-  method: string,
-  ret: string,
-  isError: boolean,
+  serviceName: string;
+  method: string;
+  ret: string;
+  isError: boolean;
 }
 
 /**

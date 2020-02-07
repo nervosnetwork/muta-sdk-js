@@ -108,13 +108,13 @@ export class AssetService {
    */
   public async getBalance(
     assetId: string,
-    address: string = this.account.address
+    address: string = this.account.address,
   ): Promise<number> {
     const servicePayload: ServicePayload<GetBalancePayParam> = {
       caller: address,
       method: 'get_balance',
       payload: { asset_id: assetId },
-      serviceName: 'asset'
+      serviceName: 'asset',
     };
 
     const res: ExecRespDyn<Balance> = await this.client.queryServiceDyn<
@@ -133,12 +133,16 @@ export class AssetService {
     const tx = await this.client.composeTransaction({
       method: 'transfer',
       payload,
-      serviceName: 'asset'
+      serviceName: 'asset',
     });
 
-    const txHash = await this.client.sendTransaction(this.account.signTransaction(tx));
+    const txHash = await this.client.sendTransaction(
+      this.account.signTransaction(tx),
+    );
 
-    /*const receipt: Receipt = */await this.client.getReceipt(utils.toHex(txHash));
+    /*const receipt: Receipt = */ await this.client.getReceipt(
+      utils.toHex(txHash),
+    );
 
     return null;
   }
@@ -153,11 +157,11 @@ export class AssetService {
     const tx = await this.client.composeTransaction({
       method: 'create_asset',
       payload,
-      serviceName: 'asset'
+      serviceName: 'asset',
     });
 
     const txHash = await this.client.sendTransaction(
-      this.account.signTransaction(tx)
+      this.account.signTransaction(tx),
     );
     const receipt: Receipt = await this.client.getReceipt(utils.toHex(txHash));
 
@@ -174,13 +178,13 @@ export class AssetService {
    */
   public async getAsset(
     assetId: Hash,
-    address: string = this.account.address
+    address: string = this.account.address,
   ): Promise<Asset> {
     const servicePayload: ServicePayload<GetAssetParam> = {
       caller: address,
       method: 'get_balance',
       payload: { asset_id: assetId },
-      serviceName: 'asset'
+      serviceName: 'asset',
     };
 
     const res: ExecRespDyn<Asset> = await this.client.queryServiceDyn<

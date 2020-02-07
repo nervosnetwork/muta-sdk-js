@@ -29,11 +29,10 @@ import { SyncWallet } from './SyncWallet';
  * ```
  */
 export class HDWallet implements SyncWallet {
-
   /**
    * generate random mnemonic phrases
    */
-  public static generateMnemonic() : string {
+  public static generateMnemonic(): string {
     return generateMnemonic();
   }
 
@@ -69,8 +68,6 @@ export class HDWallet implements SyncWallet {
    * @param accountIndex the accountIndex in the Path, please refer to bip-0044
    */
   public deriveAccount(accountIndex: number): Account {
-    return Account.fromPrivateKey(
-      toHex(this.derivePrivateKey(accountIndex))
-    );
+    return Account.fromPrivateKey(toHex(this.derivePrivateKey(accountIndex)));
   }
 }

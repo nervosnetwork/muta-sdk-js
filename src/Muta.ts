@@ -1,7 +1,7 @@
 import { Account } from './account';
 import {
   DEFAULT_CONSENSUS_INTERVAL,
-  DEFAULT_TIMEOUT_GAP
+  DEFAULT_TIMEOUT_GAP,
 } from './constant/constant';
 import { Client } from './index';
 import * as util from './utils';
@@ -27,7 +27,6 @@ interface MutaContext {
  * Main module of the SDK
  */
 export class Muta {
-
   public static util = util;
   public static hdWallet = HDWallet;
   public static account = Account;
@@ -60,7 +59,7 @@ export class Muta {
       chainId:
         '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036',
       endpoint: 'http://127.0.0.1:8000/graphql',
-      timeoutGap: DEFAULT_TIMEOUT_GAP
+      timeoutGap: DEFAULT_TIMEOUT_GAP,
     });
   }
 
@@ -71,7 +70,7 @@ export class Muta {
    * @param context
    */
   constructor(context: MutaContext) {
-    this.context =  context;
+    this.context = context;
   }
 
   /**
@@ -79,13 +78,16 @@ export class Muta {
    * @param defaultCyclesLimit
    * @param defaultCyclesPrice
    */
-  public client(defaultCyclesLimit: Uint64 = '0xffff', defaultCyclesPrice: Uint64 = '0xffff'): Client {
+  public client(
+    defaultCyclesLimit: Uint64 = '0xffff',
+    defaultCyclesPrice: Uint64 = '0xffff',
+  ): Client {
     return new Client({
       chainId: this.context.chainId,
       defaultCyclesLimit,
       defaultCyclesPrice,
       endpoint: this.context.endpoint,
-      maxTimeout: this.context.timeoutGap * DEFAULT_CONSENSUS_INTERVAL
+      maxTimeout: this.context.timeoutGap * DEFAULT_CONSENSUS_INTERVAL,
     });
   }
 }

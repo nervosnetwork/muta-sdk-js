@@ -2,10 +2,7 @@ import test from 'ava';
 import { AssetService } from './builtin';
 import { Muta } from './Muta';
 
-
 test('Muta example', async t => {
-
-
   const muta = Muta.createDefaultMutaInstance();
 
   // get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum
@@ -44,7 +41,6 @@ test('Muta example', async t => {
   // we replacing it is Okay, cause they are equal, isn't it?
   t.is(asset.asset_id, assetId);
 
-
   // get the balance of our account, should equal 1314
   const balance = await service.getBalance(assetId, account.address);
   t.is(balance, 1314);
@@ -58,7 +54,9 @@ test('Muta example', async t => {
     value: 520
   });
 
-  const balance0x2000000000000000000000000000000000000000 = await service.getBalance(assetId, to);
+  const balance0x2000000000000000000000000000000000000000 = await service.getBalance(
+    assetId,
+    to
+  );
   t.is(balance0x2000000000000000000000000000000000000000, 520);
-
 });
