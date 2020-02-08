@@ -10,13 +10,13 @@ export interface GetBalancePayParam {
 
 export interface Balance {
   asset_id: string;
-  balance: number;
+  balance: number | BigNumber;
 }
 
 export interface TransferPayParam {
   asset_id: Hash;
   to: Address;
-  value: number;
+  value: number | BigNumber;
 }
 
 /**
@@ -27,7 +27,7 @@ export interface TransferPayParam {
 export interface CreateAssetParam {
   name: string;
   symbol: string;
-  supply: number;
+  supply: number | BigNumber;
 }
 
 /**
@@ -110,7 +110,7 @@ export class AssetService {
   public async getBalance(
     assetId: string,
     address: string = this.account.address,
-  ): Promise<number> {
+  ): Promise<number | BigNumber> {
     const servicePayload: ServicePayload<GetBalancePayParam> = {
       caller: address,
       method: 'get_balance',
