@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js';
 import { Client } from '..';
 import { Account } from '../account';
 import { Address, ExecRespDyn, Hash, Receipt, ServicePayload } from '../type';
@@ -40,7 +41,7 @@ export interface Asset {
   asset_id: Hash;
   name: string;
   symbol: string;
-  supply: number;
+  supply: number | BigNumber;
   issuer: Address;
 }
 
@@ -165,7 +166,7 @@ export class AssetService {
     );
     const receipt: Receipt = await this.client.getReceipt(utils.toHex(txHash));
 
-    let createdAssetResult = JSON.parse(receipt.response.ret);
+    let createdAssetResult = utils.safeParseJSON(receipt.response.ret);
     createdAssetResult = this.changeIdToAssetId(createdAssetResult);
     createdAssetResult = createdAssetResult as Asset;
     return createdAssetResult;

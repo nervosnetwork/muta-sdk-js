@@ -19,7 +19,7 @@ import {
   SignedTransaction,
   Transaction,
 } from '../type';
-import { hexToNum, toHex } from '../utils';
+import { hexToNum, safeParseJSON, safeStringifyJSON, toHex } from '../utils';
 import {
   getSdk,
   InputRawTransaction,
@@ -188,7 +188,7 @@ export class Client {
   ): Promise<ExecRespDyn<R>> {
     const payload: string =
       typeof param.payload !== 'string'
-        ? JSON.stringify(param.payload)
+        ? safeStringifyJSON(param.payload)
         : param.payload;
 
     const queryServiceQueryParam: QueryServiceParam = { ...param, payload };
@@ -196,7 +196,7 @@ export class Client {
 
     return {
       isError: res.queryService.isError,
-      ret: JSON.parse(res.queryService.ret) as R,
+      ret: safeParseJSON(res.queryService.ret) as R,
     };
   }
 
@@ -245,7 +245,7 @@ export class Client {
   ): Promise<Transaction> {
     const payload: string =
       typeof param.payload !== 'string'
-        ? JSON.stringify(param.payload)
+        ? safeStringifyJSON(param.payload)
         : param.payload;
 
     const timeout = param.timeout

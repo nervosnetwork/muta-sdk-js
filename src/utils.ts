@@ -1,3 +1,7 @@
+import {
+  parse as safeParseJSON,
+  stringify as safeStringifyJSON,
+} from 'json-bigint';
 import createKeccakHash from 'keccak';
 import randomBytes from 'random-bytes';
 import { encode } from 'rlp';
@@ -132,6 +136,8 @@ export function addressFromPublicKey(publicKey: Buffer | string): Buffer {
   const hashed = hashBuf(toBuffer(publicKey));
   return hashed.slice(0, 20);
 }
+
+export { safeParseJSON, safeStringifyJSON };
 
 /**
  * re-export secp256k1's publicKeyCreate
