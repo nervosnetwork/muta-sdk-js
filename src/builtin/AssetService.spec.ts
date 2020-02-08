@@ -1,4 +1,5 @@
 import test from 'ava';
+import BigNumber from 'bignumber.js';
 import { Muta } from '../Muta';
 import { rm0x } from '../utils';
 import { AssetService } from './AssetService';
@@ -41,4 +42,29 @@ test('a fully AssetService example', async t => {
 
   const balance2 = await service.getBalance(assetId, to);
   t.is(balance2, 500);
+});
+
+test('Big supply', async (t) => {
+  const createdAsset = await service.createAsset({
+    name: Math.random().toString(),
+    supply: new BigNumber('9007199254740993'),
+    symbol: Math.random().toString()
+  });
+
+  const supply = createdAsset.supply;
+  t.true(BigNumber.isBigNumber(supply));
+  t.true(new BigNumber(supply).isEqualTo('9007199254740993'));
+
+  const balance = await service.getBalance(createdAsset.asset_id, account.address);
+  t.true(new BigNumber(balance).isEqualTo('9007199254740993'));
+
+  await service.transfer({
+    asset_id: createdAsset.asset_id,
+    to: '0x2000000000000000000000000000000000000000',
+    value: 500
+  });
+
+  const balance2 = await service.getBalance(createdAsset.asset_id, account.address);
+  t.true(new BigNumber(balance2).isEqualTo(new BigNumber('9007199254740993').minus(500)));
+
 });
