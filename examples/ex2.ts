@@ -14,7 +14,7 @@ import { Muta } from '../src';
   /**
    * first, we get the wallet class
    */
-  const wallet = Muta.hdWallet;
+  const Wallet = Muta.hdWallet;
 
   /**
    * to use HD wallet, usually you should get a mnemonic phrase
@@ -26,7 +26,7 @@ import { Muta } from '../src';
    *
    * let us get a random 12 mnemonic words
    */
-  const mnemonicWords = wallet.generateMnemonic();
+  const mnemonicWords = Wallet.generateMnemonic();
 
   /**
    * now, you can use the generated 12 words to create a HD wallet
@@ -35,7 +35,7 @@ import { Muta } from '../src';
    * be used to init the master node of so call HIERARCHICAL nodes
    */
 
-  const hdWallet = new wallet(mnemonicWords);
+  const hdWallet = new Wallet(mnemonicWords);
 
   /**
    * since you have got the hdWallet, which means you now can derive the path and

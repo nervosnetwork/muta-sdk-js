@@ -3,9 +3,19 @@ import { Account } from '../src/account';
 
 /**
  * finally, we learn higher APIs of AssetService.
+ *
+ * What's service in Muta-chain?
+ * Service is a piece of code which provides you certain complete function. Services may
+ * invoke each other to work together.
+ * you can build your business logic and divided it into several part like micro-service
+ * the whole chain is your business chain and services are your fundamental functions
+ *
+ * There are 2 kinds of services, one is built-in, another is user-defined
+ *
  * use service APIs, you can never touch the details of Clients, just communicate data
  * with Service.
- * But for these Muta chain Service develops, you had better go back to previous examples
+ * But for these Muta chain Service developers, you had better go back to previous examples,
+ * so that you could build your own Service
  */
 (async function AssetServiceExample() {
   /**

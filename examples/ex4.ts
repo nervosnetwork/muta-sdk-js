@@ -126,7 +126,7 @@ import { hexToNum, default as utils } from '../src/utils';
    * an error should be thrown of cause, since we have not created any UDTs
    */
 
-  let asset = null;
+  let asset: Asset | null = null;
   try {
     const asset_id =
       '0x0000000000000000000000000000000000000000000000000000000000000000';
