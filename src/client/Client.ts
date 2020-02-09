@@ -4,8 +4,9 @@ import { GraphQLClient } from 'graphql-request';
 import randomBytes from 'random-bytes';
 import {
   DEFAULT_CONSENSUS_INTERVAL,
-  DEFAULT_TIMEOUT_GAP
+  DEFAULT_TIMEOUT_GAP,
 } from '../constant/constant';
+import { boom } from '../error';
 import {
   Block,
   ExecResp,
@@ -17,13 +18,13 @@ import {
   Receipt,
   ServicePayload,
   SignedTransaction,
-  Transaction
+  Transaction,
 } from '../type';
-import { hexToNum, toHex } from '../utils';
+import { hexToNum, safeParseJSON, safeStringifyJSON, toHex } from '../utils';
 import {
   getSdk,
   InputRawTransaction,
-  InputTransactionEncryption
+  InputTransactionEncryption,
 } from './codegen/sdk';
 import { Retry } from './retry';
 
@@ -36,7 +37,6 @@ export interface ComposeTransactionParam<P> {
   serviceName: string;
   method: string;
   payload: P;
-
 }
 
 /**
@@ -50,7 +50,6 @@ export interface ClientOption {
   maxTimeout: number;
   defaultCyclesLimit: Uint64;
   defaultCyclesPrice: Uint64;
-
 }
 
 type RawClient = ReturnType<typeof getSdk>;
@@ -83,7 +82,6 @@ type RawClient = ReturnType<typeof getSdk>;
  * Please check [[AssetService]] 's source code to get the usage of this Client.
  */
 export class Client {
-
   private readonly rawClient: RawClient;
 
   private readonly options: ClientOption;
@@ -93,13 +91,12 @@ export class Client {
    * @param options, see [[ClientOption]] for more details
    */
   constructor(options: ClientOption) {
-
     this.options = options;
 
     this.rawClient = getSdk(
       new GraphQLClient(this.options.endpoint, {
-        cache: 'no-cache'
-      })
+        cache: 'no-cache',
+      }),
     );
   }
 
@@ -115,7 +112,6 @@ export class Client {
    * @param height the target height you want search, null for the latest
    */
   public async getBlock(height?: Maybe<string>): Promise<Block> {
-
     const queryBlockParam: QueryBlockParam = { height };
     const res = await this.rawClient.getBlock(queryBlockParam);
     return res.getBlock as Block;
@@ -137,10 +133,10 @@ export class Client {
   public async getTransaction(txHash: Hash): Promise<SignedTransaction> {
     const timeout = Math.max(
       this.options.maxTimeout,
-      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL
+      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL,
     );
     const res = await Retry.from(() =>
-      this.rawClient.getTransaction({ txHash })
+      this.rawClient.getTransaction({ txHash }),
     )
       .withTimeout(timeout)
       .start();
@@ -156,7 +152,7 @@ export class Client {
   public async getReceipt(txHash: Hash): Promise<Receipt> {
     const timeout = Math.max(
       this.options.maxTimeout,
-      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL
+      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL,
     );
     const res = await Retry.from(() => this.rawClient.getReceipt({ txHash }))
       .withTimeout(timeout)
@@ -189,19 +185,24 @@ export class Client {
    * @return
    */
   public async queryServiceDyn<P extends string | object, R extends object>(
-    param: ServicePayload<P>
+    param: ServicePayload<P>,
   ): Promise<ExecRespDyn<R>> {
     const payload: string =
       typeof param.payload !== 'string'
-        ? JSON.stringify(param.payload)
+        ? safeStringifyJSON(param.payload)
         : param.payload;
 
     const queryServiceQueryParam: QueryServiceParam = { ...param, payload };
     const res = await this.rawClient.queryService(queryServiceQueryParam);
 
+    const isError = res.queryService.isError;
+    if (isError) {
+      throw boom(`RPC error: ${res.queryService.ret}`);
+    }
+
     return {
-      isError: res.queryService.isError,
-      ret: JSON.parse(res.queryService.ret) as R
+      isError,
+      ret: safeParseJSON(res.queryService.ret) as R,
     };
   }
 
@@ -213,7 +214,7 @@ export class Client {
    * @return
    */
   public async sendTransaction(
-    signedTransaction: SignedTransaction
+    signedTransaction: SignedTransaction,
   ): Promise<Hash> {
     const inputRaw: InputRawTransaction = {
       chainId: signedTransaction.chainId,
@@ -223,18 +224,18 @@ export class Client {
       nonce: signedTransaction.nonce,
       payload: signedTransaction.payload,
       serviceName: signedTransaction.serviceName,
-      timeout: signedTransaction.timeout
+      timeout: signedTransaction.timeout,
     };
 
     const inputEncryption: InputTransactionEncryption = {
       pubkey: signedTransaction.pubkey,
       signature: signedTransaction.signature,
-      txHash: signedTransaction.txHash
+      txHash: signedTransaction.txHash,
     };
 
     const res = await this.rawClient.sendTransaction({
       inputEncryption,
-      inputRaw
+      inputRaw,
     });
 
     return res.sendTransaction;
@@ -246,12 +247,16 @@ export class Client {
    * @param param your params
    */
   public async composeTransaction<P extends string | object>(
-    param: ComposeTransactionParam<P>
+    param: ComposeTransactionParam<P>,
   ): Promise<Transaction> {
+    const payload: string =
+      typeof param.payload !== 'string'
+        ? safeStringifyJSON(param.payload)
+        : param.payload;
 
-    const payload: string = typeof param.payload !== 'string' ? JSON.stringify(param.payload) : param.payload;
-
-    const timeout = param.timeout ? param.timeout : toHex((await this.getLatestBlockHeight()) + DEFAULT_TIMEOUT_GAP - 1);
+    const timeout = param.timeout
+      ? param.timeout
+      : toHex((await this.getLatestBlockHeight()) + DEFAULT_TIMEOUT_GAP - 1);
 
     return {
       chainId: this.options.chainId,
@@ -260,7 +265,7 @@ export class Client {
       nonce: toHex(randomBytes.sync(32).toString('hex')),
       timeout,
       ...param,
-      payload
+      payload,
     };
   }
 
@@ -281,7 +286,7 @@ export class Client {
     const before = await this.getLatestBlockHeight();
     const timeout = Math.max(
       (n + 1) * DEFAULT_CONSENSUS_INTERVAL,
-      this.options.maxTimeout
+      this.options.maxTimeout,
     );
     return Retry.from(() => this.getLatestBlockHeight())
       .withCheck(height => height - before >= n)

@@ -1,5 +1,7 @@
+import BigNumber from 'bignumber.js';
 import { Client } from '..';
 import { Account } from '../account';
+import { boom } from '../error';
 import { Address, ExecRespDyn, Hash, Receipt, ServicePayload } from '../type';
 import * as utils from '../utils';
 
@@ -9,13 +11,13 @@ export interface GetBalancePayParam {
 
 export interface Balance {
   asset_id: string;
-  balance: number;
+  balance: number | BigNumber;
 }
 
 export interface TransferPayParam {
   asset_id: Hash;
   to: Address;
-  value: number;
+  value: number | BigNumber;
 }
 
 /**
@@ -26,7 +28,7 @@ export interface TransferPayParam {
 export interface CreateAssetParam {
   name: string;
   symbol: string;
-  supply: number;
+  supply: number | BigNumber;
 }
 
 /**
@@ -40,7 +42,7 @@ export interface Asset {
   asset_id: Hash;
   name: string;
   symbol: string;
-  supply: number;
+  supply: number | BigNumber;
   issuer: Address;
 }
 
@@ -108,13 +110,13 @@ export class AssetService {
    */
   public async getBalance(
     assetId: string,
-    address: string = this.account.address
-  ): Promise<number> {
+    address: string = this.account.address,
+  ): Promise<number | BigNumber> {
     const servicePayload: ServicePayload<GetBalancePayParam> = {
       caller: address,
       method: 'get_balance',
       payload: { asset_id: assetId },
-      serviceName: 'asset'
+      serviceName: 'asset',
     };
 
     const res: ExecRespDyn<Balance> = await this.client.queryServiceDyn<
@@ -133,12 +135,16 @@ export class AssetService {
     const tx = await this.client.composeTransaction({
       method: 'transfer',
       payload,
-      serviceName: 'asset'
+      serviceName: 'asset',
     });
 
-    const txHash = await this.client.sendTransaction(this.account.signTransaction(tx));
+    const txHash = await this.client.sendTransaction(
+      this.account.signTransaction(tx),
+    );
 
-    /*const receipt: Receipt = */await this.client.getReceipt(utils.toHex(txHash));
+    /*const receipt: Receipt = */ await this.client.getReceipt(
+      utils.toHex(txHash),
+    );
 
     return null;
   }
@@ -153,15 +159,19 @@ export class AssetService {
     const tx = await this.client.composeTransaction({
       method: 'create_asset',
       payload,
-      serviceName: 'asset'
+      serviceName: 'asset',
     });
 
     const txHash = await this.client.sendTransaction(
-      this.account.signTransaction(tx)
+      this.account.signTransaction(tx),
     );
     const receipt: Receipt = await this.client.getReceipt(utils.toHex(txHash));
 
-    let createdAssetResult = JSON.parse(receipt.response.ret);
+    if (receipt.response.isError) {
+      throw boom(`RPC error: ${receipt.response.ret}`);
+    }
+
+    let createdAssetResult = utils.safeParseJSON(receipt.response.ret);
     createdAssetResult = this.changeIdToAssetId(createdAssetResult);
     createdAssetResult = createdAssetResult as Asset;
     return createdAssetResult;
@@ -174,13 +184,13 @@ export class AssetService {
    */
   public async getAsset(
     assetId: Hash,
-    address: string = this.account.address
+    address: string = this.account.address,
   ): Promise<Asset> {
     const servicePayload: ServicePayload<GetAssetParam> = {
       caller: address,
       method: 'get_balance',
       payload: { asset_id: assetId },
-      serviceName: 'asset'
+      serviceName: 'asset',
     };
 
     const res: ExecRespDyn<Asset> = await this.client.queryServiceDyn<

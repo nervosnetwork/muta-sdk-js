@@ -1,6 +1,16 @@
+import {
+  parse as safeParseJSON,
+  stringify as safeStringifyJSON,
+} from 'json-bigint';
 import createKeccakHash from 'keccak';
 import randomBytes from 'random-bytes';
-import { publicKeyCreate } from 'secp256k1';
+import { encode } from 'rlp';
+import { publicKeyCreate, sign } from 'secp256k1';
+import {
+  InputSignedTransaction,
+  Transaction,
+  TransactionSignature,
+} from './type';
 
 /**
  * TRY to remove 0x from a hex string
@@ -81,6 +91,53 @@ export function hashBuf(buffer: Buffer): Buffer {
     .update(buffer)
     .digest();
 }
+
+/**
+ * sign a transaction with a private key
+ * @param tx
+ * @param privateKey
+ */
+export function signTransaction(
+  tx: Transaction,
+  privateKey: Buffer,
+): InputSignedTransaction {
+  const orderedTx = [
+    tx.chainId,
+    tx.cyclesLimit,
+    tx.cyclesPrice,
+    tx.nonce,
+    tx.method,
+    tx.serviceName,
+    tx.payload,
+    tx.timeout,
+  ];
+  const encoded = encode(orderedTx);
+  const txHash = hashBuf(encoded);
+
+  const { signature } = sign(txHash, privateKey);
+
+  const inputEncryption: TransactionSignature = {
+    pubkey: toHex(publicKeyCreate(privateKey)),
+    signature: toHex(signature),
+    txHash: toHex(txHash),
+  };
+
+  return {
+    inputEncryption,
+    inputRaw: tx,
+  };
+}
+
+/**
+ * convert a public key to an account address
+ * @param publicKey
+ */
+export function addressFromPublicKey(publicKey: Buffer | string): Buffer {
+  const hashed = hashBuf(toBuffer(publicKey));
+  return hashed.slice(0, 20);
+}
+
+export { safeParseJSON, safeStringifyJSON };
 
 /**
  * re-export secp256k1's publicKeyCreate
