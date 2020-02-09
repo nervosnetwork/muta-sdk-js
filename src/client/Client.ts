@@ -202,7 +202,7 @@ export class Client {
 
     return {
       isError,
-      ret: safeParseJSON(res.queryService.ret) as R,
+      ret: safeParseJSON(res.queryService.ret),
     };
   }
 

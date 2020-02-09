@@ -1,6 +1,9 @@
-import { encode } from 'rlp';
-import { sign } from 'secp256k1';
-import { SignedTransaction, Transaction, TransactionSignature } from '../type';
+import { utils } from '../index';
+import {
+  InputSignedTransaction,
+  SignedTransaction,
+  Transaction,
+} from '../type';
 import { hashBuf, publicKeyCreate, toBuffer, toHex } from '../utils';
 
 /**
@@ -52,7 +55,7 @@ export class Account {
    * @param privateKey, hex string starts with 0x, the private is 32 bytes
    * @return [[Account]]
    */
-  public static fromPrivateKey(privateKey: string): Account {
+  public static fromPrivateKey(privateKey: Buffer | string): Account {
     return new Account(toBuffer(privateKey));
   }
 
@@ -121,26 +124,10 @@ export class Account {
    * @return [[SignedTransaction]]
    */
   public signTransaction(tx: Transaction): SignedTransaction {
-    const orderedTx = [
-      tx.chainId,
-      tx.cyclesLimit,
-      tx.cyclesPrice,
-      tx.nonce,
-      tx.method,
-      tx.serviceName,
-      tx.payload,
-      tx.timeout,
-    ];
-    const encoded = encode(orderedTx);
-    const txHash = hashBuf(encoded);
-
-    const { signature } = sign(txHash, this._privateKey);
-
-    const txSig: TransactionSignature = {
-      pubkey: toHex(publicKeyCreate(this._privateKey)),
-      signature: toHex(signature),
-      txHash: toHex(txHash),
-    };
+    const inputSignedTransaction: InputSignedTransaction = utils.signTransaction(
+      tx,
+      this._privateKey,
+    );
 
     return {
       chainId: tx.chainId,
@@ -149,11 +136,11 @@ export class Account {
       method: tx.method,
       nonce: tx.nonce,
       payload: tx.payload,
-      pubkey: txSig.pubkey,
+      pubkey: inputSignedTransaction.inputEncryption.pubkey,
       serviceName: tx.serviceName,
-      signature: txSig.signature,
+      signature: inputSignedTransaction.inputEncryption.signature,
       timeout: tx.timeout,
-      txHash: txSig.txHash,
+      txHash: inputSignedTransaction.inputEncryption.txHash,
     };
   }
 }

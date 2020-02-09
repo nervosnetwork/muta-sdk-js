@@ -142,9 +142,11 @@ export class AssetService {
       this.account.signTransaction(tx),
     );
 
-    /*const receipt: Receipt = */ await this.client.getReceipt(
-      utils.toHex(txHash),
-    );
+    const receipt: Receipt = await this.client.getReceipt(utils.toHex(txHash));
+
+    if (receipt.response.isError) {
+      throw boom(`RPC error: ${receipt.response.ret}`);
+    }
 
     return null;
   }
@@ -188,8 +190,8 @@ export class AssetService {
   ): Promise<Asset> {
     const servicePayload: ServicePayload<GetAssetParam> = {
       caller: address,
-      method: 'get_balance',
-      payload: { asset_id: assetId },
+      method: 'get_asset',
+      payload: this.changeAssetIdToId({ asset_id: assetId }),
       serviceName: 'asset',
     };
 
@@ -198,7 +200,7 @@ export class AssetService {
       Asset
     >(servicePayload);
 
-    return res.ret;
+    return this.changeIdToAssetId(res.ret);
   }
 
   // wrapper all 'id' field under Asset Service to 'asset_id'
@@ -206,6 +208,14 @@ export class AssetService {
     if (input.hasOwnProperty('id')) {
       input.asset_id = input.id;
       delete input.id;
+    }
+    return input;
+  }
+
+  private changeAssetIdToId(input: any) {
+    if (input.hasOwnProperty('asset_id')) {
+      input.id = input.asset_id;
+      delete input.asset_id;
     }
     return input;
   }
