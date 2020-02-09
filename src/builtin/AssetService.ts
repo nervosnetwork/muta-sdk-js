@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { Client } from '..';
 import { Account } from '../account';
+import { boom } from '../error';
 import { Address, ExecRespDyn, Hash, Receipt, ServicePayload } from '../type';
 import * as utils from '../utils';
 
@@ -165,6 +166,10 @@ export class AssetService {
       this.account.signTransaction(tx),
     );
     const receipt: Receipt = await this.client.getReceipt(utils.toHex(txHash));
+
+    if (receipt.response.isError) {
+      throw boom(`RPC error: ${receipt.response.ret}`);
+    }
 
     let createdAssetResult = utils.safeParseJSON(receipt.response.ret);
     createdAssetResult = this.changeIdToAssetId(createdAssetResult);

@@ -6,6 +6,7 @@ import {
   DEFAULT_CONSENSUS_INTERVAL,
   DEFAULT_TIMEOUT_GAP,
 } from '../constant/constant';
+import { boom } from '../error';
 import {
   Block,
   ExecResp,
@@ -194,8 +195,13 @@ export class Client {
     const queryServiceQueryParam: QueryServiceParam = { ...param, payload };
     const res = await this.rawClient.queryService(queryServiceQueryParam);
 
+    const isError = res.queryService.isError;
+    if (isError) {
+      throw boom(`RPC error: ${res.queryService.ret}`);
+    }
+
     return {
-      isError: res.queryService.isError,
+      isError,
       ret: safeParseJSON(res.queryService.ret) as R,
     };
   }
