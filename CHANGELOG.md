@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.6.0...v0.7.0-alpha.0) (2020-02-09)
+
+### Features
+
+- add an error handling when RPC error ([37ace70](https://github.com/nervosnetwork/muta-sdk-js/commit/37ace70))
+- import BigNumber for number safe ([62d2ac1](https://github.com/nervosnetwork/muta-sdk-js/commit/62d2ac1))
+- import BigNumber for number safe ([2e2fac0](https://github.com/nervosnetwork/muta-sdk-js/commit/2e2fac0))
+- specify the registry to npm ([c4b073f](https://github.com/nervosnetwork/muta-sdk-js/commit/c4b073f))
+
+### Tests
+
+- test BigNumber with AssetService ([206c926](https://github.com/nervosnetwork/muta-sdk-js/commit/206c926))
+
 ## [0.6.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.5.0...v0.6.0) (2020-02-07)
 
 ### Features
