@@ -83,6 +83,14 @@ export function randomHex(n: number) {
 }
 
 /**
+ * generate a random nonce
+ * @param n
+ */
+export function randomNonce(n: number): string {
+  return toHex(randomBytes.sync(n).toString('hex'));
+}
+
+/**
  * us keccak256 to has the input
  * @param buffer
  */
