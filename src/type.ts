@@ -92,8 +92,8 @@ export interface Validator {
  * compare to [[ExecRespDyn]] with generic
  * @param ret  the raw data returns by service, maybe need decoding
  */
-export interface ExecResp {
-  ret: string;
+export interface ExecResp<Ret = any> {
+  ret: Ret;
   isError: boolean;
 }
 
@@ -155,7 +155,7 @@ export interface InputSignedTransaction {
  * data structure when you call [[queryService]] to chain
  * compare to [[ServicePayload]], which enables generic for 'payload'
  */
-export interface QueryServiceParam<P = string> {
+export interface QueryServiceParam<P = any> {
   serviceName: string;
   method: string;
   payload: P;
@@ -183,7 +183,7 @@ export interface QueryBlockParam {
  * see [[Event]] and [[ReceiptResponse]] for more details
  * see [[getReceipt]] for more details
  */
-export interface Receipt<Ret = string> {
+export interface Receipt<Ret = any> {
   stateRoot: string;
   height: string;
   txHash: string;
@@ -196,7 +196,7 @@ export interface Receipt<Ret = string> {
  * the details response for a committed [[Transaction]]
  * serviceName and method should equals submitted [[Transaction]]
  */
-export interface ReceiptResponse<Ret = string> {
+export interface ReceiptResponse<Ret = any> {
   serviceName: string;
   method: string;
   ret: Ret;
