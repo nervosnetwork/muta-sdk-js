@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.1](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.0...v0.7.0-alpha.1) (2020-02-11)
+
+### Features
+
+- binding for service for preview ([4dd1ab6](https://github.com/nervosnetwork/muta-sdk-js/commit/4dd1ab6))
+- supported create Class binding ([be50f62](https://github.com/nervosnetwork/muta-sdk-js/commit/be50f62))
+
+### Tests
+
+- migrate AssetService to binding ([fc1c42a](https://github.com/nervosnetwork/muta-sdk-js/commit/fc1c42a))
+- skip the test since AssetService has breaking change ([6855b76](https://github.com/nervosnetwork/muta-sdk-js/commit/6855b76))
+
 ## [0.7.0-alpha.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.6.0...v0.7.0-alpha.0) (2020-02-09)
 
 ### Features
