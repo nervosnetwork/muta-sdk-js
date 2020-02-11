@@ -2,7 +2,7 @@ import test from 'ava';
 import { AssetService } from './builtin';
 import { Muta } from './Muta';
 
-test('Muta example', async t => {
+test.skip('Muta example', async t => {
   const muta = Muta.createDefaultMutaInstance();
 
   // get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum
@@ -29,7 +29,7 @@ test('Muta example', async t => {
   const createdAsset = await service.createAsset({
     name: 'LOVE_COIN',
     supply,
-    symbol: 'LUV'
+    symbol: 'LUV',
   });
 
   // keep the asset id for later use, you should keep it carefully
@@ -51,12 +51,12 @@ test('Muta example', async t => {
   await service.transfer({
     asset_id: assetId,
     to,
-    value: 520
+    value: 520,
   });
 
   const balance0x2000000000000000000000000000000000000000 = await service.getBalance(
     assetId,
-    to
+    to,
   );
   t.is(balance0x2000000000000000000000000000000000000000, 520);
 });
