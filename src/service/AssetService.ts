@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js';
-import { Address, Hash, QueryServiceParam } from '../type';
+import { Address, Hash } from '../type';
 import { createBindingClass, read, Read, write, Write } from './';
 
 export interface GetBalancePayParam {
   asset_id: string;
-  address: Address;
+  user: Address;
 }
 
 export interface Balance {
@@ -50,7 +50,7 @@ export interface GetAssetParam {
 
 interface AssetServiceModel {
   create_asset: Write<CreateAssetParam, Asset>;
-  get_balance: Read<GetBalancePayParam>;
+  get_balance: Read<GetBalancePayParam, Balance>;
   transfer: Write<TransferPayParam>;
 }
 
@@ -58,16 +58,6 @@ const serviceName = 'asset';
 
 export const AssetService = createBindingClass<AssetServiceModel>(serviceName, {
   create_asset: write(),
-  get_balance: read(payload => {
-    const { asset_id, address } = payload;
-
-    const query: QueryServiceParam = {
-      caller: address,
-      method: 'get_balance',
-      payload: { asset_id },
-      serviceName,
-    };
-    return query;
-  }),
+  get_balance: read(),
   transfer: write(),
 });
