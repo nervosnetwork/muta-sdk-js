@@ -20,7 +20,7 @@ Suppose the [AssetService](https://github.com/nervosnetwork/muta/blob/master/bui
 6. send certain asset to another address
 
 ```js
-async function example(){
+async function example() {
   const muta = Muta.createDefaultMutaInstance();
 
   // get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum
@@ -44,23 +44,27 @@ async function example(){
   const supply = 1314;
 
   // create an asset call LOVE_COIN with LUV symbol, supply 1314 loves totally
-  const createdAsset = await service.createAsset({
+  const createdAsset = await service.create_asset({
     name: 'LOVE_COIN',
     supply,
-    symbol: 'LUV'
+    symbol: 'LUV',
   });
 
   // keep the asset id for later use, you should keep it carefully
-  const assetId = createdAsset.asset_id;
+  const assetId = createdAsset.response.ret.id;
 
   // get the Asset info back, this should equals to createdAsset above :)
-  const asset = await service.getAsset(assetId);
+  const asset = await service.get_asset({ id: assetId });
 
-  t.is(asset.asset_id, assetId);
+  // we replacing it is Okay, cause they are equal, isn't it?
+  t.is(asset.ret.id, assetId);
 
   // get the balance of our account, should equal 1314
-  const balance = await service.getBalance(assetId, account.address);
-  t.is(balance, 1314);
+  const balance = await service.get_balance({
+    asset_id: assetId,
+    user: account.address,
+  });
+  t.is(balance.ret.balance, 1314);
 
   // we send 520 LUVs
   const to = '0x2000000000000000000000000000000000000000';
@@ -68,13 +72,23 @@ async function example(){
   await service.transfer({
     asset_id: assetId,
     to,
-    value: 520
+    value: 520,
   });
 
-  const balance0x2000000000000000000000000000000000000000 = await service.getBalance(assetId, to);
-  t.is(balance0x2000000000000000000000000000000000000000, 520);
+  const balance0x2000000000000000000000000000000000000000 = await service.get_balance(
+    {
+      asset_id: assetId,
+      user: to,
+    },
+  );
+  t.is(balance0x2000000000000000000000000000000000000000.ret.balance, 520);
 }
 ```
+
+## Create My Service Binding
+
+Before we create our custom binding, learn about what is a [service](https://github.com/nervosnetwork/muta-docs) in Muta.
+We'll still use [AssetService](https://github.com/HuobiGroup/huobi-chain/tree/master/services/asset/src) as an [example](src/service/binding/AssetService.ts).
 
 ## Links
 
