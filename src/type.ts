@@ -1,6 +1,8 @@
 /**
  * ID, string
  */
+import BigNumber from 'bignumber.js';
+
 export type ID = string;
 /**
  * a 64bits number, represented by string
@@ -22,6 +24,10 @@ export type Bytes = string;
  * a short hand for number
  */
 export type Int = number;
+/**
+ * uint64
+ */
+export type u64 = number | BigNumber;
 /**
  * something like Option<T>
  */
