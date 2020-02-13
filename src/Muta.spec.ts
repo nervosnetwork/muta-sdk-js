@@ -1,8 +1,8 @@
 import test from 'ava';
-import { AssetService } from './builtin';
 import { Muta } from './Muta';
+import { AssetService } from './service';
 
-test.skip('Muta example', async t => {
+test('Muta example', async t => {
   const muta = Muta.createDefaultMutaInstance();
 
   // get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum
@@ -26,24 +26,27 @@ test.skip('Muta example', async t => {
   const supply = 1314;
 
   // create an asset call LOVE_COIN with LUV symbol, supply 1314 loves totally
-  const createdAsset = await service.createAsset({
+  const createdAsset = await service.create_asset({
     name: 'LOVE_COIN',
     supply,
     symbol: 'LUV',
   });
 
   // keep the asset id for later use, you should keep it carefully
-  const assetId = createdAsset.asset_id;
+  const assetId = createdAsset.response.ret.id;
 
   // get the Asset info back, this should equals to createdAsset above :)
-  const asset = await service.getAsset(assetId);
+  const asset = await service.get_asset({ id: assetId });
 
   // we replacing it is Okay, cause they are equal, isn't it?
-  t.is(asset.asset_id, assetId);
+  t.is(asset.ret.id, assetId);
 
   // get the balance of our account, should equal 1314
-  const balance = await service.getBalance(assetId, account.address);
-  t.is(balance, 1314);
+  const balance = await service.get_balance({
+    asset_id: assetId,
+    user: account.address,
+  });
+  t.is(balance.ret.balance, 1314);
 
   // we send 520 LUVs
   const to = '0x2000000000000000000000000000000000000000';
@@ -54,9 +57,11 @@ test.skip('Muta example', async t => {
     value: 520,
   });
 
-  const balance0x2000000000000000000000000000000000000000 = await service.getBalance(
-    assetId,
-    to,
+  const balance0x2000000000000000000000000000000000000000 = await service.get_balance(
+    {
+      asset_id: assetId,
+      user: to,
+    },
   );
-  t.is(balance0x2000000000000000000000000000000000000000, 520);
+  t.is(balance0x2000000000000000000000000000000000000000.ret.balance, 520);
 });
