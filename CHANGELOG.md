@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Tests
 
-- test BigNumber with AssetService ([206c926](https://github.com/nervosnetwork/muta-sdk-js/commit/206c926))
+- test BigNumber with AssetServiceTs ([206c926](https://github.com/nervosnetwork/muta-sdk-js/commit/206c926))
 
 ## [0.6.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.5.0...v0.6.0) (2020-02-07)
 

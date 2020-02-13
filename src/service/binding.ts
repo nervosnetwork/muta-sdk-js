@@ -12,14 +12,15 @@ import {
 import * as utils from '../utils';
 
 /**
- * Given an input payload, transform to [[QueryServiceParam]]
+ * A type for those functions which transform an any type payload into [[QueryServiceParam]]
  */
 export type QueryServiceParamTransform<P = any> = (
   payload: P,
 ) => QueryServiceParam<P> | Promise<QueryServiceParam<P>>;
 
 /**
- * Mark a service method for readonly, so the method of the service will only call queryService
+ *
+ * Mark a service **read** method, so that we can make sure on this method the client calls [[queryService]]
  */
 // @ts-ignore
 export interface Read<P = any, R = any> {
@@ -53,9 +54,6 @@ function isRead(handler: any): handler is Read {
 
 type WritePayloadHandler<P = any> = (payload: P) => Promise<Transaction>;
 
-/**
- *
- */
 // @ts-ignore
 interface WriteHandler<P = any, R = string> {
   (payload: P, privateKey: string | Buffer): Promise<SignedTransaction>;
@@ -64,8 +62,7 @@ interface WriteHandler<P = any, R = string> {
 }
 
 /**
- * Write service with a JSON payload and return a receipt OR
- * composing a transaction when private key is not provided
+ * Mark a service **write** method, so that we can make sure on this method the client calls [[sendTransaction]]
  */
 // @ts-ignore
 export interface Write<P = any, R = string> {
@@ -74,7 +71,7 @@ export interface Write<P = any, R = string> {
 }
 
 /**
- * decorate write
+ * a formal way to create a [[Write]] object
  * @param transform
  */
 export function write<P, R>(transform?: WritePayloadHandler<P>): Write<P, R> {
@@ -85,7 +82,7 @@ export function write<P, R>(transform?: WritePayloadHandler<P>): Write<P, R> {
 }
 
 /**
- * check if it is a write decorator
+ * check if a method is a write method
  * @param handler
  */
 function isWrite(handler: any): handler is Write {
@@ -95,12 +92,21 @@ function isWrite(handler: any): handler is Write {
   return handler.type === 'write';
 }
 
+/**
+ * if you only give a write payload, so it can only generate a [[Transaction]]
+ * but if you give both a write payload and a private key, it can proceed and return you a [[Receipt]]
+ */
 interface SendTransaction<PW = any, RW = any> {
   (payload: PW): Promise<Transaction>;
 
   (payload: PW, privateKey: string | Buffer): Promise<Receipt<RW>>;
 }
 
+/**
+ * deduct the type from [[Read]] and [[Write]]
+ * if the handler is [[Read]], so it will finally return you an ExecResp<>
+ * or the handler is [[Write]], returns [[SendTransaction]], note that [[SendTransaction]] contains 2 ways
+ */
 export type ServiceBinding<Binding> = {
   [method in keyof Binding]: Binding[method] extends Read<
     infer ReadPayload,
@@ -112,6 +118,14 @@ export type ServiceBinding<Binding> = {
     : never;
 };
 
+/**
+ *  This is the main logic when you call a Read or Write Method.
+ *  The Read and Write handler takes responsibility to convert data and mark the way how the client should
+ *  communicate to the node, which is 'read'-queryService or 'write'-sendTransaction
+ * @param serviceName the Service name
+ * @param model the definition of all methods with names, params and return types, and its handler
+ * @param options
+ */
 export function createServiceBinding<T>(
   serviceName: string,
   model: T,
@@ -183,6 +197,11 @@ export function createServiceBinding<T>(
   }, ({} as any) as ServiceBinding<T>);
 }
 
+/**
+ * deduct the type from [[Read]] and [[Write]]
+ * if the handler is [[Read]], so it will finally return you an ExecResp<>
+ * or the handler is [[Write]], returns [[Receipt]]
+ */
 export type BindingClassPrototype<Binding> = {
   [method in keyof Binding]: Binding[method] extends Read<
     infer ReadPayload,
@@ -194,11 +213,20 @@ export type BindingClassPrototype<Binding> = {
     : never;
 };
 
+/**
+ * an alias
+ */
 type ServiceBindingClass<T> = new (
   client: Client,
   account: Account,
 ) => BindingClassPrototype<T>;
 
+/**
+ * this function will takes your model contains definition of methods and their handler
+ * and then register them into the prototype of the Service
+ * @param serviceName the name of the service
+ * @param model definition of methods and their handler
+ */
 export function createBindingClass<T>(
   serviceName: string,
   model: T,

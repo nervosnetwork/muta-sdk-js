@@ -2,7 +2,7 @@ import { AssetService, Muta } from '../src';
 import { Account } from '../src/account';
 
 /**
- * finally, we learn higher APIs of AssetService.
+ * finally, we learn higher APIs of AssetServiceTs.
  *
  * What's service in Muta-chain?
  * Service is a piece of code which provides you certain complete function. Services may
@@ -37,20 +37,14 @@ import { Account } from '../src/account';
    * let us create a new asset, like we did in ex4, you can see that's more frank.
    * no composing tx, no sending tx, no waiting to get the receipt, just get the Asset object
    */
-  const createdAsset = await service.createAsset({
+  const createdAsset = await service.create_asset({
     name: 'LOVE_COIN',
     supply: 1314,
     symbol: 'LUV',
   });
 
   // keep the asset id for later use, you should keep it carefully
-  const assetId = createdAsset.asset_id;
-
-  // get the Asset info back, this should equals to createdAsset above :)
-  const asset = await service.getAsset(assetId);
-
-  // get the balance of our account, should equal 1314
-  const balance = await service.getBalance(assetId, account.address);
+  const assetId = createdAsset.response.ret.id;
 
   // we send 520 LUVs to 0x2000000000000000000000000000000000000000
   const to = '0x2000000000000000000000000000000000000000';
@@ -69,10 +63,12 @@ import { Account } from '../src/account';
   /**
    * get the balance of balance0x2000000000000000000000000000000000000000
    */
-  const balance0x2000000000000000000000000000000000000000 = await service.getBalance(
-    assetId,
-    to,
-  );
+  const {
+    ret: { balance: balance0x2000000000000000000000000000000000000000 },
+  } = await service.get_balance({
+    asset_id: assetId,
+    user: to,
+  });
 
   /**
    * now you can sail by yourself, good trip

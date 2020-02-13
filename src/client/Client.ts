@@ -79,7 +79,7 @@ type RawClient = ReturnType<typeof getSdk>;
  * **Locally**
  * 1. [[composeTransaction]]
  *
- * Please check [[AssetService]] 's source code to get the usage of this Client.
+ * Please check [[AssetServiceTs]] 's source code to get the usage of this Client.
  */
 export class Client {
   private readonly rawClient: RawClient;

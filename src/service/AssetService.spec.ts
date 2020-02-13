@@ -11,7 +11,7 @@ const account = Muta.accountFromPrivateKey(
   '0x1000000000000000000000000000000000000000000000000000000000000000',
 );
 
-test('AssetService with binding', async t => {
+test('AssetServiceTs with binding', async t => {
   const service = new AssetService(client, account);
 
   const supply = new BigNumber('9223372036854775808'); // 1 << 63

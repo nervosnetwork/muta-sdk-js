@@ -96,12 +96,12 @@ import { hexToNum, default as utils } from '../src/utils';
    * now let us step further, we want to ask node to do some query.
    * a query is something like eth_call.
    *
-   * Muta has many services, e.g., Metadata service and AssetService
+   * Muta has many services, e.g., Metadata service and AssetServiceTs
    *
    * the metadata service will return the metadata of the Muta Chain
    * the asset service supports User Defined Tokens, something like ERC20
    *
-   * now, let us query the node some information from AssetService
+   * now, let us query the node some information from AssetServiceTs
    */
 
   /**
@@ -110,7 +110,7 @@ import { hexToNum, default as utils } from '../src/utils';
    *
    * for more info, please refer docs, here we assume you know the specific structure.
    *
-   * don't worry, that's obviously easy for AssetService. and if you are a developer
+   * don't worry, that's obviously easy for AssetServiceTs. and if you are a developer
    * of Muta chain, you can define the structure for your own Service :)
    *
    */
@@ -153,7 +153,7 @@ import { hexToNum, default as utils } from '../src/utils';
    *
    * but before we send a tx, we have to compose one tx, right?
    *
-   * to send a tx to certain Service, not only AssetService, you must provide 3-factors:
+   * to send a tx to certain Service, not only AssetServiceTs, you must provide 3-factors:
    *
    * export interface ComposeTransactionParam<P> {
    *  timeout?: string;
@@ -257,7 +257,7 @@ import { hexToNum, default as utils } from '../src/utils';
   let createdAssetResult = utils.safeParseJSON(receipt.response.ret);
 
   /**
-   * now you know all the info about Client class, next ex we will learn AssetService
+   * now you know all the info about Client class, next ex we will learn AssetServiceTs
    * which builds on top of Client class. so you can use simplified APIs rather than
    * the above code :)
    */

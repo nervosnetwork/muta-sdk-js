@@ -48,6 +48,14 @@ export interface GetAssetParam {
   asset_id: Hash;
 }
 
+/**
+ * mark that there are 3 methods:
+ *
+ * 1. create_asset, which is a write method whose input = CreateAssetParam and output = Asset
+ * 2. get_balance, which is a read method whose input = GetBalancePayParam
+ * 3. transfer, which is a write method whose input = TransferPayParam
+ *
+ */
 interface AssetServiceModel {
   create_asset: Write<CreateAssetParam, Asset>;
   get_balance: Read<GetBalancePayParam, Balance>;
@@ -56,6 +64,9 @@ interface AssetServiceModel {
 
 const serviceName = 'asset';
 
+/**
+ * this call this function as constructor to get an AssetService object
+ */
 export const AssetService = createBindingClass<AssetServiceModel>(serviceName, {
   create_asset: write(),
   get_balance: read(),
