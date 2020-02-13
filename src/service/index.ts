@@ -1,2 +1,2 @@
 export * from './binding';
-export { AssetService } from './AssetService';
+export { AssetService } from './binding/AssetService';

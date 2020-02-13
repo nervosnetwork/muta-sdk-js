@@ -1,7 +1,7 @@
 import test from 'ava';
 import { BigNumber } from 'bignumber.js';
-import { Muta } from '../Muta';
-import { rm0x } from '../utils';
+import { Muta } from '../..';
+import { rm0x } from '../../utils';
 import { AssetService } from './AssetService';
 
 const muta = Muta.createDefaultMutaInstance();
