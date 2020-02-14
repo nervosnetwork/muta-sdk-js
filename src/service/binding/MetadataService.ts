@@ -1,0 +1,47 @@
+// https://github.com/HuobiGroup/huobi-chain/tree/master/services/asset
+
+import { createBindingClass, read, Read, write, Write } from '../';
+import { Address, Hash, u32, u64, Vec } from '../../type';
+
+interface ValidatorExtend {
+  bls__key: string;
+  address: Address;
+  propose_weight: u32;
+  vote_weight: u32;
+}
+
+interface Metadata {
+  chain_id: Hash;
+  common_ref: string;
+  timeout_gap: u64;
+  cycles_limit: u64;
+  cycles_price: u64;
+  interval: u64;
+  verifier_list: Vec<ValidatorExtend>;
+  propose_ratio: u64;
+  prevote_ratio: u64;
+  precommit_ratio: u64;
+  brake_ratio: u64;
+}
+
+interface UpdateMetadataPayload {
+  verifier_list: Vec<ValidatorExtend>;
+  interval: u64;
+  propose_ratio: u64;
+  prevote_ratio: u64;
+  precommit_ratio: u64;
+  brake_ratio: u64;
+}
+
+export interface MetadataServiceModel {
+  get_metadata: Read<null, Metadata>;
+  update_metadata: Write<UpdateMetadataPayload>;
+}
+
+export const MetadataService = createBindingClass<MetadataServiceModel>(
+  'metadata',
+  {
+    get_metadata: read(),
+    update_metadata: write(),
+  },
+);

@@ -25,9 +25,17 @@ export type Bytes = string;
  */
 export type Int = number;
 /**
+ * uint32
+ */
+export type u32 = number;
+/**
  * uint64
  */
 export type u64 = number | BigNumber;
+/**
+ * vector
+ */
+export type Vec<T> = T[];
 /**
  * something like Option<T>
  */
