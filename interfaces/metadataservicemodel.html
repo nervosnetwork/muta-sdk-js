@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ReceiptResponse | muta-sdk - v0.7.0-alpha.2</title>
+	<title>MetadataServiceModel | muta-sdk - v0.7.0-alpha.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,37 +56,21 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="receiptresponse.html">ReceiptResponse</a>
+					<a href="metadataservicemodel.html">MetadataServiceModel</a>
 				</li>
 			</ul>
-			<h1>Interface ReceiptResponse&lt;Ret&gt;</h1>
+			<h1>Interface MetadataServiceModel</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>the details response for a committed <a href="transaction.html">Transaction</a>
-						serviceName and method should equals submitted <a href="transaction.html">Transaction</a></p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>Ret</h4>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ReceiptResponse</span>
+						<span class="target">MetadataServiceModel</span>
 					</li>
 				</ul>
 			</section>
@@ -97,10 +81,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="receiptresponse.html#iserror" class="tsd-kind-icon">is<wbr>Error</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="receiptresponse.html#method" class="tsd-kind-icon">method</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="receiptresponse.html#ret" class="tsd-kind-icon">ret</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="receiptresponse.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="metadataservicemodel.html#get_metadata" class="tsd-kind-icon">get_<wbr>metadata</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="metadataservicemodel.html#update_metadata" class="tsd-kind-icon">update_<wbr>metadata</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,42 +91,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="iserror" class="tsd-anchor"></a>
-					<h3>is<wbr>Error</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="get_metadata" class="tsd-anchor"></a>
+					<h3>get_<wbr>metadata</h3>
+					<div class="tsd-signature tsd-kind-icon">get_<wbr>metadata<span class="tsd-signature-symbol">:</span> <a href="read.html" class="tsd-signature-type">Read</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">, </span><a href="metadata.html" class="tsd-signature-type">Metadata</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4111121/src/type.ts#L217">src/type.ts:217</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4111121/src/service/binding/MetadataService.ts#L37">src/service/binding/MetadataService.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="method" class="tsd-anchor"></a>
-					<h3>method</h3>
-					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="update_metadata" class="tsd-anchor"></a>
+					<h3>update_<wbr>metadata</h3>
+					<div class="tsd-signature tsd-kind-icon">update_<wbr>metadata<span class="tsd-signature-symbol">:</span> <a href="write.html" class="tsd-signature-type">Write</a><span class="tsd-signature-symbol">&lt;</span><a href="updatemetadatapayload.html" class="tsd-signature-type">UpdateMetadataPayload</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4111121/src/type.ts#L215">src/type.ts:215</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="ret" class="tsd-anchor"></a>
-					<h3>ret</h3>
-					<div class="tsd-signature tsd-kind-icon">ret<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Ret</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4111121/src/type.ts#L216">src/type.ts:216</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="servicename" class="tsd-anchor"></a>
-					<h3>service<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4111121/src/type.ts#L214">src/type.ts:214</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4111121/src/service/binding/MetadataService.ts#L38">src/service/binding/MetadataService.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -162,20 +124,14 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="receiptresponse.html" class="tsd-kind-icon">Receipt<wbr>Response</a>
+					<li class="current tsd-kind-interface">
+						<a href="metadataservicemodel.html" class="tsd-kind-icon">Metadata<wbr>Service<wbr>Model</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="receiptresponse.html#iserror" class="tsd-kind-icon">is<wbr>Error</a>
+								<a href="metadataservicemodel.html#get_metadata" class="tsd-kind-icon">get_<wbr>metadata</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="receiptresponse.html#method" class="tsd-kind-icon">method</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="receiptresponse.html#ret" class="tsd-kind-icon">ret</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="receiptresponse.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
+								<a href="metadataservicemodel.html#update_metadata" class="tsd-kind-icon">update_<wbr>metadata</a>
 							</li>
 						</ul>
 					</li>
