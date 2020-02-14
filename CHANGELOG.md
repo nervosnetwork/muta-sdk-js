@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.2](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.1...v0.7.0-alpha.2) (2020-02-14)
+
+### Features
+
+- create AssetService in binding way ([81d9663](https://github.com/nervosnetwork/muta-sdk-js/commit/81d9663))
+- supported binding u64 payload type ([92d9d1b](https://github.com/nervosnetwork/muta-sdk-js/commit/92d9d1b))
+- supported Metadata binding ([a814430](https://github.com/nervosnetwork/muta-sdk-js/commit/a814430))
+
+### Tests
+
+- test with new AssetBinding binding ([b00cdad](https://github.com/nervosnetwork/muta-sdk-js/commit/b00cdad))
+
 ## [0.7.0-alpha.1](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.0...v0.7.0-alpha.1) (2020-02-11)
 
 ### Features
