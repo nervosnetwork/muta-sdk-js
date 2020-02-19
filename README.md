@@ -5,7 +5,7 @@ The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performan
 ## Quick Start
 
 ```shell
-npm install muta-sdk@next
+npm install muta-sdk@alpha
 ```
 
 ## Example
