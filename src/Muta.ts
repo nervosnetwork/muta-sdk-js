@@ -34,7 +34,7 @@ export class Muta {
    * create a HD wallet from mnemonic.
    * the HD path is set to `m/44'/${COIN_TYPE}'/${index}'/0/0`
    * [[COIN_TYPE]] is 918
-   * @param string, 12 mnemonic words split by space
+   * @param mnemonic 12 mnemonic words split by space
    */
   public static hdWalletFromMnemonic(mnemonic: string): HDWallet {
     return new HDWallet(mnemonic);
@@ -70,7 +70,7 @@ export class Muta {
    * @param context
    */
   constructor(context: MutaContext) {
-    this.context = context;
+    this.context = { timeoutGap: DEFAULT_TIMEOUT_GAP, ...context };
   }
 
   /**
