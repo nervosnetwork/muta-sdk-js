@@ -1,7 +1,3 @@
-declare module 'random-bytes' {
-  function sync(n: number): Buffer;
-}
-
 declare module 'json-bigint' {
   /**
    * Converts a JavaScript Object Notation (JSON) string into an object.

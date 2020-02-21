@@ -3,7 +3,7 @@ import {
   stringify as safeStringifyJSON,
 } from 'json-bigint';
 import createKeccakHash from 'keccak';
-import randomBytes from 'random-bytes';
+import randomBytes from 'randombytes';
 import { encode } from 'rlp';
 import { publicKeyCreate, sign } from 'secp256k1';
 import {
@@ -79,15 +79,7 @@ export function randomAddress() {
  * @param n
  */
 export function randomHex(n: number) {
-  return toHex(randomBytes.sync(n).toString('hex'));
-}
-
-/**
- * generate a random nonce
- * @param n
- */
-export function randomNonce(n: number): string {
-  return toHex(randomBytes.sync(n).toString('hex'));
+  return toHex(randomBytes(n).toString('hex'));
 }
 
 /**
