@@ -2,7 +2,7 @@
 
 /* step 1. import the necessary binding helper */
 import { createBindingClass, read, Read, write, Write } from '../';
-import { Address, Hash, u64 } from '../../type';
+import { Address, Hash, u64 } from '../../types';
 
 /* step 2. convert the struct of the payload from Rust to Typescript */
 

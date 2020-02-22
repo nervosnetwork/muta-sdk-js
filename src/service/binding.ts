@@ -8,8 +8,8 @@ import {
   Receipt,
   SignedTransaction,
   Transaction,
-} from '../type';
-import * as utils from '../utils';
+} from '../types';
+import { capitalize, safeParseJSON, signTransaction, toHex } from '../utils';
 
 /**
  * Given an input payload, transform to [[QueryServiceParam]]

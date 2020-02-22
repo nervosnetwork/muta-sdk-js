@@ -1,7 +1,7 @@
 // https://github.com/HuobiGroup/huobi-chain/tree/master/services/asset
 
 import { createBindingClass, read, Read, write, Write } from '../';
-import { Address, Hash, u32, u64, Vec } from '../../type';
+import { Address, Hash, u32, u64, Vec } from '../../types';
 
 interface ValidatorExtend {
   bls__key: string;

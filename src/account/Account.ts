@@ -1,7 +1,7 @@
 import { encode } from 'rlp';
 import { sign } from 'secp256k1';
-import { SignedTransaction, Transaction, TransactionSignature } from '../type';
-import { hashBuf, publicKeyCreate, toBuffer, toHex } from '../utils';
+import { SignedTransaction, Transaction, TransactionSignature } from '../types';
+import { keccak, publicKeyCreate, toBuffer, toHex } from '../utils';
 
 /**
  * Account is concept of A use on Muta chain.

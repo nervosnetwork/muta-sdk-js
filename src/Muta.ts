@@ -4,7 +4,7 @@ import {
   DEFAULT_TIMEOUT_GAP,
 } from './constant/constant';
 import { Client } from './index';
-import * as util from './utils';
+import { Uint64 } from './types';
 import { HDWallet } from './wallet';
 
 interface MutaContext {

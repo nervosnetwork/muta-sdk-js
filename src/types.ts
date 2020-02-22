@@ -1,8 +1,10 @@
+import BigNumber from 'bignumber.js';
+
+/***** GraphQL scalar ******/
+
 /**
  * ID, string
  */
-import BigNumber from 'bignumber.js';
-
 export type ID = string;
 /**
  * a 64bits number, represented by string
@@ -24,6 +26,9 @@ export type Bytes = string;
  * a short hand for number
  */
 export type Int = number;
+
+/****** Rust service binding ******/
+
 /**
  * uint32
  */
