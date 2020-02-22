@@ -62,7 +62,7 @@ export class Account {
    * @return Buffer,
    */
   public static addressFromPublicKey(publicKey: Buffer | string): Buffer {
-    const hashed = hashBuf(toBuffer(publicKey));
+    const hashed = keccak(toBuffer(publicKey));
     return hashed.slice(0, 20);
   }
 
@@ -132,7 +132,7 @@ export class Account {
       tx.timeout,
     ];
     const encoded = encode(orderedTx);
-    const txHash = hashBuf(encoded);
+    const txHash = keccak(encoded);
 
     const { signature } = sign(txHash, this._privateKey);
 

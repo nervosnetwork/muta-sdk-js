@@ -39,6 +39,7 @@ export class HDWallet implements SyncWallet {
   private static getHDPath(accountIndex: number): string {
     return `m/44'/${COIN_TYPE}'/${accountIndex}'/0/0`;
   }
+
   private readonly mnemonic: string;
   private readonly masterNode: HDKey;
 

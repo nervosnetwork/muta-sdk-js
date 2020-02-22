@@ -27,9 +27,9 @@ interface MutaContext {
  * Main module of the SDK
  */
 export class Muta {
-  public static util = util;
   public static hdWallet = HDWallet;
   public static account = Account;
+
   /**
    * create a HD wallet from mnemonic.
    * the HD path is set to `m/44'/${COIN_TYPE}'/${index}'/0/0`

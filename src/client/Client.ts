@@ -1,6 +1,4 @@
-// tslint:disable-next-line:no-submodule-imports
 import { GraphQLClient } from 'graphql-request';
-import randomBytes from 'randombytes';
 import {
   DEFAULT_CONSENSUS_INTERVAL,
   DEFAULT_TIMEOUT_GAP,
@@ -18,8 +16,15 @@ import {
   ServicePayload,
   SignedTransaction,
   Transaction,
-} from '../type';
-import { hexToNum, safeParseJSON, safeStringifyJSON, toHex } from '../utils';
+  Uint64,
+} from '../types';
+import {
+  hexToNum,
+  randomNonce,
+  safeParseJSON,
+  safeStringifyJSON,
+  toHex,
+} from '../utils';
 import {
   getSdk,
   InputRawTransaction,
@@ -261,7 +266,7 @@ export class Client {
       chainId: this.options.chainId,
       cyclesLimit: this.options.defaultCyclesLimit,
       cyclesPrice: this.options.defaultCyclesPrice,
-      nonce: toHex(randomBytes(32).toString('hex')),
+      nonce: randomNonce(),
       timeout,
       ...param,
       payload,

@@ -146,7 +146,7 @@ export function createServiceBinding<T>(
           return transaction;
         }
 
-        const tx = utils.signTransaction(transaction, privateKey);
+        const tx = signTransaction(transaction, privateKey);
         debug(`sending signed tx`);
         debug('%O', tx);
 
@@ -162,13 +162,13 @@ export function createServiceBinding<T>(
           throw e;
         }
 
-        const receipt: Receipt = await client.getReceipt(utils.toHex(txHash));
+        const receipt: Receipt = await client.getReceipt(toHex(txHash));
 
         if (receipt.response.isError) {
           throw boom(`RPC error: ${receipt.response.ret}`);
         } else {
           try {
-            receipt.response.ret = utils.safeParseJSON(receipt.response.ret);
+            receipt.response.ret = safeParseJSON(receipt.response.ret);
           } catch {
             // return string only
           }
