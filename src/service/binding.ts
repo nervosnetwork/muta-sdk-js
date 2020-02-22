@@ -194,16 +194,16 @@ export type BindingClassPrototype<Binding> = {
     : never;
 };
 
-type ServiceBindingClass<T> = new (
+export type ServiceBindingClass<T> = new (
   client: Client,
-  account: Account,
+  account?: Account,
 ) => BindingClassPrototype<T>;
 
 export function createBindingClass<T>(
   serviceName: string,
   model: T,
 ): ServiceBindingClass<T> {
-  function BindingClass(client: Client, account: Account) {
+  function BindingClass(client: Client, account?: Account) {
     const binding = createServiceBinding<T>(serviceName, model, { client });
     const prototypes = Object.entries(model).reduce(
       (prototype, [method, handler]) => {
@@ -211,6 +211,14 @@ export function createBindingClass<T>(
           prototype[method] = binding[method];
         } else if (isWrite(handler)) {
           prototype[method] = payload => {
+            if (!account) {
+              throw boom(
+                'Try to call a #[write] method without account is denied,' +
+                  ` need to new ${capitalize(
+                    serviceName,
+                  )}Service(client, account)`,
+              );
+            }
             // @ts-ignore
             return binding[method](payload, account._privateKey);
           };
