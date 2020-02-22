@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.3](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.2...v0.7.0-alpha.3) (2020-02-22)
+
+### Features
+
+- defaults TIMEOUT_GAP when new a Muta instance ([70d041c](https://github.com/nervosnetwork/muta-sdk-js/commit/70d041c))
+- supported read-only service by constructing a service without the account ([c768563](https://github.com/nervosnetwork/muta-sdk-js/commit/c768563))
+- switch random-bytes to randomBytes ([e5ac215](https://github.com/nervosnetwork/muta-sdk-js/commit/e5ac215))
+
 ## [0.7.0-alpha.2](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.1...v0.7.0-alpha.2) (2020-02-14)
 
 ### Features
