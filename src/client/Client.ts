@@ -83,7 +83,7 @@ export interface ClientOption {
   /**
    * This value indicates the maximum waiting time for the client to wait for the response
    */
-  maxTimeout?: number;
+  maxTimeout: number;
 }
 
 type RawClient = ReturnType<typeof getSdk>;
@@ -125,10 +125,7 @@ export class Client {
    * @param options, see {@link ClientOption} for more details
    */
   constructor(options: ClientOption) {
-    this.options = {
-      maxTimeout: options.timeoutGap * options.consensusInterval,
-      ...options,
-    };
+    this.options = options;
 
     this.rawClient = getSdk(
       new GraphQLClient(this.options.endpoint, {
