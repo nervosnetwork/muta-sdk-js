@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GetBalanceResponse | muta-sdk - v0.7.0-alpha.5</title>
+	<title>RetryConfig | muta-sdk - v0.7.0-alpha.5</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="getbalanceresponse.html">GetBalanceResponse</a>
+					<a href="retryconfig.html">RetryConfig</a>
 				</li>
 			</ul>
-			<h1>Interface GetBalanceResponse</h1>
+			<h1>Interface RetryConfig</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GetBalanceResponse</span>
+						<span class="target">RetryConfig</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="retryoptions.html" class="tsd-signature-type">RetryOptions</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -81,8 +86,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getbalanceresponse.html#asset_id" class="tsd-kind-icon">asset_<wbr>id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="getbalanceresponse.html#balance" class="tsd-kind-icon">balance</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryconfig.html#interval" class="tsd-kind-icon">interval</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryconfig.html#timeout" class="tsd-kind-icon">timeout</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,24 +96,34 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="asset_id" class="tsd-anchor"></a>
-					<h3>asset_<wbr>id</h3>
-					<div class="tsd-signature tsd-kind-icon">asset_<wbr>id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="interval" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> interval</h3>
+					<div class="tsd-signature tsd-kind-icon">interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/6af8205/src/service/binding/AssetService.ts#L15">src/service/binding/AssetService.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/6af8205/src/client/retry.ts#L71">src/client/retry.ts:71</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>the retry interval in (ms)</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="balance" class="tsd-anchor"></a>
-					<h3>balance</h3>
-					<div class="tsd-signature tsd-kind-icon">balance<span class="tsd-signature-symbol">:</span> <a href="../globals.html#u64" class="tsd-signature-type">u64</a></div>
+					<a name="timeout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> timeout</h3>
+					<div class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/6af8205/src/service/binding/AssetService.ts#L16">src/service/binding/AssetService.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/6af8205/src/client/retry.ts#L67">src/client/retry.ts:67</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>the max timeout in (ms)</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -125,13 +140,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="getbalanceresponse.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Response</a>
+						<a href="retryconfig.html" class="tsd-kind-icon">Retry<wbr>Config</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="getbalanceresponse.html#asset_id" class="tsd-kind-icon">asset_<wbr>id</a>
+								<a href="retryconfig.html#interval" class="tsd-kind-icon">interval</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="getbalanceresponse.html#balance" class="tsd-kind-icon">balance</a>
+								<a href="retryconfig.html#timeout" class="tsd-kind-icon">timeout</a>
 							</li>
 						</ul>
 					</li>
