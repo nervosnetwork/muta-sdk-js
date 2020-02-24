@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.5](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.4...v0.7.0-alpha.5) (2020-02-24)
+
+### Features
+
+- changed the default config of Retry ([17d8a81](https://github.com/nervosnetwork/muta-sdk-js/commit/17d8a81))
+- defaults client `maxTimeout` to `timeoutGap * consensusInterval` ([60ca55b](https://github.com/nervosnetwork/muta-sdk-js/commit/60ca55b))
+- make `timeoutGap` and `consensusInterval` configurable ([ee3d8e0](https://github.com/nervosnetwork/muta-sdk-js/commit/ee3d8e0))
+- supported default `endpoint` and `chainId` ([039dfd9](https://github.com/nervosnetwork/muta-sdk-js/commit/039dfd9))
+
 ## [0.7.0-alpha.4](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.3...v0.7.0-alpha.4) (2020-02-22)
 
 ## [0.7.0-alpha.3](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.2...v0.7.0-alpha.3) (2020-02-22)
