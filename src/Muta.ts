@@ -1,23 +1,24 @@
 import { Client } from './';
 import { Account } from './account';
 import {
+  DEFAULT_CHAIN_ID,
   DEFAULT_CONSENSUS_INTERVAL,
+  DEFAULT_ENDPOINT,
   DEFAULT_TIMEOUT_GAP,
 } from './constant/constant';
-import { Client } from './index';
 import { Uint64 } from './types';
 import { HDWallet } from './wallet';
 
-interface MutaContext {
+export interface MutaContext {
   /**
    * for more information about ChainID proposal,
    * look at [eip155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md)
    */
-  chainId: string;
+  chainId?: string;
   /**
-   * a [GraplQL](https://graphql.org/) endpoint of remote node, ie. http://127.0.0.1:8000/graphql
+   * a [GraphQL](https://graphql.org/) endpoint of remote node, i.e. http://127.0.0.1:8000/graphql
    */
-  endpoint: string;
+  endpoint?: string;
   /**
    * defaults to {@link DEFAULT_TIMEOUT_GAP}. The {@link Transaction.timeout} in {@link Transaction}
    * parameter indicates the maximum waiting block height fot the transaction.
