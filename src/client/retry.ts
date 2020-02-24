@@ -1,8 +1,13 @@
+import { boom } from '../error';
+
 function wait(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-type CheckPromise<T> = (x: T) => boolean;
+const DEFAULT_RETRY_TIMEOUT = 100000;
+const DEFAULT_RETRY_INTERVAL = 500;
+
+type CheckPromise<T> = (x: T) => Promise<boolean> | boolean;
 
 export class Retry<T> {
   public static from<T>(promiseThunk: () => Promise<T>): Retry<T> {
@@ -10,28 +15,28 @@ export class Retry<T> {
   }
 
   private promiseThunk: () => Promise<T>;
-
-  private timeout: number = 6000;
-
-  private interval: number = 500;
+  private timeout: number = DEFAULT_RETRY_TIMEOUT;
+  private interval: number = DEFAULT_RETRY_INTERVAL;
+  private onResolve: CheckPromise<T>;
 
   public withPromise(promiseThunk: () => Promise<T>): this {
     this.promiseThunk = promiseThunk;
+    this.onResolve = () => true;
     return this;
   }
 
   public withInterval(interval: number): this {
-    this.interval = interval;
+    this.interval = interval || this.interval;
     return this;
   }
 
   public withTimeout(timeout: number): this {
-    this.timeout = timeout;
+    this.timeout = timeout || this.timeout;
     return this;
   }
 
   public withCheck(check: CheckPromise<T>): this {
-    this.check = check;
+    this.onResolve = check || this.onResolve;
     return this;
   }
 
@@ -41,7 +46,7 @@ export class Retry<T> {
     while (Date.now() - before <= this.timeout) {
       try {
         const res = await this.promiseThunk();
-        if (this.check(res)) {
+        if (await this.onResolve(res)) {
           return res;
         }
         await wait(this.interval);
@@ -51,8 +56,30 @@ export class Retry<T> {
       }
     }
 
-    return Promise.reject(err || new Error('retry timeout'));
+    return Promise.reject(err || boom('Retry timeout '));
   }
+}
 
-  private check: CheckPromise<T> = () => true;
+export interface RetryConfig {
+  /**
+   * the max timeout in (ms)
+   */
+  timeout?: number;
+  /**
+   * the retry interval in (ms)
+   */
+  interval?: number;
+}
+
+export interface RetryOptions<T> extends RetryConfig {
+  retry: () => Promise<T>;
+  onResolve?: (t: T) => Promise<boolean> | boolean;
+}
+
+export function retry<T>(options: RetryOptions<T>): Promise<T> {
+  return Retry.from(options.retry)
+    .withInterval(options.interval || DEFAULT_RETRY_INTERVAL)
+    .withTimeout(options.timeout || DEFAULT_RETRY_TIMEOUT)
+    .withCheck(options.onResolve)
+    .start();
 }
