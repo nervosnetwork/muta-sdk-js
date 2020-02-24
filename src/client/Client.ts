@@ -1,8 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
-import {
-  DEFAULT_CONSENSUS_INTERVAL,
-  DEFAULT_TIMEOUT_GAP,
-} from '../constant/constant';
+
 import { boom } from '../error';
 import {
   Block,
@@ -30,14 +27,16 @@ import {
   InputRawTransaction,
   InputTransactionEncryption,
 } from './codegen/sdk';
-import { Retry } from './retry';
+import { retry, Retry, RetryConfig } from './retry';
 
 /**
  * give those params,
  * the client will [[composeTransaction]] with default info in [[ClientOption]] for you
  */
 export interface ComposeTransactionParam<P> {
-  timeout?: string;
+  cyclesPrice?: Uint64;
+  cyclesLimit?: Uint64;
+  timeout?: Uint64;
   serviceName: string;
   method: string;
   payload: P;
@@ -49,19 +48,50 @@ export interface ComposeTransactionParam<P> {
  * or from Muta's [[client]]
  */
 export interface ClientOption {
+  /**
+   * {@link MutaContext.endpoint}
+   */
   endpoint: string;
+
+  /**
+   * {@link MutaContext.chainId}
+   */
   chainId: string;
-  maxTimeout: number;
+
+  /**
+   * Warning, this configuration is likely to be deprecated in the future.
+   * {@link Transaction.cyclesLimit}
+   */
   defaultCyclesLimit: Uint64;
+
+  /**
+   * Warning, this configuration is likely to be deprecated in the future.
+   * {@link Transaction.cyclesPrice}
+   */
   defaultCyclesPrice: Uint64;
+
+  /**
+   * {@link MutaContext.timeoutGap}
+   */
+  timeoutGap: number;
+
+  /**
+   * {@link MutaContext.consensusInterval}
+   */
+  consensusInterval: number;
+
+  /**
+   * This value indicates the maximum waiting time for the client to wait for the response
+   */
+  maxTimeout?: number;
 }
 
 type RawClient = ReturnType<typeof getSdk>;
 
 /**
  * Client is a tool for calling Muta GraphQL API
- * shortly, it implements js code for you to send raw **GrapghQL** rpc to node and do some prepare job **locally**.
- * you can [[getBlock]] infos, [[queryServiceDyn]], [[sendTransaction]] and [[getReceipt]] to node,
+ * shortly, it implements js code for you to send raw **GraphQL** rpc to node and do some prepare job **locally**.
+ * you can [[getBlock]] infos, {@link queryServiceDyn} [[sendTransaction]] and [[getReceipt]] to node,
  * more, you can [[composeTransaction]] locally, please see more function details,
  *
  * The Muta GraphQL API consists of 2 kinds and the concept is corresponding to GraphQL.
@@ -92,10 +122,13 @@ export class Client {
 
   /**
    * construct a Client by given [[ClientOption]]
-   * @param options, see [[ClientOption]] for more details
+   * @param options, see {@link ClientOption} for more details
    */
   constructor(options: ClientOption) {
-    this.options = options;
+    this.options = {
+      maxTimeout: options.timeoutGap * options.consensusInterval,
+      ...options,
+    };
 
     this.rawClient = getSdk(
       new GraphQLClient(this.options.endpoint, {
@@ -135,16 +168,11 @@ export class Client {
    * @param txHash the transaction target hash, you can call [[sendTransaction]] to send a tx and get its txHash
    */
   public async getTransaction(txHash: Hash): Promise<SignedTransaction> {
-    const timeout = Math.max(
-      this.options.maxTimeout,
-      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL,
-    );
-    const res = await Retry.from(() =>
-      this.rawClient.getTransaction({ txHash }),
-    )
-      .withTimeout(timeout)
-      .start();
-
+    const timeout = this.options.maxTimeout;
+    const res = await retry({
+      retry: () => this.rawClient.getTransaction({ txHash }),
+      timeout,
+    });
     return res.getTransaction;
   }
 
@@ -154,12 +182,8 @@ export class Client {
    * @param txHash the target transaction hash, you can call [[sendTransaction]] to send a [[Transaction]] and get its txHash
    */
   public async getReceipt(txHash: Hash): Promise<Receipt> {
-    const timeout = Math.max(
-      this.options.maxTimeout,
-      (DEFAULT_TIMEOUT_GAP + 1) * DEFAULT_CONSENSUS_INTERVAL,
-    );
     const res = await Retry.from(() => this.rawClient.getReceipt({ txHash }))
-      .withTimeout(timeout)
+      .withTimeout(this.options.maxTimeout)
       .start();
 
     return res.getReceipt;
@@ -253,19 +277,27 @@ export class Client {
   public async composeTransaction<P extends string | object>(
     param: ComposeTransactionParam<P>,
   ): Promise<Transaction> {
+    const {
+      timeoutGap,
+      chainId,
+      defaultCyclesLimit,
+      defaultCyclesPrice,
+    } = this.options;
+
     const payload: string =
       typeof param.payload !== 'string'
         ? safeStringifyJSON(param.payload)
         : param.payload;
 
+    const blockHeight = await this.getLatestBlockHeight();
     const timeout = param.timeout
       ? param.timeout
-      : toHex((await this.getLatestBlockHeight()) + DEFAULT_TIMEOUT_GAP - 1);
+      : toHex(blockHeight + timeoutGap - 1);
 
     return {
-      chainId: this.options.chainId,
-      cyclesLimit: this.options.defaultCyclesLimit,
-      cyclesPrice: this.options.defaultCyclesPrice,
+      chainId,
+      cyclesLimit: defaultCyclesLimit,
+      cyclesPrice: defaultCyclesPrice,
       nonce: randomNonce(),
       timeout,
       ...param,
@@ -285,17 +317,16 @@ export class Client {
    * }
    * ```
    * @param n block count
+   * @param options
    */
-  public async waitForNextNBlock(n: number) {
+  public async waitForNextNBlock(n: number, options: RetryConfig = {}) {
     const before = await this.getLatestBlockHeight();
-    const timeout = Math.max(
-      (n + 1) * DEFAULT_CONSENSUS_INTERVAL,
-      this.options.maxTimeout,
-    );
-    return Retry.from(() => this.getLatestBlockHeight())
-      .withCheck(height => height - before >= n)
-      .withInterval(1000)
-      .withTimeout(timeout)
-      .start();
+
+    return retry({
+      onResolve: height => height - before >= n,
+      retry: () => this.getLatestBlockHeight(),
+      timeout: this.options.maxTimeout,
+      ...options,
+    });
   }
 }

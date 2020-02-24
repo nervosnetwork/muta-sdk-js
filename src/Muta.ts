@@ -1,3 +1,4 @@
+import { Client } from './';
 import { Account } from './account';
 import {
   DEFAULT_CONSENSUS_INTERVAL,
@@ -18,13 +19,21 @@ interface MutaContext {
    */
   endpoint: string;
   /**
-   * defaults to 20. {@link DEFAULT_TIMEOUT_GAP}
+   * defaults to {@link DEFAULT_TIMEOUT_GAP}. The {@link Transaction.timeout} in {@link Transaction}
+   * parameter indicates the maximum waiting block height fot the transaction.
+   * and `timeoutGap + currentBlockHeight` is the maximum value of this value
    */
   timeoutGap?: number;
+
+  /**
+   * defaults to {@link DEFAULT_CONSENSUS_INTERVAL}, block interval
+   */
+  consensusInterval?: number;
 }
 
 /**
- * Main module of the SDK
+ * all in one module, use it to interact with muta,
+ * and can be used to create wallets, accounts, etc.
  */
 export class Muta {
   public static hdWallet = HDWallet;
@@ -33,7 +42,7 @@ export class Muta {
   /**
    * create a HD wallet from mnemonic.
    * the HD path is set to `m/44'/${COIN_TYPE}'/${index}'/0/0`
-   * [[COIN_TYPE]] is 918
+   * {@link COIN_TYPE}
    * @param mnemonic 12 mnemonic words split by space
    */
   public static hdWalletFromMnemonic(mnemonic: string): HDWallet {
@@ -50,19 +59,13 @@ export class Muta {
 
   /**
    * create a default Muta Instance
-   * chainId is set to '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'
-   * endpoint is set to 'http://127.0.0.1:8000/graphql',
-   * timeoutGap is set to [[DEFAULT_TIMEOUT_GAP]]
+   * chainId is set to {@link DEFAULT_CHAIN_ID}
+   * endpoint is set to {@link DEFAULT_ENDPOINT},
+   * timeoutGap is set to {@link DEFAULT_TIMEOUT_GAP}
    */
   public static createDefaultMutaInstance() {
-    return new Muta({
-      chainId:
-        '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036',
-      endpoint: 'http://127.0.0.1:8000/graphql',
-      timeoutGap: DEFAULT_TIMEOUT_GAP,
-    });
+    return new Muta({});
   }
-
   private readonly context: MutaContext;
 
   /**
@@ -70,7 +73,13 @@ export class Muta {
    * @param context
    */
   constructor(context: MutaContext) {
-    this.context = { timeoutGap: DEFAULT_TIMEOUT_GAP, ...context };
+    this.context = {
+      chainId: DEFAULT_CHAIN_ID,
+      consensusInterval: DEFAULT_CONSENSUS_INTERVAL,
+      endpoint: DEFAULT_ENDPOINT,
+      timeoutGap: DEFAULT_TIMEOUT_GAP,
+      ...context,
+    };
   }
 
   /**
@@ -84,10 +93,12 @@ export class Muta {
   ): Client {
     return new Client({
       chainId: this.context.chainId,
+      consensusInterval: this.context.consensusInterval,
       defaultCyclesLimit,
       defaultCyclesPrice,
       endpoint: this.context.endpoint,
       maxTimeout: this.context.timeoutGap * DEFAULT_CONSENSUS_INTERVAL,
+      timeoutGap: this.context.timeoutGap,
     });
   }
 }
