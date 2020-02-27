@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.6](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.5...v0.7.0-alpha.6) (2020-02-27)
+
+### Features
+
+- supported `blockHash` in block ([20d2209](https://github.com/nervosnetwork/muta-sdk-js/commit/20d2209))
+
 ## [0.7.0-alpha.5](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.4...v0.7.0-alpha.5) (2020-02-24)
 
 ### Features
