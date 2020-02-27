@@ -6,7 +6,7 @@ import { toHex } from './bytes';
  * @param n
  */
 export function randomHex(n: number) {
-  return toHex(randomBytes(n).toString('hex'));
+  return toHex('0x' + randomBytes(n).toString('hex'));
 }
 
 /**

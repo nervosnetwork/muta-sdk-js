@@ -18,7 +18,7 @@ test('test get latest block without height', async t => {
 });
 
 test('test get given block without height', async t => {
-  const block = await client.getBlock('1');
+  const block = await client.getBlock('0x01');
   const height = hexToNum(block.header.height);
   t.is(typeof height, 'number');
   t.true(height >= 0);

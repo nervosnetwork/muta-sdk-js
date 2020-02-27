@@ -3,6 +3,8 @@
  * if no 0x starts, do nothing
  * @param hex string
  */
+import { boom } from '../error';
+
 export function rm0x(hex: string): string {
   return hex.startsWith('0x') ? hex.slice(2) : hex;
 }
@@ -16,7 +18,7 @@ export function toHex(x: Buffer | number | string): string {
     if (x.startsWith('0x')) {
       return x;
     }
-    return '0x' + x;
+    throw boom('Hex string MUST starts with 0x');
   }
   if (typeof x === 'number') {
     const hex = Number(x).toString(16);
