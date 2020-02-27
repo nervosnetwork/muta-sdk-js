@@ -7,6 +7,8 @@ schema {
 
 "Block is a single digital record created within a blockchain. Each block contains a record of the previous Block, and when linked together these become the âchainâ.A block is always composed of header and body."
 type Block {
+  "Hash of the block"
+  hash: Hash!
   "The header section of a block"
   header: BlockHeader!
   "The body section of a block"
@@ -55,8 +57,17 @@ type ExecResp {
 
 type Mutation {
   "send transaction"
-  sendTransaction(inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
-  unsafeSendTransaction(inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "DON'T use it in production! This is just for development.")
+  sendTransaction(
+    inputEncryption: InputTransactionEncryption!
+    inputRaw: InputRawTransaction!
+  ): Hash!
+  unsafeSendTransaction(
+    inputPrivkey: Bytes!
+    inputRaw: InputRawTransaction!
+  ): Hash!
+    @deprecated(
+      reason: "DON'T use it in production! This is just for development."
+    )
 }
 
 "The verifier of the block header proved"
@@ -76,7 +87,15 @@ type Query {
   "Get the transaction by hash"
   getTransaction(txHash: Hash!): SignedTransaction!
   "query service"
-  queryService(caller: Address!, cyclesLimit: Uint64, cyclesPrice: Uint64, height: Uint64, method: String!, payload: String!, serviceName: String!): ExecResp!
+  queryService(
+    caller: Address!
+    cyclesLimit: Uint64
+    cyclesPrice: Uint64
+    height: Uint64
+    method: String!
+    payload: String!
+    serviceName: String!
+  ): ExecResp!
 }
 
 type Receipt {
@@ -141,7 +160,6 @@ input InputTransactionEncryption {
   "The digest of the transaction"
   txHash: Hash!
 }
-
 
 "Bytes corresponding hex string."
 scalar Bytes

@@ -23,3 +23,12 @@ test('test get given block without height', async t => {
   t.is(typeof height, 'number');
   t.true(height >= 0);
 });
+
+test('current preHash eq last hash', async t => {
+  const lastBlock = await client.getBlock();
+  await client.waitForNextNBlock(1);
+
+  const currentBlock = await client.getBlock();
+
+  t.is(currentBlock.header.preHash, lastBlock.hash);
+});

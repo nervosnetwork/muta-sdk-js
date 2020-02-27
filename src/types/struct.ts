@@ -5,7 +5,8 @@ import { Address, Hash, Int, Maybe, Uint64 } from './scalar';
  */
 export interface Block {
   header: BlockHeader;
-  orderedTxHashes: string[];
+  orderedTxHashes: Hash[];
+  hash: Hash;
 }
 
 /**

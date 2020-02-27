@@ -97,5 +97,6 @@ query getBlock($height: Uint64) {
       }
     }
     orderedTxHashes
+    hash
   }
 }

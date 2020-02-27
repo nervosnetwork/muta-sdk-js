@@ -20,6 +20,7 @@ export type Block = {
    __typename?: 'Block',
   header: BlockHeader,
   orderedTxHashes: Array<Scalars['Hash']>,
+  hash: Scalars['Hash'],
 };
 
 export type BlockHeader = {
@@ -251,7 +252,7 @@ export type GetBlockQuery = (
   { __typename?: 'Query' }
   & { getBlock: (
     { __typename?: 'Block' }
-    & Pick<Block, 'orderedTxHashes'>
+    & Pick<Block, 'orderedTxHashes' | 'hash'>
     & { header: (
       { __typename?: 'BlockHeader' }
       & Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'execHeight' | 'orderRoot' | 'preHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
@@ -351,6 +352,7 @@ export const GetBlockDocument = gql`
       }
     }
     orderedTxHashes
+    hash
   }
 }
     `;
