@@ -1,7 +1,7 @@
 import test from 'ava';
 import { BigNumber } from 'bignumber.js';
 import { Muta } from '../..';
-import { rm0x } from '../../utils';
+import { toHex } from '../../utils';
 import { AssetService } from './AssetService';
 
 const muta = Muta.createDefaultMutaInstance();
@@ -24,7 +24,7 @@ test('AssetService with binding', async t => {
 
   const createdAsset = receipt.response.ret;
 
-  t.is(createdAsset.issuer, rm0x(account.address));
+  t.is(toHex(createdAsset.issuer), toHex(account.address));
   const assetId = createdAsset.id;
 
   const {
