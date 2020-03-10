@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0-alpha.7](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.6...v0.7.0-alpha.7) (2020-03-10)
+
+### Tests
+
+- update test case ([26ec789](https://github.com/nervosnetwork/muta-sdk-js/commit/26ec789))
+
 ## [0.7.0-alpha.6](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.5...v0.7.0-alpha.6) (2020-02-27)
 
 ### Features
