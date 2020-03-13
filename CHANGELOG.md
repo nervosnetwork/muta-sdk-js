@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0-alpha.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.7...v0.8.0-alpha.0) (2020-03-13)
+
+### Features
+
+- supported `precision` for `AssetService` ([cb70a33](https://github.com/nervosnetwork/muta-sdk-js/commit/cb70a33))
+
 ## [0.7.0-alpha.7](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.7.0-alpha.6...v0.7.0-alpha.7) (2020-03-10)
 
 ### Tests

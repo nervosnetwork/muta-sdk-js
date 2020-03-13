@@ -1,6 +1,6 @@
 {
   "name": "muta-sdk",
-  "version": "0.7.0-alpha.7",
+  "version": "0.8.0-alpha.0",
   "description": "Muta JavaScript SDK",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
