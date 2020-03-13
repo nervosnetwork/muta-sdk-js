@@ -21,19 +21,14 @@ Suppose the [AssetService](https://github.com/nervosnetwork/muta/blob/master/bui
 
 ```js
 async function example() {
-  const muta = Muta.createDefaultMutaInstance();
+  const muta = new Muta();
 
   // get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum
   const client = muta.client();
 
-  // use HDWallet to generate random mnemonic
-  const mnemonic = Muta.hdWallet.generateMnemonic();
-
-  // use the mnemonic to build an HDWallet
-  const wallet = new Muta.hdWallet(mnemonic);
-
-  // derive an account from the HDWallet
-  const account = wallet.deriveAccount(1);
+  const account = Muta.accountFromPrivateKey(
+    '0x...', // my private key
+  );
 
   // get AssetService with given client and accout
   // the client takes responsibility to send you query/transaction to the Muta chain or node
@@ -46,6 +41,7 @@ async function example() {
   // create an asset call LOVE_COIN with LUV symbol, supply 1314 loves totally
   const createdAsset = await service.create_asset({
     name: 'LOVE_COIN',
+    precision: 0,
     supply,
     symbol: 'LUV',
   });
@@ -66,8 +62,14 @@ async function example() {
   });
   t.is(balance.ret.balance, 1314);
 
+  // use HDWallet to generate random mnemonic
+  const mnemonic = Muta.hdWallet.generateMnemonic();
+
+  // use the mnemonic to build an HDWallet
+  const wallet = new Muta.hdWallet(mnemonic);
+
   // we send 520 LUVs
-  const to = '0x2000000000000000000000000000000000000000';
+  const to = wallet.deriveAccount(1).address;
 
   await service.transfer({
     asset_id: assetId,

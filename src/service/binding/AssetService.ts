@@ -31,6 +31,7 @@ export interface CreateAssetPayload {
   name: string;
   symbol: string;
   supply: u64;
+  precision: u64;
 }
 
 /**
@@ -46,6 +47,7 @@ export interface Asset {
   symbol: string;
   supply: u64;
   issuer: Address;
+  precision: u64;
 }
 
 export interface GetAssetPayload {
@@ -86,10 +88,11 @@ export interface AssetServiceModel {
   create_asset: Write<CreateAssetPayload, Asset>;
   get_allowance: Read<GetAllowancePayload, GetAllowanceResponse>;
   get_asset: Read<GetAssetPayload, Asset>;
+  get_native_asset: Read<undefined, Asset>;
   get_balance: Read<GetBalancePayParam, GetBalanceResponse>;
-  transfer: Write<TransferPayParam>;
-  approve: Write<ApprovePayload>;
-  transfer_from: Write<TransferFromPayload>;
+  transfer: Write<TransferPayParam, ''>;
+  approve: Write<ApprovePayload, ''>;
+  transfer_from: Write<TransferFromPayload, ''>;
 }
 
 /* step 5. Create our binding and export it */
@@ -99,6 +102,7 @@ export const AssetService = createBindingClass<AssetServiceModel>(serviceName, {
   get_allowance: read(),
   get_asset: read(),
   get_balance: read(),
+  get_native_asset: read(),
   transfer: write(),
   transfer_from: write(),
 });

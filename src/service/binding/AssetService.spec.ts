@@ -8,7 +8,7 @@ const muta = Muta.createDefaultMutaInstance();
 
 const client = muta.client();
 const account = Muta.accountFromPrivateKey(
-  '0x1000000000000000000000000000000000000000000000000000000000000000',
+  '0x2b672bb959fa7a852d7259b129b65aee9c83b39f427d6f7bded1f58c4c9310c2',
 );
 
 test('AssetService with binding', async t => {
@@ -18,6 +18,7 @@ test('AssetService with binding', async t => {
 
   const receipt = await service.create_asset({
     name: Math.random().toString(),
+    precision: 0,
     supply,
     symbol: Math.random().toString(),
   });

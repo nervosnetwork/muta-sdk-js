@@ -8,14 +8,10 @@ test('Muta example', async t => {
   // get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum
   const client = muta.client();
 
-  // use HDWallet to generate random mnemonic
-  const mnemonic = Muta.hdWallet.generateMnemonic();
-
-  // use the mnemonic to build an HDWallet
-  const wallet = new Muta.hdWallet(mnemonic);
-
   // derive an account from the HDWallet
-  const account = wallet.deriveAccount(1);
+  const account = Muta.accountFromPrivateKey(
+    '0x2b672bb959fa7a852d7259b129b65aee9c83b39f427d6f7bded1f58c4c9310c2',
+  );
 
   // get AssetService with given client and accout
   // the client takes responsibility to send you query/transaction to the Muta chain or node
@@ -27,7 +23,8 @@ test('Muta example', async t => {
 
   // create an asset call LOVE_COIN with LUV symbol, supply 1314 loves totally
   const createdAsset = await service.create_asset({
-    name: 'LOVE_COIN',
+    name: 'LOVE_COIN' + Math.random(),
+    precision: 0,
     supply,
     symbol: 'LUV',
   });
@@ -48,8 +45,14 @@ test('Muta example', async t => {
   });
   t.is(balance.ret.balance, 1314);
 
+  // use HDWallet to generate random mnemonic
+  const mnemonic = Muta.hdWallet.generateMnemonic();
+
+  // use the mnemonic to build an HDWallet
+  const wallet = new Muta.hdWallet(mnemonic);
+
   // we send 520 LUVs
-  const to = '0x2000000000000000000000000000000000000000';
+  const to = wallet.deriveAccount(2).address;
 
   await service.transfer({
     asset_id: assetId,

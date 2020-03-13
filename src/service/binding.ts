@@ -121,7 +121,7 @@ export function createServiceBinding<T>(
 
   return Object.entries(model).reduce((service, [method, handler]) => {
     if (isRead(handler)) {
-      service[method] = async inputPayload => {
+      service[method] = async (inputPayload = '') => {
         const queryParams: QueryServiceParam = await (handler.transform
           ? handler.transform(inputPayload)
           : { method, serviceName, payload: inputPayload });
@@ -188,7 +188,9 @@ export type BindingClassPrototype<Binding> = {
     infer ReadPayload,
     infer QueryResponse
   >
-    ? (payload: ReadPayload) => Promise<ExecResp<QueryResponse>>
+    ? ReadPayload extends undefined
+      ? () => Promise<ExecResp<QueryResponse>>
+      : (payload: ReadPayload) => Promise<ExecResp<QueryResponse>>
     : Binding[method] extends Write<infer WritePayload, infer ReceiptRet>
     ? (payload: WritePayload) => Promise<Receipt<ReceiptRet>>
     : never;
