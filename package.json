@@ -1,6 +1,6 @@
 {
   "name": "muta-sdk",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Muta JavaScript SDK",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -35,8 +35,7 @@
     "version": "standard-version",
     "reset": "git clean -dfx && git reset --hard && npm i",
     "clean": "trash build test",
-    "prepare-release": "run-s reset test cov:check doc:html version doc:publish",
-    "deploy": "gh-pages-clean && gh-pages -d build/docs"
+    "prepare-release": "run-s reset test cov:check doc:html version doc:publish"
   },
   "scripts-info": {
     "info": "Display information about the package scripts",
@@ -57,7 +56,7 @@
   "dependencies": {
     "@types/debug": "^4.1.5",
     "@types/randombytes": "^2.0.0",
-    "@types/secp256k1": "^3.5.0",
+    "@types/secp256k1": "^3.5.3",
     "bignumber.js": "^9.0.0",
     "bip39": "^3.0.2",
     "cross-fetch": "^3.0.4",
@@ -67,10 +66,10 @@
     "graphql-tag": "^2.10.1",
     "hdkey": "^1.1.1",
     "json-bigint": "^0.3.0",
-    "keccak": "^2.0.0",
+    "keccak": "^3.0.0",
     "randombytes": "^2.1.0",
     "rlp": "^2.2.3",
-    "secp256k1": "^3.7.1",
+    "secp256k1": "^4.0.0",
     "utility-types": "^3.9.0"
   },
   "devDependencies": {
