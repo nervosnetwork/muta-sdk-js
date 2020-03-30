@@ -1,5 +1,5 @@
 import { encode } from 'rlp';
-import { publicKeyCreate, sign } from 'secp256k1';
+import { ecdsaSign, publicKeyCreate } from 'secp256k1';
 import {
   InputSignedTransaction,
   Transaction,
@@ -30,7 +30,7 @@ export function createTransactionSignature(
   const encoded = encode(orderedTx);
   const txHash = keccak(encoded);
 
-  const { signature } = sign(txHash, privateKey);
+  const { signature } = ecdsaSign(txHash, privateKey);
 
   return {
     pubkey: toHex(publicKeyCreate(privateKey)),

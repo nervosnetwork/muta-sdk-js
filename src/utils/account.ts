@@ -1,8 +1,15 @@
-import { publicKeyCreate } from 'secp256k1';
+import { publicKeyCreate as rawPublicKeyCreate } from 'secp256k1';
 import { toBuffer } from './bytes';
 import { keccak } from './hash';
 
-export { publicKeyCreate };
+export function publicKeyCreate(
+  privateKey: Buffer | Uint8Array,
+  compressed?: boolean,
+): Buffer {
+  return Buffer.from(
+    rawPublicKeyCreate(Uint8Array.from(privateKey), compressed),
+  );
+}
 
 /**
  * convert a public key to an account address

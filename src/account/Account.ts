@@ -1,7 +1,11 @@
-import { encode } from 'rlp';
-import { sign } from 'secp256k1';
-import { SignedTransaction, Transaction, TransactionSignature } from '../types';
-import { keccak, publicKeyCreate, toBuffer, toHex } from '../utils';
+import { SignedTransaction, Transaction } from '../types';
+import {
+  createTransactionSignature,
+  keccak,
+  publicKeyCreate,
+  toBuffer,
+  toHex,
+} from '../utils';
 
 /**
  * Account is concept of A use on Muta chain.
@@ -31,20 +35,20 @@ import { keccak, publicKeyCreate, toBuffer, toHex } from '../utils';
  * ```
  */
 export class Account {
-  private get _publicKey(): Buffer {
-    return publicKeyCreate(this._privateKey);
-  }
-
-  private get _address(): Buffer {
-    return Account.addressFromPublicKey(this._publicKey);
-  }
-
   get publicKey(): string {
     return toHex(this._publicKey);
   }
 
   get address(): string {
     return toHex(this._address);
+  }
+
+  private get _publicKey(): Buffer {
+    return publicKeyCreate(this._privateKey);
+  }
+
+  private get _address(): Buffer {
+    return Account.addressFromPublicKey(this._publicKey);
   }
 
   /**
@@ -65,7 +69,6 @@ export class Account {
     const hashed = keccak(toBuffer(publicKey));
     return hashed.slice(0, 20);
   }
-
   // tslint:disable-next-line:variable-name
   private readonly _privateKey: Buffer;
 
@@ -121,26 +124,10 @@ export class Account {
    * @return [[SignedTransaction]]
    */
   public signTransaction(tx: Transaction): SignedTransaction {
-    const orderedTx = [
-      tx.chainId,
-      tx.cyclesLimit,
-      tx.cyclesPrice,
-      tx.nonce,
-      tx.method,
-      tx.serviceName,
-      tx.payload,
-      tx.timeout,
-    ];
-    const encoded = encode(orderedTx);
-    const txHash = keccak(encoded);
-
-    const { signature } = sign(txHash, this._privateKey);
-
-    const txSig: TransactionSignature = {
-      pubkey: toHex(publicKeyCreate(this._privateKey)),
-      signature: toHex(signature),
-      txHash: toHex(txHash),
-    };
+    const { txHash, signature, pubkey } = createTransactionSignature(
+      tx,
+      this._privateKey,
+    );
 
     return {
       chainId: tx.chainId,
@@ -149,11 +136,11 @@ export class Account {
       method: tx.method,
       nonce: tx.nonce,
       payload: tx.payload,
-      pubkey: txSig.pubkey,
+      pubkey,
       serviceName: tx.serviceName,
-      signature: txSig.signature,
+      signature,
       timeout: tx.timeout,
-      txHash: txSig.txHash,
+      txHash,
     };
   }
 }

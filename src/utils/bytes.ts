@@ -13,7 +13,7 @@ export function rm0x(hex: string): string {
  * parse to hex string
  * @param x , may be Buffer, number or string(add 0x if needed or do nothing if already find 0x)
  */
-export function toHex(x: Buffer | number | string): string {
+export function toHex(x: Uint8Array | Buffer | number | string): string {
   if (typeof x === 'string') {
     if (x.startsWith('0x')) {
       return x;
@@ -28,16 +28,20 @@ export function toHex(x: Buffer | number | string): string {
     const hex = Number(x).toString(16);
     return hex.length % 2 === 1 ? '0x0' + hex : '0x' + hex;
   }
-  return '0x' + x.toString('hex');
+  return '0x' + Buffer.from(x).toString('hex');
+}
+
+function isUint8Array(x: unknown): x is Uint8Array {
+  return x?.constructor === Uint8Array;
 }
 
 /**
  * parse a hex string to buffer, if x is already a Buffer, do nothing
  * @param x , string or Buffer,
  */
-export function toBuffer(x: string | Buffer): Buffer {
-  if (Buffer.isBuffer(x)) {
-    return x;
+export function toBuffer(x: string | Buffer | Uint8Array): Buffer {
+  if (Buffer.isBuffer(x) || isUint8Array(x)) {
+    return Buffer.from(x);
   }
   return Buffer.from(rm0x(x), 'hex');
 }
