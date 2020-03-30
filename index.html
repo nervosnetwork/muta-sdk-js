@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>muta-sdk - v0.8.0-alpha.0</title>
+	<title>muta-sdk - v0.9.2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">muta-sdk - v0.8.0-alpha.0</a>
+					<a href="index.html" class="title">muta-sdk - v0.9.2</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> muta-sdk - v0.8.0-alpha.0</h1>
+			<h1> muta-sdk - v0.9.2</h1>
 		</div>
 	</div>
 </header>
@@ -71,89 +71,48 @@
 				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
 					<h2>Quick Start</h2>
 				</a>
-				<pre><code class="language-shell">npm install muta-sdk@alpha</code></pre>
+				<pre><code class="language-shell">npm install muta-sdk</code></pre>
 				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
 					<h2>Example</h2>
 				</a>
-				<p>Suppose the <a href="https://github.com/nervosnetwork/muta/blob/master/built-in-services/asset/src/lib.rs">AssetService</a> is stable, the bellow code shows how to create a UDT(user define token) and how to transfer UDTs</p>
+				<p>The following code will shows</p>
 				<ol>
-					<li>create a default Muta Instance of Muta chain</li>
-					<li>generate random Mnemonic and use it as HDWallet&#39;s seed</li>
-					<li>derive a Account, which contains privateKey, as our account for later use</li>
-					<li>get a client to communicate with Muta chain thru the Node given is step 1</li>
-					<li>use Asset Service to create an Asset called LOVE_COIN</li>
-					<li>send certain asset to another address</li>
+					<li>How to interact with <code>#[read]</code> service</li>
+					<li>How to sign a transaction</li>
+					<li>How to sendTransaction</li>
 				</ol>
-				<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> muta = <span class="hljs-keyword">new</span> Muta();
-
-  <span class="hljs-comment">// get a client which plays a role to sent GraphQL rpc to the Muta chain, it like you get a web3.eth in Ethereum</span>
-  <span class="hljs-keyword">const</span> client = muta.client();
-
-  <span class="hljs-keyword">const</span> account = Muta.accountFromPrivateKey(
-    <span class="hljs-string">'0x...'</span>, <span class="hljs-comment">// my private key</span>
-  );
-
-  <span class="hljs-comment">// get AssetService with given client and accout</span>
-  <span class="hljs-comment">// the client takes responsibility to send you query/transaction to the Muta chain or node</span>
-  <span class="hljs-comment">// the account is as the default sender of query and the only sender of transaction which you send to Muta chain or node</span>
-  <span class="hljs-keyword">const</span> service = <span class="hljs-keyword">new</span> AssetService(client, account);
-
-  <span class="hljs-comment">// the total supply is 1314, nothing special</span>
-  <span class="hljs-keyword">const</span> supply = <span class="hljs-number">1314</span>;
-
-  <span class="hljs-comment">// create an asset call LOVE_COIN with LUV symbol, supply 1314 loves totally</span>
-  <span class="hljs-keyword">const</span> createdAsset = <span class="hljs-keyword">await</span> service.create_asset({
-    <span class="hljs-attr">name</span>: <span class="hljs-string">'LOVE_COIN'</span>,
-    <span class="hljs-attr">precision</span>: <span class="hljs-number">0</span>,
-    supply,
-    <span class="hljs-attr">symbol</span>: <span class="hljs-string">'LUV'</span>,
+				<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// get metadata from the chain</span>
+  <span class="hljs-keyword">const</span> metadataResponse = <span class="hljs-keyword">await</span> client.queryServiceDyn({
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'get_metadata'</span>,
+    <span class="hljs-attr">payload</span>: <span class="hljs-string">''</span>,
+    <span class="hljs-attr">serviceName</span>: <span class="hljs-string">'metadata'</span>,
   });
 
-  <span class="hljs-comment">// keep the asset id for later use, you should keep it carefully</span>
-  <span class="hljs-keyword">const</span> assetId = createdAsset.response.ret.id;
+  <span class="hljs-built_in">console</span>.log(metadataResponse);
 
-  <span class="hljs-comment">// get the Asset info back, this should equals to createdAsset above :)</span>
-  <span class="hljs-keyword">const</span> asset = <span class="hljs-keyword">await</span> service.get_asset({ <span class="hljs-attr">id</span>: assetId });
+  <span class="hljs-comment">// Accounts with permission to modify metadata</span>
+  <span class="hljs-keyword">const</span> admin = Muta.accountFromPrivateKey(<span class="hljs-string">'0x...'</span>);
 
-  <span class="hljs-comment">// we replacing it is Okay, cause they are equal, isn't it?</span>
-  t.is(asset.ret.id, assetId);
-
-  <span class="hljs-comment">// get the balance of our account, should equal 1314</span>
-  <span class="hljs-keyword">const</span> balance = <span class="hljs-keyword">await</span> service.get_balance({
-    <span class="hljs-attr">asset_id</span>: assetId,
-    <span class="hljs-attr">user</span>: account.address,
-  });
-  t.is(balance.ret.balance, <span class="hljs-number">1314</span>);
-
-  <span class="hljs-comment">// use HDWallet to generate random mnemonic</span>
-  <span class="hljs-keyword">const</span> mnemonic = Muta.hdWallet.generateMnemonic();
-
-  <span class="hljs-comment">// use the mnemonic to build an HDWallet</span>
-  <span class="hljs-keyword">const</span> wallet = <span class="hljs-keyword">new</span> Muta.hdWallet(mnemonic);
-
-  <span class="hljs-comment">// we send 520 LUVs</span>
-  <span class="hljs-keyword">const</span> to = wallet.deriveAccount(<span class="hljs-number">1</span>).address;
-
-  <span class="hljs-keyword">await</span> service.transfer({
-    <span class="hljs-attr">asset_id</span>: assetId,
-    to,
-    <span class="hljs-attr">value</span>: <span class="hljs-number">520</span>,
-  });
-
-  <span class="hljs-keyword">const</span> balance0x2000000000000000000000000000000000000000 = <span class="hljs-keyword">await</span> service.get_balance(
-    {
-      <span class="hljs-attr">asset_id</span>: assetId,
-      <span class="hljs-attr">user</span>: to,
+  <span class="hljs-comment">// Preparing transaction</span>
+  <span class="hljs-keyword">const</span> tx = <span class="hljs-keyword">await</span> client.composeTransaction({
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'update_metadata'</span>,
+    <span class="hljs-attr">payload</span>: {
+      <span class="hljs-comment">// ...</span>
     },
-  );
-  t.is(balance0x2000000000000000000000000000000000000000.ret.balance, <span class="hljs-number">520</span>);
+    <span class="hljs-attr">serviceName</span>: <span class="hljs-string">'metadata'</span>,
+  });
+  <span class="hljs-keyword">const</span> signedTx = admin.signTransaction(tx);
+  <span class="hljs-keyword">const</span> txHash = <span class="hljs-keyword">await</span> client.sendTransaction(signedTx);
+  <span class="hljs-keyword">const</span> receipt = <span class="hljs-keyword">await</span> client.getReceipt(txHash);
+
+  <span class="hljs-built_in">console</span>.log(receipt);
 }</code></pre>
-				<a href="#create-my-service-binding" id="create-my-service-binding" style="color: inherit; text-decoration: none;">
-					<h2>Create My Service Binding</h2>
+				<a href="#create-service-binding" id="create-service-binding" style="color: inherit; text-decoration: none;">
+					<h2>Create Service Binding</h2>
 				</a>
 				<p>Before we create our custom binding, learn about what is a <a href="https://github.com/nervosnetwork/muta-docs">service</a> in Muta.
-				We&#39;ll still use <a href="https://github.com/HuobiGroup/huobi-chain/tree/master/services/asset/src">AssetService</a> as an <a href="src/service/binding/AssetService.ts">example</a>.</p>
+				We&#39;ll still use <a href="https://github.com/HuobiGroup/huobi-chain/tree/master/services/asset/src">AssetService</a> as an <a href="https://github.com/homura/huobi-chain-sdk-js/blob/develop/src/services/AssetService.ts">example</a>.</p>
 				<a href="#links" id="links" style="color: inherit; text-decoration: none;">
 					<h2>Links</h2>
 				</a>
@@ -207,15 +166,6 @@ yarn start</code></pre>
 						<a href="classes/retry.html" class="tsd-kind-icon">Retry</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/approvepayload.html" class="tsd-kind-icon">Approve<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/asset.html" class="tsd-kind-icon">Asset</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/assetservicemodel.html" class="tsd-kind-icon">Asset<wbr>Service<wbr>Model</a>
-					</li>
-					<li class=" tsd-kind-interface">
 						<a href="interfaces/block.html" class="tsd-kind-icon">Block</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -227,9 +177,6 @@ yarn start</code></pre>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/composetransactionparam.html" class="tsd-kind-icon">Compose<wbr>Transaction<wbr>Param</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/createassetpayload.html" class="tsd-kind-icon">Create<wbr>Asset<wbr>Payload</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/event.html" class="tsd-kind-icon">Event</a>
 					</li>
@@ -240,21 +187,6 @@ yarn start</code></pre>
 						<a href="interfaces/execrespdyn.html" class="tsd-kind-icon">Exec<wbr>Resp<wbr>Dyn</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/getallowancepayload.html" class="tsd-kind-icon">Get<wbr>Allowance<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/getallowanceresponse.html" class="tsd-kind-icon">Get<wbr>Allowance<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/getassetpayload.html" class="tsd-kind-icon">Get<wbr>Asset<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/getbalancepayparam.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Pay<wbr>Param</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/getbalanceresponse.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
 						<a href="interfaces/inputsignedtransaction.html" class="tsd-kind-icon">Input<wbr>Signed<wbr>Transaction</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
@@ -262,9 +194,6 @@ yarn start</code></pre>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/metadataservicemodel.html" class="tsd-kind-icon">Metadata<wbr>Service<wbr>Model</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="interfaces/mockservicemodel.html" class="tsd-kind-icon">Mock<wbr>Service<wbr>Model</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/mutacontext.html" class="tsd-kind-icon">Muta<wbr>Context</a>
@@ -310,12 +239,6 @@ yarn start</code></pre>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/transactionsignature.html" class="tsd-kind-icon">Transaction<wbr>Signature</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/transferfrompayload.html" class="tsd-kind-icon">Transfer<wbr>From<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/transferpayparam.html" class="tsd-kind-icon">Transfer<wbr>Pay<wbr>Param</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="interfaces/updatemetadatapayload.html" class="tsd-kind-icon">Update<wbr>Metadata<wbr>Payload</a>
@@ -450,9 +373,6 @@ yarn start</code></pre>
 						<a href="globals.html#u64" class="tsd-kind-icon">u64</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#assetservice" class="tsd-kind-icon">Asset<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-variable">
 						<a href="globals.html#coin_type" class="tsd-kind-icon">COIN_<wbr>TYPE</a>
 					</li>
 					<li class=" tsd-kind-variable">
@@ -485,9 +405,6 @@ yarn start</code></pre>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#metadataservice" class="tsd-kind-icon">Metadata<wbr>Service</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#mockservice" class="tsd-kind-icon">Mock<wbr>Service</a>
-					</li>
 					<li class=" tsd-kind-variable tsd-is-external">
 						<a href="globals.html#queryservicedocument" class="tsd-kind-icon">Query<wbr>Service<wbr>Document</a>
 					</li>
@@ -497,12 +414,6 @@ yarn start</code></pre>
 					<li class=" tsd-kind-variable tsd-is-external">
 						<a href="globals.html#servicepayloadfragmentdoc" class="tsd-kind-icon">Service<wbr>Payload<wbr>Fragment<wbr>Doc</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#account" class="tsd-kind-icon">account</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#client" class="tsd-kind-icon">client</a>
-					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#debug" class="tsd-kind-icon">debug</a>
 					</li>
@@ -511,12 +422,6 @@ yarn start</code></pre>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#info" class="tsd-kind-icon">info</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#muta" class="tsd-kind-icon">muta</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#warn" class="tsd-kind-icon">warn</a>
@@ -552,10 +457,16 @@ yarn start</code></pre>
 						<a href="globals.html#isread" class="tsd-kind-icon">is<wbr>Read</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#isuint8array" class="tsd-kind-icon">is<wbr>Uint8<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#iswrite" class="tsd-kind-icon">is<wbr>Write</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#keccak" class="tsd-kind-icon">keccak</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#publickeycreate" class="tsd-kind-icon">public<wbr>Key<wbr>Create</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#randomaddress" class="tsd-kind-icon">random<wbr>Address</a>
