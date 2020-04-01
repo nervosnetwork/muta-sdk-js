@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.9.2...v0.10.0) (2020-04-01)
+
+### ⚠ BREAKING CHANGES
+
+- remove `update_metadata` in `MetadataService`
+- update `queryService` and `getReceipt` with the `ServicePayload` nervosnetwork/muta#230
+
+### Features
+
+- remove `update_metadata` in `MetadataService` ([f66f3e0](https://github.com/nervosnetwork/muta-sdk-js/commit/f66f3e07ef2259cdc148956891e3554420541d1e))
+- supported built-in `AssetService` ([b26cb64](https://github.com/nervosnetwork/muta-sdk-js/commit/b26cb643accb254d581777b19e8591de4350464f))
+- update `queryService` and `getReceipt` with the `ServicePayload` nervosnetwork/muta[#230](https://github.com/nervosnetwork/muta-sdk-js/issues/230) ([e72bf85](https://github.com/nervosnetwork/muta-sdk-js/commit/e72bf854a309848b873b397ab9e325d256f12fa1))
+
 ### [0.9.2](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.9.1...v0.9.2) (2020-03-30)
 
 ### [0.9.1](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.9.0...v0.9.1) (2020-03-30)
