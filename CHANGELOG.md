@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.1](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.10.0...v0.10.1) (2020-04-01)
+
+### Features
+
+- export the `AssetService` ([101373d](https://github.com/nervosnetwork/muta-sdk-js/commit/101373dd2a88d7c625e399eb74c1270d5c919885))
+
 ## [0.10.0](https://github.com/nervosnetwork/muta-sdk-js/compare/v0.9.2...v0.10.0) (2020-04-01)
 
 ### ⚠ BREAKING CHANGES
