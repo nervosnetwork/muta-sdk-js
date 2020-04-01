@@ -3,14 +3,13 @@ import { GraphQLClient } from 'graphql-request';
 import { boom } from '../error';
 import {
   Block,
-  ExecResp,
-  ExecRespDyn,
   Hash,
   Maybe,
   QueryBlockParam,
   QueryServiceParam,
   Receipt,
   ServicePayload,
+  ServiceResponse,
   SignedTransaction,
   Transaction,
   Uint64,
@@ -194,7 +193,9 @@ export class Client {
    * @param param
    * @return
    */
-  public async queryService(param: QueryServiceParam): Promise<ExecResp> {
+  public async queryService(
+    param: QueryServiceParam,
+  ): Promise<ServiceResponse> {
     const res = await this.rawClient.queryService(param);
 
     return res.queryService;
@@ -209,9 +210,9 @@ export class Client {
    * @param param
    * @return
    */
-  public async queryServiceDyn<P extends string | object, R extends object>(
+  public async queryServiceDyn<P, R>(
     param: ServicePayload<P>,
-  ): Promise<ExecRespDyn<R>> {
+  ): Promise<ServiceResponse<R>> {
     const payload: string =
       typeof param.payload !== 'string'
         ? safeStringifyJSON(param.payload)
@@ -220,14 +221,14 @@ export class Client {
     const queryServiceQueryParam: QueryServiceParam = { ...param, payload };
     const res = await this.rawClient.queryService(queryServiceQueryParam);
 
-    const isError = res.queryService.isError;
-    if (isError) {
-      throw boom(`RPC error: ${res.queryService.ret}`);
+    const errorMessage = res.queryService.errorMessage;
+    if (errorMessage) {
+      throw boom(`RPC error: ${res.queryService.errorMessage}`);
     }
 
     return {
-      isError,
-      ret: safeParseJSON(res.queryService.ret) as R,
+      ...res.queryService,
+      succeedData: safeParseJSON(res.queryService.succeedData) as R,
     };
   }
 

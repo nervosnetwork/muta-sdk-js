@@ -48,12 +48,6 @@ export type Event = {
   data: Scalars['String'],
 };
 
-export type ExecResp = {
-   __typename?: 'ExecResp',
-  ret: Scalars['String'],
-  isError: Scalars['Boolean'],
-};
-
 
 export type InputRawTransaction = {
   chainId: Scalars['Hash'],
@@ -104,7 +98,7 @@ export type Query = {
   getBlock: Block,
   getTransaction: SignedTransaction,
   getReceipt: Receipt,
-  queryService: ExecResp,
+  queryService: ServiceResponse,
 };
 
 
@@ -147,8 +141,14 @@ export type ReceiptResponse = {
    __typename?: 'ReceiptResponse',
   serviceName: Scalars['String'],
   method: Scalars['String'],
-  ret: Scalars['String'],
-  isError: Scalars['Boolean'],
+  response: ServiceResponse,
+};
+
+export type ServiceResponse = {
+   __typename?: 'ServiceResponse',
+  code: Scalars['Uint64'],
+  succeedData: Scalars['String'],
+  errorMessage: Scalars['String'],
 };
 
 export type SignedTransaction = {
@@ -188,8 +188,8 @@ export type QueryServiceQueryVariables = {
 export type QueryServiceQuery = (
   { __typename?: 'Query' }
   & { queryService: (
-    { __typename?: 'ExecResp' }
-    & Pick<ExecResp, 'isError' | 'ret'>
+    { __typename?: 'ServiceResponse' }
+    & Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'>
   ) }
 );
 
@@ -238,7 +238,11 @@ export type GetReceiptQuery = (
       & Pick<Event, 'data' | 'service'>
     )>, response: (
       { __typename?: 'ReceiptResponse' }
-      & Pick<ReceiptResponse, 'serviceName' | 'method' | 'ret' | 'isError'>
+      & Pick<ReceiptResponse, 'serviceName' | 'method'>
+      & { response: (
+        { __typename?: 'ServiceResponse' }
+        & Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'>
+      ) }
     ) }
   ) }
 );
@@ -277,8 +281,9 @@ export const ServicePayloadFragmentDoc = gql`
 export const QueryServiceDocument = gql`
     query queryService($serviceName: String!, $method: String!, $payload: String!, $height: Uint64, $caller: Address = "0x1000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
   queryService(height: $height, serviceName: $serviceName, method: $method, payload: $payload, caller: $caller, cyclesPrice: $cyclePrice, cyclesLimit: $cycleLimit) {
-    isError
-    ret
+    code
+    errorMessage
+    succeedData
   }
 }
     `;
@@ -316,8 +321,11 @@ export const GetReceiptDocument = gql`
     response {
       serviceName
       method
-      ret
-      isError
+      response {
+        code
+        errorMessage
+        succeedData
+      }
     }
   }
 }

@@ -3,9 +3,9 @@ import { Client } from '../client';
 import { debug, error } from '../debug';
 import { boom } from '../error';
 import {
-  ExecResp,
   QueryServiceParam,
   Receipt,
+  ServiceResponse,
   SignedTransaction,
   Transaction,
 } from '../types';
@@ -106,7 +106,7 @@ export type ServiceBinding<Binding> = {
     infer ReadPayload,
     infer QueryResponse
   >
-    ? (payload: ReadPayload) => Promise<ExecResp<QueryResponse>>
+    ? (payload: ReadPayload) => Promise<ServiceResponse<QueryResponse>>
     : Binding[method] extends Write<infer WritePayload, infer ReceiptRet>
     ? SendTransaction<WritePayload, ReceiptRet>
     : never;
@@ -164,11 +164,14 @@ export function createServiceBinding<T>(
 
         const receipt: Receipt = await client.getReceipt(toHex(txHash));
 
-        if (receipt.response.isError) {
-          throw boom(`RPC error: ${receipt.response.ret}`);
+        const response = receipt.response.response;
+        if (response.errorMessage) {
+          throw boom(`RPC error: ${response.errorMessage}`);
         } else {
           try {
-            receipt.response.ret = safeParseJSON(receipt.response.ret);
+            receipt.response.response.succeedData = safeParseJSON(
+              response.succeedData,
+            );
           } catch {
             // return string only
           }
@@ -189,8 +192,8 @@ export type BindingClassPrototype<Binding> = {
     infer QueryResponse
   >
     ? ReadPayload extends undefined
-      ? () => Promise<ExecResp<QueryResponse>>
-      : (payload: ReadPayload) => Promise<ExecResp<QueryResponse>>
+      ? () => Promise<ServiceResponse<QueryResponse>>
+      : (payload: ReadPayload) => Promise<ServiceResponse<QueryResponse>>
     : Binding[method] extends Write<infer WritePayload, infer ReceiptRet>
     ? (payload: WritePayload) => Promise<Receipt<ReceiptRet>>
     : never;

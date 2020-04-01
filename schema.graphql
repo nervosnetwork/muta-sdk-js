@@ -50,11 +50,6 @@ type Event {
   service: String!
 }
 
-type ExecResp {
-  isError: Boolean!
-  ret: String!
-}
-
 type Mutation {
   "send transaction"
   sendTransaction(
@@ -95,7 +90,7 @@ type Query {
     method: String!
     payload: String!
     serviceName: String!
-  ): ExecResp!
+  ): ServiceResponse!
 }
 
 type Receipt {
@@ -108,10 +103,15 @@ type Receipt {
 }
 
 type ReceiptResponse {
-  isError: Boolean!
   method: String!
-  ret: String!
+  response: ServiceResponse!
   serviceName: String!
+}
+
+type ServiceResponse {
+  code: Uint64!
+  errorMessage: String!
+  succeedData: String!
 }
 
 type SignedTransaction {

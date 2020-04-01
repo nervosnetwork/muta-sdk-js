@@ -104,10 +104,10 @@ export interface Validator {
  * compare to [[ExecRespDyn]] with generic
  * @param ret  the raw data returns by service, maybe need decoding
  */
-export interface ExecResp<Ret = any> {
-  ret: Ret;
-  isError: boolean;
-}
+// export interface ExecResp<Ret = any> {
+//   ret: Ret;
+//   isError: boolean;
+// }
 
 /**
  * A transaction often require computing resources or write data to chain,
@@ -218,8 +218,7 @@ export interface Receipt<Ret = any> {
 export interface ReceiptResponse<Ret = any> {
   serviceName: string;
   method: string;
-  ret: Ret;
-  isError: boolean;
+  response: ServiceResponse<Ret>;
 }
 
 /**
@@ -236,13 +235,10 @@ export interface ServicePayload<P> {
   payload: P;
 }
 
-/**
- * ExecResp with generic, when you call [[queryServiceDyn]]
- * compare to [[ExecResp]] without generic
- */
-export interface ExecRespDyn<R> {
-  ret: R;
-  isError: boolean;
+export interface ServiceResponse<Data = string> {
+  code: Uint64;
+  errorMessage: string;
+  succeedData: Data;
 }
 
 /**
