@@ -1,0 +1,27 @@
+{
+  "name": "@muta/utils",
+  "version": "0.11.0-alpha.0",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "author": "homura <homura.dev@gmail.com>",
+  "license": "MIT",
+  "keywords": [],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@muta/types": "^0.11.0-alpha.0",
+    "json-bigint": "^0.3.0",
+    "keccak": "^3.0.0",
+    "randombytes": "^2.1.0",
+    "rlp": "^2.2.3",
+    "secp256k1": "^4.0.0"
+  },
+  "devDependencies": {
+    "ava": "^3.5.2",
+    "typescript": "^3.7.2"
+  }
+}

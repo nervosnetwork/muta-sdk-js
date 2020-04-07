@@ -1,0 +1,9 @@
+{
+  "include": ["src"],
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "tsBuildInfoFile": "../../.cache/muta-defaults.tsbuildinfo"
+  }
+}

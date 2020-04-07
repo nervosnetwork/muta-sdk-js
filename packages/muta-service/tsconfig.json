@@ -1,0 +1,26 @@
+{
+  "include": ["src"],
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "tsBuildInfoFile": "../../.cache/muta-service.tsbuildinfo"
+  },
+  "references": [
+    {
+      "path": "../muta-types"
+    },
+    {
+      "path": "../muta-utils"
+    },
+    {
+      "path": "../muta-client"
+    },
+    {
+      "path": "../muta-account"
+    },
+    {
+      "path": "../shared"
+    }
+  ]
+}

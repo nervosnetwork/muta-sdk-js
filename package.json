@@ -1,126 +1,18 @@
 {
-  "name": "muta-sdk",
-  "version": "0.10.1",
-  "description": "Muta JavaScript SDK",
-  "main": "build/main/index.js",
-  "typings": "build/main/index.d.ts",
-  "module": "build/module/index.js",
-  "repository": "https://github.com/nervosnetwork/muta-sdk-js",
-  "license": "MIT",
-  "keywords": [],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
+  "private": true,
   "scripts": {
-    "describe": "npm-scripts-info",
-    "build": "run-s clean && run-p build:*",
-    "build:main": "tsc -p tsconfig.json",
-    "build:module": "tsc -p tsconfig.module.json",
-    "fix": "run-s fix:*",
-    "fix:prettier": "prettier \"src/**/*.ts\" --write",
-    "fix:tslint": "tslint --fix --project .",
-    "generate": "graphql-codegen",
-    "test": "run-s build test:*",
-    "test:lint": "tslint --project . && prettier \"src/**/*.ts\" --list-different",
-    "test:unit": "ava --verbose --timeout=1m",
-    "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
-    "cov": "run-s build test:unit cov:html && open-cli coverage/index.html",
-    "cov:html": "nyc report --reporter=html",
-    "cov:send": "nyc report --reporter=lcov && codecov",
-    "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
-    "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
-    "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
-    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
-    "version": "standard-version",
-    "reset": "git clean -dfx && git reset --hard && npm i",
-    "clean": "trash build test",
-    "prepare-release": "run-s reset test cov:check doc:html version doc:publish"
-  },
-  "scripts-info": {
-    "info": "Display information about the package scripts",
-    "build": "Clean and rebuild the project",
-    "fix": "Try to automatically fix any linting problems",
-    "test": "Lint and unit test the project",
-    "watch": "Watch and rebuild the project on save, then rerun relevant tests",
-    "cov": "Rebuild, run tests, then create and open the coverage report",
-    "doc": "Generate HTML API documentation and open it in a browser",
-    "doc:json": "Generate API documentation in typedoc JSON format",
-    "version": "Bump package.json version, update CHANGELOG.md, tag release",
-    "reset": "Delete all untracked files and reset the repo to the last commit",
-    "prepare-release": "One-step: clean, build, test, publish docs, and prep a release"
-  },
-  "engines": {
-    "node": ">=8.9"
-  },
-  "dependencies": {
-    "@types/debug": "^4.1.5",
-    "@types/randombytes": "^2.0.0",
-    "@types/secp256k1": "^3.5.3",
-    "bignumber.js": "^9.0.0",
-    "bip39": "^3.0.2",
-    "cross-fetch": "^3.0.4",
-    "debug": "^4.1.1",
-    "graphql": "^14.5.8",
-    "graphql-request": "^1.8.2",
-    "graphql-tag": "^2.10.1",
-    "hdkey": "^1.1.1",
-    "json-bigint": "^0.3.0",
-    "keccak": "^3.0.0",
-    "randombytes": "^2.1.0",
-    "rlp": "^2.2.3",
-    "secp256k1": "^4.0.0",
-    "utility-types": "^3.9.0"
+    "bootstrap": "lerba bootstrap",
+    "build": "tsc -b packages/*",
+    "test": "lerna run test",
+    "clean": "rimraf packages/**/lib .cache/*.tsbuildinfo"
   },
   "devDependencies": {
-    "@bitjson/npm-scripts-info": "^1.0.0",
-    "@graphql-codegen/cli": "^1.10.0",
-    "@graphql-codegen/typescript": "^1.10.0",
-    "@graphql-codegen/typescript-graphql-request": "^1.10.0",
-    "@graphql-codegen/typescript-operations": "^1.10.0",
-    "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "ava": "^3.5.2",
-    "codecov": "^3.5.0",
-    "cz-conventional-changelog": "^2.1.0",
-    "gh-pages": "^2.0.1",
-    "husky": "^4.2.1",
-    "npm-run-all": "^4.1.5",
-    "nyc": "^14.1.1",
-    "open-cli": "^5.0.0",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^2.0.1",
-    "standard-version": "^6.0.1",
-    "trash-cli": "^3.0.0",
-    "ts-node": "^8.4.1",
-    "tslint": "^5.18.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-immutable": "^6.0.1",
-    "typedoc": "^0.15.6",
+    "lerna": "^3.20.2",
+    "rimraf": "^2.6.2",
     "typescript": "^3.7.2"
   },
-  "ava": {
-    "failFast": true,
-    "files": [
-      "build/main/**/*.spec.js"
-    ],
-    "ignoredByWatcher": [
-      "build/main/**/*.js"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "exclude": [
-      "**/*.spec.js"
-    ]
-  }
+  "workspaces": [
+    "packages/*"
+  ]
 }
