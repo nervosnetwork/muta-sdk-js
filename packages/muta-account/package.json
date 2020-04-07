@@ -1,5 +1,5 @@
 {
-  "name": "@muta/account",
+  "name": "@mutajs/account",
   "version": "0.11.0-alpha.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "ava"
   },
   "dependencies": {
-    "@muta/utils": "^0.11.0-alpha.0"
+    "@mutajs/utils": "^0.11.0-alpha.0"
   },
   "devDependencies": {
     "ava": "^3.5.2",

@@ -1,11 +1,11 @@
-import { SignedTransaction, Transaction } from '@muta/types';
+import { SignedTransaction, Transaction } from '@mutajs/types';
 import {
   createTransactionSignature,
   keccak,
   publicKeyCreate,
   toBuffer,
   toHex,
-} from '@muta/utils';
+} from '@mutajs/utils';
 
 /**
  * Account is concept of A use on Muta chain.

@@ -1,5 +1,5 @@
 import { createBindingClass, read, Read } from '../';
-import { Address, Hash, u32, u64, Vec } from '@muta/types';
+import { Address, Hash, u32, u64, Vec } from '@mutajs/types';
 
 interface ValidatorExtend {
   bls__key: string;

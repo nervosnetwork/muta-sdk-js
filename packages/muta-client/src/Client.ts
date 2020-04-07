@@ -2,14 +2,14 @@ import {
   getSdk,
   InputRawTransaction,
   InputTransactionEncryption,
-} from '@muta/client-raw';
+} from '@mutajs/client-raw';
 import {
   DEFAULT_CHAIN_ID,
   DEFAULT_CONSENSUS_INTERVAL,
   DEFAULT_ENDPOINT,
   DEFAULT_TIMEOUT_GAP,
-} from '@muta/defaults';
-import { invariant } from '@muta/shared';
+} from '@mutajs/defaults';
+import { invariant } from '@mutajs/shared';
 import {
   Block,
   Hash,
@@ -20,14 +20,14 @@ import {
   SignedTransaction,
   Transaction,
   Uint64,
-} from '@muta/types';
+} from '@mutajs/types';
 import {
   hexToNum,
   randomNonce,
   safeParseJSON,
   safeStringifyJSON,
   toHex,
-} from '@muta/utils';
+} from '@mutajs/utils';
 import { GraphQLClient } from 'graphql-request';
 import { defaults, isNil } from 'lodash';
 import { retry, Retry, RetryConfig } from './retry';

@@ -1,14 +1,14 @@
-import { Account } from '@muta/account';
-import { Client } from '@muta/client';
-import { invariant } from '@muta/shared';
+import { Account } from '@mutajs/account';
+import { Client } from '@mutajs/client';
+import { invariant } from '@mutajs/shared';
 import {
   QueryServiceParam,
   Receipt,
   ServiceResponse,
   SignedTransaction,
   Transaction,
-} from '@muta/types';
-import { capitalize, safeParseJSON, signTransaction, toHex } from '@muta/utils';
+} from '@mutajs/types';
+import { capitalize, safeParseJSON, signTransaction, toHex } from '@mutajs/utils';
 
 /**
  * Given an input payload, transform to [[QueryServiceParam]]

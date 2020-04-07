@@ -1,4 +1,4 @@
-import { hexToNum } from '@muta/utils';
+import { hexToNum } from '@mutajs/utils';
 import test from 'ava';
 import { Client } from './Client';
 

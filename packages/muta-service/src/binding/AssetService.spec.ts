@@ -1,6 +1,6 @@
-import { Account } from '@muta/account';
-import { Client } from '@muta/client';
-import { BigNumber } from '@muta/shared';
+import { Account } from '@mutajs/account';
+import { Client } from '@mutajs/client';
+import { BigNumber } from '@mutajs/shared';
 import test from 'ava';
 import { AssetService } from './AssetService';
 

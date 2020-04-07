@@ -1,7 +1,7 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import * as HDKey from 'hdkey';
-import { Account } from '@muta/account';
-import { toHex } from '@muta/utils';
+import { Account } from '@mutajs/account';
+import { toHex } from '@mutajs/utils';
 import { SyncWallet } from './SyncWallet';
 
 export const COIN_TYPE = 918;

@@ -1,13 +1,13 @@
-import { Account } from '@muta/account';
-import { Client } from '@muta/client';
+import { Account } from '@mutajs/account';
+import { Client } from '@mutajs/client';
 import {
   DEFAULT_CHAIN_ID,
   DEFAULT_CONSENSUS_INTERVAL,
   DEFAULT_ENDPOINT,
   DEFAULT_TIMEOUT_GAP,
-} from '@muta/defaults';
-import { Uint64 } from '@muta/types';
-import { HDWallet } from '@muta/wallet';
+} from '@mutajs/defaults';
+import { Uint64 } from '@mutajs/types';
+import { HDWallet } from '@mutajs/wallet';
 import { Optional } from 'utility-types';
 
 export interface MutaContext {

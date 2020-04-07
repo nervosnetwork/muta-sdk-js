@@ -16,13 +16,13 @@
     "lib": ["es2017", "dom"],
     "baseUrl": "./packages",
     "paths": {
-      "@muta/shared": ["shared/src"],
-      "@muta/types": ["muta-types/src"],
-      "@muta/utils": ["packages/muta-utils/src"],
-      "@muta/account": ["muta-account/src"],
-      "@muta/client-raw": ["muta-client-raw/src"],
-      "@muta/client": ["muta-client/src"],
-      "@muta/service": ["muta-service/src"]
+      "@mutajs/shared": ["shared/src"],
+      "@mutajs/types": ["muta-types/src"],
+      "@mutajs/utils": ["packages/muta-utils/src"],
+      "@mutajs/account": ["muta-account/src"],
+      "@mutajs/client-raw": ["muta-client-raw/src"],
+      "@mutajs/client": ["muta-client/src"],
+      "@mutajs/service": ["muta-service/src"]
     }
   },
   "files": [],

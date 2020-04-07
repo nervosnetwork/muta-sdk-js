@@ -1,4 +1,4 @@
-import { Client } from '@muta/client';
+import { Client } from '@mutajs/client';
 import test from 'ava';
 import { createBindingClass, read, Read, write, Write } from './binding';
 

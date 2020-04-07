@@ -1,5 +1,5 @@
-import { Account } from '@muta/account';
-import { Client } from '@muta/client';
+import { Account } from '@mutajs/account';
+import { Client } from '@mutajs/client';
 import test from 'ava';
 import { MetadataService } from './MetadataService';
 
