@@ -9,6 +9,10 @@ export type ID = string;
  */
 export type Uint64 = string;
 /**
+ * a 32bits number, represented by string
+ */
+export type Uint32 = string;
+/**
  * a hash, represented by string, not sure the real length
  */
 export type Hash = string;
@@ -20,6 +24,10 @@ export type Address = string;
  * a short hand for string
  */
 export type Bytes = string;
+/**
+ * A hexadecimal string
+ */
+export type Hex = string;
 /**
  * a short hand for number
  */
