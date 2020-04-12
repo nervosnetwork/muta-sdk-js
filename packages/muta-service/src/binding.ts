@@ -8,7 +8,12 @@ import {
   SignedTransaction,
   Transaction,
 } from '@mutajs/types';
-import { capitalize, safeParseJSON, signTransaction, toHex } from '@mutajs/utils';
+import {
+  capitalize,
+  safeParseJSON,
+  signTransaction,
+  toHex,
+} from '@mutajs/utils';
 
 /**
  * Given an input payload, transform to [[QueryServiceParam]]
@@ -211,7 +216,7 @@ export function createBindingClass<T>(
         if (isRead(handler)) {
           prototype[method] = binding[method];
         } else if (isWrite(handler)) {
-          prototype[method] = payload => {
+          prototype[method] = (payload) => {
             invariant(
               account,
               'Try to call a #[write] method without account is denied,' +

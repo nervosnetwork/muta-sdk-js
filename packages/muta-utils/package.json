@@ -20,9 +20,5 @@
     "randombytes": "^2.1.0",
     "rlp": "^2.2.3",
     "secp256k1": "^4.0.0"
-  },
-  "devDependencies": {
-    "ava": "^3.5.2",
-    "typescript": "^3.7.2"
   }
 }

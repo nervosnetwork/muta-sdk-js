@@ -1,5 +1,4 @@
 import { hexToNum } from '@mutajs/utils';
-import test from 'ava';
 import { Client } from './Client';
 
 const client = new Client({
@@ -12,31 +11,31 @@ const client = new Client({
   endpoint: 'http://127.0.0.1:8000/graphql',
 });
 
-test('test get latest block', async t => {
+it('test get latest block', async () => {
   const height = await client.getLatestBlockHeight();
-  t.is(typeof height, 'number');
-  t.true(height >= 0);
+  expect(typeof height).toBe('number');
+  expect(height >= 0).toBe(true);
 });
 
-test('test get latest block without height', async t => {
+test('test get latest block without height', async () => {
   const block = await client.getBlock();
   const height = hexToNum(block.header.height);
-  t.is(typeof height, 'number');
-  t.true(height >= 0);
+  expect(typeof height).toBe('number');
+  expect(height >= 0).toBe(true);
 });
 
-test('test get given block without height', async t => {
+test('test get given block without height', async () => {
   const block = await client.getBlock('0x01');
   const height = hexToNum(block.header.height);
-  t.is(typeof height, 'number');
-  t.true(height >= 0);
+  expect(typeof height).toBe('number');
+  expect(height >= 0).toBe(true);
 });
 
-test('current preHash eq last hash', async t => {
+test('current preHash eq last hash', async () => {
   const lastBlock = await client.getBlock();
   await client.waitForNextNBlock(1);
 
   const currentBlock = await client.getBlock();
 
-  t.is(currentBlock.header.preHash, lastBlock.hash);
+  expect(currentBlock.header.preHash).toBe(lastBlock.hash);
 });

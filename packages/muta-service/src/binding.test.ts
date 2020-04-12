@@ -1,5 +1,4 @@
 import { Client } from '@mutajs/client';
-import test from 'ava';
 import { createBindingClass, read, Read, write, Write } from './binding';
 
 const client = new Client();
@@ -14,7 +13,7 @@ const MockService = createBindingClass<MockServiceModel>('mock', {
   write_something: write(),
 });
 
-test('error when readonly service try to write', t => {
+test('error when readonly service try to write', () => {
   const mockService = new MockService(client, null);
-  t.throws(() => mockService.write_something(null));
+  expect(() => mockService.write_something(null)).toThrow();
 });

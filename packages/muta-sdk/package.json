@@ -13,9 +13,7 @@
   "files": [
     "lib"
   ],
-  "scripts": {
-    "build": "tsc -b tsconfig.json"
-  },
+
   "dependencies": {
     "@mutajs/account": "^0.11.0-alpha.0",
     "@mutajs/client": "^0.11.0-alpha.0",

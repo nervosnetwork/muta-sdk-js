@@ -1,7 +1,6 @@
 import { Account } from '@mutajs/account';
 import { Client } from '@mutajs/client';
 import { BigNumber } from '@mutajs/shared';
-import test from 'ava';
 import { AssetService } from './AssetService';
 
 const account = Account.fromPrivateKey(
@@ -10,7 +9,7 @@ const account = Account.fromPrivateKey(
 
 const client = new Client();
 
-test('test AssetService', async t => {
+test('test AssetService', async () => {
   const service = new AssetService(client, account);
 
   const supply = 10000;
@@ -22,8 +21,8 @@ test('test AssetService', async t => {
 
   const asset = res.response.response.succeedData;
 
-  t.is(Number(res.response.response.code), 0);
-  t.true(new BigNumber(asset.supply).eq(new BigNumber(supply)));
+  expect(Number(res.response.response.code)).toBe(0);
+  expect(new BigNumber(asset.supply).eq(new BigNumber(supply))).toBe(true);
 
   await service.transfer({
     asset_id: asset.id,
@@ -36,5 +35,5 @@ test('test AssetService', async t => {
     user: account.address,
   });
 
-  t.is(balanceRes.succeedData.balance, supply - 123);
+  expect(balanceRes.succeedData.balance).toBe(supply - 123);
 });

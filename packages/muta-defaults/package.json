@@ -12,9 +12,5 @@
   },
   "files": [
     "lib"
-  ],
-  "dependencies": {},
-  "devDependencies": {
-    "typescript": "^3.7.2"
-  }
+  ]
 }

@@ -13,13 +13,7 @@
   "files": [
     "lib"
   ],
-  "scripts": {
-    "build": "tsc -b ."
-  },
   "dependencies": {
     "bignumber.js": "^9.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^3.7.2"
   }
 }

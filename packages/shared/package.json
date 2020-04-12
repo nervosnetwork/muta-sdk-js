@@ -13,9 +13,7 @@
   "files": [
     "lib"
   ],
-  "scripts": {
-    "build": "tsc -b tsconfig.json"
-  },
+
   "dependencies": {
     "@types/invariant": "^2.2.4",
     "invariant": "^2.2.4",

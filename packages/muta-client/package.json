@@ -13,9 +13,6 @@
   "files": [
     "lib"
   ],
-  "scripts": {
-    "test": "ava"
-  },
   "dependencies": {
     "@mutajs/client-raw": "^0.11.0-alpha.0",
     "@mutajs/defaults": "^0.11.0-alpha.0",
@@ -25,9 +22,5 @@
     "@types/lodash": "^4.14.149",
     "invariant": "^2.2.4",
     "lodash": "^4.17.15"
-  },
-  "devDependencies": {
-    "ava": "^3.5.2",
-    "typescript": "^3.7.2"
   }
 }

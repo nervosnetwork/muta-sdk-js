@@ -332,7 +332,7 @@ export class Client {
     const before = await this.getLatestBlockHeight();
 
     return retry({
-      onResolve: height => height - before >= n,
+      onResolve: (height) => height - before >= n,
       retry: () => this.getLatestBlockHeight(),
       timeout: this.options.maxTimeout,
       ...options,
