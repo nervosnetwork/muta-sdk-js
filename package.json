@@ -3,7 +3,7 @@
   "scripts": {
     "bootstrap": "lerba bootstrap",
     "build": "tsc -b packages/*",
-    "test": "lerna run test",
+    "test": "yarn build && lerna run test",
     "clean": "rimraf packages/**/lib .cache/*.tsbuildinfo"
   },
   "devDependencies": {
