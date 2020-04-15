@@ -6,10 +6,7 @@
   "author": "homura <homura.dev@gmail.com>",
   "license": "MIT",
   "keywords": [],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
+
   "files": [
     "lib"
   ],

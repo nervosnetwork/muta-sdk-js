@@ -1,5 +1,6 @@
 {
   "include": ["src"],
+  "exclude": ["**/*.test.ts"],
   "extends": "../../tsconfig",
   "compilerOptions": {
     "outDir": "lib",
