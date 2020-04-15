@@ -1,7 +1,7 @@
 schema: http://localhost:8000/graphql
 documents: muta.graphql
 generates:
-  src/index.ts:
+  src/sdk.ts:
     plugins:
       - typescript
       - typescript-operations
