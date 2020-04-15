@@ -1,0 +1,644 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>muta-utils | muta-sdk</title>
+	<meta name="description" content="Documentation for muta-sdk">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">muta-sdk</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="muta_utils.html">muta-utils</a>
+				</li>
+			</ul>
+			<h1>Module muta-utils</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#capitalize" class="tsd-kind-icon">capitalize</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#createtransactionsignature" class="tsd-kind-icon">create<wbr>Transaction<wbr>Signature</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#hextonum" class="tsd-kind-icon">hex<wbr>ToNum</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_utils.html#isuint8array" class="tsd-kind-icon">is<wbr>Uint8<wbr>Array</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#keccak" class="tsd-kind-icon">keccak</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#publickeycreate" class="tsd-kind-icon">public<wbr>Key<wbr>Create</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#randomaddress" class="tsd-kind-icon">random<wbr>Address</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#randomhex" class="tsd-kind-icon">random<wbr>Hex</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#randomnonce" class="tsd-kind-icon">random<wbr>Nonce</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#rm0x" class="tsd-kind-icon">rm0x</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#tobuffer" class="tsd-kind-icon">to<wbr>Buffer</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#tohex" class="tsd-kind-icon">to<wbr>Hex</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_utils.html#warning" class="tsd-kind-icon">warning</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="addressfrompublickey" class="tsd-anchor"></a>
+					<h3>address<wbr>From<wbr>Public<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key<span class="tsd-signature-symbol">(</span>publicKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/account.ts#L18">muta-utils/src/account.ts:18</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>convert a public key to an account address</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>publicKey: <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="capitalize" class="tsd-anchor"></a>
+					<h3>capitalize</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">capitalize<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/common.ts#L12">muta-utils/src/common.ts:12</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>capitalize first letter</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><p>capitalize(&#39;fooBar&#39;) // =&gt; FooBar</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createtransactionsignature" class="tsd-anchor"></a>
+					<h3>create<wbr>Transaction<wbr>Signature</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Transaction<wbr>Signature<span class="tsd-signature-symbol">(</span>tx<span class="tsd-signature-symbol">: </span><a href="../interfaces/muta_types.transaction.html" class="tsd-signature-type">Transaction</a>, privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/muta_types.transactionsignature.html" class="tsd-signature-type">TransactionSignature</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/transaction.ts#L16">muta-utils/src/transaction.ts:16</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>create a transaction signature</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tx: <a href="../interfaces/muta_types.transaction.html" class="tsd-signature-type">Transaction</a></h5>
+								</li>
+								<li>
+									<h5>privateKey: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/muta_types.transactionsignature.html" class="tsd-signature-type">TransactionSignature</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="hextonum" class="tsd-anchor"></a>
+					<h3>hex<wbr>ToNum</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">hex<wbr>ToNum<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/bytes.ts#L56">muta-utils/src/bytes.ts:56</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>convert a hex string to number</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="isuint8array" class="tsd-anchor"></a>
+					<h3>is<wbr>Uint8<wbr>Array</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Uint8<wbr>Array<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Uint8Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/bytes.ts#L37">muta-utils/src/bytes.ts:37</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Uint8Array</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="keccak" class="tsd-anchor"></a>
+					<h3>keccak</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">keccak<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/hash.ts#L7">muta-utils/src/hash.ts:7</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>us keccak256 to has the input</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="publickeycreate" class="tsd-anchor"></a>
+					<h3>public<wbr>Key<wbr>Create</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">public<wbr>Key<wbr>Create<span class="tsd-signature-symbol">(</span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span>, compressed<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/account.ts#L5">muta-utils/src/account.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>privateKey: <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> compressed: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="randomaddress" class="tsd-anchor"></a>
+					<h3>random<wbr>Address</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">random<wbr>Address<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/random.ts#L15">muta-utils/src/random.ts:15</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>generate a random <a href="muta_types.html#address">Address</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="randomhex" class="tsd-anchor"></a>
+					<h3>random<wbr>Hex</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">random<wbr>Hex<span class="tsd-signature-symbol">(</span>n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/random.ts#L8">muta-utils/src/random.ts:8</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>generate given length random hex string</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>n: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="randomnonce" class="tsd-anchor"></a>
+					<h3>random<wbr>Nonce</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">random<wbr>Nonce<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/random.ts#L22">muta-utils/src/random.ts:22</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>generate a random [[Nonce]]</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="rm0x" class="tsd-anchor"></a>
+					<h3>rm0x</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">rm0x<span class="tsd-signature-symbol">(</span>hex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/bytes.ts#L6">muta-utils/src/bytes.ts:6</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>TRY to remove 0x from a hex string
+									if no 0x starts, do nothing</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>hex: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>string</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="signtransaction" class="tsd-anchor"></a>
+					<h3>sign<wbr>Transaction</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">sign<wbr>Transaction<span class="tsd-signature-symbol">(</span>tx<span class="tsd-signature-symbol">: </span><a href="../interfaces/muta_types.transaction.html" class="tsd-signature-type">Transaction</a>, privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/muta_types.inputsignedtransaction.html" class="tsd-signature-type">InputSignedTransaction</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/transaction.ts#L47">muta-utils/src/transaction.ts:47</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sign a transaction with a private key</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tx: <a href="../interfaces/muta_types.transaction.html" class="tsd-signature-type">Transaction</a></h5>
+								</li>
+								<li>
+									<h5>privateKey: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/muta_types.inputsignedtransaction.html" class="tsd-signature-type">InputSignedTransaction</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="tobuffer" class="tsd-anchor"></a>
+					<h3>to<wbr>Buffer</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Buffer<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/bytes.ts#L45">muta-utils/src/bytes.ts:45</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>parse a hex string to buffer, if x is already a Buffer, do nothing</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>, string or Buffer,</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="tohex" class="tsd-anchor"></a>
+					<h3>to<wbr>Hex</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Hex<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/bytes.ts#L19">muta-utils/src/bytes.ts:19</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>parse to hex string</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>, may be Buffer, number or string(add 0x if needed or do nothing if already find 0x)</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="warning" class="tsd-anchor"></a>
+					<h3>warning</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">warning<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/1b0994b/packages/muta-utils/src/bytes.ts#L10">muta-utils/src/bytes.ts:10</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="muta_account.html">muta-<wbr>account</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="muta_client.html">muta-<wbr>client</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="muta_defaults.html">muta-<wbr>defaults</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="muta_sdk.html">muta-<wbr>sdk</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="muta_service.html">muta-<wbr>service</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="muta_types.html">muta-<wbr>types</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="muta_utils.html">muta-<wbr>utils</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="muta_wallet.html">muta-<wbr>wallet</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#capitalize" class="tsd-kind-icon">capitalize</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#createtransactionsignature" class="tsd-kind-icon">create<wbr>Transaction<wbr>Signature</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#hextonum" class="tsd-kind-icon">hex<wbr>ToNum</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_utils.html#isuint8array" class="tsd-kind-icon">is<wbr>Uint8<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#keccak" class="tsd-kind-icon">keccak</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#publickeycreate" class="tsd-kind-icon">public<wbr>Key<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#randomaddress" class="tsd-kind-icon">random<wbr>Address</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#randomhex" class="tsd-kind-icon">random<wbr>Hex</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#randomnonce" class="tsd-kind-icon">random<wbr>Nonce</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#rm0x" class="tsd-kind-icon">rm0x</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#tobuffer" class="tsd-kind-icon">to<wbr>Buffer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#tohex" class="tsd-kind-icon">to<wbr>Hex</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_utils.html#warning" class="tsd-kind-icon">warning</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
