@@ -1,10 +1,12 @@
 {
-  "inputFiles": ["./src"],
-  "externalPattern":
-  ["./src/client/codegen/**",
-    "./src/types/global-fetch.d.ts",
-    "./src/types/three-party.d.ts"],
-  "excludePrivate" : true,
+  "name": "muta-sdk",
   "mode": "modules",
-  "out": "doc"
+  "out": "build/docs",
+  "ignoreCompilerErrors": true,
+  "preserveConstEnums": "true",
+  "exclude": ["**/*.test.*", "**/*.e2e.*", "**/node_modules/**", "**/index.ts"],
+  "stripInternal": false,
+  "inputFiles": ["packages"],
+  "external-modulemap": ".*/packages/([\\w\\-_]+)/",
+  "tsconfig": "./tsconfig.json"
 }

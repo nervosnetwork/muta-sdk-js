@@ -7,5 +7,7 @@ coverage
 
 package-lock.json
 
-packages/**/lib
+lib
 .cache
+build
+
