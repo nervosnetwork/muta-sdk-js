@@ -87,11 +87,15 @@ it('e2e test createBindingClass', async () => {
   const service = new AssetService(client, account);
 
   const supply = 10000;
-  const res = await service.mutation.create_asset({
+  const waitableAsset = service.mutation.create_asset({
     name: Math.random().toString(),
     supply,
     symbol: Math.random().toString(),
   });
+  const res = await waitableAsset;
+
+  const txHash = await waitableAsset.waitFor('transaction');
+  expect(txHash.startsWith('0x')).toBe(true);
 
   const asset = res.response.response.succeedData;
 

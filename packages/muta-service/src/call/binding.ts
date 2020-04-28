@@ -52,11 +52,6 @@ interface Model<T> {
   [key: string]: T;
 }
 
-/**
- * @param name
- * @param query
- * @param mutation
- */
 export function createBindingClass<
   Q extends Model<QueryHook>,
   M extends Model<MutationHook>
