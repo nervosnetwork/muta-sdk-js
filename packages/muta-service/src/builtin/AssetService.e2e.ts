@@ -13,9 +13,9 @@ test('test AssetService', async () => {
   const service = new AssetService(client, account);
 
   const supply = 10000;
-  const res = await service.create_asset({
+  const res = await service.mutation.create_asset({
     name: Math.random().toString(),
-    supply,
+    supply: supply,
     symbol: Math.random().toString(),
   });
 
@@ -24,13 +24,13 @@ test('test AssetService', async () => {
   expect(Number(res.response.response.code)).toBe(0);
   expect(new BigNumber(asset.supply).eq(new BigNumber(supply))).toBe(true);
 
-  await service.transfer({
+  await service.mutation.transfer({
     asset_id: asset.id,
     to: '0x0000000000000000000000000000000000000000',
     value: 123,
   });
 
-  const balanceRes = await service.get_balance({
+  const balanceRes = await service.query.get_balance({
     asset_id: asset.id,
     user: account.address,
   });

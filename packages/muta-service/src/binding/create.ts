@@ -6,9 +6,11 @@ import { capitalize } from '@mutajs/utils';
 import PLazy from 'p-lazy';
 import { MutationHook, QueryHook } from './hook';
 
-interface QueryMethod<Payload = any, Response = any> {
-  (payload: Payload): Promise<ServiceResponse<Response>>;
-}
+type Result<T> = T extends null ? '' : T;
+
+export type QueryMethod<Payload = any, Response = any> = Payload extends null
+  ? () => Promise<ServiceResponse<Result<Response>>>
+  : (payload: Payload) => Promise<ServiceResponse<Result<Response>>>;
 
 interface WaitFor<T> {
   (wait: 'transaction'): Promise<Hash>;
@@ -20,11 +22,11 @@ interface Waitable<T> {
   waitFor: WaitFor<T>;
 }
 
-interface WaitableResult<T> extends Promise<T>, Waitable<T> {}
+export interface WaitableResult<T> extends Promise<T>, Waitable<T> {}
 
-interface MutationMethod<Payload = any, Response = any> {
-  (payload: Payload): WaitableResult<Receipt<Response>>;
-}
+export type MutationMethod<Payload = any, Response = any> = Payload extends null
+  ? () => WaitableResult<Receipt<Result<Response>>>
+  : (payload: Payload) => WaitableResult<Receipt<Result<Response>>>;
 
 export interface IService<Q, M> {
   name: string;
@@ -81,6 +83,7 @@ export function createBindingClass<
       this.query = Object.keys(query).reduce((queries, method) => {
         const hook = query[method];
         queries[method] = async function(payload: any) {
+          if (!payload) payload = '';
           payload = await hook.handlePayload(payload);
 
           const res = await self.client.queryService({
@@ -103,7 +106,7 @@ export function createBindingClass<
             'Try to call a mutation method without account is denied,' +
               ` need to new ${capitalize(name)}Service(client, account)`,
           );
-
+          if (!payload) payload = '';
           async function sendTransaction() {
             payload = await hook.handlePayload(payload);
             const rawTx = await self.client.composeTransaction({
