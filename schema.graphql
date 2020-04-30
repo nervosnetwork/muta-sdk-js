@@ -45,24 +45,21 @@ type BlockHeader {
   validators: [Validator!]!
 }
 
+"ChainSchema consists of all service schemas"
+type ChainSchema {
+  schema: [ServiceSchema!]!
+}
+
 type Event {
   data: String!
   service: String!
+  topic: String!
 }
 
 type Mutation {
   "send transaction"
-  sendTransaction(
-    inputEncryption: InputTransactionEncryption!
-    inputRaw: InputRawTransaction!
-  ): Hash!
-  unsafeSendTransaction(
-    inputPrivkey: Bytes!
-    inputRaw: InputRawTransaction!
-  ): Hash!
-    @deprecated(
-      reason: "DON'T use it in production! This is just for development."
-    )
+  sendTransaction(inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
+  unsafeSendTransaction(inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "DON'T use it in production! This is just for development.")
 }
 
 "The verifier of the block header proved"
@@ -79,18 +76,12 @@ type Query {
   getBlock(height: Uint64): Block!
   "Get the receipt by transaction hash"
   getReceipt(txHash: Hash!): Receipt!
+  "Get all services schema, including service methods and events"
+  getSchema: ChainSchema!
   "Get the transaction by hash"
   getTransaction(txHash: Hash!): SignedTransaction!
   "query service"
-  queryService(
-    caller: Address!
-    cyclesLimit: Uint64
-    cyclesPrice: Uint64
-    height: Uint64
-    method: String!
-    payload: String!
-    serviceName: String!
-  ): ServiceResponse!
+  queryService(caller: Address!, cyclesLimit: Uint64, cyclesPrice: Uint64, height: Uint64, method: String!, payload: String!, serviceName: String!): ServiceResponse!
 }
 
 type Receipt {
@@ -112,6 +103,16 @@ type ServiceResponse {
   code: Uint64!
   errorMessage: String!
   succeedData: String!
+}
+
+"Description a service interface and events"
+type ServiceSchema {
+  "all events emitted by service"
+  event: String!
+  "service methods, method payloads and response"
+  method: String!
+  "name of service"
+  service: String!
 }
 
 type SignedTransaction {
@@ -161,14 +162,15 @@ input InputTransactionEncryption {
   txHash: Hash!
 }
 
+
 "Bytes corresponding hex string."
 scalar Bytes
 
 "20 bytes of account address"
 scalar Address
 
-"Uint64"
-scalar Uint64
-
 "The output digest of Keccak hash function"
 scalar Hash
+
+"Uint64"
+scalar Uint64
