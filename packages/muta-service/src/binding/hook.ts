@@ -17,11 +17,19 @@ export function query<Payload, Response>(
     handlePayload: payload => {
       return typeof payload !== 'string' ? safeStringifyJSON(payload) : payload;
     },
-    handleResponse: (res) => {
+    handleResponse: res => {
+      if (Number(res.code)) {
+        return res;
+      }
+      let succeedData = res.succeedData;
+      try {
+        succeedData = safeParseJSON(res.succeedData);
+      } catch {}
+
       return {
         ...res,
-        succeedData: safeParseJSON(res.succeedData),
-      }
+        succeedData,
+      };
     },
   });
 }
@@ -38,6 +46,9 @@ export function mutation<Payload, Response>(
   return defaults(hook, {
     handlePayload: identity,
     handleResponse: receipt => {
+      if (Number(receipt.response.response.code)) {
+        return receipt;
+      }
       try {
         receipt.response.response.succeedData = safeParseJSON(
           receipt.response.response.succeedData,
