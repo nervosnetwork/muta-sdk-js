@@ -52,17 +52,8 @@ type Event {
 
 type Mutation {
   "send transaction"
-  sendTransaction(
-    inputEncryption: InputTransactionEncryption!
-    inputRaw: InputRawTransaction!
-  ): Hash!
-  unsafeSendTransaction(
-    inputPrivkey: Bytes!
-    inputRaw: InputRawTransaction!
-  ): Hash!
-    @deprecated(
-      reason: "DON'T use it in production! This is just for development."
-    )
+  sendTransaction(inputEncryption: InputTransactionEncryption!, inputRaw: InputRawTransaction!): Hash!
+  unsafeSendTransaction(inputPrivkey: Bytes!, inputRaw: InputRawTransaction!): Hash! @deprecated(reason : "DON'T use it in production! This is just for development.")
 }
 
 "The verifier of the block header proved"
@@ -82,15 +73,7 @@ type Query {
   "Get the transaction by hash"
   getTransaction(txHash: Hash!): SignedTransaction!
   "query service"
-  queryService(
-    caller: Address!
-    cyclesLimit: Uint64
-    cyclesPrice: Uint64
-    height: Uint64
-    method: String!
-    payload: String!
-    serviceName: String!
-  ): ServiceResponse!
+  queryService(caller: Address!, cyclesLimit: Uint64, cyclesPrice: Uint64, height: Uint64, method: String!, payload: String!, serviceName: String!): ServiceResponse!
 }
 
 type Receipt {
@@ -121,11 +104,10 @@ type SignedTransaction {
   method: String!
   nonce: Hash!
   payload: String!
-  pubkey: Bytes!
   serviceName: String!
-  signature: Bytes!
   timeout: Uint64!
   txHash: Hash!
+  witness: WitnessSchema!
 }
 
 "Validator address set"
@@ -153,13 +135,12 @@ input InputRawTransaction {
 
 "Signature of the transaction"
 input InputTransactionEncryption {
-  "The public key of transfer"
-  pubkey: Bytes!
-  "The signature of the transaction"
-  signature: Bytes!
   "The digest of the transaction"
   txHash: Hash!
+  "The witness of transaction"
+  witness: WitnessSchema!
 }
+
 
 "Bytes corresponding hex string."
 scalar Bytes
@@ -167,8 +148,11 @@ scalar Bytes
 "20 bytes of account address"
 scalar Address
 
-"Uint64"
-scalar Uint64
+"Witness json string."
+scalar WitnessSchema
 
 "The output digest of Keccak hash function"
 scalar Hash
+
+"Uint64"
+scalar Uint64

@@ -9,63 +9,17 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** Uint64 */
-  Uint64: string;
-  /** The output digest of Keccak hash function */
-  Hash: string;
-  /** 20 bytes of account address */
-  Address: string;
   /** Bytes corresponding hex string. */
   Bytes: string;
+  /** 20 bytes of account address */
+  Address: string;
+  /** Witness json string. */
+  WitnessSchema: any;
+  /** The output digest of Keccak hash function */
+  Hash: string;
+  /** Uint64 */
+  Uint64: string;
 };
-
-
-/**
- * Block is a single digital record created within a blockchain. Each block
- * contains a record of the previous Block, and when linked together these become
- * the “chain”.A block is always composed of header and body.
- */
-export type Block = {
-   __typename?: 'Block';
-  /** The header section of a block */
-  header: BlockHeader;
-  /** The body section of a block */
-  orderedTxHashes: Array<Scalars['Hash']>;
-  /** Hash of the block */
-  hash: Scalars['Hash'];
-};
-
-/** A block header is like the metadata of a block. */
-export type BlockHeader = {
-   __typename?: 'BlockHeader';
-  /** Identifier of a chain in order to prevent replay attacks across channels  */
-  chainId: Scalars['Hash'];
-  /** block height */
-  height: Scalars['Uint64'];
-  /** The height to which the block has been executed */
-  execHeight: Scalars['Uint64'];
-  /** The hash of the serialized previous block */
-  preHash: Scalars['Hash'];
-  /** A timestamp that records when the block was created */
-  timestamp: Scalars['Uint64'];
-  /** The merkle root of ordered transactions */
-  orderRoot: Scalars['Hash'];
-  /** The merkle roots of all the confirms */
-  confirmRoot: Array<Scalars['Hash']>;
-  /** The merkle root of state root */
-  stateRoot: Scalars['Hash'];
-  /** The merkle roots of receipts */
-  receiptRoot: Array<Scalars['Hash']>;
-  /** The sum of all transactions costs */
-  cyclesUsed: Array<Scalars['Uint64']>;
-  /** The address descirbed who packed the block */
-  proposer: Scalars['Address'];
-  proof: Proof;
-  /** The version of validator is designed for cross chain */
-  validatorVersion: Scalars['Uint64'];
-  validators: Array<Validator>;
-};
-
 
 export type Event = {
    __typename?: 'Event';
@@ -74,39 +28,24 @@ export type Event = {
 };
 
 
-/**
- * There was many types of transaction in Muta, A transaction often require
- * computing resources or write data to chain,these resources are valuable so we
- * need to pay some token for them.InputRawTransaction describes information above
- */
-export type InputRawTransaction = {
-  /** Identifier of the chain. */
-  chainId: Scalars['Hash'];
-  /** Mostly like the gas limit in Ethereum, describes the fee that you are willing to pay the highest price for the transaction */
-  cyclesLimit: Scalars['Uint64'];
-  cyclesPrice: Scalars['Uint64'];
-  /** Every transaction has its own id, unlike Ethereum's nonce,the nonce in Muta is an hash */
-  nonce: Scalars['Hash'];
-  /**
-   * For security and performance reasons, Muta will only deal with trade request
-   * over a period of time,the `timeout` should be `timeout > current_block_height`
-   * and `timeout < current_block_height + timeout_gap`,the `timeout_gap` generally equal to 20.
-   */
-  timeout: Scalars['Uint64'];
-  serviceName: Scalars['String'];
-  method: Scalars['String'];
-  payload: Scalars['String'];
+/** The verifier of the block header proved */
+export type Proof = {
+   __typename?: 'Proof';
+  height: Scalars['Uint64'];
+  round: Scalars['Uint64'];
+  blockHash: Scalars['Hash'];
+  signature: Scalars['Bytes'];
+  bitmap: Scalars['Bytes'];
 };
 
 /** Signature of the transaction */
 export type InputTransactionEncryption = {
   /** The digest of the transaction */
   txHash: Scalars['Hash'];
-  /** The public key of transfer */
-  pubkey: Scalars['Bytes'];
-  /** The signature of the transaction */
-  signature: Scalars['Bytes'];
+  /** The witness of transaction */
+  witness: Scalars['WitnessSchema'];
 };
+
 
 export type Mutation = {
    __typename?: 'Mutation';
@@ -128,15 +67,7 @@ export type MutationUnsafeSendTransactionArgs = {
   inputPrivkey: Scalars['Bytes'];
 };
 
-/** The verifier of the block header proved */
-export type Proof = {
-   __typename?: 'Proof';
-  height: Scalars['Uint64'];
-  round: Scalars['Uint64'];
-  blockHash: Scalars['Hash'];
-  signature: Scalars['Bytes'];
-  bitmap: Scalars['Bytes'];
-};
+
 
 export type Query = {
    __typename?: 'Query';
@@ -193,12 +124,6 @@ export type ReceiptResponse = {
   response: ServiceResponse;
 };
 
-export type ServiceResponse = {
-   __typename?: 'ServiceResponse';
-  code: Scalars['Uint64'];
-  succeedData: Scalars['String'];
-  errorMessage: Scalars['String'];
-};
 
 export type SignedTransaction = {
    __typename?: 'SignedTransaction';
@@ -211,10 +136,19 @@ export type SignedTransaction = {
   method: Scalars['String'];
   payload: Scalars['String'];
   txHash: Scalars['Hash'];
-  pubkey: Scalars['Bytes'];
-  signature: Scalars['Bytes'];
+  witness: Scalars['WitnessSchema'];
 };
 
+/** Block is a single digital record created within a blockchain. Each block contains a record of the previous Block, and when linked together these become the “chain”.A block is always composed of header and body. */
+export type Block = {
+   __typename?: 'Block';
+  /** The header section of a block */
+  header: BlockHeader;
+  /** The body section of a block */
+  orderedTxHashes: Array<Scalars['Hash']>;
+  /** Hash of the block */
+  hash: Scalars['Hash'];
+};
 
 /** Validator address set */
 export type Validator = {
@@ -222,6 +156,60 @@ export type Validator = {
   address: Scalars['Address'];
   proposeWeight: Scalars['Int'];
   voteWeight: Scalars['Int'];
+};
+
+/** A block header is like the metadata of a block. */
+export type BlockHeader = {
+   __typename?: 'BlockHeader';
+  /** Identifier of a chain in order to prevent replay attacks across channels  */
+  chainId: Scalars['Hash'];
+  /** block height */
+  height: Scalars['Uint64'];
+  /** The height to which the block has been executed */
+  execHeight: Scalars['Uint64'];
+  /** The hash of the serialized previous block */
+  preHash: Scalars['Hash'];
+  /** A timestamp that records when the block was created */
+  timestamp: Scalars['Uint64'];
+  /** The merkle root of ordered transactions */
+  orderRoot: Scalars['Hash'];
+  /** The merkle roots of all the confirms */
+  confirmRoot: Array<Scalars['Hash']>;
+  /** The merkle root of state root */
+  stateRoot: Scalars['Hash'];
+  /** The merkle roots of receipts */
+  receiptRoot: Array<Scalars['Hash']>;
+  /** The sum of all transactions costs */
+  cyclesUsed: Array<Scalars['Uint64']>;
+  /** The address descirbed who packed the block */
+  proposer: Scalars['Address'];
+  proof: Proof;
+  /** The version of validator is designed for cross chain */
+  validatorVersion: Scalars['Uint64'];
+  validators: Array<Validator>;
+};
+
+export type ServiceResponse = {
+   __typename?: 'ServiceResponse';
+  code: Scalars['Uint64'];
+  succeedData: Scalars['String'];
+  errorMessage: Scalars['String'];
+};
+
+/** There was many types of transaction in Muta, A transaction often require computing resources or write data to chain,these resources are valuable so we need to pay some token for them.InputRawTransaction describes information above */
+export type InputRawTransaction = {
+  /** Identifier of the chain. */
+  chainId: Scalars['Hash'];
+  /** Mostly like the gas limit in Ethereum, describes the fee that you are willing to pay the highest price for the transaction */
+  cyclesLimit: Scalars['Uint64'];
+  cyclesPrice: Scalars['Uint64'];
+  /** Every transaction has its own id, unlike Ethereum's nonce,the nonce in Muta is an hash */
+  nonce: Scalars['Hash'];
+  /** For security and performance reasons, Muta will only deal with trade request over a period of time,the `timeout` should be `timeout > current_block_height` and `timeout < current_block_height + timeout_gap`,the `timeout_gap` generally equal to 20. */
+  timeout: Scalars['Uint64'];
+  serviceName: Scalars['String'];
+  method: Scalars['String'];
+  payload: Scalars['String'];
 };
 
 export type QueryServiceQueryVariables = {
@@ -268,7 +256,7 @@ export type GetTransactionQuery = (
   { __typename?: 'Query' }
   & { getTransaction: (
     { __typename?: 'SignedTransaction' }
-    & Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'pubkey' | 'signature'>
+    & Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'witness'>
     & ServicePayloadFragment
   ) }
 );
@@ -352,8 +340,7 @@ export const GetTransactionDocument = gql`
     cyclesPrice
     timeout
     txHash
-    pubkey
-    signature
+    witness
   }
 }
     ${ServicePayloadFragmentDoc}`;
