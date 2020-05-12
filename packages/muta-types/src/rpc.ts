@@ -1,4 +1,4 @@
-import { Address, Hash, Int, Maybe, Uint64 } from './scalar';
+import { Address, Bytes, Hash, Int, Maybe, Uint64, Vec } from './scalar';
 
 /**
  * The Block struct
@@ -114,64 +114,59 @@ export interface Validator {
  * these resources are valuable so we need to pay some token for them.
  * Transaction describes information above
  *
- * The transaction is not signed yet
- *
- * you may stuff this by [[prepareTransaction]]
  */
-export interface Transaction {
-  chainId: string;
+export interface Transaction<P> {
+  chainId: Hash;
 
-  cyclesLimit: string;
+  cyclesLimit: Uint64;
 
-  cyclesPrice: string;
+  cyclesPrice: Uint64;
 
-  nonce: string;
+  nonce: Bytes;
 
-  timeout: string;
+  timeout: Uint64;
 
   serviceName: string;
 
   method: string;
 
-  payload: string;
+  payload: P;
+}
+
+type SerializedTransaction = Transaction<string>;
+
+export interface Witness {
+  pubkeys: Vec<Bytes>;
+  signatures: Vec<Bytes>;
+  signatureType: number;
 }
 
 /**
- * Signature of the transaction, this should not be used separately
- * you may sign it by [[signTransaction]]
+ * now the serialized witness is a string with JSON format
  */
-export interface TransactionSignature {
-  txHash: string;
-  pubkey: string;
-  signature: string;
-}
+type SerializedWitness = string;
 
 /**
  * SignedTransaction, contains all info from [[Transaction]] and [[TransactionSignature]]
  * you may sign it by [[signTransaction]]
  */
 export interface SignedTransaction {
-  chainId: string;
-  cyclesLimit: string;
-  cyclesPrice: string;
-  nonce: string;
-  timeout: string;
-  serviceName: string;
-  method: string;
-  payload: string;
-  txHash: string;
-  pubkey: string;
-  signature: string;
+  raw: SerializedTransaction;
+  txHash: Hash;
+  witness: SerializedWitness;
 }
 
-export interface InputSignedTransaction {
-  inputRaw: Transaction;
-  inputEncryption: TransactionSignature;
+export interface DeSerializedSignedTransaction<P> {
+  raw: Transaction<P>;
+  txHash: Hash;
+  witness: Witness;
 }
 
 /**
  * data structure when you call [[queryService]] to chain
  * compare to [[ServicePayload]], which enables generic for 'payload'
+ *
+ * @deprecated
  */
 export interface QueryServiceParam<P = any> {
   serviceName: string;
@@ -186,16 +181,11 @@ export interface QueryServiceParam<P = any> {
 /**
  * data structure when you call [[getBlock]] to chain
  * @param height , note that this could be null
+ * @deprecated
  */
 export interface QueryBlockParam {
   height?: Maybe<string>;
 }
-
-/**
- * data structure when you
- */
-
-// export type QueryTransactionParam = Hash;
 
 /**
  * the Receipt data structure, receipt represent a handler or response with submitted transactions
@@ -203,10 +193,10 @@ export interface QueryBlockParam {
  * see [[getReceipt]] for more details
  */
 export interface Receipt<Ret = any> {
-  stateRoot: string;
-  height: string;
-  txHash: string;
-  cyclesUsed: string;
+  stateRoot: Hash;
+  height: Uint64;
+  txHash: Hash;
+  cyclesUsed: Uint64;
   events: Event[];
   response: ReceiptResponse<Ret>;
 }
