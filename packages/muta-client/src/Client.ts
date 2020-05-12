@@ -1,8 +1,4 @@
-import {
-  getSdk,
-  InputRawTransaction,
-  InputTransactionEncryption,
-} from '@mutajs/client-raw';
+import { getSdk } from '@mutajs/client-raw';
 import {
   DEFAULT_CHAIN_ID,
   DEFAULT_CONSENSUS_INTERVAL,
@@ -12,9 +8,11 @@ import {
 import { invariant } from '@mutajs/shared';
 import {
   Block,
+  DeSerializedSignedTransaction,
   Hash,
   QueryServiceParam,
   Receipt,
+  Serde,
   ServicePayload,
   ServiceResponse,
   SignedTransaction,
@@ -24,8 +22,8 @@ import {
 import {
   hexToNum,
   randomNonce,
+  SafeJsonStringSerde,
   safeParseJSON,
-  safeStringifyJSON,
   toHex,
 } from '@mutajs/utils';
 import { GraphQLClient } from 'graphql-request';
@@ -51,14 +49,10 @@ export interface ComposeTransactionParam<P> {
  * or from Muta's [[client]]
  */
 export interface ClientOption {
-  /**
-   * {@link MutaContext.endpoint}
-   */
+  serde: Serde;
+
   endpoint: string;
 
-  /**
-   * {@link MutaContext.chainId}
-   */
   chainId: string;
 
   /**
@@ -73,18 +67,12 @@ export interface ClientOption {
    */
   defaultCyclesPrice: Uint64;
 
-  /**
-   * {@link MutaContext.timeoutGap}
-   */
   timeoutGap: number;
 
-  /**
-   * {@link MutaContext.consensusInterval}
-   */
   consensusInterval: number;
 
   /**
-   * This value indicates the maximum waiting time for the client to wait for the response
+   * ms, This value indicates the maximum waiting time for the client to wait for the response
    */
   maxTimeout: number;
 }
@@ -111,12 +99,11 @@ type RawClient = ReturnType<typeof getSdk>;
  * 4. [[queryService]] and [[queryServiceDyn]]
  *
  * **Mutation**
- * 1. [[sendTransaction]]
+ * 1. {@link sendTransaction}
  *
  * **Locally**
- * 1. [[composeTransaction]]
+ * 1. {@link composeTransaction}
  *
- * Please check [[AssetService]] 's source code to get the usage of this Client.
  */
 export class Client {
   private readonly rawClient: RawClient;
@@ -127,8 +114,8 @@ export class Client {
    * construct a Client by given [[ClientOption]]
    * @param options, see {@link ClientOption} for more details
    */
-  constructor(options?: ClientOption) {
-    this.options = defaults<ClientOption, ClientOption>(options, {
+  constructor(options?: Partial<ClientOption>) {
+    this.options = defaults<Partial<ClientOption>, ClientOption>(options, {
       endpoint: DEFAULT_ENDPOINT,
       chainId: DEFAULT_CHAIN_ID,
       defaultCyclesPrice: '0xffff',
@@ -136,6 +123,7 @@ export class Client {
       maxTimeout: 60000,
       timeoutGap: DEFAULT_TIMEOUT_GAP,
       consensusInterval: DEFAULT_CONSENSUS_INTERVAL,
+      serde: new SafeJsonStringSerde(),
     });
 
     this.rawClient = getSdk(
@@ -176,13 +164,26 @@ export class Client {
    * get [[SignedTransaction]] by give its transaction hash
    * @param txHash the transaction target hash, you can call [[sendTransaction]] to send a tx and get its txHash
    */
-  public async getTransaction(txHash: Hash): Promise<SignedTransaction> {
+  public async getTransaction<P>(
+    txHash: Hash,
+  ): Promise<DeSerializedSignedTransaction<P>> {
     const timeout = this.options.maxTimeout;
     const res = await retry({
       retry: () => this.rawClient.getTransaction({ txHash }),
       timeout,
     });
-    return res.getTransaction;
+    const tx = res.getTransaction;
+    const witness = this.options.serde.deserialize(tx.witness);
+    const payload = this.options.serde.deserialize(tx.payload);
+
+    return {
+      txHash: tx.txHash,
+      witness,
+      raw: {
+        ...tx,
+        payload,
+      },
+    };
   }
 
   /**
@@ -226,10 +227,9 @@ export class Client {
   public async queryServiceDyn<P, R>(
     param: ServicePayload<P>,
   ): Promise<ServiceResponse<R>> {
-    const payload: string =
-      typeof param.payload !== 'string'
-        ? safeStringifyJSON(param.payload)
-        : param.payload;
+    const { serde } = this.options;
+
+    const payload: string = serde.serialize(param.payload);
 
     const queryServiceQueryParam: QueryServiceParam = { ...param, payload };
     const res = await this.rawClient.queryService(queryServiceQueryParam);
@@ -253,26 +253,12 @@ export class Client {
   public async sendTransaction(
     signedTransaction: SignedTransaction,
   ): Promise<Hash> {
-    const inputRaw: InputRawTransaction = {
-      chainId: signedTransaction.chainId,
-      cyclesLimit: signedTransaction.cyclesLimit,
-      cyclesPrice: signedTransaction.cyclesPrice,
-      method: signedTransaction.method,
-      nonce: signedTransaction.nonce,
-      payload: signedTransaction.payload,
-      serviceName: signedTransaction.serviceName,
-      timeout: signedTransaction.timeout,
-    };
-
-    const inputEncryption: InputTransactionEncryption = {
-      pubkey: signedTransaction.pubkey,
-      signature: signedTransaction.signature,
-      txHash: signedTransaction.txHash,
-    };
-
     const res = await this.rawClient.sendTransaction({
-      inputEncryption,
-      inputRaw,
+      inputEncryption: {
+        txHash: signedTransaction.txHash,
+        witness: signedTransaction.witness,
+      },
+      inputRaw: signedTransaction.raw,
     });
 
     return res.sendTransaction;
@@ -283,21 +269,15 @@ export class Client {
    * @typeparam P generic of object which will be JSON.stringify to payload string in [[Transaction]]
    * @param param your params
    */
-  public async composeTransaction<P extends string | object>(
+  public async composeTransaction<P>(
     param: ComposeTransactionParam<P>,
-  ): Promise<Transaction> {
+  ): Promise<Transaction<P>> {
     const {
       timeoutGap,
       chainId,
       defaultCyclesLimit,
       defaultCyclesPrice,
     } = this.options;
-
-    const payload: string =
-      typeof param.payload !== 'string'
-        ? safeStringifyJSON(param.payload)
-        : param.payload;
-
     const blockHeight = await this.getLatestBlockHeight();
     const timeout = param.timeout
       ? param.timeout
@@ -310,7 +290,6 @@ export class Client {
       nonce: randomNonce(),
       timeout,
       ...param,
-      payload,
     };
   }
 
@@ -332,7 +311,7 @@ export class Client {
     const before = await this.getLatestBlockHeight();
 
     return retry({
-      onResolve: (height) => height - before >= n,
+      onResolve: height => height - before >= n,
       retry: () => this.getLatestBlockHeight(),
       timeout: this.options.maxTimeout,
       ...options,
