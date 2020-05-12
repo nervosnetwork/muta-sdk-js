@@ -16,5 +16,8 @@
     "randombytes": "^2.1.0",
     "rlp": "^2.2.3",
     "secp256k1": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/secp256k1": "^4.0.1"
   }
 }
