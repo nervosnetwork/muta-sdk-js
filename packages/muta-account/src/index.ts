@@ -1,1 +1,2 @@
-export { Account } from './Account';
+export { DefaultAccount } from './DefaultAccount';
+export { DefaultMultiSigAccount } from './MultiSigAccount';
