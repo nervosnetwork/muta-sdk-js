@@ -1,6 +1,6 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
 import * as HDKey from 'hdkey';
-import { Account } from '@mutajs/account';
+import { DefaultAccount } from '@mutajs/account';
 import { toHex } from '@mutajs/utils';
 import { SyncWallet } from './SyncWallet';
 
@@ -69,7 +69,7 @@ export class HDWallet implements SyncWallet {
    * the private key is in the return [[Account]]
    * @param accountIndex the accountIndex in the Path, please refer to bip-0044
    */
-  public deriveAccount(accountIndex: number): Account {
-    return Account.fromPrivateKey(toHex(this.derivePrivateKey(accountIndex)));
+  public deriveAccount(accountIndex: number): DefaultAccount {
+    return DefaultAccount.fromPrivateKey(toHex(this.derivePrivateKey(accountIndex)));
   }
 }

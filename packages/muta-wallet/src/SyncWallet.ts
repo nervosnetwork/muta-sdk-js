@@ -1,7 +1,7 @@
-import { Account } from '@mutajs/account';
+import { DefaultAccount } from '@mutajs/account';
 
 interface SyncWallet {
-  deriveAccount(accountIndex: number): Account;
+  deriveAccount(accountIndex: number): DefaultAccount;
   derivePrivateKey(accountIndex: number): Buffer;
 }
 

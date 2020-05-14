@@ -1,4 +1,4 @@
-import { Account } from '@mutajs/account';
+import { DefaultAccount } from '@mutajs/account';
 import { Client } from '@mutajs/client';
 import {
   DEFAULT_CHAIN_ID,
@@ -39,7 +39,7 @@ export interface MutaContext {
  */
 export class Muta {
   public static hdWallet = HDWallet;
-  public static account = Account;
+  public static account = DefaultAccount;
   private readonly context: MutaContext;
 
   /**
@@ -70,8 +70,8 @@ export class Muta {
    * create an Account directly from private key
    * @param privateKey
    */
-  public static accountFromPrivateKey(privateKey: string): Account {
-    return Account.fromPrivateKey(privateKey);
+  public static accountFromPrivateKey(privateKey: string): DefaultAccount {
+    return DefaultAccount.fromPrivateKey(privateKey);
   }
 
   /**
