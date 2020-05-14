@@ -1,4 +1,4 @@
-import { Account } from '@mutajs/account';
+import { IAccount } from '@mutajs/account';
 import { Client } from '@mutajs/client';
 import { invariant } from '@mutajs/shared';
 import {
@@ -8,12 +8,7 @@ import {
   SignedTransaction,
   Transaction,
 } from '@mutajs/types';
-import {
-  capitalize,
-  safeParseJSON,
-  signTransaction,
-  toHex,
-} from '@mutajs/utils';
+import { capitalize, safeParseJSON, toHex } from '@mutajs/utils';
 
 /**
  * Given an input payload, transform to [[QueryServiceParam]]
@@ -55,7 +50,9 @@ function isRead(handler: any): handler is Read {
   return handler.type === 'read';
 }
 
-type WritePayloadHandler<P = any> = (payload: P) => Promise<Transaction>;
+type WritePayloadHandler<P = any, R = any> = (
+  payload: P,
+) => Promise<Transaction<R>>;
 
 /**
  *
@@ -64,7 +61,7 @@ type WritePayloadHandler<P = any> = (payload: P) => Promise<Transaction>;
 interface WriteHandler<P = any, R = string> {
   (payload: P, privateKey: string | Buffer): Promise<SignedTransaction>;
 
-  (payload: P): Promise<Transaction>;
+  (payload: P): Promise<Transaction<R>>;
 }
 
 /**
@@ -100,9 +97,9 @@ function isWrite(handler: any): handler is Write {
 }
 
 interface SendTransaction<PW = any, RW = any> {
-  (payload: PW): Promise<Transaction>;
+  (payload: PW): Promise<Transaction<RW>>;
 
-  (payload: PW, privateKey: string | Buffer): Promise<Receipt<RW>>;
+  (payload: PW, account: IAccount): Promise<Receipt<RW>>;
 }
 
 export type ServiceBinding<Binding> = {
@@ -136,9 +133,9 @@ export function createServiceBinding<T>(
       // @ts-ignore
       const sendOrGenerateTransaction: SendTransaction = async (
         inputPayload,
-        privateKey?,
+        account?,
       ) => {
-        const transaction: Transaction = await (handler.transform
+        const transaction = await (handler.transform
           ? handler.transform(inputPayload)
           : client.composeTransaction({
               method,
@@ -146,18 +143,14 @@ export function createServiceBinding<T>(
               serviceName,
             }));
 
-        if (!privateKey) {
+        if (!account) {
           return transaction;
         }
 
-        const tx = signTransaction(transaction, privateKey);
-
+        const tx = account.signTransaction(transaction);
         let txHash: string;
         try {
-          txHash = await client.sendTransaction({
-            ...tx.inputEncryption,
-            ...tx.inputRaw,
-          });
+          txHash = await client.sendTransaction(tx);
         } catch (e) {
           throw e;
         }
@@ -202,21 +195,21 @@ export type BindingClassPrototype<Binding> = {
 
 export type ServiceBindingClass<T> = new (
   client: Client,
-  account?: Account,
+  account?: IAccount,
 ) => BindingClassPrototype<T>;
 
 export function createBindingClass<T>(
   serviceName: string,
   model: T,
 ): ServiceBindingClass<T> {
-  function BindingClass(client: Client, account?: Account) {
+  function BindingClass(client: Client, account?: IAccount) {
     const binding = createServiceBinding<T>(serviceName, model, { client });
     const prototypes = Object.entries(model).reduce(
       (prototype, [method, handler]) => {
         if (isRead(handler)) {
           prototype[method] = binding[method];
         } else if (isWrite(handler)) {
-          prototype[method] = (payload) => {
+          prototype[method] = payload => {
             invariant(
               account,
               'Try to call a #[write] method without account is denied,' +
@@ -224,8 +217,8 @@ export function createBindingClass<T>(
                   serviceName,
                 )}Service(client, account)`,
             );
-            // @ts-ignore
-            return binding[method](payload, account._privateKey);
+
+            return binding[method](payload, account);
           };
         }
 

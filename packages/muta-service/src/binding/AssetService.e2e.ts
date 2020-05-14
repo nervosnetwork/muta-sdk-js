@@ -1,9 +1,9 @@
-import { Account } from '@mutajs/account';
+import { DefaultAccount } from '@mutajs/account';
 import { Client } from '@mutajs/client';
 import { BigNumber } from '@mutajs/shared';
 import { AssetService } from './AssetService';
 
-const account = Account.fromPrivateKey(
+const account = DefaultAccount.fromPrivateKey(
   '0x45c56be699dca666191ad3446897e0f480da234da896270202514a0e1a587c3f',
 );
 

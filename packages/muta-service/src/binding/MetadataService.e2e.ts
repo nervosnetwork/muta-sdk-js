@@ -1,8 +1,8 @@
-import { Account } from '@mutajs/account';
+import { DefaultAccount } from '@mutajs/account';
 import { Client } from '@mutajs/client';
 import { MetadataService } from '@mutajs/service';
 
-const account = Account.fromPrivateKey(
+const account = DefaultAccount.fromPrivateKey(
   '0x45c56be699dca666191ad3446897e0f480da234da896270202514a0e1a587c3f',
 );
 const client = new Client();
