@@ -1,6 +1,6 @@
 {
   "name": "@mutajs/service",
-  "version": "0.11.0-alpha.12",
+  "version": "0.11.0-alpha.14",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -10,10 +10,13 @@
     "lib"
   ],
   "dependencies": {
-    "@mutajs/account": "^0.11.0-alpha.12",
-    "@mutajs/client": "^0.11.0-alpha.12",
-    "@mutajs/shared": "^0.11.0-alpha.12",
-    "@mutajs/types": "^0.11.0-alpha.12",
-    "@mutajs/utils": "^0.11.0-alpha.12"
+    "@mutajs/account": "^0.11.0-alpha.14",
+    "@mutajs/client": "^0.11.0-alpha.14",
+    "@mutajs/shared": "^0.11.0-alpha.13",
+    "@mutajs/types": "^0.11.0-alpha.14",
+    "@mutajs/utils": "^0.11.0-alpha.14",
+    "graphql": "^15.0.0",
+    "node-fetch": "^2.6.0",
+    "p-lazy": "^3.0.0"
   }
 }

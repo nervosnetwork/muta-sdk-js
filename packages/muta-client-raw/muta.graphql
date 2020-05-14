@@ -56,7 +56,6 @@ query getReceipt($txHash: Hash!) {
     events {
       data
       service
-      #      topic
     }
     stateRoot
     response {

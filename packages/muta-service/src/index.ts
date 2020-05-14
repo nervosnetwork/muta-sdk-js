@@ -1,4 +1,5 @@
-export * from './binding';
+export * from './binding/create';
+export * from './binding/hook';
 
-export { AssetService } from './binding/AssetService';
-export { MetadataService } from './binding/MetadataService';
+export { AssetService } from './builtin/AssetService';
+export { MetadataService } from './builtin/MetadataService';

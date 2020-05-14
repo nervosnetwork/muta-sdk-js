@@ -104,13 +104,13 @@ interface SendTransaction<PW = any, RW = any> {
 
 export type ServiceBinding<Binding> = {
   [method in keyof Binding]: Binding[method] extends Read<
-    infer ReadPayload,
-    infer QueryResponse
-  >
+      infer ReadPayload,
+      infer QueryResponse
+      >
     ? (payload: ReadPayload) => Promise<ServiceResponse<QueryResponse>>
     : Binding[method] extends Write<infer WritePayload, infer ReceiptRet>
-    ? SendTransaction<WritePayload, ReceiptRet>
-    : never;
+      ? SendTransaction<WritePayload, ReceiptRet>
+      : never;
 };
 
 export function createServiceBinding<T>(
@@ -138,10 +138,10 @@ export function createServiceBinding<T>(
         const transaction = await (handler.transform
           ? handler.transform(inputPayload)
           : client.composeTransaction({
-              method,
-              payload: inputPayload,
-              serviceName,
-            }));
+            method,
+            payload: inputPayload,
+            serviceName,
+          }));
 
         if (!account) {
           return transaction;
@@ -182,15 +182,15 @@ export function createServiceBinding<T>(
 
 export type BindingClassPrototype<Binding> = {
   [method in keyof Binding]: Binding[method] extends Read<
-    infer ReadPayload,
-    infer QueryResponse
-  >
+      infer ReadPayload,
+      infer QueryResponse
+      >
     ? ReadPayload extends undefined
       ? () => Promise<ServiceResponse<QueryResponse>>
       : (payload: ReadPayload) => Promise<ServiceResponse<QueryResponse>>
     : Binding[method] extends Write<infer WritePayload, infer ReceiptRet>
-    ? (payload: WritePayload) => Promise<Receipt<ReceiptRet>>
-    : never;
+      ? (payload: WritePayload) => Promise<Receipt<ReceiptRet>>
+      : never;
 };
 
 export type ServiceBindingClass<T> = new (
@@ -213,9 +213,9 @@ export function createBindingClass<T>(
             invariant(
               account,
               'Try to call a #[write] method without account is denied,' +
-                ` need to new ${capitalize(
-                  serviceName,
-                )}Service(client, account)`,
+              ` need to new ${capitalize(
+                serviceName,
+              )}Service(client, account)`,
             );
 
             return binding[method](payload, account);

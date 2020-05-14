@@ -22,7 +22,7 @@ export type Scalars = {
 };
 
 export type Event = {
-   __typename?: 'Event';
+  __typename?: 'Event';
   service: Scalars['String'];
   data: Scalars['String'];
 };
@@ -30,7 +30,7 @@ export type Event = {
 
 /** The verifier of the block header proved */
 export type Proof = {
-   __typename?: 'Proof';
+  __typename?: 'Proof';
   height: Scalars['Uint64'];
   round: Scalars['Uint64'];
   blockHash: Scalars['Hash'];
@@ -48,7 +48,7 @@ export type InputTransactionEncryption = {
 
 
 export type Mutation = {
-   __typename?: 'Mutation';
+  __typename?: 'Mutation';
   /** send transaction */
   sendTransaction: Scalars['Hash'];
   /** @deprecated DON'T use it in production! This is just for development. */
@@ -70,7 +70,7 @@ export type MutationUnsafeSendTransactionArgs = {
 
 
 export type Query = {
-   __typename?: 'Query';
+  __typename?: 'Query';
   /** Get the block */
   getBlock: Block;
   /** Get the transaction by hash */
@@ -108,7 +108,7 @@ export type QueryQueryServiceArgs = {
 };
 
 export type Receipt = {
-   __typename?: 'Receipt';
+  __typename?: 'Receipt';
   stateRoot: Scalars['Hash'];
   height: Scalars['Uint64'];
   txHash: Scalars['Hash'];
@@ -118,7 +118,7 @@ export type Receipt = {
 };
 
 export type ReceiptResponse = {
-   __typename?: 'ReceiptResponse';
+  __typename?: 'ReceiptResponse';
   serviceName: Scalars['String'];
   method: Scalars['String'];
   response: ServiceResponse;
@@ -126,7 +126,7 @@ export type ReceiptResponse = {
 
 
 export type SignedTransaction = {
-   __typename?: 'SignedTransaction';
+  __typename?: 'SignedTransaction';
   chainId: Scalars['Hash'];
   cyclesLimit: Scalars['Uint64'];
   cyclesPrice: Scalars['Uint64'];
@@ -141,7 +141,7 @@ export type SignedTransaction = {
 
 /** Block is a single digital record created within a blockchain. Each block contains a record of the previous Block, and when linked together these become the “chain”.A block is always composed of header and body. */
 export type Block = {
-   __typename?: 'Block';
+  __typename?: 'Block';
   /** The header section of a block */
   header: BlockHeader;
   /** The body section of a block */
@@ -152,7 +152,7 @@ export type Block = {
 
 /** Validator address set */
 export type Validator = {
-   __typename?: 'Validator';
+  __typename?: 'Validator';
   address: Scalars['Address'];
   proposeWeight: Scalars['Int'];
   voteWeight: Scalars['Int'];
@@ -160,7 +160,7 @@ export type Validator = {
 
 /** A block header is like the metadata of a block. */
 export type BlockHeader = {
-   __typename?: 'BlockHeader';
+  __typename?: 'BlockHeader';
   /** Identifier of a chain in order to prevent replay attacks across channels  */
   chainId: Scalars['Hash'];
   /** block height */
@@ -190,7 +190,7 @@ export type BlockHeader = {
 };
 
 export type ServiceResponse = {
-   __typename?: 'ServiceResponse';
+  __typename?: 'ServiceResponse';
   code: Scalars['Uint64'];
   succeedData: Scalars['String'];
   errorMessage: Scalars['String'];
@@ -228,8 +228,8 @@ export type QueryServiceQuery = (
   & { queryService: (
     { __typename?: 'ServiceResponse' }
     & Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'>
-  ) }
-);
+    ) }
+  );
 
 export type SendTransactionMutationVariables = {
   inputRaw: InputRawTransaction;
@@ -240,12 +240,12 @@ export type SendTransactionMutationVariables = {
 export type SendTransactionMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'sendTransaction'>
-);
+  );
 
 export type ServicePayloadFragment = (
   { __typename?: 'SignedTransaction' }
   & Pick<SignedTransaction, 'serviceName' | 'method' | 'payload'>
-);
+  );
 
 export type GetTransactionQueryVariables = {
   txHash: Scalars['Hash'];
@@ -258,8 +258,8 @@ export type GetTransactionQuery = (
     { __typename?: 'SignedTransaction' }
     & Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'witness'>
     & ServicePayloadFragment
-  ) }
-);
+    ) }
+  );
 
 export type GetReceiptQueryVariables = {
   txHash: Scalars['Hash'];
@@ -274,16 +274,16 @@ export type GetReceiptQuery = (
     & { events: Array<(
       { __typename?: 'Event' }
       & Pick<Event, 'data' | 'service'>
-    )>, response: (
+      )>, response: (
       { __typename?: 'ReceiptResponse' }
       & Pick<ReceiptResponse, 'serviceName' | 'method'>
       & { response: (
         { __typename?: 'ServiceResponse' }
         & Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'>
+        ) }
       ) }
     ) }
-  ) }
-);
+  );
 
 export type GetBlockQueryVariables = {
   height?: Maybe<Scalars['Uint64']>;
@@ -301,106 +301,106 @@ export type GetBlockQuery = (
       & { proof: (
         { __typename?: 'Proof' }
         & Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>
-      ), validators: Array<(
+        ), validators: Array<(
         { __typename?: 'Validator' }
         & Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>
-      )> }
+        )> }
+      ) }
     ) }
-  ) }
-);
+  );
 
 export const ServicePayloadFragmentDoc = gql`
-    fragment ServicePayload on SignedTransaction {
-  serviceName
-  method
-  payload
-}
-    `;
+  fragment ServicePayload on SignedTransaction {
+    serviceName
+    method
+    payload
+  }
+`;
 export const QueryServiceDocument = gql`
-    query queryService($serviceName: String!, $method: String!, $payload: String!, $height: Uint64, $caller: Address = "0x0000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
-  queryService(height: $height, serviceName: $serviceName, method: $method, payload: $payload, caller: $caller, cyclesPrice: $cyclePrice, cyclesLimit: $cycleLimit) {
-    code
-    errorMessage
-    succeedData
+  query queryService($serviceName: String!, $method: String!, $payload: String!, $height: Uint64, $caller: Address = "0x0000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
+    queryService(height: $height, serviceName: $serviceName, method: $method, payload: $payload, caller: $caller, cyclesPrice: $cyclePrice, cyclesLimit: $cycleLimit) {
+      code
+      errorMessage
+      succeedData
+    }
   }
-}
-    `;
+`;
 export const SendTransactionDocument = gql`
-    mutation sendTransaction($inputRaw: InputRawTransaction!, $inputEncryption: InputTransactionEncryption!) {
-  sendTransaction(inputRaw: $inputRaw, inputEncryption: $inputEncryption)
-}
-    `;
+  mutation sendTransaction($inputRaw: InputRawTransaction!, $inputEncryption: InputTransactionEncryption!) {
+    sendTransaction(inputRaw: $inputRaw, inputEncryption: $inputEncryption)
+  }
+`;
 export const GetTransactionDocument = gql`
-    query getTransaction($txHash: Hash!) {
-  getTransaction(txHash: $txHash) {
-    ...ServicePayload
-    nonce
-    chainId
-    cyclesLimit
-    cyclesPrice
-    timeout
-    txHash
-    witness
-  }
-}
-    ${ServicePayloadFragmentDoc}`;
-export const GetReceiptDocument = gql`
-    query getReceipt($txHash: Hash!) {
-  getReceipt(txHash: $txHash) {
-    txHash
-    height
-    cyclesUsed
-    events {
-      data
-      service
-    }
-    stateRoot
-    response {
-      serviceName
-      method
-      response {
-        code
-        errorMessage
-        succeedData
-      }
-    }
-  }
-}
-    `;
-export const GetBlockDocument = gql`
-    query getBlock($height: Uint64) {
-  getBlock(height: $height) {
-    header {
+  query getTransaction($txHash: Hash!) {
+    getTransaction(txHash: $txHash) {
+      ...ServicePayload
+      nonce
       chainId
-      confirmRoot
-      cyclesUsed
+      cyclesLimit
+      cyclesPrice
+      timeout
+      txHash
+      witness
+    }
+  }
+${ServicePayloadFragmentDoc}`;
+export const GetReceiptDocument = gql`
+  query getReceipt($txHash: Hash!) {
+    getReceipt(txHash: $txHash) {
+      txHash
       height
-      execHeight
-      orderRoot
-      preHash
-      proposer
-      receiptRoot
-      stateRoot
-      timestamp
-      validatorVersion
-      proof {
-        bitmap
-        blockHash
-        height
-        round
-        signature
+      cyclesUsed
+      events {
+        data
+        service
       }
-      validators {
-        address
-        proposeWeight
-        voteWeight
+      stateRoot
+      response {
+        serviceName
+        method
+        response {
+          code
+          errorMessage
+          succeedData
+        }
       }
     }
-    orderedTxHashes
-    hash
   }
-}
-    `;
+`;
+export const GetBlockDocument = gql`
+  query getBlock($height: Uint64) {
+    getBlock(height: $height) {
+      header {
+        chainId
+        confirmRoot
+        cyclesUsed
+        height
+        execHeight
+        orderRoot
+        preHash
+        proposer
+        receiptRoot
+        stateRoot
+        timestamp
+        validatorVersion
+        proof {
+          bitmap
+          blockHash
+          height
+          round
+          signature
+        }
+        validators {
+          address
+          proposeWeight
+          voteWeight
+        }
+      }
+      orderedTxHashes
+      hash
+    }
+  }
+`;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 

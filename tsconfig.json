@@ -18,7 +18,7 @@
     "paths": {
       "@mutajs/shared": ["shared/src"],
       "@mutajs/types": ["muta-types/src"],
-      "@mutajs/utils": ["packages/muta-utils/src"],
+      "@mutajs/utils": ["muta-utils/src"],
       "@mutajs/account": ["muta-account/src"],
       "@mutajs/client-raw": ["muta-client-raw/src"],
       "@mutajs/client": ["muta-client/src"],
@@ -26,5 +26,36 @@
     }
   },
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "packages/muta-account"
+    },
+    {
+      "path": "packages/muta-client"
+    },
+    {
+      "path": "packages/muta-client-raw"
+    },
+    {
+      "path": "packages/muta-defaults"
+    },
+    {
+      "path": "packages/muta-sdk"
+    },
+    {
+      "path": "packages/muta-service"
+    },
+    {
+      "path": "packages/muta-types"
+    },
+    {
+      "path": "packages/muta-utils"
+    },
+    {
+      "path": "packages/muta-wallet"
+    },
+    {
+      "path": "packages/shared"
+    }
+  ]
 }
