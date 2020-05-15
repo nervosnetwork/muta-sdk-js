@@ -3,12 +3,6 @@ import {
   InputRawTransaction,
   InputTransactionEncryption,
 } from '@mutajs/client-raw';
-import {
-  DEFAULT_CHAIN_ID,
-  DEFAULT_CONSENSUS_INTERVAL,
-  DEFAULT_ENDPOINT,
-  DEFAULT_TIMEOUT_GAP,
-} from '@mutajs/defaults';
 import { invariant } from '@mutajs/shared';
 import {
   Block,
@@ -30,7 +24,8 @@ import {
 } from '@mutajs/utils';
 import { GraphQLClient } from 'graphql-request';
 import { defaults, isNil } from 'lodash';
-import { retry, Retry, RetryConfig } from './retry';
+import { ClientOption, getDefaultClientOption } from './options';
+import { retry, RetryConfig } from './retry';
 
 /**
  * give those params,
@@ -43,50 +38,6 @@ export interface ComposeTransactionParam<P> {
   serviceName: string;
   method: string;
   payload: P;
-}
-
-/**
- * the preset [[ClientOption]] when you construct [[Client]]
- * you may manually construct by Construct
- * or from Muta's [[client]]
- */
-export interface ClientOption {
-  /**
-   * {@link MutaContext.endpoint}
-   */
-  endpoint: string;
-
-  /**
-   * {@link MutaContext.chainId}
-   */
-  chainId: string;
-
-  /**
-   * Warning, this configuration is likely to be deprecated in the future.
-   * {@link Transaction.cyclesLimit}
-   */
-  defaultCyclesLimit: Uint64;
-
-  /**
-   * Warning, this configuration is likely to be deprecated in the future.
-   * {@link Transaction.cyclesPrice}
-   */
-  defaultCyclesPrice: Uint64;
-
-  /**
-   * {@link MutaContext.timeoutGap}
-   */
-  timeoutGap: number;
-
-  /**
-   * {@link MutaContext.consensusInterval}
-   */
-  consensusInterval: number;
-
-  /**
-   * This value indicates the maximum waiting time for the client to wait for the response
-   */
-  maxTimeout: number;
 }
 
 type RawClient = ReturnType<typeof getSdk>;
@@ -128,15 +79,10 @@ export class Client {
    * @param options, see {@link ClientOption} for more details
    */
   constructor(options?: ClientOption) {
-    this.options = defaults<ClientOption, ClientOption>(options, {
-      endpoint: DEFAULT_ENDPOINT,
-      chainId: DEFAULT_CHAIN_ID,
-      defaultCyclesPrice: '0xffff',
-      defaultCyclesLimit: '0xffff',
-      maxTimeout: 60000,
-      timeoutGap: DEFAULT_TIMEOUT_GAP,
-      consensusInterval: DEFAULT_CONSENSUS_INTERVAL,
-    });
+    this.options = defaults<ClientOption, ClientOption>(
+      options,
+      getDefaultClientOption(),
+    );
 
     this.rawClient = getSdk(
       new GraphQLClient(this.options.endpoint, {
@@ -158,7 +104,7 @@ export class Client {
    */
   public async getBlock(height?: string): Promise<Block> {
     const res = await this.rawClient.getBlock(
-      isNil(height) ? { height } : null,
+      !isNil(height) ? { height } : null,
     );
     return res.getBlock;
   }
@@ -191,9 +137,7 @@ export class Client {
    * @param txHash the target transaction hash, you can call [[sendTransaction]] to send a [[Transaction]] and get its txHash
    */
   public async getReceipt(txHash: Hash): Promise<Receipt> {
-    const res = await Retry.from(() => this.rawClient.getReceipt({ txHash }))
-      .withTimeout(this.options.maxTimeout)
-      .start();
+    const res = await this.rawClient.getReceipt({ txHash });
 
     return res.getReceipt;
   }
@@ -332,7 +276,7 @@ export class Client {
     const before = await this.getLatestBlockHeight();
 
     return retry({
-      onResolve: (height) => height - before >= n,
+      onResolve: height => height - before >= n,
       retry: () => this.getLatestBlockHeight(),
       timeout: this.options.maxTimeout,
       ...options,
