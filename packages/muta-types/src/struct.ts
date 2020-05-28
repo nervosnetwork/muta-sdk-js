@@ -28,7 +28,7 @@ export interface BlockHeader {
   /**
    * prev block hash
    */
-  preHash: Hash;
+  prevHash: Hash;
 
   /**
    * the time tim

@@ -30,7 +30,7 @@ type BlockHeader {
   "The merkle root of ordered transactions"
   orderRoot: Hash!
   "The hash of the serialized previous block"
-  preHash: Hash!
+  prevHash: Hash!
   proof: Proof!
   "The address descirbed who packed the block"
   proposer: Address!

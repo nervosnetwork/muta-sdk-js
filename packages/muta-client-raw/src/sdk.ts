@@ -45,7 +45,7 @@ export type BlockHeader = {
   /** The height to which the block has been executed */
   execHeight: Scalars['Uint64'];
   /** The hash of the serialized previous block */
-  preHash: Scalars['Hash'];
+  prevHash: Scalars['Hash'];
   /** A timestamp that records when the block was created */
   timestamp: Scalars['Uint64'];
   /** The merkle root of ordered transactions */
@@ -309,7 +309,7 @@ export type GetBlockQuery = (
     & Pick<Block, 'orderedTxHashes' | 'hash'>
     & { header: (
       { __typename?: 'BlockHeader' }
-      & Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'execHeight' | 'orderRoot' | 'preHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
+      & Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'execHeight' | 'orderRoot' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
       & { proof: (
         { __typename?: 'Proof' }
         & Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>
@@ -390,7 +390,7 @@ export const GetBlockDocument = gql`
       height
       execHeight
       orderRoot
-      preHash
+      prevHash
       proposer
       receiptRoot
       stateRoot
