@@ -31,11 +31,11 @@ test('test get given block without height', async () => {
   expect(height >= 0).toBe(true);
 });
 
-test('current preHash eq last hash', async () => {
+test('current prevHash eq last hash', async () => {
   const lastBlock = await client.getBlock();
   await client.waitForNextNBlock(1);
 
   const currentBlock = await client.getBlock();
 
-  expect(currentBlock.header.preHash).toBe(lastBlock.hash);
+  expect(currentBlock.header.prevHash).toBe(lastBlock.hash);
 });

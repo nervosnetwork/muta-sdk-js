@@ -80,7 +80,7 @@ query getBlock($height: Uint64) {
       height
       execHeight
       orderRoot
-      preHash
+      prevHash
 
       proposer
       receiptRoot
