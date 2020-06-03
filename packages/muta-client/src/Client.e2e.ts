@@ -11,7 +11,15 @@ const client = new Client({
   endpoint: 'http://127.0.0.1:8000/graphql',
 });
 
-it('test get latest block', async () => {
+test('get block should be correct', async () => {
+  const lastBlock = await client.getBlock();
+  expect(lastBlock.hash).toBeTruthy();
+
+  const block1 = await client.getBlock('0x01');
+  expect(block1.hash).toBeTruthy();
+});
+
+test('test get latest block', async () => {
   const height = await client.getLatestBlockHeight();
   expect(typeof height).toBe('number');
   expect(height >= 0).toBe(true);

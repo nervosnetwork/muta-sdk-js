@@ -158,7 +158,7 @@ export class Client {
    */
   public async getBlock(height?: string): Promise<Block> {
     const res = await this.rawClient.getBlock(
-      isNil(height) ? { height } : null,
+      isNil(height) ? null : { height },
     );
     return res.getBlock;
   }
