@@ -14,6 +14,6 @@ const MockService = createBindingClass<MockServiceModel>('mock', {
 });
 
 it('error when readonly service try to write', () => {
-  const mockService = new MockService(client, null);
+  const mockService = new MockService(client);
   expect(() => mockService.write_something(null)).toThrow();
 });

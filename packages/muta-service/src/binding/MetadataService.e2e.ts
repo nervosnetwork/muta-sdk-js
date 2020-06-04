@@ -10,6 +10,6 @@ const client = new Client();
 const service = new MetadataService(client, account);
 
 test('test MetadataService', async () => {
-  const res = await service.get_metadata();
+  const res = await service.get_metadata(null);
   expect(Number(res.code)).toBe(0);
 });
