@@ -4,8 +4,7 @@
   "extends": "../../tsconfig",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "lib",
-    "tsBuildInfoFile": "../../.cache/muta-wallet.tsbuildinfo"
+    "outDir": "lib"
   },
   "references": [
     {

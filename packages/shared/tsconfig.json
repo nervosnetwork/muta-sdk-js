@@ -3,7 +3,6 @@
   "extends": "../../tsconfig",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src",
-    "tsBuildInfoFile": "../../.cache/shared.tsbuildinfo"
+    "rootDir": "src"
   }
 }

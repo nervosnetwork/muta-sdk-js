@@ -4,9 +4,7 @@
   "extends": "../../tsconfig",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src",
-    "tsBuildInfoFile": "../../.cache/muta-client.tsbuildinfo"
-
+    "rootDir": "src"
   },
   "references": [
     {

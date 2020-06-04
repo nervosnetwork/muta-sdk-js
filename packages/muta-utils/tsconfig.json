@@ -1,10 +1,11 @@
 {
   "include": ["src"],
+  "exclude": ["**/*.test.ts", "**/*.e2e.ts"],
   "extends": "../../tsconfig",
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "tsBuildInfoFile": "../../.cache/muta-utils.tsbuildinfo"
+    "typeRoots": ["./types"]
   },
   "references": [
     {

@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
+    "strict": true,
+    "skipLibCheck": true,
     "declaration": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
@@ -16,15 +18,29 @@
     "lib": ["es2017", "dom"],
     "baseUrl": "./packages",
     "paths": {
-      "@mutajs/shared": ["shared/src"],
-      "@mutajs/types": ["muta-types/src"],
-      "@mutajs/utils": ["packages/muta-utils/src"],
       "@mutajs/account": ["muta-account/src"],
-      "@mutajs/client-raw": ["muta-client-raw/src"],
       "@mutajs/client": ["muta-client/src"],
-      "@mutajs/service": ["muta-service/src"]
+      "@mutajs/client-raw": ["muta-client-raw/src"],
+      "@mutajs/defaults": ["muta-defaults/src"],
+      "muta-sdk": ["muta-sdk/src"],
+      "@mutajs/service": ["muta-service/src"],
+      "@mutajs/types": ["muta-types/src"],
+      "@mutajs/utils": ["muta-utils/src"],
+      "@mutajs/wallet": ["muta-wallet/src"],
+      "@mutajs/shared": ["shared/src"]
     }
   },
   "files": [],
-  "references": []
+  "references": [
+    { "path": "./packages/shared" },
+    { "path": "./packages/muta-defaults" },
+    { "path": "./packages/muta-types" },
+    { "path": "./packages/muta-utils" },
+    { "path": "./packages/muta-client-raw" },
+    { "path": "./packages/muta-client" },
+    { "path": "./packages/muta-account" },
+    { "path": "./packages/muta-service" },
+    { "path": "./packages/muta-wallet" },
+    { "path": "./packages/muta-sdk" }
+  ]
 }
