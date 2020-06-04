@@ -1,5 +1,5 @@
 import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
-import * as HDKey from 'hdkey';
+import HDKey from 'hdkey';
 import { Account } from '@mutajs/account';
 import { toHex } from '@mutajs/utils';
 import { SyncWallet } from './SyncWallet';
@@ -61,7 +61,7 @@ export class HDWallet implements SyncWallet {
    */
   public derivePrivateKey(accountIndex: number): Buffer {
     const hdNode = this.masterNode.derive(HDWallet.getHDPath(accountIndex));
-    return hdNode._privateKey;
+    return hdNode.privateKey;
   }
 
   /**
