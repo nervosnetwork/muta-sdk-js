@@ -10,4 +10,4 @@ package-lock.json
 lib
 .cache
 build
-
+*.tsbuildinfo

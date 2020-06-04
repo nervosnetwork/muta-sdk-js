@@ -1,6 +1,7 @@
 # Muta SDK(WIP)
 
-The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). Allow you interact with Muta node's GraphQL service.
+The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). 
+Allow you to interact with Muta node's GraphQL service.
 
 ## Quick Start
 
@@ -10,13 +11,15 @@ npm install muta-sdk
 
 ## Example
 
-The following code will shows
+The following code will show
 
 1. How to interact with `#[read]` service
 2. How to sign a transaction
 3. How to sendTransaction
 
-```js
+```
+
+
 async function main() {
   // get metadata from the chain
   const metadataResponse = await client.queryServiceDyn({
