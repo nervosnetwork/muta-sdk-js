@@ -45,19 +45,17 @@ export interface ComposeTransactionParam<P> {
   payload: P;
 }
 
-/**
- * the preset [[ClientOption]] when you construct [[Client]]
- * you may manually construct by Construct
- * or from Muta's [[client]]
- */
 export interface ClientOption {
   /**
-   * {@link MutaContext.endpoint}
+   * A GraphQL endpoint is the RPC endpoint exposed by Muta
    */
   endpoint: string;
 
   /**
-   * {@link MutaContext.chainId}
+   * Since Muta is a blockchain framework that allows multiple instances,
+   * the chain id is used to prevent replay attacks, for more information,
+   * For more details about chain id,
+   * you can check [EIP55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md)
    */
   chainId: string;
 
@@ -74,12 +72,12 @@ export interface ClientOption {
   defaultCyclesPrice: Uint64;
 
   /**
-   * {@link MutaContext.timeoutGap}
+   * Muta timeout gap
    */
   timeoutGap: number;
 
   /**
-   * {@link MutaContext.consensusInterval}
+   * Muta consensus interval
    */
   consensusInterval: number;
 
@@ -128,7 +126,7 @@ export class Client {
    * @param options, see {@link ClientOption} for more details
    */
   constructor(options?: ClientOption) {
-    this.options = defaults<ClientOption, ClientOption>(options, {
+    this.options = defaults<ClientOption | undefined, ClientOption>(options, {
       endpoint: DEFAULT_ENDPOINT,
       chainId: DEFAULT_CHAIN_ID,
       defaultCyclesPrice: '0xffff',
@@ -157,9 +155,9 @@ export class Client {
    * @param height the target height you want search, null for the latest
    */
   public async getBlock(height?: string): Promise<Block> {
-    const res = await this.rawClient.getBlock(
-      isNil(height) ? null : { height },
-    );
+    const heightVariable = !isNil(height) ? { height } : undefined;
+    const res = await this.rawClient.getBlock(heightVariable);
+
     return res.getBlock;
   }
 
@@ -168,7 +166,7 @@ export class Client {
    * @return the latest block height
    */
   public async getLatestBlockHeight(): Promise<number> {
-    const block = await this.getBlock(null);
+    const block = await this.getBlock();
     return hexToNum(block.header.height);
   }
 
@@ -332,7 +330,7 @@ export class Client {
     const before = await this.getLatestBlockHeight();
 
     return retry({
-      onResolve: (height) => height - before >= n,
+      onResolve: height => height - before >= n,
       retry: () => this.getLatestBlockHeight(),
       timeout: this.options.maxTimeout,
       ...options,
