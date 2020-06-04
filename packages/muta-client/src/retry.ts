@@ -1,46 +1,55 @@
 function wait(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 const DEFAULT_RETRY_TIMEOUT = 100000;
 const DEFAULT_RETRY_INTERVAL = 500;
+const DEFAULT_RESOLVE_CHECK = () => true;
 
+type PromiseThunk<T> = () => Promise<T>;
 type CheckPromise<T> = (x: T) => Promise<boolean> | boolean;
 
 export class Retry<T> {
-  private promiseThunk: () => Promise<T>;
   private timeout: number = DEFAULT_RETRY_TIMEOUT;
   private interval: number = DEFAULT_RETRY_INTERVAL;
+  private promiseThunk!: PromiseThunk<T>;
   private onResolve: CheckPromise<T>;
 
+  constructor(thunk: PromiseThunk<T>) {
+    this.promiseThunk = thunk;
+    this.onResolve = DEFAULT_RESOLVE_CHECK;
+  }
+
   public static from<T>(promiseThunk: () => Promise<T>): Retry<T> {
-    return new Retry<T>().withPromise(promiseThunk);
+    return new Retry<T>(promiseThunk);
   }
 
   public withPromise(promiseThunk: () => Promise<T>): this {
     this.promiseThunk = promiseThunk;
-    this.onResolve = () => true;
     return this;
   }
 
   public withInterval(interval: number): this {
-    this.interval = interval || this.interval;
+    this.interval = interval || DEFAULT_RETRY_INTERVAL;
     return this;
   }
 
   public withTimeout(timeout: number): this {
-    this.timeout = timeout || this.timeout;
+    this.timeout = timeout || DEFAULT_RETRY_TIMEOUT;
     return this;
   }
 
-  public withCheck(check: CheckPromise<T>): this {
-    this.onResolve = check || this.onResolve;
+  public withCheck(check?: CheckPromise<T>): this {
+    this.onResolve = check || DEFAULT_RESOLVE_CHECK;
     return this;
   }
 
   public async start(): Promise<T> {
+    if (!this.promiseThunk) {
+      throw new Error('');
+    }
     const before = Date.now();
-    let err: Error;
+    let err: Error = new Error('Retry timeout');
     while (Date.now() - before <= this.timeout) {
       try {
         const res = await this.promiseThunk();
@@ -54,7 +63,7 @@ export class Retry<T> {
       }
     }
 
-    return Promise.reject(err || 'Retry timeout');
+    return Promise.reject(err);
   }
 }
 
@@ -70,7 +79,7 @@ export interface RetryConfig {
 }
 
 export interface RetryOptions<T> extends RetryConfig {
-  retry: () => Promise<T>;
+  retry: PromiseThunk<T>;
   onResolve?: (t: T) => Promise<boolean> | boolean;
 }
 
