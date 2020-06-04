@@ -27,13 +27,14 @@ export function createTransactionSignature(
     tx.payload,
     tx.timeout,
   ];
+  const uint8PrivateKey = Uint8Array.from(privateKey);
   const encoded = encode(orderedTx);
   const txHash = keccak(encoded);
 
-  const { signature } = ecdsaSign(txHash, privateKey);
+  const { signature } = ecdsaSign(txHash, uint8PrivateKey);
 
   return {
-    pubkey: toHex(publicKeyCreate(privateKey)),
+    pubkey: toHex(publicKeyCreate(uint8PrivateKey)),
     signature: toHex(signature),
     txHash: toHex(txHash),
   };

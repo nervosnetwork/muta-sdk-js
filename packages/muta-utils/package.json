@@ -14,7 +14,11 @@
     "json-bigint": "^0.3.0",
     "keccak": "^3.0.0",
     "randombytes": "^2.1.0",
-    "rlp": "^2.2.3",
+    "rlp": "^2.2.5",
     "secp256k1": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/randombytes": "^2.0.0",
+    "@types/secp256k1": "^4.0.1"
   }
 }

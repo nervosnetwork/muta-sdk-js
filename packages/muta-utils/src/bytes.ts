@@ -34,7 +34,7 @@ export function toHex(x: Uint8Array | Buffer | number | string): string {
   return '0x' + Buffer.from(x).toString('hex');
 }
 
-function isUint8Array(x: unknown): x is Uint8Array {
+function isUint8Array(x: any): x is Uint8Array {
   return x?.constructor === Uint8Array;
 }
 
