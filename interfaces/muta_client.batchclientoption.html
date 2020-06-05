@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GetAssetPayload | muta-sdk</title>
+	<title>BatchClientOption | muta-sdk</title>
 	<meta name="description" content="Documentation for muta-sdk">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/muta_service.html">muta-service</a>
+					<a href="../modules/muta_client.html">muta-client</a>
 				</li>
 				<li>
-					<a href="muta_service.getassetpayload.html">GetAssetPayload</a>
+					<a href="muta_client.batchclientoption.html">BatchClientOption</a>
 				</li>
 			</ul>
-			<h1>Interface GetAssetPayload</h1>
+			<h1>Interface BatchClientOption</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GetAssetPayload</span>
+						<span class="target">BatchClientOption</span>
 					</li>
 				</ul>
 			</section>
@@ -84,7 +84,8 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.getassetpayload.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.batchclientoption.html#batch" class="tsd-kind-icon">batch</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.batchclientoption.html#client" class="tsd-kind-icon">client</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,12 +94,33 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#hash" class="tsd-signature-type">Hash</a></div>
+					<a name="batch" class="tsd-anchor"></a>
+					<h3>batch</h3>
+					<div class="tsd-signature tsd-kind-icon">batch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>chunkSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>concurrency<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4b52f57/packages/muta-service/src/binding/AssetService.ts#L11">muta-service/src/binding/AssetService.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4b52f57/packages/muta-client/src/BatchClient/batch-client.ts#L89">muta-client/src/BatchClient/batch-client.ts:89</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>chunk<wbr>Size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>concurrency<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="client" class="tsd-anchor"></a>
+					<h3>client</h3>
+					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="muta_client.clientoption.html" class="tsd-signature-type">ClientOption</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/4b52f57/packages/muta-client/src/BatchClient/batch-client.ts#L88">muta-client/src/BatchClient/batch-client.ts:88</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -113,7 +135,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/muta_account.html">muta-<wbr>account</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/muta_client.html">muta-<wbr>client</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -125,7 +147,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/muta_sdk.html">muta-<wbr>sdk</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/muta_service.html">muta-<wbr>service</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -141,107 +163,98 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.asset.html" class="tsd-kind-icon">Asset</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/muta_client.batchclient.html" class="tsd-kind-icon">Batch<wbr>Client</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_service.assetservicemodel.html" class="tsd-kind-icon">Asset<wbr>Service<wbr>Model</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/muta_client.client.html" class="tsd-kind-icon">Client</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.createassetpayload.html" class="tsd-kind-icon">Create<wbr>Asset<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.getallowancepayload.html" class="tsd-kind-icon">Get<wbr>Allowance<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.getallowanceresponse.html" class="tsd-kind-icon">Get<wbr>Allowance<wbr>Response</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../classes/muta_client.retry.html" class="tsd-kind-icon">Retry</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.getassetpayload.html" class="tsd-kind-icon">Get<wbr>Asset<wbr>Payload</a>
+						<a href="muta_client.batchclientoption.html" class="tsd-kind-icon">Batch<wbr>Client<wbr>Option</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="muta_service.getassetpayload.html#id" class="tsd-kind-icon">id</a>
+								<a href="muta_client.batchclientoption.html#batch" class="tsd-kind-icon">batch</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_client.batchclientoption.html#client" class="tsd-kind-icon">client</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.getbalancepayload.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.getbalanceresponse.html" class="tsd-kind-icon">Get<wbr>Balance<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.metadata.html" class="tsd-kind-icon">Metadata</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="muta_client.chunkandbatchoption.html" class="tsd-kind-icon">Chunk<wbr>And<wbr>Batch<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_service.metadataservicemodel.html" class="tsd-kind-icon">Metadata<wbr>Service<wbr>Model</a>
+						<a href="muta_client.clientoption.html" class="tsd-kind-icon">Client<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_service.read.html" class="tsd-kind-icon">Read</a>
+						<a href="muta_client.composetransactionparam.html" class="tsd-kind-icon">Compose<wbr>Transaction<wbr>Param</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="muta_service.sendtransaction.html" class="tsd-kind-icon">Send<wbr>Transaction</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.transferfrompayload.html" class="tsd-kind-icon">Transfer<wbr>From<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.transferpayload.html" class="tsd-kind-icon">Transfer<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.validatorextend.html" class="tsd-kind-icon">Validator<wbr>Extend</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="muta_client.retryconfig.html" class="tsd-kind-icon">Retry<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_service.write.html" class="tsd-kind-icon">Write</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="muta_service.writehandler.html" class="tsd-kind-icon">Write<wbr>Handler</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_service.html#approvepayload" class="tsd-kind-icon">Approve<wbr>Payload</a>
+						<a href="muta_client.retryoptions.html" class="tsd-kind-icon">Retry<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#bindingclassprototype" class="tsd-kind-icon">Binding<wbr>Class<wbr>Prototype</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#queryserviceparamtransform" class="tsd-kind-icon">Query<wbr>Service<wbr>Param<wbr>Transform</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#servicebinding" class="tsd-kind-icon">Service<wbr>Binding</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#servicebindingclass" class="tsd-kind-icon">Service<wbr>Binding<wbr>Class</a>
+						<a href="../modules/muta_client.html#batched" class="tsd-kind-icon">Batched</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../modules/muta_service.html#writepayloadhandler" class="tsd-kind-icon">Write<wbr>Payload<wbr>Handler</a>
+						<a href="../modules/muta_client.html#checkpromise" class="tsd-kind-icon">Check<wbr>Promise</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_client.html#promisethunk" class="tsd-kind-icon">Promise<wbr>Thunk</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#rawclient" class="tsd-kind-icon">Raw<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#rawreceipt" class="tsd-kind-icon">Raw<wbr>Receipt</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#rawtransaction" class="tsd-kind-icon">Raw<wbr>Transaction</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#default_retry_interval" class="tsd-kind-icon">DEFAULT_<wbr>RETRY_<wbr>INTERVAL</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#default_retry_timeout" class="tsd-kind-icon">DEFAULT_<wbr>RETRY_<wbr>TIMEOUT</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#receiptfragment" class="tsd-kind-icon">receipt<wbr>Fragment</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/muta_service.html#assetservice" class="tsd-kind-icon">Asset<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/muta_service.html#metadataservice" class="tsd-kind-icon">Metadata<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#createbindingclass" class="tsd-kind-icon">create<wbr>Binding<wbr>Class</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#createservicebinding" class="tsd-kind-icon">create<wbr>Service<wbr>Binding</a>
+						<a href="../modules/muta_client.html#txfragment" class="tsd-kind-icon">tx<wbr>Fragment</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_service.html#isread" class="tsd-kind-icon">is<wbr>Read</a>
+						<a href="../modules/muta_client.html#default_resolve_check" class="tsd-kind-icon">DEFAULT_<wbr>RESOLVE_<wbr>CHECK</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/muta_client.html#batchwithsamefragment" class="tsd-kind-icon">batch<wbr>With<wbr>Same<wbr>Fragment</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/muta_client.html#chunkandbatch" class="tsd-kind-icon">chunk<wbr>And<wbr>Batch</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_service.html#iswrite" class="tsd-kind-icon">is<wbr>Write</a>
+						<a href="../modules/muta_client.html#generatereceiptquerysegment" class="tsd-kind-icon">generate<wbr>Receipt<wbr>Query<wbr>Segment</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#generatetransactionquerysegment" class="tsd-kind-icon">generate<wbr>Transaction<wbr>Query<wbr>Segment</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/muta_client.html#getdefaultclientoption" class="tsd-kind-icon">get<wbr>Default<wbr>Client<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#read-1" class="tsd-kind-icon">read</a>
+						<a href="../modules/muta_client.html#retry-1" class="tsd-kind-icon">retry</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#write-1" class="tsd-kind-icon">write</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/muta_client.html#wait" class="tsd-kind-icon">wait</a>
 					</li>
 				</ul>
 			</nav>
