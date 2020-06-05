@@ -78,8 +78,6 @@ export interface RetryConfig {
   interval?: number;
 }
 
-type PromiseThunk<T> = () => Promise<T>;
-
 export interface RetryOptions<T> extends RetryConfig {
   retry: PromiseThunk<T>;
   onResolve?: (t: T) => Promise<boolean> | boolean;

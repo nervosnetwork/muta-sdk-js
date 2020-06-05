@@ -79,7 +79,7 @@ export class Client {
    * @param options, see {@link ClientOption} for more details
    */
   constructor(options?: ClientOption) {
-    this.options = defaults<ClientOption, ClientOption>(
+    this.options = defaults<ClientOption | undefined, ClientOption>(
       options,
       getDefaultClientOption(),
     );
