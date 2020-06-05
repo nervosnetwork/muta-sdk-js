@@ -72,28 +72,33 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Account is concept of A use on Muta chain.
-							it like other block chain, address is only identifier for different users, so as Muta
-							Account contains a privateKey, and could extract its publicKey and address
-						what&#39;s more, Account takes job of <a href="muta_account.account.html#signtransaction">signTransaction</a></p>
+						<p>If you are familiar with Ethereum, you will find that Muta&#39;s account system is similar to Ethereum.
+							Simply put, Muta&#39;s account is also secured by ECDSA cryptography.
+							A private key corresponds to a Muta account.
+							We can use the private key to create an account like this <code>new Account(&#39;0x...&#39;)</code>.
+						Generally used for <a href="muta_account.account.html#signtransaction">signTransaction</a></p>
 					</div>
 					<p>Here is an example:</p>
-					<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>)</span>{
-  <span class="hljs-keyword">const</span> account = Account.fromPrivateKey(
-    <span class="hljs-string">'0x1000000000000000000000000000000000000000000000000000000000000000'</span>
-);
+					<pre><code class="language-js"><span class="hljs-keyword">import</span> { Account } <span class="hljs-keyword">from</span> <span class="hljs-string">'@mutajs/account'</span>;
+<span class="hljs-keyword">import</span> { Client } <span class="hljs-keyword">from</span> <span class="hljs-string">'@mutajs/client'</span>;
 
-<span class="hljs-keyword">const</span> signedTransaction = account.signTransaction({
- <span class="hljs-attr">chainId</span>:
-   <span class="hljs-string">'0x0000000000000000000000000000000000000000000000000000000000000000'</span>,
- <span class="hljs-attr">cyclesLimit</span>: <span class="hljs-string">'0x00'</span>,
- <span class="hljs-attr">cyclesPrice</span>: <span class="hljs-string">'0x00'</span>,
- <span class="hljs-attr">method</span>: <span class="hljs-string">'method'</span>,
- <span class="hljs-attr">nonce</span>: <span class="hljs-string">'0x0000000000000000000000000000000000000000000000000000000000000000'</span>,
- <span class="hljs-attr">payload</span>: <span class="hljs-string">'payload'</span>,
- <span class="hljs-attr">serviceName</span>: <span class="hljs-string">'service_name'</span>,
- <span class="hljs-attr">timeout</span>: <span class="hljs-string">'0x9999'</span>
-});
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> Client();
+  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">new</span> Account(<span class="hljs-string">'0x...'</span>); <span class="hljs-comment">// private key</span>
+
+  <span class="hljs-comment">// create an UDT</span>
+  <span class="hljs-keyword">const</span> rawTransaction = <span class="hljs-keyword">await</span> client.composeTransaction({
+    <span class="hljs-attr">serviceName</span>: <span class="hljs-string">'asset'</span>,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'create_asset'</span>,
+    <span class="hljs-attr">payload</span>: {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'MyToken'</span>,
+      <span class="hljs-attr">symbol</span>: <span class="hljs-string">'MT'</span>,
+      <span class="hljs-attr">supply</span>: <span class="hljs-number">100</span>_000_000,
+    }
+  });
+
+  <span class="hljs-keyword">const</span> signedTransaction = account.signTransaction(rawTransaction);
+  client.sendTransaction(signedTransaction);
 }</code></pre>
 				</div>
 			</section>
@@ -153,7 +158,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L39">muta-account/src/Account.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L44">muta-account/src/Account.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -186,7 +191,7 @@
 					<div class="tsd-signature tsd-kind-icon">_private<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L39">muta-account/src/Account.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L44">muta-account/src/Account.ts:44</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -203,7 +208,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L62">muta-account/src/Account.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L67">muta-account/src/Account.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
@@ -220,7 +225,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L58">muta-account/src/Account.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L63">muta-account/src/Account.ts:63</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
@@ -237,7 +242,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L54">muta-account/src/Account.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L59">muta-account/src/Account.ts:59</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -254,7 +259,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L50">muta-account/src/Account.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L55">muta-account/src/Account.ts:55</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -274,48 +279,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L127">muta-account/src/Account.ts:127</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L96">muta-account/src/Account.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>sign a Muta transaction with this Account&#39;s internal private key
-										use case:
-									```typescript</p>
+									<p>sign a Muta transaction with this Account&#39;s internal private key</p>
 								</div>
-								<p>  const account = Account.fromPrivateKey(
-									&#39;0x1000000000000000000000000000000000000000000000000000000000000000&#39;
-									);
-									const signedTransaction = account.signTransaction({
-									chainId:
-									&#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
-									cyclesLimit: &#39;0x00&#39;,
-									cyclesPrice: &#39;0x00&#39;,
-									method: &#39;method&#39;,
-									nonce: &#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
-									payload: &#39;payload&#39;,
-									serviceName: &#39;service_name&#39;,
-									timeout: &#39;0x9999&#39;
-								});</p>
-								<p>  const { pubkey, signature, txHash } = signedTransaction;</p>
-								<p>```
-									the output is
-									{ chainId:
-									&#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
-									cyclesLimit: &#39;0x00&#39;,
-									cyclesPrice: &#39;0x00&#39;,
-									method: &#39;method&#39;,
-									nonce:
-									&#39;0x0000000000000000000000000000000000000000000000000000000000000000&#39;,
-									payload: &#39;payload&#39;,
-									pubkey:
-									&#39;0x0308ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0&#39;,
-									serviceName: &#39;service_name&#39;,
-									signature:
-									&#39;0xb911f4c58d9ae2c8ea4a546c426f4167813dd0d7a8b5de7f2a7d40e07d7df4572b5670744954ea1f2ff831d5c579fa5d937beb0ddd544d18f8bc069547ac5295&#39;,
-									timeout: &#39;0x9999&#39;,
-									txHash:
-								&#39;0x26e4ec1c25cc0c6fc084f358b97a7615fee1b229d271ba40bcfc5be80b6dd0d4&#39; }</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -338,7 +308,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L80">muta-account/src/Account.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L85">muta-account/src/Account.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -367,7 +337,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-account/src/Account.ts#L71">muta-account/src/Account.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-account/src/Account.ts#L76">muta-account/src/Account.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

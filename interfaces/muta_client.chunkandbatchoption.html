@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RetryOptions | muta-sdk</title>
+	<title>ChunkAndBatchOption | muta-sdk</title>
 	<meta name="description" content="Documentation for muta-sdk">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/muta_client.html">muta-client</a>
 				</li>
 				<li>
-					<a href="muta_client.retryoptions.html">RetryOptions</a>
+					<a href="muta_client.chunkandbatchoption.html">ChunkAndBatchOption</a>
 				</li>
 			</ul>
-			<h1>Interface RetryOptions&lt;T&gt;</h1>
+			<h1>Interface ChunkAndBatchOption&lt;Source&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>T</h4>
+						<h4>Source</h4>
 					</li>
 				</ul>
 			</section>
@@ -81,12 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="muta_client.retryconfig.html" class="tsd-signature-type">RetryConfig</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">RetryOptions</span>
-							</li>
-						</ul>
+						<span class="target">ChunkAndBatchOption</span>
 					</li>
 				</ul>
 			</section>
@@ -94,71 +89,105 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="muta_client.retryoptions.html#interval" class="tsd-kind-icon">interval</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.retryoptions.html#onresolve" class="tsd-kind-icon">on<wbr>Resolve</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.retryoptions.html#retry" class="tsd-kind-icon">retry</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="muta_client.retryoptions.html#timeout" class="tsd-kind-icon">timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.chunkandbatchoption.html#chunksize" class="tsd-kind-icon">chunk<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.chunkandbatchoption.html#concurrency" class="tsd-kind-icon">concurrency</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.chunkandbatchoption.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.chunkandbatchoption.html#fragment" class="tsd-kind-icon">fragment</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.chunkandbatchoption.html#generatequerysegment" class="tsd-kind-icon">generate<wbr>Query<wbr>Segment</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_client.chunkandbatchoption.html#tasksource" class="tsd-kind-icon">task<wbr>Source</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="interval" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> interval</h3>
-					<div class="tsd-signature tsd-kind-icon">interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="chunksize" class="tsd-anchor"></a>
+					<h3>chunk<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">chunk<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="muta_client.retryconfig.html">RetryConfig</a>.<a href="muta_client.retryconfig.html#interval">interval</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/retry.ts#L78">muta-client/src/retry.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/BatchClient/batch.ts#L31">muta-client/src/BatchClient/batch.ts:31</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>the retry interval in (ms)</p>
-						</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="concurrency" class="tsd-anchor"></a>
+					<h3>concurrency</h3>
+					<div class="tsd-signature tsd-kind-icon">concurrency<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/BatchClient/batch.ts#L32">muta-client/src/BatchClient/batch.ts:32</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="endpoint" class="tsd-anchor"></a>
+					<h3>endpoint</h3>
+					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/BatchClient/batch.ts#L28">muta-client/src/BatchClient/batch.ts:28</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="fragment" class="tsd-anchor"></a>
+					<h3>fragment</h3>
+					<div class="tsd-signature tsd-kind-icon">fragment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/BatchClient/batch.ts#L33">muta-client/src/BatchClient/batch.ts:33</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="generatequerysegment" class="tsd-anchor"></a>
+					<h3>generate<wbr>Query<wbr>Segment</h3>
+					<div class="tsd-signature tsd-kind-icon">generate<wbr>Query<wbr>Segment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Source</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/BatchClient/batch.ts#L30">muta-client/src/BatchClient/batch.ts:30</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Source</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>x: <span class="tsd-signature-type">Source</span></h5>
+											</li>
+											<li>
+												<h5>i: <span class="tsd-signature-type">number</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="onresolve" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Resolve</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Resolve<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="tasksource" class="tsd-anchor"></a>
+					<h3>task<wbr>Source</h3>
+					<div class="tsd-signature tsd-kind-icon">task<wbr>Source<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Source</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/retry.ts#L83">muta-client/src/retry.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/BatchClient/batch.ts#L29">muta-client/src/BatchClient/batch.ts:29</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="retry" class="tsd-anchor"></a>
-					<h3>retry</h3>
-					<div class="tsd-signature tsd-kind-icon">retry<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_client.html#promisethunk" class="tsd-signature-type">PromiseThunk</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/retry.ts#L82">muta-client/src/retry.ts:82</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="timeout" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> timeout</h3>
-					<div class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="muta_client.retryconfig.html">RetryConfig</a>.<a href="muta_client.retryconfig.html#timeout">timeout</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-client/src/retry.ts#L74">muta-client/src/retry.ts:74</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>the max timeout in (ms)</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -205,9 +234,33 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../classes/muta_client.retry.html" class="tsd-kind-icon">Retry</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="muta_client.chunkandbatchoption.html" class="tsd-kind-icon">Chunk<wbr>And<wbr>Batch<wbr>Option</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_client.chunkandbatchoption.html#chunksize" class="tsd-kind-icon">chunk<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_client.chunkandbatchoption.html#concurrency" class="tsd-kind-icon">concurrency</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_client.chunkandbatchoption.html#endpoint" class="tsd-kind-icon">endpoint</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_client.chunkandbatchoption.html#fragment" class="tsd-kind-icon">fragment</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_client.chunkandbatchoption.html#generatequerysegment" class="tsd-kind-icon">generate<wbr>Query<wbr>Segment</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_client.chunkandbatchoption.html#tasksource" class="tsd-kind-icon">task<wbr>Source</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="muta_client.clientoption.html" class="tsd-kind-icon">Client<wbr>Option</a>
 					</li>
@@ -217,27 +270,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="muta_client.retryconfig.html" class="tsd-kind-icon">Retry<wbr>Config</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="muta_client.retryoptions.html" class="tsd-kind-icon">Retry<wbr>Options</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="muta_client.retryoptions.html#interval" class="tsd-kind-icon">interval</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_client.retryoptions.html#onresolve" class="tsd-kind-icon">on<wbr>Resolve</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_client.retryoptions.html#retry" class="tsd-kind-icon">retry</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="muta_client.retryoptions.html#timeout" class="tsd-kind-icon">timeout</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../modules/muta_client.html#batched" class="tsd-kind-icon">Batched</a>
 					</li>

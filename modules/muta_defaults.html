@@ -79,6 +79,13 @@
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="muta_defaults.html#default_timeout_gap" class="tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_defaults.html#envnum" class="tsd-kind-icon">env<wbr>Num</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_defaults.html#envstr" class="tsd-kind-icon">env<wbr>Str</a></li>
+							</ul>
+						</section>
 					</div>
 				</section>
 			</section>
@@ -87,10 +94,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="default_chain_id" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>CHAIN_<wbr>ID</h3>
-					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CHAIN_<wbr>ID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036"</span><span class="tsd-signature-symbol"> = &quot;0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CHAIN_<wbr>ID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = envStr(&#x27;MUTA_CHAIN_ID&#x27;,&#x27;0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036&#x27;,)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-defaults/src/defaults.ts#L9">muta-defaults/src/defaults.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-defaults/src/defaults.ts#L17">muta-defaults/src/defaults.ts:17</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -102,10 +109,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="default_consensus_interval" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>CONSENSUS_<wbr>INTERVAL</h3>
-					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CONSENSUS_<wbr>INTERVAL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">3000</span><span class="tsd-signature-symbol"> = 3000</span></div>
+					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CONSENSUS_<wbr>INTERVAL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = envNum(&#x27;MUTA_CONSENSUS_INTERVAL&#x27;,3000,)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-defaults/src/defaults.ts#L15">muta-defaults/src/defaults.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-defaults/src/defaults.ts#L25">muta-defaults/src/defaults.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -117,10 +124,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="default_endpoint" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>ENDPOINT</h3>
-					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>ENDPOINT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"http://127.0.0.1:8000/graphql"</span><span class="tsd-signature-symbol"> = &quot;http://127.0.0.1:8000/graphql&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>ENDPOINT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = envStr(&#x27;MUTA_ENDPOINT&#x27;,&#x27;http://127.0.0.1:8000/graphql&#x27;,)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-defaults/src/defaults.ts#L22">muta-defaults/src/defaults.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-defaults/src/defaults.ts#L35">muta-defaults/src/defaults.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -134,17 +141,72 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="default_timeout_gap" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>TIMEOUT_<wbr>GAP</h3>
-					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">20</span><span class="tsd-signature-symbol"> = 20</span></div>
+					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = envNum(&#x27;MUTA_TIMEOUT_GAP&#x27;, 20)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/338c05e/packages/muta-defaults/src/defaults.ts#L4">muta-defaults/src/defaults.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-defaults/src/defaults.ts#L12">muta-defaults/src/defaults.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>the default TIMEOUT_GAP <a href="../interfaces/muta_sdk.mutacontext.html#timeoutgap">MutaContext.timeoutGap</a></p>
+							<p>the default TIMEOUT_GAP</p>
 						</div>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="envnum" class="tsd-anchor"></a>
+					<h3>env<wbr>Num</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">env<wbr>Num<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, defaults<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-defaults/src/defaults.ts#L5">muta-defaults/src/defaults.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>defaults: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="envstr" class="tsd-anchor"></a>
+					<h3>env<wbr>Str</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">env<wbr>Str<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, defaults<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/e085bac/packages/muta-defaults/src/defaults.ts#L1">muta-defaults/src/defaults.ts:1</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>defaults: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -196,6 +258,12 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="muta_defaults.html#default_timeout_gap" class="tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_defaults.html#envnum" class="tsd-kind-icon">env<wbr>Num</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_defaults.html#envstr" class="tsd-kind-icon">env<wbr>Str</a>
 					</li>
 				</ul>
 			</nav>
