@@ -8,29 +8,34 @@ import {
 } from '@mutajs/utils';
 
 /**
- * Account is concept of A use on Muta chain.
- * it like other block chain, address is only identifier for different users, so as Muta
- * Account contains a privateKey, and could extract its publicKey and address
- * what's more, Account takes job of [[signTransaction]]
+ * If you are familiar with Ethereum, you will find that Muta's account system is similar to Ethereum.
+ * Simply put, Muta's account is also secured by ECDSA cryptography.
+ * A private key corresponds to a Muta account.
+ * We can use the private key to create an account like this `new Account('0x...')`.
+ * Generally used for [[signTransaction]]
  *
  * Here is an example:
  * ```js
- * async function example(){
- *   const account = Account.fromPrivateKey(
- *     '0x1000000000000000000000000000000000000000000000000000000000000000'
- * );
+ * import { Account } from '@mutajs/account';
+ * import { Client } from '@mutajs/client';
  *
- * const signedTransaction = account.signTransaction({
- *  chainId:
- *    '0x0000000000000000000000000000000000000000000000000000000000000000',
- *  cyclesLimit: '0x00',
- *  cyclesPrice: '0x00',
- *  method: 'method',
- *  nonce: '0x0000000000000000000000000000000000000000000000000000000000000000',
- *  payload: 'payload',
- *  serviceName: 'service_name',
- *  timeout: '0x9999'
- * });
+ * async function example() {
+ *   const client = new Client();
+ *   const account = new Account('0x...'); // private key
+ *
+ *   // create an UDT
+ *   const rawTransaction = await client.composeTransaction({
+ *     serviceName: 'asset',
+ *     method: 'create_asset',
+ *     payload: {
+ *       name: 'MyToken',
+ *       symbol: 'MT',
+ *       supply: 100_000_000,
+ *     }
+ *   });
+ *
+ *   const signedTransaction = account.signTransaction(rawTransaction);
+ *   client.sendTransaction(signedTransaction);
  * }
  * ```
  */
@@ -84,43 +89,7 @@ export class Account {
 
   /**
    * sign a Muta transaction with this Account's internal private key
-   * use case:
-   * ```typescript
    *
-   *   const account = Account.fromPrivateKey(
-   *       '0x1000000000000000000000000000000000000000000000000000000000000000'
-   *   );
-   *   const signedTransaction = account.signTransaction({
-   *     chainId:
-   *       '0x0000000000000000000000000000000000000000000000000000000000000000',
-   *     cyclesLimit: '0x00',
-   *     cyclesPrice: '0x00',
-   *     method: 'method',
-   *     nonce: '0x0000000000000000000000000000000000000000000000000000000000000000',
-   *     payload: 'payload',
-   *     serviceName: 'service_name',
-   *     timeout: '0x9999'
-   *   });
-   *
-   *   const { pubkey, signature, txHash } = signedTransaction;
-   * ```
-   *  the output is
-   * { chainId:
-   * '0x0000000000000000000000000000000000000000000000000000000000000000',
-   *  cyclesLimit: '0x00',
-   *  cyclesPrice: '0x00',
-   *  method: 'method',
-   *  nonce:
-   *   '0x0000000000000000000000000000000000000000000000000000000000000000',
-   *  payload: 'payload',
-   *  pubkey:
-   *   '0x0308ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0',
-   *  serviceName: 'service_name',
-   *  signature:
-   *   '0xb911f4c58d9ae2c8ea4a546c426f4167813dd0d7a8b5de7f2a7d40e07d7df4572b5670744954ea1f2ff831d5c579fa5d937beb0ddd544d18f8bc069547ac5295',
-   *  timeout: '0x9999',
-   *  txHash:
-   *   '0x26e4ec1c25cc0c6fc084f358b97a7615fee1b229d271ba40bcfc5be80b6dd0d4' }
    * @param tx, [[Transaction]]
    * @return [[SignedTransaction]]
    */
