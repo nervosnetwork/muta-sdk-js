@@ -78,12 +78,23 @@ export interface RetryConfig {
   interval?: number;
 }
 
+type PromiseThunk<T> = () => Promise<T>;
+
 export interface RetryOptions<T> extends RetryConfig {
   retry: PromiseThunk<T>;
   onResolve?: (t: T) => Promise<boolean> | boolean;
 }
 
-export function retry<T>(options: RetryOptions<T>): Promise<T> {
+export function retry<T>(
+  options: RetryOptions<T> | PromiseThunk<T>,
+): Promise<T> {
+  if (typeof options === 'function') {
+    return Retry.from(options)
+      .withInterval(DEFAULT_RETRY_INTERVAL)
+      .withTimeout(DEFAULT_RETRY_TIMEOUT)
+      .start();
+  }
+
   return Retry.from(options.retry)
     .withInterval(options.interval || DEFAULT_RETRY_INTERVAL)
     .withTimeout(options.timeout || DEFAULT_RETRY_TIMEOUT)

@@ -1,7 +1,7 @@
 // This module will be rewritten in the near future
 //@ts-nocheck
 import { Account } from '@mutajs/account';
-import { Client } from '@mutajs/client';
+import { Client, retry } from '@mutajs/client';
 import { invariant } from '@mutajs/shared';
 import {
   QueryServiceParam,
@@ -164,7 +164,7 @@ export function createServiceBinding<T>(
           throw e;
         }
 
-        const receipt: Receipt = await client.getReceipt(toHex(txHash));
+        const receipt: Receipt = await retry(() => client.getReceipt(toHex(txHash)));
 
         const response = receipt.response.response;
         invariant(
