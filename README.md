@@ -1,4 +1,4 @@
-# Muta SDK(WIP)
+# Muta SDK
 
 The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). 
 Allow you to interact with Muta node's GraphQL service.
@@ -17,10 +17,12 @@ The following code will show
 2. How to sign a transaction
 3. How to sendTransaction
 
-```
-
+```ts
+import { Muta } from 'muta-sdk';
 
 async function main() {
+  const muta = new Muta();
+  const client = muta.client();
   // get metadata from the chain
   const metadataResponse = await client.queryServiceDyn({
     method: 'get_metadata',
@@ -51,8 +53,8 @@ async function main() {
 
 ## Create Service Binding
 
-Before we create our custom binding, learn about what is a [service](https://github.com/nervosnetwork/muta-docs) in Muta.
-We'll still use [AssetService](https://github.com/HuobiGroup/huobi-chain/tree/master/services/asset/src) as an [example](https://github.com/homura/huobi-chain-sdk-js/blob/develop/src/services/AssetService.ts).
+Before we create our custom binding, learn about what is a [service](https://github.com/nervosnetwork/muta-docs/blob/master/service_dev.md) in Muta.
+We'll still use [AssetService](https://github.com/nervosnetwork/muta/blob/master/built-in-services/asset) as an [example](./packages/muta-service/src/binding/AssetService.ts).
 
 ## Links
 
