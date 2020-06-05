@@ -96,16 +96,16 @@ export class BatchClient {
   private options: BatchClientOption;
 
   constructor(options?: DeepPartial<BatchClientOption>) {
-    this.options = defaults<DeepPartial<BatchClientOption>, BatchClientOption>(
-      options,
-      {
-        client: getDefaultClientOption(),
-        batch: {
-          chunkSize: 200,
-          concurrency: 20,
-        },
+    this.options = defaults<
+      DeepPartial<BatchClientOption> | undefined,
+      BatchClientOption
+    >(options, {
+      client: getDefaultClientOption(),
+      batch: {
+        chunkSize: 200,
+        concurrency: 20,
       },
-    );
+    });
   }
 
   async getTransactions(txHashes: Hash[]): Promise<RawTransaction[]> {
