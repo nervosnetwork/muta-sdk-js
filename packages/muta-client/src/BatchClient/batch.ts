@@ -1,5 +1,5 @@
-import { chunk, reduce } from 'lodash';
 import { request } from 'graphql-request';
+import { chunk, reduce } from 'lodash';
 import { default as plimit } from 'p-limit';
 
 export type Batched<T> = {

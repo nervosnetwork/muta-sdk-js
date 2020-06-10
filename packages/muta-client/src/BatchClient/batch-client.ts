@@ -1,7 +1,7 @@
 import { GetReceiptQuery, GetTransactionQuery } from '@mutajs/client-raw';
 import { Hash } from '@mutajs/types';
-import { DeepPartial } from 'utility-types';
 import { defaults } from 'lodash';
+import { DeepPartial } from 'utility-types';
 import { ClientOption, getDefaultClientOption } from '../options';
 import { chunkAndBatch } from './batch';
 
@@ -99,7 +99,7 @@ export class BatchClient {
     this.options = defaults<
       DeepPartial<BatchClientOption> | undefined,
       BatchClientOption
-      >(options, {
+    >(options, {
       client: getDefaultClientOption(),
       batch: {
         chunkSize: 200,

@@ -78,11 +78,8 @@ export class Client {
    * construct a Client by given [[ClientOption]]
    * @param options, see {@link ClientOption} for more details
    */
-  constructor(options?: ClientOption) {
-    this.options = defaults<ClientOption | undefined, ClientOption>(
-      options,
-      getDefaultClientOption(),
-    );
+  constructor(options?: Partial<ClientOption>) {
+    this.options = defaults(options, getDefaultClientOption());
 
     this.rawClient = getSdk(
       new GraphQLClient(this.options.endpoint, {
