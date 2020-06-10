@@ -3,6 +3,21 @@
 The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). 
 Allow you to interact with Muta node's GraphQL service.
 
+## Modules
+
+This is a root organized into monorepo mode, which is composed of the following modules
+
+- [muta-sdk](./packages/muta-sdk) - the all-in-one packages to interact with Muta
+- [@mutajs/client](./packages/muta-client) - wrap the GraphQL interface like RPC
+- [@mutajs/client-raw](./packages/muta-client-raw) - wrap the raw Muta GraphQL
+- [@mutajs/account](./packages/muta-account) - account system for Muta
+- [@mutajs/wallet](./packages/muta-wallet) - an HD wallet implement for Muta instance
+- [@mutajs/service](./packages/muta-service) - wrap the Muta service
+- [@mutajs/utils](./packages/muta-utils) - common utils for Muta
+- [@mutajs/defaults](./packages/muta-defaults) - provides some default config
+- [@mutajs/types](./packages/muta-types) - provide some typescript type definition 
+- [@mutajs/shared](./packages/shared) - shared third-party dependencies
+
 ## Quick Start
 
 ```shell
