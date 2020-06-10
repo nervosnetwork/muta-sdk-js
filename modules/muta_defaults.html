@@ -97,12 +97,13 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CHAIN_<wbr>ID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = envStr(&#x27;MUTA_CHAIN_ID&#x27;,&#x27;0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036&#x27;,)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/f877881/packages/muta-defaults/src/defaults.ts#L17">muta-defaults/src/defaults.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-defaults/src/defaults.ts#L18">muta-defaults/src/defaults.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The default chain id</p>
+							<p>The default chain id. Lookup for <code>MUTA_CHAIN_ID</code> in env or
+							defaults to <code>0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036</code></p>
 						</div>
 					</div>
 				</section>
@@ -112,12 +113,13 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CONSENSUS_<wbr>INTERVAL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = envNum(&#x27;MUTA_CONSENSUS_INTERVAL&#x27;,3000,)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/f877881/packages/muta-defaults/src/defaults.ts#L25">muta-defaults/src/defaults.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-defaults/src/defaults.ts#L27">muta-defaults/src/defaults.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Interval of consensus engine executed each block</p>
+							<p>Interval(in ms) of consensus engine executed each block. Look up for <code>MUTA_CONSENSUS_INTERVAL</code> in env or
+							defaults to <em>3000</em></p>
 						</div>
 					</div>
 				</section>
@@ -127,14 +129,15 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>ENDPOINT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = envStr(&#x27;MUTA_ENDPOINT&#x27;,&#x27;http://127.0.0.1:8000/graphql&#x27;,)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/f877881/packages/muta-defaults/src/defaults.ts#L35">muta-defaults/src/defaults.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-defaults/src/defaults.ts#L38">muta-defaults/src/defaults.ts:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The Muta project is now in the early stage,
 								so the default endpoint will use localhost.
-							This value will likely change after test network mounted</p>
+								This value will likely change after test network mounted.
+							Lookup for <code>MUTA_ENDPOINT</code> in env or defaults to <code>http://127.0.0.1:8000/graphql</code></p>
 						</div>
 					</div>
 				</section>
@@ -144,12 +147,12 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>TIMEOUT_<wbr>GAP<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = envNum(&#x27;MUTA_TIMEOUT_GAP&#x27;, 20)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/f877881/packages/muta-defaults/src/defaults.ts#L12">muta-defaults/src/defaults.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-defaults/src/defaults.ts#L12">muta-defaults/src/defaults.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>the default TIMEOUT_GAP</p>
+							<p>The default TIMEOUT_GAP. Lookup for <code>MUTA_TIMEOUT_GAP</code> in env or defaults to 20</p>
 						</div>
 					</div>
 				</section>
@@ -166,7 +169,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/f877881/packages/muta-defaults/src/defaults.ts#L5">muta-defaults/src/defaults.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-defaults/src/defaults.ts#L5">muta-defaults/src/defaults.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -192,7 +195,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/f877881/packages/muta-defaults/src/defaults.ts#L1">muta-defaults/src/defaults.ts:1</a></li>
+									<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-defaults/src/defaults.ts#L1">muta-defaults/src/defaults.ts:1</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
