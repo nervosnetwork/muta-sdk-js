@@ -96,9 +96,9 @@ All modules are under the `packages` folder which organized with similar structu
 
 ```
 - package-name
-	- src
-		- index.ts # export relatedmodules
-		- foo.ts # module impl
-		- foo.test.ts # unit test for foo module
-		- foo.e2e.ts # e2e test for foo module
+  - src
+    - index.ts # export relatedmodules
+    - foo.ts # module impl
+    - foo.test.ts # unit test for foo module
+    - foo.e2e.ts # e2e test for foo module
 ```
