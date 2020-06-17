@@ -10,7 +10,7 @@ const account = Account.fromPrivateKey(
 const client = new Client();
 
 test('test AssetService', async () => {
-  const service = new AssetService(client, account);
+  const service = new AssetService(client, account.address, account);
 
   const supply = 10000;
   const res = await service.create_asset({
