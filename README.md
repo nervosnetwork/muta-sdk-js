@@ -1,13 +1,13 @@
 # Muta SDK
 
-The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). 
+The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework).
 Allow you to interact with Muta node's GraphQL service.
 
 ## Modules
 
-This is a root organized into monorepo mode, which is composed of the following modules
+The repo root which organized via monorepo mode, that composed of the following modules
 
-- [muta-sdk](./packages/muta-sdk) - the all-in-one packages to interact with Muta
+- [muta-sdk](./packages/muta-sdk) - the all-in-one package to interact with Muta
 - [@mutajs/client](./packages/muta-client) - wrap the GraphQL interface like RPC
 - [@mutajs/client-raw](./packages/muta-client-raw) - wrap the raw Muta GraphQL
 - [@mutajs/account](./packages/muta-account) - account system for Muta
@@ -15,7 +15,7 @@ This is a root organized into monorepo mode, which is composed of the following 
 - [@mutajs/service](./packages/muta-service) - wrap the Muta service
 - [@mutajs/utils](./packages/muta-utils) - common utils for Muta
 - [@mutajs/defaults](./packages/muta-defaults) - provides some default config
-- [@mutajs/types](./packages/muta-types) - provide some typescript type definition 
+- [@mutajs/types](./packages/muta-types) - provide some typescript type definition
 - [@mutajs/shared](./packages/shared) - shared third-party dependencies
 
 ## Quick Start
@@ -79,12 +79,26 @@ We'll still use [AssetService](https://github.com/nervosnetwork/muta/blob/master
 ## Development
 
 - nodejs >= 10
-- typescript >= 3.7
 - yarn
+
+> To ensure that the test passes, please enable a muta-example chain before the test
 
 ```shell
 git clone https://github.com/nervosnetwork/muta-sdk-js
 cd muta-sdk-js
 yarn
-yarn start
+yarn test
+```
+
+### Aboult Package
+
+All modules are under the `packages` folder which organized with similar structure
+
+```
+- package-name
+	- src
+		- index.ts # export relatedmodules
+		- foo.ts # module impl
+		- foo.test.ts # unit test for foo module
+		- foo.e2e.ts # e2e test for foo module
 ```
