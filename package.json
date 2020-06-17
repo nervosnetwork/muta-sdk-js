@@ -15,8 +15,11 @@
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "gh-pages": "^2.2.0",
+    "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lerna": "^3.20.2",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
     "rimraf": "^2.6.2",
     "ts-jest": "^26.1.0",
     "typedoc": "^0.17.4",
@@ -25,5 +28,10 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged --partern \"packages/*/src/**/*.(js|ts)\""
+    }
+  }
 }

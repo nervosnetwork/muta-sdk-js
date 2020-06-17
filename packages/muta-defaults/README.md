@@ -31,4 +31,3 @@ A number for max available unprocessed block height gap
 
 - type: number
 - default: 20
-

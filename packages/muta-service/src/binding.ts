@@ -164,7 +164,9 @@ export function createServiceBinding<T>(
           throw e;
         }
 
-        const receipt: Receipt = await retry(() => client.getReceipt(toHex(txHash)));
+        const receipt: Receipt = await retry(() =>
+          client.getReceipt(toHex(txHash)),
+        );
 
         const response = receipt.response.response;
         invariant(
@@ -218,7 +220,7 @@ export function createBindingClass<T>(
         if (isRead(handler)) {
           prototype[method] = binding[method];
         } else if (isWrite(handler)) {
-          prototype[method] = payload => {
+          prototype[method] = (payload) => {
             invariant(
               account,
               'Try to call a #[write] method without account is denied,' +
