@@ -27,8 +27,9 @@ export function createTransactionSignature(
     tx.serviceName,
     tx.payload,
     tx.timeout,
-    tx.sender,
+    [Uint8Array.from(toBuffer(tx.sender))],
   ];
+
   const uint8PrivateKey = Uint8Array.from(privateKey);
   const encoded = encode(orderedTx);
   const txHash = keccak(encoded);
