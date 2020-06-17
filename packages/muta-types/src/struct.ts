@@ -134,6 +134,8 @@ export interface Transaction {
   method: string;
 
   payload: string;
+
+  sender: string;
 }
 
 /**
@@ -162,6 +164,7 @@ export interface SignedTransaction {
   txHash: string;
   pubkey: string;
   signature: string;
+  sender: string;
 }
 
 export interface InputSignedTransaction {

@@ -14,6 +14,7 @@ import {
   SignedTransaction,
   Transaction,
   Uint64,
+  Address,
 } from '@mutajs/types';
 import {
   hexToNum,
@@ -38,6 +39,7 @@ export interface ComposeTransactionParam<P> {
   serviceName: string;
   method: string;
   payload: P;
+  sender: Address;
 }
 
 type RawClient = ReturnType<typeof getSdk>;
@@ -203,6 +205,7 @@ export class Client {
       payload: signedTransaction.payload,
       serviceName: signedTransaction.serviceName,
       timeout: signedTransaction.timeout,
+      sender: signedTransaction.sender,
     };
 
     const inputEncryption: InputTransactionEncryption = {
@@ -244,6 +247,8 @@ export class Client {
       ? param.timeout
       : toHex(blockHeight + timeoutGap - 1);
 
+    const sender = param.sender;
+
     return {
       chainId,
       cyclesLimit: defaultCyclesLimit,
@@ -252,6 +257,7 @@ export class Client {
       timeout,
       ...param,
       payload,
+      sender,
     };
   }
 
