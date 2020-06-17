@@ -37,8 +37,11 @@ export function createTransactionSignature(
   const { signature } = ecdsaSign(txHash, uint8PrivateKey);
 
   return {
-    pubkey: toHex(encode([publicKeyCreate(uint8PrivateKey)])),
-    signature: toHex(encode([signature])),
+    pubkey: toHex(publicKeyCreate(uint8PrivateKey)),
+    signature: toHex(signature),
+    // FIXME: Update muta
+    // pubkey: toHex(encode([publicKeyCreate(uint8PrivateKey)])),
+    // signature: toHex(encode([signature])),
     txHash: toHex(txHash),
   };
 }
