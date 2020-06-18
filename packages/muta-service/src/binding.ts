@@ -9,6 +9,7 @@ import {
   ServiceResponse,
   SignedTransaction,
   Transaction,
+  Address,
 } from '@mutajs/types';
 import {
   capitalize,
@@ -121,9 +122,9 @@ export type ServiceBinding<Binding> = {
 export function createServiceBinding<T>(
   serviceName: string,
   model: T,
-  options: { client: Client },
+  options: { client: Client, signatureAddress: Address },
 ): ServiceBinding<T> {
-  const { client } = options;
+  const { client, signatureAddress } = options;
 
   return Object.entries(model).reduce((service, [method, handler]) => {
     if (isRead(handler)) {
@@ -146,6 +147,7 @@ export function createServiceBinding<T>(
               method,
               payload: inputPayload,
               serviceName,
+              sender: signatureAddress,
             }));
 
         if (!privateKey) {
@@ -206,6 +208,7 @@ export type BindingClassPrototype<Binding> = {
 
 export type ServiceBindingClass<T> = new (
   client: Client,
+  signatureAddress: Address,
   account?: Account,
 ) => BindingClassPrototype<T>;
 
@@ -213,8 +216,8 @@ export function createBindingClass<T>(
   serviceName: string,
   model: T,
 ): ServiceBindingClass<T> {
-  function BindingClass(client: Client, account?: Account) {
-    const binding = createServiceBinding<T>(serviceName, model, { client });
+  function BindingClass(client: Client, signatureAddress: Address, account?: Account) {
+    const binding = createServiceBinding<T>(serviceName, model, { client, signatureAddress });
     const prototypes = Object.entries(model).reduce(
       (prototype, [method, handler]) => {
         if (isRead(handler)) {

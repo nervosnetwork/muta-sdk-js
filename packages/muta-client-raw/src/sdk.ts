@@ -96,6 +96,7 @@ export type InputRawTransaction = {
   serviceName: Scalars['String'];
   method: Scalars['String'];
   payload: Scalars['String'];
+  sender: Scalars['Address'];
 };
 
 /** Signature of the transaction */
@@ -213,6 +214,7 @@ export type SignedTransaction = {
   txHash: Scalars['Hash'];
   pubkey: Scalars['Bytes'];
   signature: Scalars['Bytes'];
+  sender: Scalars['Address'];
 };
 
 
@@ -268,7 +270,7 @@ export type GetTransactionQuery = (
   { __typename?: 'Query' }
   & { getTransaction: (
     { __typename?: 'SignedTransaction' }
-    & Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'pubkey' | 'signature'>
+    & Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'pubkey' | 'signature' | 'sender'>
     & ServicePayloadFragment
   ) }
 );
@@ -354,6 +356,7 @@ export const GetTransactionDocument = gql`
     txHash
     pubkey
     signature
+    sender
   }
 }
     ${ServicePayloadFragmentDoc}`;

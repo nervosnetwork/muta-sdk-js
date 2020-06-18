@@ -54,6 +54,7 @@ fragment transactionKeys on SignedTransaction {
     signature
     timeout
     txHash
+    sender
 }
 `;
 
