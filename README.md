@@ -21,8 +21,10 @@ The repo root which organized via monorepo mode, that composed of the following 
 ## Quick Start
 
 ```shell
-npm install muta-sdk
+npm install graphql muta-sdk
 ```
+
+> Note: The `graphql` is peerDependent by @mutajs/client-raw. So we need to install it manually. To avoid multiple `graphql` version conflict error, make sure there was only one `graphql` version in our system. If you are also a library contributor dependent on `graphql` module, you should consider whether to peerDependeies on `graphql`
 
 ## Example
 
