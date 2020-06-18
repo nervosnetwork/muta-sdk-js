@@ -1,6 +1,6 @@
 {
   "name": "@mutajs/defaults",
-  "version": "0.11.0-dev.1",
+  "version": "0.11.0-next.feature.1816be9",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
