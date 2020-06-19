@@ -7,7 +7,7 @@
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest -c jest.config.js",
     "test:e2e": "jest -c jest.e2e.config.js",
-    "clean": "rimraf packages/**/lib .cache/*.tsbuildinfo",
+    "clean": "rimraf packages/**/lib packages/**/*.tsbuildinfo",
     "docs": "rimraf build/docs && typedoc --options typedoc.json packages",
     "docs:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "prepublishOnly": "npm run test"
