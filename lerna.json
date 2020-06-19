@@ -2,7 +2,7 @@
   "packages": ["packages/*"],
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "0.11.0-dev.2",
+  "version": "0.11.0-dev.3",
   "command": {
     "publish": {
       "registry": "https://registry.npmjs.org"
