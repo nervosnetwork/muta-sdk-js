@@ -92,7 +92,7 @@ yarn
 yarn test
 ```
 
-### Aboult Package
+### About Package
 
 All modules are under the `packages` folder which organized with similar structure
 
