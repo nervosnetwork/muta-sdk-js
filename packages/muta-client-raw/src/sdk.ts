@@ -21,7 +21,6 @@ export type Scalars = {
 };
 
 export type Event = {
-  __typename?: 'Event';
   service: Scalars['String'];
   data: Scalars['String'];
 };
@@ -29,7 +28,6 @@ export type Event = {
 
 /** The verifier of the block header proved */
 export type Proof = {
-  __typename?: 'Proof';
   height: Scalars['Uint64'];
   round: Scalars['Uint64'];
   blockHash: Scalars['Hash'];
@@ -51,7 +49,6 @@ export type InputTransactionEncryption = {
 
 /** Block is a single digital record created within a blockchain. Each block contains a record of the previous Block, and when linked together these become the “chain”.A block is always composed of header and body. */
 export type Block = {
-  __typename?: 'Block';
   /** The header section of a block */
   header: BlockHeader;
   /** The body section of a block */
@@ -61,7 +58,6 @@ export type Block = {
 };
 
 export type SignedTransaction = {
-  __typename?: 'SignedTransaction';
   chainId: Scalars['Hash'];
   cyclesLimit: Scalars['Uint64'];
   cyclesPrice: Scalars['Uint64'];
@@ -77,7 +73,6 @@ export type SignedTransaction = {
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
   /** send transaction */
   sendTransaction: Scalars['Hash'];
   /** @deprecated DON'T use it in production! This is just for development. */
@@ -99,7 +94,6 @@ export type MutationUnsafeSendTransactionArgs = {
 
 /** Validator address set */
 export type Validator = {
-  __typename?: 'Validator';
   address: Scalars['Address'];
   proposeWeight: Scalars['Int'];
   voteWeight: Scalars['Int'];
@@ -107,7 +101,6 @@ export type Validator = {
 
 /** A block header is like the metadata of a block. */
 export type BlockHeader = {
-  __typename?: 'BlockHeader';
   /** Identifier of a chain in order to prevent replay attacks across channels  */
   chainId: Scalars['Hash'];
   /** block height */
@@ -139,7 +132,6 @@ export type BlockHeader = {
 };
 
 export type Query = {
-  __typename?: 'Query';
   /** Get the block */
   getBlock: Block;
   /** Get the transaction by hash */
@@ -177,7 +169,6 @@ export type QueryQueryServiceArgs = {
 };
 
 export type Receipt = {
-  __typename?: 'Receipt';
   stateRoot: Scalars['Hash'];
   height: Scalars['Uint64'];
   txHash: Scalars['Hash'];
@@ -187,7 +178,6 @@ export type Receipt = {
 };
 
 export type ServiceResponse = {
-  __typename?: 'ServiceResponse';
   code: Scalars['Uint64'];
   succeedData: Scalars['String'];
   errorMessage: Scalars['String'];
@@ -211,7 +201,6 @@ export type InputRawTransaction = {
 };
 
 export type ReceiptResponse = {
-  __typename?: 'ReceiptResponse';
   serviceName: Scalars['String'];
   method: Scalars['String'];
   response: ServiceResponse;
@@ -228,13 +217,7 @@ export type QueryServiceQueryVariables = Exact<{
 }>;
 
 
-export type QueryServiceQuery = (
-  { __typename?: 'Query' }
-  & { queryService: (
-    { __typename?: 'ServiceResponse' }
-    & Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'>
-  ) }
-);
+export type QueryServiceQuery = { queryService: Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'> };
 
 export type SendTransactionMutationVariables = Exact<{
   inputRaw: InputRawTransaction;
@@ -242,77 +225,45 @@ export type SendTransactionMutationVariables = Exact<{
 }>;
 
 
-export type SendTransactionMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'sendTransaction'>
-);
+export type SendTransactionMutation = Pick<Mutation, 'sendTransaction'>;
 
-export type ServicePayloadFragment = (
-  { __typename?: 'SignedTransaction' }
-  & Pick<SignedTransaction, 'serviceName' | 'method' | 'payload'>
-);
+export type ServicePayloadFragment = Pick<SignedTransaction, 'serviceName' | 'method' | 'payload'>;
 
 export type GetTransactionQueryVariables = Exact<{
   txHash: Scalars['Hash'];
 }>;
 
 
-export type GetTransactionQuery = (
-  { __typename?: 'Query' }
-  & { getTransaction: (
-    { __typename?: 'SignedTransaction' }
-    & Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'pubkey' | 'signature' | 'sender'>
+export type GetTransactionQuery = { getTransaction: (
+    Pick<SignedTransaction, 'nonce' | 'chainId' | 'cyclesLimit' | 'cyclesPrice' | 'timeout' | 'txHash' | 'pubkey' | 'signature' | 'sender'>
     & ServicePayloadFragment
-  ) }
-);
+  ) };
 
 export type GetReceiptQueryVariables = Exact<{
   txHash: Scalars['Hash'];
 }>;
 
 
-export type GetReceiptQuery = (
-  { __typename?: 'Query' }
-  & { getReceipt: (
-    { __typename?: 'Receipt' }
-    & Pick<Receipt, 'txHash' | 'height' | 'cyclesUsed' | 'stateRoot'>
-    & { events: Array<(
-      { __typename?: 'Event' }
-      & Pick<Event, 'data' | 'service'>
-    )>, response: (
-      { __typename?: 'ReceiptResponse' }
-      & Pick<ReceiptResponse, 'serviceName' | 'method'>
-      & { response: (
-        { __typename?: 'ServiceResponse' }
-        & Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'>
-      ) }
+export type GetReceiptQuery = { getReceipt: (
+    Pick<Receipt, 'txHash' | 'height' | 'cyclesUsed' | 'stateRoot'>
+    & { events: Array<Pick<Event, 'data' | 'service'>>, response: (
+      Pick<ReceiptResponse, 'serviceName' | 'method'>
+      & { response: Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'> }
     ) }
-  ) }
-);
+  ) };
 
 export type GetBlockQueryVariables = Exact<{
   height?: Maybe<Scalars['Uint64']>;
 }>;
 
 
-export type GetBlockQuery = (
-  { __typename?: 'Query' }
-  & { getBlock: (
-    { __typename?: 'Block' }
-    & Pick<Block, 'orderedTxHashes' | 'hash'>
+export type GetBlockQuery = { getBlock: (
+    Pick<Block, 'orderedTxHashes' | 'hash'>
     & { header: (
-      { __typename?: 'BlockHeader' }
-      & Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'execHeight' | 'orderRoot' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
-      & { proof: (
-        { __typename?: 'Proof' }
-        & Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>
-      ), validators: Array<(
-        { __typename?: 'Validator' }
-        & Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>
-      )> }
+      Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'execHeight' | 'orderRoot' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
+      & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>> }
     ) }
-  ) }
-);
+  ) };
 
 export const ServicePayloadFragmentDoc = gql`
     fragment ServicePayload on SignedTransaction {
