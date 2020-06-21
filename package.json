@@ -31,7 +31,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --partern \"packages/*/src/**/*.(js|ts)\""
+      "pre-commit": "pretty-quick --staged --partern \"packages/*/src/**/*.(js|ts)\" --pattern \"**/*.graphql\""
     }
   }
 }
