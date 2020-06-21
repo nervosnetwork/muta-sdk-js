@@ -260,7 +260,7 @@ export type GetBlockQueryVariables = Exact<{
 export type GetBlockQuery = { getBlock: (
     Pick<Block, 'orderedTxHashes' | 'hash'>
     & { header: (
-      Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'height' | 'execHeight' | 'orderRoot' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
+      Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'execHeight' | 'height' | 'orderRoot' | 'orderSignedTransactionsHash' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
       & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>> }
     ) }
   ) };
@@ -332,15 +332,11 @@ export const GetBlockDocument = gql`
       chainId
       confirmRoot
       cyclesUsed
-      height
       execHeight
+      height
       orderRoot
+      orderSignedTransactionsHash
       prevHash
-      proposer
-      receiptRoot
-      stateRoot
-      timestamp
-      validatorVersion
       proof {
         bitmap
         blockHash
@@ -348,6 +344,11 @@ export const GetBlockDocument = gql`
         round
         signature
       }
+      proposer
+      receiptRoot
+      stateRoot
+      timestamp
+      validatorVersion
       validators {
         address
         proposeWeight
