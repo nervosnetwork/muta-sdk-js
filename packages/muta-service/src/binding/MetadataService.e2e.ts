@@ -7,7 +7,7 @@ const account = Account.fromPrivateKey(
 );
 const client = new Client();
 
-const service = new MetadataService(client, account);
+const service = new MetadataService(client, account.address, account);
 
 test('test MetadataService', async () => {
   const res = await service.get_metadata(null);

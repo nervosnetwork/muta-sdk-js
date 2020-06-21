@@ -1,5 +1,10 @@
+import { Account } from '@mutajs/account';
 import { Client } from '@mutajs/client';
 import { createBindingClass, read, Read, write, Write } from './binding';
+
+const account = Account.fromPrivateKey(
+  '0x45c56be699dca666191ad3446897e0f480da234da896270202514a0e1a587c3f',
+);
 
 const client = new Client();
 
@@ -14,6 +19,6 @@ const MockService = createBindingClass<MockServiceModel>('mock', {
 });
 
 it('error when readonly service try to write', () => {
-  const mockService = new MockService(client);
+  const mockService = new MockService(client, account.address);
   expect(() => mockService.write_something(null)).toThrow();
 });

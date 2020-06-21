@@ -1,5 +1,6 @@
 import { SignedTransaction, Transaction } from '@mutajs/types';
 import {
+  appendTransactionSignature,
   createTransactionSignature,
   keccak,
   publicKeyCreate,
@@ -111,6 +112,18 @@ export class Account {
       signature,
       timeout: tx.timeout,
       txHash,
+      sender: tx.sender,
     };
+  }
+
+  /**
+   * sign a multiple signatures Muta transaction with this Account's internal
+   * private key
+   *
+   * @param tx, [[SignedTransaction]]
+   * @return [[SignedTransaction]]
+   */
+  public signMultiSigTransaction(stx: SignedTransaction): SignedTransaction {
+    return appendTransactionSignature(stx, this._privateKey);
   }
 }

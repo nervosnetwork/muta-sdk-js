@@ -18,6 +18,7 @@ test('test batch transactions', async () => {
       supply: 10000,
       symbol: Math.random().toString(),
     },
+    sender: account.address,
   });
 
   const tx2 = await client.composeTransaction({
@@ -28,6 +29,7 @@ test('test batch transactions', async () => {
       supply: 10000,
       symbol: Math.random().toString(),
     },
+    sender: account.address,
   });
 
   const hashes = await Promise.all([
