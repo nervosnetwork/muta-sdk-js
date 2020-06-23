@@ -6,6 +6,8 @@ generates:
       - typescript
       - typescript-operations
       - typescript-graphql-request
+    config:
+      skipTypename: true
 config:
   scalars:
     Uint64: string

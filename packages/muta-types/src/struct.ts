@@ -1,4 +1,4 @@
-import { Address, Hash, Int, Maybe, Uint64 } from './scalar';
+import {Address, Hash, Int, Maybe, Uint64} from "./scalar";
 
 /**
  * The Block struct
@@ -16,65 +16,58 @@ export interface Block {
  */
 export interface BlockHeader {
   /**
-   * the chain id
+   * Identifier of a chain in order to prevent replay attacks across channels
    */
   chainId: Hash;
-
+  /**
+   * The merkle roots of all the confirms
+   */
+  confirmRoot: Hash[];
+  /**
+   * The sum of all transactions costs
+   */
+  cyclesUsed: Uint64[];
+  /**
+   * The height to which the block has been executed
+   */
+  execHeight: Uint64;
   /**
    * block height
    */
   height: Uint64;
-
   /**
-   * prev block hash
-   */
-  prevHash: Hash;
-
-  /**
-   * the time tim
-   */
-  timestamp: Uint64;
-
-  /**
-   * the Merkle root of the ordered transactions
+   * The merkle root of ordered transactions
    */
   orderRoot: Hash;
-
   /**
-   *
+   * The hash of ordered signed transactions
    */
-  confirmRoot: string[];
-
+  orderSignedTransactionsHash: Hash;
   /**
-   *
+   * The hash of the serialized previous block
    */
-  stateRoot: string;
-
+  prevHash: Hash;
+  proof: Proof;
   /**
-   *
+   * The address descirbed who packed the block
+   */
+  proposer: Address;
+  /**
+   * The merkle roots of receipts
    */
   receiptRoot: Hash[];
-
   /**
-   *
+   * The merkle root of state root
    */
-  cyclesUsed: Uint64[];
-
+  stateRoot: Hash;
   /**
-   *
+   * A timestamp that records when the block was created
    */
-  proposer: string;
-
-  proof: Proof;
-
+  timestamp: Uint64;
   /**
-   *
+   * The version of validator is designed for cross chain
    */
   validatorVersion: Uint64;
-
-  /**
-   *
-   */
   validators: Validator[];
 }
 

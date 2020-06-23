@@ -29,6 +29,8 @@ type BlockHeader {
   height: Uint64!
   "The merkle root of ordered transactions"
   orderRoot: Hash!
+  "The hash of ordered signed transactions"
+  orderSignedTransactionsHash: Hash!
   "The hash of the serialized previous block"
   prevHash: Hash!
   proof: Proof!
@@ -122,11 +124,11 @@ type SignedTransaction {
   nonce: Hash!
   payload: String!
   pubkey: Bytes!
+  sender: Address!
   serviceName: String!
   signature: Bytes!
   timeout: Uint64!
   txHash: Hash!
-  sender: Address!
 }
 
 "Validator address set"
@@ -147,10 +149,10 @@ input InputRawTransaction {
   "Every transaction has its own id, unlike Ethereum's nonce,the nonce in Muta is an hash"
   nonce: Hash!
   payload: String!
+  sender: Address!
   serviceName: String!
   "For security and performance reasons, Muta will only deal with trade request over a period of time,the `timeout` should be `timeout > current_block_height` and `timeout < current_block_height + timeout_gap`,the `timeout_gap` generally equal to 20."
   timeout: Uint64!
-  sender: Address!
 }
 
 "Signature of the transaction"

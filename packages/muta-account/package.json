@@ -1,6 +1,6 @@
 {
   "name": "@mutajs/account",
-  "version": "0.11.0-next.feature.1816be9",
+  "version": "0.11.1-dev.2",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -10,6 +10,6 @@
     "lib"
   ],
   "dependencies": {
-    "@mutajs/utils": "^0.11.0-next.feature.1816be9"
+    "@mutajs/utils": "^0.11.1-dev.2"
   }
 }

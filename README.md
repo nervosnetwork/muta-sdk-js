@@ -66,6 +66,8 @@ async function main() {
 
   console.log(receipt);
 }
+
+main();
 ```
 
 ## Create Service Binding
@@ -92,15 +94,20 @@ yarn
 yarn test
 ```
 
-### Aboult Package
+### About Package
 
 All modules are under the `packages` folder which organized with similar structure
+
+> You can also create a muta-sdk-like project based on [the template](https://github.com/homura/typescript-monorepo-template)
 
 ```
 - package-name
   - src
-    - index.ts # export relatedmodules
+    - index.ts # export related modules
     - foo.ts # module impl
-    - foo.test.ts # unit test for foo module
-    - foo.e2e.ts # e2e test for foo module
+    - foo.test.ts # unit test for this module
+    - foo.e2e.ts # e2e test for this module
+  - README.md # some description for this module
+  - package.json
+  - tsconfig.json
 ```

@@ -78,16 +78,11 @@ query getBlock($height: Uint64) {
       chainId
       confirmRoot
       cyclesUsed
-      height
       execHeight
+      height
       orderRoot
+      orderSignedTransactionsHash
       prevHash
-
-      proposer
-      receiptRoot
-      stateRoot
-      timestamp
-      validatorVersion
       proof {
         bitmap
         blockHash
@@ -95,6 +90,11 @@ query getBlock($height: Uint64) {
         round
         signature
       }
+      proposer
+      receiptRoot
+      stateRoot
+      timestamp
+      validatorVersion
       validators {
         address
         proposeWeight

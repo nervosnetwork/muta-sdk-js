@@ -24,14 +24,14 @@
     "ts-jest": "^26.1.0",
     "typedoc": "^0.17.4",
     "typedoc-plugin-external-module-map": "^1.2.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.9.5"
   },
   "workspaces": [
     "packages/*"
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --partern \"packages/*/src/**/*.(js|ts)\""
+      "pre-commit": "pretty-quick --staged --partern \"packages/*/src/**/*.(js|ts)\" --pattern \"**/*.graphql\""
     }
   }
 }
