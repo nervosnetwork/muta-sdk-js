@@ -1,6 +1,6 @@
 {
   "name": "muta-sdk",
-  "version": "0.11.1-dev.2",
+  "version": "0.11.2-dev.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -10,12 +10,12 @@
     "lib"
   ],
   "dependencies": {
-    "@mutajs/account": "^0.11.1-dev.2",
-    "@mutajs/client": "^0.11.1-dev.2",
-    "@mutajs/defaults": "^0.11.0-dev.3",
-    "@mutajs/shared": "^0.11.0-dev.3",
-    "@mutajs/types": "^0.11.1-dev.2",
-    "@mutajs/wallet": "^0.11.1-dev.2",
+    "@mutajs/account": "^0.11.2-dev.0",
+    "@mutajs/client": "^0.11.2-dev.0",
+    "@mutajs/defaults": "^0.11.2-dev.0",
+    "@mutajs/shared": "^0.11.2-dev.0",
+    "@mutajs/types": "^0.11.2-dev.0",
+    "@mutajs/wallet": "^0.11.2-dev.0",
     "utility-types": "^3.10.0"
   }
 }
