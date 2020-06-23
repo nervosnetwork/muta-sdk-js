@@ -5,6 +5,7 @@ import {
 } from '@mutajs/client-raw';
 import { invariant } from '@mutajs/shared';
 import {
+  Address,
   Block,
   Hash,
   QueryServiceParam,
@@ -14,7 +15,6 @@ import {
   SignedTransaction,
   Transaction,
   Uint64,
-  Address,
 } from '@mutajs/types';
 import {
   hexToNum,
@@ -242,10 +242,9 @@ export class Client {
         ? safeStringifyJSON(param.payload)
         : param.payload;
 
-    const blockHeight = await this.getLatestBlockHeight();
     const timeout = param.timeout
       ? param.timeout
-      : toHex(blockHeight + timeoutGap - 1);
+      : toHex((await this.getLatestBlockHeight()) + timeoutGap - 1);
 
     const sender = param.sender;
 
@@ -279,7 +278,7 @@ export class Client {
     const before = await this.getLatestBlockHeight();
 
     return retry({
-      onResolve: height => height - before >= n,
+      onResolve: (height) => height - before >= n,
       retry: () => this.getLatestBlockHeight(),
       timeout: this.options.maxTimeout,
       ...options,
