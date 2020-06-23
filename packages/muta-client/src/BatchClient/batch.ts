@@ -21,7 +21,7 @@ export async function batchWithSameFragment<T>(
     `,
   );
 
-  return batched;
+  return batched as Batched<T>;
 }
 
 interface ChunkAndBatchOption<Source> {
