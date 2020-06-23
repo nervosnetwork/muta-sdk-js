@@ -37,11 +37,8 @@ export function createTransactionSignature(
   const { signature } = ecdsaSign(txHash, uint8PrivateKey);
 
   return {
-    pubkey: toHex(publicKeyCreate(uint8PrivateKey)),
-    signature: toHex(signature),
-    // FIXME: Update muta
-    // pubkey: toHex(encode([publicKeyCreate(uint8PrivateKey)])),
-    // signature: toHex(encode([signature])),
+    pubkey: toHex(encode([publicKeyCreate(uint8PrivateKey)])),
+    signature: toHex(encode([signature])),
     txHash: toHex(txHash),
   };
 }
@@ -57,23 +54,23 @@ export function appendTransactionSignature(
 
   let pubkeys = decode(toBuffer(stx.pubkey));
   if (Array.isArray(pubkeys)) {
-      pubkeys.push(publicKeyCreate(uint8PrivateKey));
+    pubkeys.push(publicKeyCreate(uint8PrivateKey));
   } else {
-      throw 'MultiSigs pubkey should be rlp encoded list'
+    throw 'MultiSigs pubkey should be rlp encoded list';
   }
 
   let multiSigs = decode(toBuffer(stx.signature));
   if (Array.isArray(multiSigs)) {
-      multiSigs.push(signature);
+    multiSigs.push(signature);
   } else {
-      throw 'MultiSigs signature should be rlp encoded list'
+    throw 'MultiSigs signature should be rlp encoded list';
   }
 
   return {
     ...stx,
     pubkey: toHex(encode(pubkeys)),
-    signature: toHex(encode(multiSigs))
-  }
+    signature: toHex(encode(multiSigs)),
+  };
 }
 
 /**
