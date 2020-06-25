@@ -274,7 +274,7 @@ export class Client {
    * @param n block count
    * @param options
    */
-  public async waitForNextNBlock(n: number, options: RetryConfig = {}) {
+  public async waitForNextNBlock(n: number = 1, options: RetryConfig = {}) {
     const before = await this.getLatestBlockHeight();
 
     return retry({
