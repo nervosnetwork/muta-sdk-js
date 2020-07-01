@@ -4,12 +4,12 @@ import { Account } from '@mutajs/account';
 import { Client, retry } from '@mutajs/client';
 import { invariant } from '@mutajs/shared';
 import {
+  Address,
   QueryServiceParam,
   Receipt,
   ServiceResponse,
   SignedTransaction,
   Transaction,
-  Address,
 } from '@mutajs/types';
 import {
   capitalize,
@@ -122,7 +122,7 @@ export type ServiceBinding<Binding> = {
 export function createServiceBinding<T>(
   serviceName: string,
   model: T,
-  options: { client: Client, signatureAddress: Address },
+  options: { client: Client; signatureAddress: Address },
 ): ServiceBinding<T> {
   const { client, signatureAddress } = options;
 
@@ -208,16 +208,24 @@ export type BindingClassPrototype<Binding> = {
 
 export type ServiceBindingClass<T> = new (
   client: Client,
-  signatureAddress: Address,
   account?: Account,
+  signatureAddress?: Address,
 ) => BindingClassPrototype<T>;
 
 export function createBindingClass<T>(
   serviceName: string,
   model: T,
 ): ServiceBindingClass<T> {
-  function BindingClass(client: Client, signatureAddress: Address, account?: Account) {
-    const binding = createServiceBinding<T>(serviceName, model, { client, signatureAddress });
+  function BindingClass(
+    client: Client,
+    account?: Account,
+    signatureAddress?: Address,
+  ) {
+    signatureAddress = account?.address;
+    const binding = createServiceBinding<T>(serviceName, model, {
+      client,
+      signatureAddress,
+    });
     const prototypes = Object.entries(model).reduce(
       (prototype, [method, handler]) => {
         if (isRead(handler)) {
