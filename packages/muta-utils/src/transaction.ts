@@ -1,12 +1,12 @@
-import { encode, decode } from 'rlp';
-import { ecdsaSign, publicKeyCreate } from 'secp256k1';
 import {
   InputSignedTransaction,
+  SignedTransaction,
   Transaction,
   TransactionSignature,
-  SignedTransaction,
 } from '@mutadev/types';
-import { toHex, toBuffer } from './bytes';
+import { decode, encode } from 'rlp';
+import { ecdsaSign, publicKeyCreate } from 'secp256k1';
+import { toBuffer, toHex } from './bytes';
 import { keccak } from './hash';
 
 /**
@@ -15,9 +15,13 @@ import { keccak } from './hash';
  * @param privateKey
  */
 export function createTransactionSignature(
-  tx: Transaction,
+  tx: Transaction | SignedTransaction,
   privateKey: Buffer,
 ): TransactionSignature {
+  if (isSignedTransaction(tx)) {
+    return separateOutEncryption(appendTransactionSignature(tx, privateKey));
+  }
+
   const orderedTx = [
     tx.chainId,
     tx.cyclesLimit,
@@ -73,16 +77,55 @@ export function appendTransactionSignature(
   };
 }
 
+export function isSignedTransaction(
+  tx: Transaction | SignedTransaction,
+): tx is SignedTransaction {
+  return 'pubkey' in tx && 'signature' in tx && 'txHash' in tx;
+}
+
+export function separateOutRawTransaction(
+  tx: Transaction | SignedTransaction,
+): Transaction {
+  return {
+    chainId: tx.chainId,
+    cyclesLimit: tx.cyclesLimit,
+    cyclesPrice: tx.cyclesPrice,
+    method: tx.method,
+    nonce: tx.nonce,
+    payload: tx.payload,
+    sender: tx.sender,
+    serviceName: tx.serviceName,
+    timeout: tx.timeout,
+  };
+}
+
+export function separateOutEncryption(
+  signedTx: SignedTransaction,
+): TransactionSignature {
+  return {
+    pubkey: signedTx.pubkey,
+    signature: signedTx.signature,
+    txHash: signedTx.txHash,
+  };
+}
+
 /**
  * sign a transaction with a private key
  * @param tx
  * @param privateKey
  */
 export function signTransaction(
-  tx: Transaction,
+  tx: Transaction | SignedTransaction,
   privateKey: Buffer,
 ): InputSignedTransaction {
-  const inputEncryption = createTransactionSignature(tx, privateKey);
+  if (isSignedTransaction(tx)) {
+    const signed = appendTransactionSignature(tx, privateKey);
+    return {
+      inputEncryption: separateOutEncryption(signed),
+      inputRaw: separateOutRawTransaction(signed),
+    };
+  }
 
+  const inputEncryption = createTransactionSignature(tx, privateKey);
   return { inputEncryption, inputRaw: tx };
 }
