@@ -1,6 +1,5 @@
 import { SignedTransaction, Transaction } from '@mutadev/types';
 import {
-  appendTransactionSignature,
   createTransactionSignature,
   keccak,
   publicKeyCreate,
@@ -94,7 +93,9 @@ export class Account {
    * @param tx, [[Transaction]]
    * @return [[SignedTransaction]]
    */
-  public signTransaction(tx: Transaction): SignedTransaction {
+  public signTransaction(
+    tx: Transaction | SignedTransaction,
+  ): SignedTransaction {
     const { txHash, signature, pubkey } = createTransactionSignature(
       tx,
       this._privateKey,
@@ -114,16 +115,5 @@ export class Account {
       txHash,
       sender: tx.sender,
     };
-  }
-
-  /**
-   * sign a multiple signatures Muta transaction with this Account's internal
-   * private key
-   *
-   * @param tx, [[SignedTransaction]]
-   * @return [[SignedTransaction]]
-   */
-  public signMultiSigTransaction(stx: SignedTransaction): SignedTransaction {
-    return appendTransactionSignature(stx, this._privateKey);
   }
 }

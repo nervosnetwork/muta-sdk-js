@@ -72,9 +72,7 @@ it('sign multiple signatures transaction by account should be correct', () => {
     '0x72fd551241f07c1c05ce0fe6f5ebc7aa89ed8e6b7a1c640d8509a4cb4eeff623',
   );
 
-  const multiSignedTransaction = account2.signMultiSigTransaction(
-    signedTransaction,
-  );
+  const multiSignedTransaction = account2.signTransaction(signedTransaction);
   const {
     pubkey: multiPubkeys,
     signature: multiSignatures,
