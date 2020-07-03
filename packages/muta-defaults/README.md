@@ -1,4 +1,4 @@
-# @mutajs/defaults
+# @mutadev/defaults
 
 Provide the default configuration or read configuration from environment variables for SDK instance
 

@@ -1,4 +1,4 @@
-# @mutajs/client
+# @mutadev/client
 
 ## Examples
 

@@ -1,6 +1,6 @@
-import { Account } from '@mutajs/account';
-import { Client } from '@mutajs/client';
-import { BigNumber } from '@mutajs/shared';
+import { Account } from '@mutadev/account';
+import { Client } from '@mutadev/client';
+import { BigNumber } from '@mutadev/shared';
 import { AssetService } from './AssetService';
 
 const account = Account.fromPrivateKey(

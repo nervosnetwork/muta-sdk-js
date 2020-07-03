@@ -1,5 +1,5 @@
-import { GetReceiptQuery, GetTransactionQuery } from '@mutajs/client-raw';
-import { Hash } from '@mutajs/types';
+import { GetReceiptQuery, GetTransactionQuery } from '@mutadev/client-raw';
+import { Hash } from '@mutadev/types';
 import { defaults } from 'lodash';
 import { DeepPartial } from 'utility-types';
 import { ClientOption, getDefaultClientOption } from '../options';

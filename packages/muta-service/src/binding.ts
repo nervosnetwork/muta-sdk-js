@@ -1,8 +1,8 @@
 // This module will be rewritten in the near future
 //@ts-nocheck
-import { Account } from '@mutajs/account';
-import { Client, retry } from '@mutajs/client';
-import { invariant } from '@mutajs/shared';
+import { Account } from '@mutadev/account';
+import { Client, retry } from '@mutadev/client';
+import { invariant } from '@mutadev/shared';
 import {
   Address,
   QueryServiceParam,
@@ -10,13 +10,13 @@ import {
   ServiceResponse,
   SignedTransaction,
   Transaction,
-} from '@mutajs/types';
+} from '@mutadev/types';
 import {
   capitalize,
   safeParseJSON,
   signTransaction,
   toHex,
-} from '@mutajs/utils';
+} from '@mutadev/utils';
 
 /**
  * Given an input payload, transform to [[QueryServiceParam]]

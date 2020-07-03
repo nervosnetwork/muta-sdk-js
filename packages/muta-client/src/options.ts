@@ -3,8 +3,8 @@ import {
   DEFAULT_CONSENSUS_INTERVAL,
   DEFAULT_ENDPOINT,
   DEFAULT_TIMEOUT_GAP,
-} from '@mutajs/defaults';
-import { Uint64 } from '@mutajs/types';
+} from '@mutadev/defaults';
+import { Uint64 } from '@mutadev/types';
 
 /**
  * the preset [[ClientOption]] when you construct [[Client]]

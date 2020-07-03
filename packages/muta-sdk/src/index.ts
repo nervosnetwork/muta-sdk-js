@@ -1,2 +1,2 @@
 export * from './muta';
-export * as utils from '@mutajs/utils';
+export * as utils from '@mutadev/utils';

@@ -7,24 +7,24 @@ Allow you to interact with Muta node's GraphQL service.
 
 The repo root which organized via monorepo mode, that composed of the following modules
 
-- [muta-sdk](./packages/muta-sdk) - the all-in-one package to interact with Muta
-- [@mutajs/client](./packages/muta-client) - wrap the GraphQL interface like RPC
-- [@mutajs/client-raw](./packages/muta-client-raw) - wrap the raw Muta GraphQL
-- [@mutajs/account](./packages/muta-account) - account system for Muta
-- [@mutajs/wallet](./packages/muta-wallet) - an HD wallet implement for Muta instance
-- [@mutajs/service](./packages/muta-service) - wrap the Muta service
-- [@mutajs/utils](./packages/muta-utils) - common utils for Muta
-- [@mutajs/defaults](./packages/muta-defaults) - provides some default config
-- [@mutajs/types](./packages/muta-types) - provide some typescript type definition
-- [@mutajs/shared](./packages/shared) - shared third-party dependencies
+- [@mutadev/muta-sdk](./packages/muta-sdk) - the all-in-one package to interact with Muta
+- [@mutadev/client](./packages/muta-client) - wrap the GraphQL interface like RPC
+- [@mutadev/client-raw](./packages/muta-client-raw) - wrap the raw Muta GraphQL
+- [@mutadev/account](./packages/muta-account) - account system for Muta
+- [@mutadev/wallet](./packages/muta-wallet) - an HD wallet implement for Muta instance
+- [@mutadev/service](./packages/muta-service) - wrap the Muta service
+- [@mutadev/utils](./packages/muta-utils) - common utils for Muta
+- [@mutadev/defaults](./packages/muta-defaults) - provides some default config
+- [@mutadev/types](./packages/muta-types) - provide some typescript type definition
+- [@mutadev/shared](./packages/shared) - shared third-party dependencies
 
 ## Quick Start
 
 ```shell
-npm install graphql muta-sdk
+npm install graphql @mutadev/muta-sdk
 ```
 
-> Note: The `graphql` is peerDependent by @mutajs/client-raw. So we need to install it manually. To avoid multiple `graphql` version conflict error, make sure there was only one `graphql` version in our system. If you are also a library contributor dependent on `graphql` module, you should consider whether to peerDependeies on `graphql`
+> Note: The `graphql` is peerDependent by @mutadev/client-raw. So we need to install it manually. To avoid multiple `graphql` version conflict error, make sure there was only one `graphql` version in our system. If you are also a library contributor dependent on `graphql` module, you should consider whether to peerDependeies on `graphql`
 
 ## Example
 
@@ -35,7 +35,7 @@ The following code will show
 3. How to sendTransaction
 
 ```ts
-import { Muta } from 'muta-sdk';
+import { Muta } from '@mutadev/muta-sdk';
 
 async function main() {
   const muta = new Muta();

@@ -18,16 +18,16 @@
     "lib": ["es2017", "dom"],
     "baseUrl": "./packages",
     "paths": {
-      "@mutajs/account": ["muta-account/src"],
-      "@mutajs/client": ["muta-client/src"],
-      "@mutajs/client-raw": ["muta-client-raw/src"],
-      "@mutajs/defaults": ["muta-defaults/src"],
-      "muta-sdk": ["muta-sdk/src"],
-      "@mutajs/service": ["muta-service/src"],
-      "@mutajs/types": ["muta-types/src"],
-      "@mutajs/utils": ["muta-utils/src"],
-      "@mutajs/wallet": ["muta-wallet/src"],
-      "@mutajs/shared": ["shared/src"]
+      "@mutadev/account": ["muta-account/src"],
+      "@mutadev/client": ["muta-client/src"],
+      "@mutadev/client-raw": ["muta-client-raw/src"],
+      "@mutadev/defaults": ["muta-defaults/src"],
+      "@mutadev/muta-sdk": ["muta-sdk/src"],
+      "@mutadev/service": ["muta-service/src"],
+      "@mutadev/types": ["muta-types/src"],
+      "@mutadev/utils": ["muta-utils/src"],
+      "@mutadev/wallet": ["muta-wallet/src"],
+      "@mutadev/shared": ["shared/src"]
     }
   },
   "files": [],

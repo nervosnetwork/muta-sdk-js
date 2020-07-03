@@ -1,4 +1,4 @@
-import { hexToNum } from '@mutajs/utils';
+import { hexToNum } from '@mutadev/utils';
 import { Client } from './Client';
 
 const client = new Client();

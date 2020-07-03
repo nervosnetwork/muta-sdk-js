@@ -1,4 +1,4 @@
-import { Client } from '@mutajs/client';
+import { Client } from '@mutadev/client';
 import { createBindingClass, read, Read, write, Write } from './binding';
 
 const client = new Client();

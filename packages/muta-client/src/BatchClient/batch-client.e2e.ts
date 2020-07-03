@@ -1,4 +1,4 @@
-import { Account } from '@mutajs/account';
+import { Account } from '@mutadev/account';
 import { Client } from '../Client';
 import { retry } from '../retry';
 import { BatchClient } from './';

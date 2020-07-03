@@ -1,4 +1,4 @@
-import { SignedTransaction, Transaction } from '@mutajs/types';
+import { SignedTransaction, Transaction } from '@mutadev/types';
 import {
   appendTransactionSignature,
   createTransactionSignature,
@@ -6,7 +6,7 @@ import {
   publicKeyCreate,
   toBuffer,
   toHex,
-} from '@mutajs/utils';
+} from '@mutadev/utils';
 
 /**
  * If you are familiar with Ethereum, you will find that Muta's account system is similar to Ethereum.
@@ -17,8 +17,8 @@ import {
  *
  * Here is an example:
  * ```js
- * import { Account } from '@mutajs/account';
- * import { Client } from '@mutajs/client';
+ * import { Account } from '@mutadev/account';
+ * import { Client } from '@mutadev/client';
  *
  * async function example() {
  *   const client = new Client();

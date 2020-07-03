@@ -2,8 +2,8 @@ import {
   getSdk,
   InputRawTransaction,
   InputTransactionEncryption,
-} from '@mutajs/client-raw';
-import { invariant } from '@mutajs/shared';
+} from '@mutadev/client-raw';
+import { invariant } from '@mutadev/shared';
 import {
   Address,
   Block,
@@ -15,14 +15,14 @@ import {
   SignedTransaction,
   Transaction,
   Uint64,
-} from '@mutajs/types';
+} from '@mutadev/types';
 import {
   hexToNum,
   randomNonce,
   safeParseJSON,
   safeStringifyJSON,
   toHex,
-} from '@mutajs/utils';
+} from '@mutadev/utils';
 import { GraphQLClient } from 'graphql-request';
 import { defaults, isNil } from 'lodash';
 import { ClientOption, getDefaultClientOption } from './options';

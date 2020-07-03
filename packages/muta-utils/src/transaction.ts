@@ -5,7 +5,7 @@ import {
   Transaction,
   TransactionSignature,
   SignedTransaction,
-} from '@mutajs/types';
+} from '@mutadev/types';
 import { toHex, toBuffer } from './bytes';
 import { keccak } from './hash';
 

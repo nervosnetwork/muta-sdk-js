@@ -1,4 +1,4 @@
-import { Address, Hash, u64 } from '@mutajs/types';
+import { Address, Hash, u64 } from '@mutadev/types';
 import { createBindingClass, read, Read, write, Write } from '../binding';
 
 interface CreateAssetPayload {

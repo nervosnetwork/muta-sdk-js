@@ -1,4 +1,4 @@
-import { Account } from '@mutajs/account';
+import { Account } from '@mutadev/account';
 
 interface SyncWallet {
   deriveAccount(accountIndex: number): Account;

@@ -1,5 +1,5 @@
-import { Client } from '@mutajs/client';
-import { MetadataService } from '@mutajs/service';
+import { Client } from '@mutadev/client';
+import { MetadataService } from '@mutadev/service';
 
 const client = new Client();
 

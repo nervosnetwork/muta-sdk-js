@@ -1,6 +1,6 @@
 {
-  "name": "@mutajs/utils",
-  "version": "0.11.2-dev.0",
+  "name": "@mutadev/utils",
+  "version": "0.2.0-dev+2a413e6",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -10,7 +10,7 @@
     "lib"
   ],
   "dependencies": {
-    "@mutajs/types": "^0.11.2-dev.0",
+    "@mutadev/types": "^0.2.0-dev+2a413e6",
     "json-bigint": "^0.3.0",
     "keccak": "^3.0.0",
     "randombytes": "^2.1.0",
