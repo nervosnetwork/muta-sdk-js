@@ -40,10 +40,10 @@ test('test batch transactions', async () => {
   const batchClient = new BatchClient();
   const txs = await retry(() => batchClient.getTransactions(hashes));
 
-  expect(txs.every(tx => tx.txHash)).toBe(true);
+  expect(txs.every((tx) => tx.txHash)).toBe(true);
 
   const receipts = await retry(() => batchClient.getReceipts(hashes));
-  expect(receipts.every(receipt => receipt.txHash)).toBe(true);
+  expect(receipts.every((receipt) => receipt.txHash)).toBe(true);
 });
 
 test('failed when tx can not found', async () => {
