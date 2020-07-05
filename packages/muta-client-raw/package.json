@@ -21,6 +21,6 @@
     "@graphql-codegen/typescript": "^1.15.4",
     "@graphql-codegen/typescript-graphql-request": "^1.15.4",
     "@graphql-codegen/typescript-operations": "^1.15.4",
-    "graphql": "^15.1.0"
+    "graphql": "^14.6.0"
   }
 }
