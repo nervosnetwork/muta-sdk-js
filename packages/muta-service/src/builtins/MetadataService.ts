@@ -1,5 +1,5 @@
-import { createBindingClass, read, Read } from '../';
 import { Address, Hash, u32, u64, Vec } from '@mutadev/types';
+import { createServiceBindingClass, read } from '../create';
 
 interface ValidatorExtend {
   bls__key: string;
@@ -22,13 +22,9 @@ interface Metadata {
   brake_ratio: u64;
 }
 
-export interface MetadataServiceModel {
-  get_metadata: Read<null, Metadata>;
-}
-
-export const MetadataService = createBindingClass<MetadataServiceModel>(
-  'metadata',
-  {
-    get_metadata: read(),
+export const MetadataService = createServiceBindingClass({
+  serviceName: 'metadata',
+  read: {
+    get_metadata: read<null, Metadata>(),
   },
-);
+});

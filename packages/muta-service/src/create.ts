@@ -1,11 +1,12 @@
-import { Account } from "@mutadev/account";
-import { Client, retry } from "@mutadev/client";
-import { GetReceiptQuery, QueryServiceQuery } from "@mutadev/client-raw";
-import { Hash, Transaction } from "@mutadev/types";
-import { capitalize, safeParseJSON, safeStringifyJSON } from "@mutadev/utils";
+import { Account } from '@mutadev/account';
+import { Client, retry } from '@mutadev/client';
+import { GetReceiptQuery, QueryServiceQuery } from '@mutadev/client-raw';
+import { Hash, Transaction } from '@mutadev/types';
+import { capitalize, safeParseJSON, safeStringifyJSON } from '@mutadev/utils';
+import { defaults } from 'lodash';
 
-export function createServiceBindingClass<R, W>(
-  model: ServiceModel<R, W>
+export function createServiceBindingClass<R = {}, W = {}>(
+  options: CreateServiceBindingClassOptions<R, W>
 ): ServiceClass<R, W> {
   const BindingClass = class {
     getServiceName: () => string;
@@ -15,6 +16,11 @@ export function createServiceBindingClass<R, W>(
     write: WritePrototype<W>;
 
     constructor(client: Client = new Client(), account?: Account) {
+      const model: ServiceModel<R, W> = defaults(options, {
+        read: {},
+        write: {},
+      });
+
       this.getServiceName = () => {
         return model.serviceName;
       };
@@ -35,10 +41,20 @@ export function createServiceBindingClass<R, W>(
   return BindingClass as ServiceClass<R, W>;
 }
 
-interface CreateReadPrototypeOptions<R> {
-  model: R;
-  client: Client;
+interface ServiceModel<R, W> {
   serviceName: string;
+  read: R;
+  write: W;
+}
+
+type CreateServiceBindingClassOptions<R, W> = Pick<ServiceModel<R, W>,
+  'serviceName'> &
+  Partial<ServiceModel<R, W>>;
+
+interface CreateReadPrototypeOptions<R> {
+  readonly model: R;
+  readonly client: Client;
+  readonly serviceName: string;
 }
 
 function createReadPrototype<R>(
@@ -54,17 +70,18 @@ function createReadPrototype<R>(
       const res = await rawClient.queryService({
         serviceName,
         method,
-        payload: safeStringifyJSON(payload),
+        payload: payload ? safeStringifyJSON(payload) : '',
       });
 
-      const succeedData = safeParseJSON(res.queryService.succeedData);
+      const succeed = res.queryService.succeedData;
+      const succeedData = succeed ? safeParseJSON(succeed) : {};
       return {
         ...res.queryService,
         succeedData,
       };
     };
 
-    return Object.assign(r, { [method]: query });
+    return Object.assign(r, {[method]: query});
   }, {} as ReadPrototype<R>);
 }
 
@@ -82,7 +99,7 @@ interface CreateWritePrototypeOption<W> {
 export function createWritePrototype<W>(
   options: CreateWritePrototypeOption<W>
 ): WritePrototype<W> {
-  const { model, account, client, serviceName } = options;
+  const {model, account, client, serviceName} = options;
   const sender = account?.address;
 
   return Object.keys(model).reduce<WritePrototype<W>>((w, method) => {
@@ -102,8 +119,8 @@ export function createWritePrototype<W>(
     ): Promise<Hash> {
       if (!account) {
         throw new Error(
-          "Try to call a #[write] method without account is denied," +
-            ` account is required by ${capitalize(serviceName)}Service`
+          'Try to call a #[write] method without account is denied,' +
+          ` account is required by ${capitalize(serviceName)}Service`
         );
       }
 
@@ -112,15 +129,14 @@ export function createWritePrototype<W>(
       return client.sendTransaction(signedTx);
     }
 
-    async function sendTransactionAndGetReceipt<
-      Payload extends object,
-      Receipt
-    >(payload: Payload): Promise<DeserializedReceipt<Receipt>> {
+    async function sendTransactionAndGetReceipt<Payload extends object,
+      Receipt>(payload: Payload): Promise<DeserializedReceipt<Receipt>> {
       const txHash = await sendTransaction(payload);
       const receipt = await retry(() => client.getReceipt(txHash));
       const succeedData = receipt.response.response.succeedData;
-      const deserialized = succeedData ? safeParseJSON(succeedData) : {};
-      receipt.response.response.succeedData = deserialized;
+      receipt.response.response.succeedData = succeedData
+        ? safeParseJSON(succeedData)
+        : {};
       return receipt;
     }
 
@@ -128,18 +144,12 @@ export function createWritePrototype<W>(
     impl.sendTransaction = sendTransaction;
     impl.composeTransaction = composeTransaction;
 
-    return Object.assign(w, { [method]: impl });
+    return Object.assign(w, {[method]: impl});
   }, {} as WritePrototype<W>);
 }
 
 export function write<Payload, Receipt>(): Write<Payload, Receipt> {
   return {};
-}
-
-interface ServiceModel<R, W> {
-  serviceName: string;
-  read: R;
-  write: W;
 }
 
 interface ServicePrototype<R, W> {
@@ -162,19 +172,18 @@ type WritePrototype<W> = {
 };
 
 // @ts-ignore
-export interface Read<Payload = any, Return = any> {}
-
-interface ReadMethod<Payload, Return> {
-  (payload: Payload): Promise<DeserializedQueryServiceQuery<Return>>;
+export interface Read<Payload = any, Return = any> {
 }
+
+type ReadMethod<Payload, Return> = Payload extends null
+  ? () => Promise<DeserializedQueryServiceQuery<Return>>
+  : (payload: Payload) => Promise<DeserializedQueryServiceQuery<Return>>;
 
 type Override<O, K extends keyof O, T> = Omit<O, K> & T;
 
-type DeserializedQueryServiceQuery<T> = Override<
-  QueryServiceQuery["queryService"],
-  "succeedData",
-  { succeedData: T }
->;
+type DeserializedQueryServiceQuery<T> = Override<QueryServiceQuery['queryService'],
+  'succeedData',
+  { succeedData: T }>;
 
 // @ts-ignore
 export interface Write<Payload = any, Receipt = any> {}
@@ -187,24 +196,18 @@ interface WriteMethod<Payload, Receipt> {
   composeTransaction(): Promise<Transaction>;
 }
 
-type DeserializedReceipt<Receipt> = Override<
-  GetReceiptQuery["getReceipt"],
-  "response",
+type DeserializedReceipt<Receipt> = Override<GetReceiptQuery['getReceipt'],
+  'response',
   {
-    response: Override<
-      GetReceiptQuery["getReceipt"]["response"],
-      "response",
+    response: Override<GetReceiptQuery['getReceipt']['response'],
+      'response',
       {
-        response: Override<
-          GetReceiptQuery["getReceipt"]["response"]["response"],
-          "succeedData",
-          { succeedData: Receipt }
-        >;
-      }
-    >;
-  }
->;
+        response: Override<GetReceiptQuery['getReceipt']['response']['response'],
+          'succeedData',
+          { succeedData: Receipt }>;
+      }>;
+  }>;
 
 export interface ServiceClass<R, W> {
-  new (client?: Client, account?: Account): ServicePrototype<R, W>;
+  new(client?: Client, account?: Account): ServicePrototype<R, W>;
 }

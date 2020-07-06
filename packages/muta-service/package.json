@@ -14,6 +14,7 @@
     "@mutadev/client": "^0.2.0-dev+2a413e6",
     "@mutadev/shared": "^0.2.0-dev+2a413e6",
     "@mutadev/types": "^0.2.0-dev+2a413e6",
-    "@mutadev/utils": "^0.2.0-dev+2a413e6"
+    "@mutadev/utils": "^0.2.0-dev+2a413e6",
+    "lodash": "^4.17.15"
   }
 }
