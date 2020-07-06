@@ -1,6 +1,6 @@
 {
   "name": "@mutadev/client",
-  "version": "0.2.0-dev",
+  "version": "0.2.0-dev.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -10,11 +10,11 @@
     "lib"
   ],
   "dependencies": {
-    "@mutadev/client-raw": "^0.2.0-dev",
-    "@mutadev/defaults": "^0.2.0-dev",
-    "@mutadev/shared": "^0.2.0-dev",
-    "@mutadev/types": "^0.2.0-dev",
-    "@mutadev/utils": "^0.2.0-dev",
+    "@mutadev/client-raw": "0.2.0-dev.0",
+    "@mutadev/defaults": "0.2.0-dev.0",
+    "@mutadev/shared": "0.2.0-dev.0",
+    "@mutadev/types": "0.2.0-dev.0",
+    "@mutadev/utils": "0.2.0-dev.0",
     "@types/lodash": "^4.14.149",
     "invariant": "^2.2.4",
     "lodash": "^4.17.15",
