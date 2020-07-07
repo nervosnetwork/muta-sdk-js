@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TransferFromPayload | muta-sdk</title>
+	<title>ServicePrototype | muta-sdk</title>
 	<meta name="description" content="Documentation for muta-sdk">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,21 +59,32 @@
 					<a href="../modules/muta_service.html">muta-service</a>
 				</li>
 				<li>
-					<a href="muta_service.transferfrompayload.html">TransferFromPayload</a>
+					<a href="muta_service.serviceprototype.html">ServicePrototype</a>
 				</li>
 			</ul>
-			<h1>Interface TransferFromPayload</h1>
+			<h1>Interface ServicePrototype&lt;R, W&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>R</h4>
+					</li>
+					<li>
+						<h4>W</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">TransferFromPayload</span>
+						<span class="target">ServicePrototype</span>
 					</li>
 				</ul>
 			</section>
@@ -84,10 +95,14 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.transferfrompayload.html#asset_id" class="tsd-kind-icon">asset_<wbr>id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.transferfrompayload.html#recipient" class="tsd-kind-icon">recipient</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.transferfrompayload.html#sender" class="tsd-kind-icon">sender</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.transferfrompayload.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.serviceprototype.html#read" class="tsd-kind-icon">read</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.serviceprototype.html#write" class="tsd-kind-icon">write</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.serviceprototype.html#getservicename" class="tsd-kind-icon">get<wbr>Service<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,44 +111,44 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="asset_id" class="tsd-anchor"></a>
-					<h3>asset_<wbr>id</h3>
-					<div class="tsd-signature tsd-kind-icon">asset_<wbr>id<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#hash" class="tsd-signature-type">Hash</a></div>
+					<a name="read" class="tsd-anchor"></a>
+					<h3>read</h3>
+					<div class="tsd-signature tsd-kind-icon">read<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_service.html#readprototype" class="tsd-signature-type">ReadPrototype</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/builtins/AssetService.ts#L23">muta-service/src/builtins/AssetService.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/create.ts#L156">muta-service/src/create.ts:156</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="recipient" class="tsd-anchor"></a>
-					<h3>recipient</h3>
-					<div class="tsd-signature tsd-kind-icon">recipient<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address" class="tsd-signature-type">Address</a></div>
+					<a name="write" class="tsd-anchor"></a>
+					<h3>write</h3>
+					<div class="tsd-signature tsd-kind-icon">write<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_service.html#writeprototype" class="tsd-signature-type">WritePrototype</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">W</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/builtins/AssetService.ts#L25">muta-service/src/builtins/AssetService.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/create.ts#L157">muta-service/src/create.ts:157</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="sender" class="tsd-anchor"></a>
-					<h3>sender</h3>
-					<div class="tsd-signature tsd-kind-icon">sender<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address" class="tsd-signature-type">Address</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/builtins/AssetService.ts#L24">muta-service/src/builtins/AssetService.ts:24</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="value" class="tsd-anchor"></a>
-					<h3>value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#u64" class="tsd-signature-type">u64</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/builtins/AssetService.ts#L26">muta-service/src/builtins/AssetService.ts:26</a></li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="getservicename" class="tsd-anchor"></a>
+					<h3>get<wbr>Service<wbr>Name</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Service<wbr>Name<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/create.ts#L159">muta-service/src/create.ts:159</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -213,30 +228,27 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="muta_service.servicemodel.html" class="tsd-kind-icon">Service<wbr>Model</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="muta_service.serviceprototype.html" class="tsd-kind-icon">Service<wbr>Prototype</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_service.transferfrompayload.html" class="tsd-kind-icon">Transfer<wbr>From<wbr>Payload</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="muta_service.serviceprototype.html" class="tsd-kind-icon">Service<wbr>Prototype</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="muta_service.transferfrompayload.html#asset_id" class="tsd-kind-icon">asset_<wbr>id</a>
+								<a href="muta_service.serviceprototype.html#read" class="tsd-kind-icon">read</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="muta_service.transferfrompayload.html#recipient" class="tsd-kind-icon">recipient</a>
+								<a href="muta_service.serviceprototype.html#write" class="tsd-kind-icon">write</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="muta_service.transferfrompayload.html#sender" class="tsd-kind-icon">sender</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="muta_service.transferfrompayload.html#value" class="tsd-kind-icon">value</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.serviceprototype.html#getservicename" class="tsd-kind-icon">get<wbr>Service<wbr>Name</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_service.transferfrompayload.html" class="tsd-kind-icon">Transfer<wbr>From<wbr>Payload</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
 						<a href="muta_service.transferpayload.html" class="tsd-kind-icon">Transfer<wbr>Payload</a>
 					</li>
@@ -314,6 +326,7 @@
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

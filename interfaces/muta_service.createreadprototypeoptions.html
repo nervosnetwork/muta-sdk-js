@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>WriteHandler | muta-sdk</title>
+	<title>CreateReadPrototypeOptions | muta-sdk</title>
 	<meta name="description" content="Documentation for muta-sdk">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/muta_service.html">muta-service</a>
 				</li>
 				<li>
-					<a href="muta_service.writehandler.html">WriteHandler</a>
+					<a href="muta_service.createreadprototypeoptions.html">CreateReadPrototypeOptions</a>
 				</li>
 			</ul>
-			<h1>Interface WriteHandler&lt;P, R&gt;</h1>
+			<h1>Interface CreateReadPrototypeOptions&lt;R&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -73,9 +73,6 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>P</h4>
-					</li>
-					<li>
 						<h4>R</h4>
 					</li>
 				</ul>
@@ -84,49 +81,57 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">WriteHandler</span>
+						<span class="target">CreateReadPrototypeOptions</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel">
-				<h3 class="tsd-before-signature">Callable</h3>
-				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">P</span>, privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="muta_types.signedtransaction.html" class="tsd-signature-type">SignedTransaction</a><span class="tsd-signature-symbol">&gt;</span></li>
-					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>payload<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="muta_types.transaction.html" class="tsd-signature-type">Transaction</a><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-service/src/binding.ts#L66">muta-service/src/binding.ts:66</a></li>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.createreadprototypeoptions.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.createreadprototypeoptions.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.createreadprototypeoptions.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
 							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>payload: <span class="tsd-signature-type">P</span></h5>
-							</li>
-							<li>
-								<h5>privateKey: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span></h5>
-							</li>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="client" class="tsd-anchor"></a>
+					<h3>client</h3>
+					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="../classes/muta_client.client.html" class="tsd-signature-type">Client</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/create.ts#L56">muta-service/src/create.ts:56</a></li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="muta_types.signedtransaction.html" class="tsd-signature-type">SignedTransaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/homura/muta-js-sdk/blob/54b0905/packages/muta-service/src/binding.ts#L67">muta-service/src/binding.ts:67</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>payload: <span class="tsd-signature-type">P</span></h5>
-							</li>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="model" class="tsd-anchor"></a>
+					<h3>model</h3>
+					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">R</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/create.ts#L55">muta-service/src/create.ts:55</a></li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="muta_types.transaction.html" class="tsd-signature-type">Transaction</a><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="servicename" class="tsd-anchor"></a>
+					<h3>service<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-service/src/create.ts#L57">muta-service/src/create.ts:57</a></li>
+						</ul>
+					</aside>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -169,11 +174,29 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
 						<a href="muta_service.asset.html" class="tsd-kind-icon">Asset</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_service.assetservicemodel.html" class="tsd-kind-icon">Asset<wbr>Service<wbr>Model</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
 						<a href="muta_service.createassetpayload.html" class="tsd-kind-icon">Create<wbr>Asset<wbr>Payload</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="muta_service.createreadprototypeoptions.html" class="tsd-kind-icon">Create<wbr>Read<wbr>Prototype<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.createreadprototypeoptions.html#client" class="tsd-kind-icon">client</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.createreadprototypeoptions.html#model" class="tsd-kind-icon">model</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.createreadprototypeoptions.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="muta_service.createwriteprototypeoption.html" class="tsd-kind-icon">Create<wbr>Write<wbr>Prototype<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
 						<a href="muta_service.getallowancepayload.html" class="tsd-kind-icon">Get<wbr>Allowance<wbr>Payload</a>
@@ -193,14 +216,17 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
 						<a href="muta_service.metadata.html" class="tsd-kind-icon">Metadata</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_service.metadataservicemodel.html" class="tsd-kind-icon">Metadata<wbr>Service<wbr>Model</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="muta_service.read.html" class="tsd-kind-icon">Read</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="muta_service.serviceclass.html" class="tsd-kind-icon">Service<wbr>Class</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="muta_service.sendtransaction.html" class="tsd-kind-icon">Send<wbr>Transaction</a>
+						<a href="muta_service.servicemodel.html" class="tsd-kind-icon">Service<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="muta_service.serviceprototype.html" class="tsd-kind-icon">Service<wbr>Prototype</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
 						<a href="muta_service.transferfrompayload.html" class="tsd-kind-icon">Transfer<wbr>From<wbr>Payload</a>
@@ -214,30 +240,32 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="muta_service.write.html" class="tsd-kind-icon">Write</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="muta_service.writehandler.html" class="tsd-kind-icon">Write<wbr>Handler</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="muta_service.writemethod.html" class="tsd-kind-icon">Write<wbr>Method</a>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
 						<a href="../modules/muta_service.html#approvepayload" class="tsd-kind-icon">Approve<wbr>Payload</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#bindingclassprototype" class="tsd-kind-icon">Binding<wbr>Class<wbr>Prototype</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#queryserviceparamtransform" class="tsd-kind-icon">Query<wbr>Service<wbr>Param<wbr>Transform</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#servicebinding" class="tsd-kind-icon">Service<wbr>Binding</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#servicebindingclass" class="tsd-kind-icon">Service<wbr>Binding<wbr>Class</a>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_service.html#createservicebindingclassoptions" class="tsd-kind-icon">Create<wbr>Service<wbr>Binding<wbr>Class<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../modules/muta_service.html#writepayloadhandler" class="tsd-kind-icon">Write<wbr>Payload<wbr>Handler</a>
+						<a href="../modules/muta_service.html#deserializedqueryservicequery" class="tsd-kind-icon">Deserialized<wbr>Query<wbr>Service<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_service.html#deserializedreceipt" class="tsd-kind-icon">Deserialized<wbr>Receipt</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_service.html#override" class="tsd-kind-icon">Override</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_service.html#readmethod" class="tsd-kind-icon">Read<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_service.html#readprototype" class="tsd-kind-icon">Read<wbr>Prototype</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_service.html#writeprototype" class="tsd-kind-icon">Write<wbr>Prototype</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="../modules/muta_service.html#assetservice" class="tsd-kind-icon">Asset<wbr>Service</a>
@@ -245,17 +273,14 @@
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="../modules/muta_service.html#metadataservice" class="tsd-kind-icon">Metadata<wbr>Service</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#createbindingclass" class="tsd-kind-icon">create<wbr>Binding<wbr>Class</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/muta_service.html#createreadprototype" class="tsd-kind-icon">create<wbr>Read<wbr>Prototype</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_service.html#createservicebinding" class="tsd-kind-icon">create<wbr>Service<wbr>Binding</a>
+						<a href="../modules/muta_service.html#createservicebindingclass" class="tsd-kind-icon">create<wbr>Service<wbr>Binding<wbr>Class</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_service.html#isread" class="tsd-kind-icon">is<wbr>Read</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_service.html#iswrite" class="tsd-kind-icon">is<wbr>Write</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/muta_service.html#createwriteprototype" class="tsd-kind-icon">create<wbr>Write<wbr>Prototype</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../modules/muta_service.html#read-1" class="tsd-kind-icon">read</a>
@@ -282,6 +307,7 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

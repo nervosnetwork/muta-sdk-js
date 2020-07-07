@@ -67,78 +67,59 @@
 				<a href="#muta-sdk" id="muta-sdk" style="color: inherit; text-decoration: none;">
 					<h1>Muta SDK</h1>
 				</a>
-				<p>The JS/TS SDK for <a href="https://github.com/nervosnetwork/muta">Muta</a>(a High performance Blockchain framework).
-				Allow you to interact with Muta node&#39;s GraphQL service.</p>
-				<a href="#modules" id="modules" style="color: inherit; text-decoration: none;">
-					<h2>Modules</h2>
-				</a>
-				<p>This is a root organized into monorepo mode, which is composed of the following modules</p>
-				<ul>
-					<li><a href="./packages/muta-sdk">muta-sdk</a> - the all-in-one packages to interact with Muta</li>
-					<li><a href="./packages/muta-client">@mutajs/client</a> - wrap the GraphQL interface like RPC</li>
-					<li><a href="./packages/muta-client-raw">@mutajs/client-raw</a> - wrap the raw Muta GraphQL</li>
-					<li><a href="./packages/muta-account">@mutajs/account</a> - account system for Muta</li>
-					<li><a href="./packages/muta-wallet">@mutajs/wallet</a> - an HD wallet implement for Muta instance</li>
-					<li><a href="./packages/muta-service">@mutajs/service</a> - wrap the Muta service</li>
-					<li><a href="./packages/muta-utils">@mutajs/utils</a> - common utils for Muta</li>
-					<li><a href="./packages/muta-defaults">@mutajs/defaults</a> - provides some default config</li>
-					<li><a href="./packages/muta-types">@mutajs/types</a> - provide some typescript type definition </li>
-					<li><a href="./packages/shared">@mutajs/shared</a> - shared third-party dependencies</li>
-				</ul>
+				<p>The JS/TS SDK for <a href="https://github.com/nervosnetwork/muta">Muta</a>(a High performance Blockchain framework). Allow you to interact with Muta node&#39;s GraphQL service.</p>
 				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
 					<h2>Quick Start</h2>
 				</a>
-				<pre><code class="language-shell">npm install muta-sdk</code></pre>
-				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-					<h2>Example</h2>
+				<a href="#npm" id="npm" style="color: inherit; text-decoration: none;">
+					<h3>npm</h3>
 				</a>
-				<p>The following code will show</p>
-				<ol>
-					<li>How to interact with <code>#[read]</code> service</li>
-					<li>How to sign a transaction</li>
-					<li>How to sendTransaction</li>
-				</ol>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Muta } <span class="hljs-keyword">from</span> <span class="hljs-string">'muta-sdk'</span>;
-
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> muta = <span class="hljs-keyword">new</span> Muta();
-  <span class="hljs-keyword">const</span> client = muta.client();
-  <span class="hljs-comment">// get metadata from the chain</span>
-  <span class="hljs-keyword">const</span> metadataResponse = <span class="hljs-keyword">await</span> client.queryServiceDyn({
-    method: <span class="hljs-string">'get_metadata'</span>,
-    payload: <span class="hljs-string">''</span>,
-    serviceName: <span class="hljs-string">'metadata'</span>,
-  });
-
-  <span class="hljs-built_in">console</span>.log(metadataResponse);
-
-  <span class="hljs-comment">// Accounts with permission to modify metadata</span>
-  <span class="hljs-keyword">const</span> admin = Muta.accountFromPrivateKey(<span class="hljs-string">'0x...'</span>);
-
-  <span class="hljs-comment">// Preparing transaction</span>
-  <span class="hljs-keyword">const</span> tx = <span class="hljs-keyword">await</span> client.composeTransaction({
-    method: <span class="hljs-string">'update_metadata'</span>,
-    payload: {
-      <span class="hljs-comment">// ...</span>
-    },
-    serviceName: <span class="hljs-string">'metadata'</span>,
-  });
-  <span class="hljs-keyword">const</span> signedTx = admin.signTransaction(tx);
-  <span class="hljs-keyword">const</span> txHash = <span class="hljs-keyword">await</span> client.sendTransaction(signedTx);
-  <span class="hljs-keyword">const</span> receipt = <span class="hljs-keyword">await</span> client.getReceipt(txHash);
-
-  <span class="hljs-built_in">console</span>.log(receipt);
-}</code></pre>
-				<a href="#create-service-binding" id="create-service-binding" style="color: inherit; text-decoration: none;">
-					<h2>Create Service Binding</h2>
+				<pre><code class="language-shell">npm install graphql@14 @mutadev/muta-sdk</code></pre>
+				<a href="#yarn" id="yarn" style="color: inherit; text-decoration: none;">
+					<h3>yarn</h3>
 				</a>
-				<p>Before we create our custom binding, learn about what is a <a href="https://github.com/nervosnetwork/muta-docs/blob/master/service_dev.md">service</a> in Muta.
-				We&#39;ll still use <a href="https://github.com/nervosnetwork/muta/blob/master/built-in-services/asset">AssetService</a> as an <a href="./packages/muta-service/src/binding/AssetService.ts">example</a>.</p>
+				<pre><code class="language-shell">yarn add graphql@14 @mutadev/muta-sdk</code></pre>
+				<blockquote>
+					<p>Note: The <code>graphql</code> is peerDependent by @mutadev/client-raw. So we need to install it manually. To avoid multiple <code>graphql</code> version conflict error, make sure there was only one <code>graphql</code> version in our system. If you are also a library contributor dependent on <code>graphql</code> module, you should consider whether to peerDependeies on <code>graphql</code></p>
+				</blockquote>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">var</span> sdk = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@mutadev/muta-sdk'</span>);
+
+<span class="hljs-keyword">var</span> muta = <span class="hljs-keyword">new</span> sdk.Muta();
+
+<span class="hljs-comment">// Muta {</span>
+<span class="hljs-comment">//   context: {</span>
+<span class="hljs-comment">//     chainId: '0x...',</span>
+<span class="hljs-comment">//     consensusInterval: 3000,</span>
+<span class="hljs-comment">//     endpoint: 'http://127.0.0.1:8000/graphql',</span>
+<span class="hljs-comment">//     timeoutGap: 20</span>
+<span class="hljs-comment">//   }</span>
+<span class="hljs-comment">// }</span>
+<span class="hljs-built_in">console</span>.log(muta);</code></pre>
+				<a href="#modules" id="modules" style="color: inherit; text-decoration: none;">
+					<h2>Modules</h2>
+				</a>
+				<p>The repo root which organized via monorepo mode, that composed of the following modules</p>
+				<ul>
+					<li><a href="./packages/muta-sdk">@mutadev/muta-sdk</a> - the all-in-one package to interact with Muta</li>
+					<li><a href="./packages/muta-client">@mutadev/client</a> - wrap the GraphQL interface like RPC</li>
+					<li><a href="./packages/muta-client-raw">@mutadev/client-raw</a> - wrap the raw Muta GraphQL</li>
+					<li><a href="./packages/muta-account">@mutadev/account</a> - account system for Muta</li>
+					<li><a href="./packages/muta-wallet">@mutadev/wallet</a> - an HD wallet implement for Muta instance</li>
+					<li><a href="./packages/muta-service">@mutadev/service</a> - wrap the Muta service</li>
+					<li><a href="./packages/muta-utils">@mutadev/utils</a> - common utils for Muta</li>
+					<li><a href="./packages/muta-defaults">@mutadev/defaults</a> - provides some default config</li>
+					<li><a href="./packages/muta-types">@mutadev/types</a> - provide some typescript type definition</li>
+					<li><a href="./packages/shared">@mutadev/shared</a> - shared third-party dependencies</li>
+				</ul>
 				<a href="#links" id="links" style="color: inherit; text-decoration: none;">
 					<h2>Links</h2>
 				</a>
 				<ul>
 					<li><a href="https://nervosnetwork.github.io/muta-sdk-js">API Documentation</a></li>
+					<li><a href="./examples">Examples</a></li>
 					<li><a href="https://github.com/nervosnetwork/muta">Muta</a></li>
 				</ul>
 				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
@@ -146,13 +127,31 @@
 				</a>
 				<ul>
 					<li>nodejs &gt;= 10</li>
-					<li>typescript &gt;= 3.7</li>
 					<li>yarn</li>
 				</ul>
+				<blockquote>
+					<p>To ensure that the test passes, please enable a muta-example chain before the test</p>
+				</blockquote>
 				<pre><code class="language-shell">git clone https://github.com/nervosnetwork/muta-sdk-js
 cd muta-sdk-js
 yarn
-yarn start</code></pre>
+yarn test</code></pre>
+				<a href="#about-package" id="about-package" style="color: inherit; text-decoration: none;">
+					<h3>About Package</h3>
+				</a>
+				<p>All modules are under the <code>packages</code> folder which organized with similar structure</p>
+				<blockquote>
+					<p>You can also create a muta-sdk-like project based on <a href="https://github.com/homura/typescript-monorepo-template">the template</a></p>
+				</blockquote>
+				<pre><code>-<span class="ruby"> package-name
+</span>  -<span class="ruby"> src
+</span>    -<span class="ruby"> index.ts <span class="hljs-comment"># export related modules</span>
+</span>    -<span class="ruby"> foo.ts <span class="hljs-comment"># module impl</span>
+</span>    -<span class="ruby"> foo.test.ts <span class="hljs-comment"># unit test for this module</span>
+</span>    -<span class="ruby"> foo.e2e.ts <span class="hljs-comment"># e2e test for this module</span>
+</span>  -<span class="ruby"> README.md <span class="hljs-comment"># some description for this module</span>
+</span>  -<span class="ruby"> package.json
+</span>  -<span class="ruby"> tsconfig.json</span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
