@@ -1,7 +1,40 @@
 # Muta SDK
 
-The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework).
-Allow you to interact with Muta node's GraphQL service.
+The JS/TS SDK for [Muta](https://github.com/nervosnetwork/muta)(a High performance Blockchain framework). Allow you to interact with Muta node's GraphQL service.
+
+## Quick Start
+
+### npm
+
+```shell
+npm install graphql@14 @mutadev/muta-sdk
+```
+
+### yarn
+
+```shell
+yarn add graphql@14 @mutadev/muta-sdk
+```
+
+> Note: The `graphql` is peerDependent by @mutadev/client-raw. So we need to install it manually. To avoid multiple `graphql` version conflict error, make sure there was only one `graphql` version in our system. If you are also a library contributor dependent on `graphql` module, you should consider whether to peerDependeies on `graphql`
+
+## Usage
+
+```js
+var sdk = require('@mutadev/muta-sdk');
+
+var muta = new sdk.Muta();
+
+// Muta {
+//   context: {
+//     chainId: '0x...',
+//     consensusInterval: 3000,
+//     endpoint: 'http://127.0.0.1:8000/graphql',
+//     timeoutGap: 20
+//   }
+// }
+console.log(muta);
+```
 
 ## Modules
 
@@ -18,66 +51,10 @@ The repo root which organized via monorepo mode, that composed of the following 
 - [@mutadev/types](./packages/muta-types) - provide some typescript type definition
 - [@mutadev/shared](./packages/shared) - shared third-party dependencies
 
-## Quick Start
-
-```shell
-npm install graphql @mutadev/muta-sdk
-```
-
-> Note: The `graphql` is peerDependent by @mutadev/client-raw. So we need to install it manually. To avoid multiple `graphql` version conflict error, make sure there was only one `graphql` version in our system. If you are also a library contributor dependent on `graphql` module, you should consider whether to peerDependeies on `graphql`
-
-## Example
-
-The following code will show
-
-1. How to interact with `#[read]` service
-2. How to sign a transaction
-3. How to sendTransaction
-
-```ts
-import { Muta } from '@mutadev/muta-sdk';
-
-async function main() {
-  const muta = new Muta();
-  const client = muta.client();
-  // get metadata from the chain
-  const metadataResponse = await client.queryServiceDyn({
-    method: 'get_metadata',
-    payload: '',
-    serviceName: 'metadata',
-  });
-
-  console.log(metadataResponse);
-
-  // Accounts with permission to modify metadata
-  const admin = Muta.accountFromPrivateKey('0x...');
-
-  // Preparing transaction
-  const tx = await client.composeTransaction({
-    method: 'update_metadata',
-    payload: {
-      // ...
-    },
-    serviceName: 'metadata',
-  });
-  const signedTx = admin.signTransaction(tx);
-  const txHash = await client.sendTransaction(signedTx);
-  const receipt = await client.getReceipt(txHash);
-
-  console.log(receipt);
-}
-
-main();
-```
-
-## Create Service Binding
-
-Before we create our custom binding, learn about what is a [service](https://github.com/nervosnetwork/muta-docs/blob/master/service_dev.md) in Muta.
-We'll still use [AssetService](https://github.com/nervosnetwork/muta/blob/master/built-in-services/asset) as an [example](./packages/muta-service/src/binding/AssetService.ts).
-
 ## Links
 
 - [API Documentation](https://nervosnetwork.github.io/muta-sdk-js)
+- [Examples](./examples)
 - [Muta](https://github.com/nervosnetwork/muta)
 
 ## Development
