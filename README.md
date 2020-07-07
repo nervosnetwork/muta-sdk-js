@@ -40,21 +40,22 @@ console.log(muta);
 
 The repo root which organized via monorepo mode, that composed of the following modules
 
-- [@mutadev/muta-sdk](./packages/muta-sdk) - the all-in-one package to interact with Muta
-- [@mutadev/client](./packages/muta-client) - wrap the GraphQL interface like RPC
-- [@mutadev/client-raw](./packages/muta-client-raw) - wrap the raw Muta GraphQL
-- [@mutadev/account](./packages/muta-account) - account system for Muta
-- [@mutadev/wallet](./packages/muta-wallet) - an HD wallet implement for Muta instance
-- [@mutadev/service](./packages/muta-service) - wrap the Muta service
-- [@mutadev/utils](./packages/muta-utils) - common utils for Muta
-- [@mutadev/defaults](./packages/muta-defaults) - provides some default config
-- [@mutadev/types](./packages/muta-types) - provide some typescript type definition
-- [@mutadev/shared](./packages/shared) - shared third-party dependencies
+- [@mutadev/muta-sdk](./packages/muta-sdk) - All-in-one SDK for Muta framework
+- [@mutadev/client](./packages/muta-client) - Wrapping the GraphQL like RPC
+- [@mutadev/client-raw](./packages/muta-client-raw) - Wrapping the raw Muta GraphQL
+- [@mutadev/account](./packages/muta-account) - Account system for Muta
+- [@mutadev/service](./packages/muta-service) - Wrapping for Muta service
+- [@mutadev/utils](./packages/muta-utils) - Commons utils
+- [@mutadev/wallet](./packages/muta-wallet) - An simple HD wallet implement
+- [@mutadev/defaults](./packages/muta-defaults) - Defaults constants
+- [@mutadev/types](./packages/muta-types) - The TypeScript definitions
+- [@mutadev/shared](./packages/shared) - Shred third-party dependencies
 
 ## Links
 
-- [API Documentation](https://nervosnetwork.github.io/muta-sdk-js)
-- [Examples](./examples)
+- [Documentation](docs)
+- [Examples](examples)
+- [API](https://nervosnetwork.github.io/muta-sdk-js)
 - [Muta](https://github.com/nervosnetwork/muta)
 
 ## Development
