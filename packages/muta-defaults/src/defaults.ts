@@ -17,7 +17,7 @@ export const DEFAULT_TIMEOUT_GAP = envNum('MUTA_TIMEOUT_GAP', 20);
  */
 export const DEFAULT_CHAIN_ID = envStr(
   'MUTA_CHAIN_ID',
-  '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036',
+  '0xb6a4d7da21443f5e816e8700eea87610e6d769657d6b8ec73028457bf2ca4036'
 );
 
 /**
@@ -26,7 +26,7 @@ export const DEFAULT_CHAIN_ID = envStr(
  */
 export const DEFAULT_CONSENSUS_INTERVAL = envNum(
   'MUTA_CONSENSUS_INTERVAL',
-  3000,
+  3000
 );
 
 /**
@@ -37,5 +37,13 @@ export const DEFAULT_CONSENSUS_INTERVAL = envNum(
  */
 export const DEFAULT_ENDPOINT = envStr(
   'MUTA_ENDPOINT',
-  'http://127.0.0.1:8000/graphql',
+  'http://127.0.0.1:8000/graphql'
+);
+
+/**
+ *
+ */
+export const DEFAULT_PRIVATE_KEY = envStr(
+  'MUTA_PRIVATE_KEY',
+  '0x0000000000000000000000000000000000000000000000000000000000000001'
 );
