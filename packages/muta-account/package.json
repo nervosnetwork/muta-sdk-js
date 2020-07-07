@@ -10,6 +10,7 @@
     "lib"
   ],
   "dependencies": {
+    "@mutadev/defaults": "0.2.0-dev.0",
     "@mutadev/utils": "0.2.0-dev.0"
   }
 }

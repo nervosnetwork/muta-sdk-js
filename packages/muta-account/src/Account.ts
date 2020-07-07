@@ -1,8 +1,10 @@
-import { SignedTransaction, Transaction } from '@mutadev/types';
+import { DEFAULT_PRIVATE_KEY } from '@mutadev/defaults';
+import { Bytes, SignedTransaction, Transaction } from '@mutadev/types';
 import {
   createTransactionSignature,
   keccak,
   publicKeyCreate,
+  separateOutRawTransaction,
   toBuffer,
   toHex,
 } from '@mutadev/utils';
@@ -40,16 +42,10 @@ import {
  * ```
  */
 export class Account {
-  // tslint:disable-next-line:variable-name
   private readonly _privateKey: Buffer;
 
-  /**
-   * create an Account by pass a buffer containing private key
-   * this is not recommended, consider using [[fromPrivateKey]]
-   * @param privateKey Buffer | Buffer-like
-   */
-  constructor(privateKey: Buffer) {
-    this._privateKey = privateKey;
+  constructor(privateKey: Buffer | Bytes = DEFAULT_PRIVATE_KEY) {
+    this._privateKey = toBuffer(privateKey);
   }
 
   get publicKey(): string {
@@ -102,18 +98,10 @@ export class Account {
     );
 
     return {
-      chainId: tx.chainId,
-      cyclesLimit: tx.cyclesLimit,
-      cyclesPrice: tx.cyclesPrice,
-      method: tx.method,
-      nonce: tx.nonce,
-      payload: tx.payload,
+      ...separateOutRawTransaction(tx),
       pubkey,
-      serviceName: tx.serviceName,
       signature,
-      timeout: tx.timeout,
       txHash,
-      sender: tx.sender,
     };
   }
 }

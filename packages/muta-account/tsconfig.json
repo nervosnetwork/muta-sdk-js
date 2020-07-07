@@ -9,6 +9,9 @@
   "references": [
     {
       "path": "../muta-utils"
+    },
+    {
+      "path": "../muta-defaults"
     }
   ]
 }
