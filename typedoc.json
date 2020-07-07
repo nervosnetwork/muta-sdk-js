@@ -8,5 +8,6 @@
   "stripInternal": false,
   "inputFiles": ["packages"],
   "external-modulemap": ".*/packages/([\\w\\-_]+)/",
-  "tsconfig": "./tsconfig.json"
+  "tsconfig": "./tsconfig.json",
+  "readme": "README.md"
 }
