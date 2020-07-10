@@ -1,4 +1,5 @@
-import {Address, Hash, Int, Maybe, Uint64} from "./scalar";
+import { Any, Maybe } from './common';
+import { Address, Bytes, Hash, Hex, Int, Uint64 } from './scalar';
 
 /**
  * The Block struct
@@ -76,31 +77,21 @@ export interface BlockHeader {
  * Overload runs likes tendermint, which means in one Block, there may be more than one **round** to achieve consensus,
  */
 export interface Proof {
-  height: string;
-  round: string;
-  blockHash: string;
-  signature: string;
-  bitmap: string;
+  height: Hex;
+  round: Hex;
+  blockHash: Hash;
+  signature: Bytes;
+  bitmap: Bytes;
 }
 
 /**
  * Validator address, contains its propose weight and vote weight
  */
 export interface Validator {
-  address: string;
+  address: Address;
   proposeWeight: Int;
   voteWeight: Int;
 }
-
-/**
- * represent the answer of query_service graphql_rpc or [[queryService]] in Client
- * compare to [[ExecRespDyn]] with generic
- * @param ret  the raw data returns by service, maybe need decoding
- */
-// export interface ExecResp<Ret = any> {
-//   ret: Ret;
-//   isError: boolean;
-// }
 
 /**
  * A transaction often require computing resources or write data to chain,
@@ -128,7 +119,7 @@ export interface Transaction {
 
   payload: string;
 
-  sender: string;
+  sender: Address;
 }
 
 /**
@@ -169,7 +160,7 @@ export interface InputSignedTransaction {
  * data structure when you call [[queryService]] to chain
  * compare to [[ServicePayload]], which enables generic for 'payload'
  */
-export interface QueryServiceParam<P = any> {
+export interface QueryServiceParam<P = string> {
   serviceName: string;
   method: string;
   payload: P;
@@ -198,7 +189,7 @@ export interface QueryBlockParam {
  * see [[Event]] and [[ReceiptResponse]] for more details
  * see [[getReceipt]] for more details
  */
-export interface Receipt<Ret = any> {
+export interface Receipt<Ret = string | Any> {
   stateRoot: string;
   height: string;
   txHash: string;
@@ -211,7 +202,7 @@ export interface Receipt<Ret = any> {
  * the details response for a committed [[Transaction]]
  * serviceName and method should equals submitted [[Transaction]]
  */
-export interface ReceiptResponse<Ret = any> {
+export interface ReceiptResponse<Ret = Any> {
   serviceName: string;
   method: string;
   response: ServiceResponse<Ret>;

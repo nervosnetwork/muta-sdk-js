@@ -45,8 +45,3 @@ export type u64 = number | BigNumber;
  * vector
  */
 export type Vec<T> = T[];
-
-/**
- * something like Option<T>
- */
-export type Maybe<T> = T | null;
