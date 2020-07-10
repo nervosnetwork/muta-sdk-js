@@ -7,7 +7,8 @@
   "license": "MIT",
   "keywords": [],
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "dependencies": {
     "@mutadev/account": "0.2.0-dev.0",
@@ -15,6 +16,7 @@
     "@mutadev/shared": "0.2.0-dev.0",
     "@mutadev/types": "0.2.0-dev.0",
     "@mutadev/utils": "0.2.0-dev.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "utility-types": "^3.10.0"
   }
 }
