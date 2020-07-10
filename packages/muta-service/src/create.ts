@@ -1,13 +1,17 @@
 import { Account } from '@mutadev/account';
 import { Client, retry } from '@mutadev/client';
 import { GetReceiptQuery, QueryServiceQuery } from '@mutadev/client-raw';
-import { Hash, Transaction } from '@mutadev/types';
+import { Any, Hash, Transaction } from '@mutadev/types';
 import { capitalize, safeParseJSON, safeStringifyJSON } from '@mutadev/utils';
 import { defaults } from 'lodash';
+import { DeepNonNullable } from 'utility-types';
 
-export function createServiceBindingClass<R = {}, W = {}>(
-  options: CreateServiceBindingClassOptions<R, W>
-): ServiceClass<R, W> {
+type DeserializedPayload = Record<string, unknown>;
+
+export function createServiceBindingClass<
+  R = DeserializedPayload,
+  W = DeserializedPayload
+>(options: CreateServiceBindingClassOptions<R, W>): ServiceClass<R, W> {
   const BindingClass = class {
     getServiceName: () => string;
 
@@ -47,8 +51,10 @@ interface ServiceModel<R, W> {
   write: W;
 }
 
-type CreateServiceBindingClassOptions<R, W> = Pick<ServiceModel<R, W>,
-  'serviceName'> &
+type CreateServiceBindingClassOptions<R, W> = Pick<
+  ServiceModel<R, W>,
+  'serviceName'
+> &
   Partial<ServiceModel<R, W>>;
 
 interface CreateReadPrototypeOptions<R> {
@@ -58,14 +64,14 @@ interface CreateReadPrototypeOptions<R> {
 }
 
 function createReadPrototype<R>(
-  options: CreateReadPrototypeOptions<R>
+  options: CreateReadPrototypeOptions<R>,
 ): ReadPrototype<R> {
   const { client, model, serviceName } = options;
   const rawClient = client.getRawClient();
 
   return Object.keys(model).reduce<ReadPrototype<R>>((r, method) => {
     const query = async <Payload, Return>(
-      payload: Payload
+      payload: Payload,
     ): Promise<DeserializedQueryServiceQuery<Return>> => {
       const res = await rawClient.queryService({
         serviceName,
@@ -81,12 +87,15 @@ function createReadPrototype<R>(
       };
     };
 
-    return Object.assign(r, {[method]: query});
+    return Object.assign(r, { [method]: query });
   }, {} as ReadPrototype<R>);
 }
 
 export function read<Payload, Return>(): Read<Payload, Return> {
-  return {};
+  return {
+    deserializeRet: safeParseJSON,
+    serializePayload: safeStringifyJSON,
+  };
 }
 
 interface CreateWritePrototypeOption<W> {
@@ -97,30 +106,33 @@ interface CreateWritePrototypeOption<W> {
 }
 
 export function createWritePrototype<W>(
-  options: CreateWritePrototypeOption<W>
+  options: CreateWritePrototypeOption<W>,
 ): WritePrototype<W> {
-  const {model, account, client, serviceName} = options;
+  const { model, account, client, serviceName } = options;
   const sender = account?.address;
 
   return Object.keys(model).reduce<WritePrototype<W>>((w, method) => {
-    async function composeTransaction<Payload extends object>(
-      payload: Payload
+    async function composeTransaction<Payload extends string | Any>(
+      payload: Payload,
     ): Promise<Transaction> {
+      if (!sender) {
+        throw new Error('sender can not be empty when composeTransaction');
+      }
       return client.composeTransaction({
         serviceName,
         method,
         payload,
-        sender: sender!,
+        sender,
       });
     }
 
-    async function sendTransaction<Payload extends object>(
-      payload: Payload
+    async function sendTransaction<Payload extends Any>(
+      payload: Payload,
     ): Promise<Hash> {
       if (!account) {
         throw new Error(
           'Try to call a #[write] method without account is denied,' +
-          ` account is required by ${capitalize(serviceName)}Service`
+            ` account is required by ${capitalize(serviceName)}Service`,
         );
       }
 
@@ -129,27 +141,30 @@ export function createWritePrototype<W>(
       return client.sendTransaction(signedTx);
     }
 
-    async function sendTransactionAndGetReceipt<Payload extends object,
-      Receipt>(payload: Payload): Promise<DeserializedReceipt<Receipt>> {
+    const impl: WriteMethod = async <Payload extends Any, Receipt>(
+      payload: Payload,
+    ): Promise<DeserializedReceipt<Receipt>> => {
       const txHash = await sendTransaction(payload);
       const receipt = await retry(() => client.getReceipt(txHash));
       const succeedData = receipt.response.response.succeedData;
       receipt.response.response.succeedData = succeedData
         ? safeParseJSON(succeedData)
         : {};
-      return receipt;
-    }
 
-    const impl: any = sendTransactionAndGetReceipt;
-    impl.sendTransaction = sendTransaction;
+      return receipt as DeserializedReceipt<Receipt>;
+    };
     impl.composeTransaction = composeTransaction;
+    impl.sendTransaction = sendTransaction;
 
-    return Object.assign(w, {[method]: impl});
+    return Object.assign(w, { [method]: impl });
   }, {} as WritePrototype<W>);
 }
 
 export function write<Payload, Receipt>(): Write<Payload, Receipt> {
-  return {};
+  return {
+    deserializeReceipt: safeParseJSON,
+    serializePayload: safeStringifyJSON,
+  };
 }
 
 interface ServicePrototype<R, W> {
@@ -171,8 +186,10 @@ type WritePrototype<W> = {
     : never;
 };
 
-// @ts-ignore
-export interface Read<Payload = any, Return = any> {
+export interface Read<Payload, Return> {
+  serializePayload(payload: Payload): string;
+
+  deserializeRet(ret: string): Return;
 }
 
 type ReadMethod<Payload, Return> = Payload extends null
@@ -181,33 +198,53 @@ type ReadMethod<Payload, Return> = Payload extends null
 
 type Override<O, K extends keyof O, T> = Omit<O, K> & T;
 
-type DeserializedQueryServiceQuery<T> = Override<QueryServiceQuery['queryService'],
+type DeserializedQueryServiceQuery<T> = Override<
+  QueryServiceQuery['queryService'],
   'succeedData',
-  { succeedData: T }>;
+  { succeedData: T }
+>;
 
-// @ts-ignore
-export interface Write<Payload = any, Receipt = any> {}
+export interface Write<Payload = Any, Receipt = Any> {
+  serializePayload(payload: Payload): string;
 
-interface WriteMethod<Payload, Receipt> {
-  (payload: Payload): Promise<DeserializedReceipt<Receipt>>;
-
-  sendTransaction(): Promise<Hash>;
-
-  composeTransaction(): Promise<Transaction>;
+  deserializeReceipt(receipt: string): Receipt;
 }
 
-type DeserializedReceipt<Receipt> = Override<GetReceiptQuery['getReceipt'],
+type WriteAndWaitReceipt<Payload, Receipt> = (
+  payload: Payload,
+) => Promise<DeserializedReceipt<Receipt>>;
+
+type WriteWithoutReceipt<Payload> = {
+  sendTransaction: (payload: Payload) => Promise<Hash>;
+
+  composeTransaction: (payload: Payload) => Promise<Transaction>;
+};
+
+type WriteMethod<Payload = Any, Receipt = Any> = WriteAndWaitReceipt<
+  Payload,
+  Receipt
+> &
+  WriteWithoutReceipt<Payload>;
+
+type ReceiptQuery = DeepNonNullable<GetReceiptQuery>['getReceipt'];
+type DeserializedReceipt<Receipt> = Override<
+  ReceiptQuery,
   'response',
   {
-    response: Override<GetReceiptQuery['getReceipt']['response'],
+    response: Override<
+      ReceiptQuery['response'],
       'response',
       {
-        response: Override<GetReceiptQuery['getReceipt']['response']['response'],
+        response: Override<
+          ReceiptQuery['response']['response'],
           'succeedData',
-          { succeedData: Receipt }>;
-      }>;
-  }>;
+          { succeedData: Receipt }
+        >;
+      }
+    >;
+  }
+>;
 
 export interface ServiceClass<R, W> {
-  new(client?: Client, account?: Account): ServicePrototype<R, W>;
+  new (client?: Client, account?: Account): ServicePrototype<R, W>;
 }

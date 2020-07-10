@@ -72,4 +72,3 @@ export const AssetService = createServiceBindingClass({
     transfer_from: write<TransferFromPayload, null>(),
   },
 });
-

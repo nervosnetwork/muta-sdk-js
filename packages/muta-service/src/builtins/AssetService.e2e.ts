@@ -3,9 +3,7 @@ import { Client } from '@mutadev/client';
 import { BigNumber } from '@mutadev/shared';
 import { AssetService } from './AssetService';
 
-const account = Account.fromPrivateKey(
-  '0x45c56be699dca666191ad3446897e0f480da234da896270202514a0e1a587c3f',
-);
+const account = new Account();
 
 const client = new Client();
 
