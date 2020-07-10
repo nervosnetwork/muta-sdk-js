@@ -75,18 +75,6 @@ export class Muta {
   }
 
   /**
-   * DEPRECATED, try `new Muta();`
-   * create a default Muta Instance
-   * chainId is set to {@link DEFAULT_CHAIN_ID}
-   * endpoint is set to {@link DEFAULT_ENDPOINT},
-   * timeoutGap is set to {@link DEFAULT_TIMEOUT_GAP}
-   * @deprecated
-   */
-  public static createDefaultMutaInstance() {
-    return new Muta({});
-  }
-
-  /**
    * get a [[Client]] for communication with chain thru Muta node
    * @param defaultCyclesLimit
    * @param defaultCyclesPrice
