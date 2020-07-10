@@ -56,14 +56,14 @@ export function appendTransactionSignature(
 
   const { signature } = ecdsaSign(uint8TxHash, uint8PrivateKey);
 
-  let pubkeys = decode(toBuffer(stx.pubkey));
+  const pubkeys = decode(toBuffer(stx.pubkey));
   if (Array.isArray(pubkeys)) {
     pubkeys.push(publicKeyCreate(uint8PrivateKey));
   } else {
     throw 'MultiSigs pubkey should be rlp encoded list';
   }
 
-  let multiSigs = decode(toBuffer(stx.signature));
+  const multiSigs = decode(toBuffer(stx.signature));
   if (Array.isArray(multiSigs)) {
     multiSigs.push(signature);
   } else {
