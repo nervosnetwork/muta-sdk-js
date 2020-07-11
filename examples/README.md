@@ -10,6 +10,16 @@ they can auto-complete for you when you try your example code.
 - [yarn 1.20+](https://classic.yarnpkg.com/en/docs/install)
 - [Muta example-chain](https://github.com/nervosnetwork/muta/releases)
 
+## Start A muta-example Chain
+
+If you are new to Muta, or just want to try out the SDK, 
+we recommend using [Docker](https://docs.docker.com/get-docker/) 
+to avoid compile failures caused by different environments.
+
+```
+docker run --rm mutadev/muta
+```
+
 ## Build The SDK
 
 ```
@@ -23,5 +33,5 @@ yarn build
 
 ```
 cd examples
-node 002-create-an-account.js
+node 001-get-some-block-info.js
 ```
