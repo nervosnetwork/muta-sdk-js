@@ -19,7 +19,7 @@ export function createServiceBindingClass<
 
     write: WritePrototype<W>;
 
-    constructor(client: Client = new Client(), account?: Account) {
+    constructor(client: Client = new Client(), account: Account = new Account()) {
       const model: ServiceModel<R, W> = defaults(options, {
         read: {},
         write: {},
