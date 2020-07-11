@@ -26,6 +26,7 @@ async function main() {
 
   // don't worry, we can retry until consensus successful,
   // which will probably only take a few seconds
+  console.log('waiting for creating asset');
   const receipt2 = await retry(() => client.getReceipt(txHash));
   console.log(receipt2);
 }

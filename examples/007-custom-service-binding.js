@@ -18,6 +18,7 @@ async function main() {
     const tokenName = 'My Token' + Math.random();
     // creating asset requires wait for consensus successful,
     // which takes a few seconds
+  console.log('waiting for creating asset');
     const createdAsset = await service.write.create_asset({
       name: tokenName,
       supply: 10000,
@@ -25,7 +26,7 @@ async function main() {
     });
     const assetId = createdAsset.response.response.succeedData.id;
     console.log(`create asset id is: [${assetId}]`);
-  
+
     // after successfully creating an asset,
     // we can find it on Muta
     const asset = await service.read.get_asset({ id: assetId });

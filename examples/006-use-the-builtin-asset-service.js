@@ -10,6 +10,7 @@ async function main() {
   const tokenName = 'My Token' + Math.random();
   // creating asset requires wait for consensus successful,
   // which takes a few seconds
+  console.log('waiting for creating asset');
   const createdAsset = await service.write.create_asset({
     name: tokenName,
     supply: 10000,
