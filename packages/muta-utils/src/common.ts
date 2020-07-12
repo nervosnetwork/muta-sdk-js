@@ -1,7 +1,4 @@
-import {
-  parse as safeParseJSON,
-  stringify as safeStringifyJSON,
-} from 'json-bigint';
+import { parse, stringify } from 'json-bigint';
 
 /**
  * capitalize first letter
@@ -9,8 +6,17 @@ import {
  * capitalize('fooBar') // => FooBar
  * @param x
  */
-export function capitalize(x: string) {
+export function capitalize(x: string): string {
   return x.charAt(0).toUpperCase() + x.slice(1);
 }
 
-export { safeParseJSON, safeStringifyJSON };
+/**
+ *
+ * A safe alternative to `JSON.parse`
+ */
+export const safeParseJSON = parse;
+
+/**
+ * A safe alternative to `JSON.stringify`
+ */
+export const safeStringifyJSON = stringify;

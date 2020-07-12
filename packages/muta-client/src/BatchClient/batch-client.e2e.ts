@@ -1,11 +1,8 @@
 import { Account } from '@mutadev/account';
 import { Client } from '../Client';
-import { retry } from '../retry';
 import { BatchClient } from './';
 
-const account = Account.fromPrivateKey(
-  '0x45c56be699dca666191ad3446897e0f480da234da896270202514a0e1a587c3f',
-);
+const account = new Account();
 
 test('test batch transactions', async () => {
   const client = new Client();
@@ -37,24 +34,24 @@ test('test batch transactions', async () => {
     client.sendTransaction(account.signTransaction(tx2)),
   ]);
 
+  await client.waitForNextNBlock(3);
   const batchClient = new BatchClient();
-  const txs = await retry(() => batchClient.getTransactions(hashes));
+  const txs = await batchClient.getTransactions(hashes);
+  expect(txs.every((tx) => tx!.txHash)).toBe(true);
 
-  expect(txs.every((tx) => tx.txHash)).toBe(true);
-
-  const receipts = await retry(() => batchClient.getReceipts(hashes));
-  expect(receipts.every((receipt) => receipt.txHash)).toBe(true);
+  const receipts = await batchClient.getReceipts(hashes);
+  expect(receipts.every((receipt) => receipt!.txHash)).toBe(true);
 });
 
-test('failed when tx can not found', async () => {
+test('null when try to get a non-existent transaction ', async () => {
   const batchClient = new BatchClient();
-  const txs = batchClient.getTransactions([
+  const txs = await batchClient.getTransactions([
     '0x0000000000000000000000000000000000000000000000000000000000000000',
   ]);
-  await expect(txs).rejects.toThrow();
+  await expect(txs).toEqual([null]);
 
-  const receipts = batchClient.getReceipts([
+  const receipts = await batchClient.getReceipts([
     '0x0000000000000000000000000000000000000000000000000000000000000000',
   ]);
-  await expect(receipts).rejects.toThrow();
+  await expect(receipts).toEqual([null]);
 });

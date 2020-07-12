@@ -1,13 +1,14 @@
 {
   "name": "@mutadev/client-raw",
-  "version": "0.2.0-dev.0",
+  "version": "0.2.0-dev+pr315.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
   "license": "MIT",
   "keywords": [],
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "generate": "graphql-codegen"
@@ -17,10 +18,11 @@
     "graphql-tag": "^2.10.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.15.4",
-    "@graphql-codegen/typescript": "^1.15.4",
-    "@graphql-codegen/typescript-graphql-request": "^1.15.4",
-    "@graphql-codegen/typescript-operations": "^1.15.4",
+    "@graphql-codegen/add": "^1.16.3",
+    "@graphql-codegen/cli": "^1.16.3",
+    "@graphql-codegen/typescript": "^1.16.3",
+    "@graphql-codegen/typescript-graphql-request": "^1.16.3",
+    "@graphql-codegen/typescript-operations": "^1.16.3",
     "graphql": "^14.6.0"
   }
 }

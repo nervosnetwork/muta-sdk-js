@@ -1,4 +1,4 @@
-const { Client } = require('../packages/muta-client');
+const { Client } = require('@mutadev/muta-sdk');
 
 async function main() {
   const client = new Client({
@@ -6,7 +6,8 @@ async function main() {
   });
 
   const block = await client.getBlock();
-  console.log(block.header.height);
+  console.log(`current height(hex): ${block.header.height}`);
+  console.log(`current height(decimal): ${Number(block.header.height)}`);
 }
 
 main();

@@ -6,8 +6,10 @@ import {
 import { invariant } from '@mutadev/shared';
 import {
   Address,
+  Any,
   Block,
   Hash,
+  Maybe,
   QueryServiceParam,
   Receipt,
   ServicePayload,
@@ -28,6 +30,8 @@ import { defaults, isNil } from 'lodash';
 import { ClientOption, getDefaultClientOption } from './options';
 import { retry, RetryConfig } from './retry';
 
+export type DynPayload = string | Record<string, unknown>;
+
 /**
  * give those params,
  * the client will [[composeTransaction]] with default info in [[ClientOption]] for you
@@ -43,6 +47,12 @@ export interface ComposeTransactionParam<P> {
 }
 
 type RawClient = ReturnType<typeof getSdk>;
+
+interface GetBlock {
+  (): Promise<Block>;
+
+  (height: Uint64): Promise<Maybe<Block>>;
+}
 
 /**
  * Client is a tool for calling Muta GraphQL API
@@ -98,15 +108,15 @@ export class Client {
   }
 
   /**
-   * get the [[Block]] of given height
-   * @param height the target height you want search, null for the latest
+   * get a {@link Block} or get the latest {@link Block}
+   * @param height the target height, or empty for the latest block
    */
-  public async getBlock(height?: string): Promise<Block> {
+  getBlock: GetBlock = (async (height?: Uint64): Promise<Maybe<Block>> => {
     const heightVariable = !isNil(height) ? { height } : undefined;
     const res = await this.rawClient.getBlock(heightVariable);
 
-    return res.getBlock;
-  }
+    return res.getBlock ?? null;
+  }) as GetBlock;
 
   /**
    * get latest block height
@@ -114,20 +124,20 @@ export class Client {
    */
   public async getLatestBlockHeight(): Promise<number> {
     const block = await this.getBlock();
-    return hexToNum(block.header.height);
+    return hexToNum(block!.header.height);
   }
 
   /**
    * get [[SignedTransaction]] by give its transaction hash
    * @param txHash the transaction target hash, you can call [[sendTransaction]] to send a tx and get its txHash
    */
-  public async getTransaction(txHash: Hash): Promise<SignedTransaction> {
+  public async getTransaction(txHash: Hash): Promise<Maybe<SignedTransaction>> {
     const timeout = this.options.maxTimeout;
     const res = await retry({
       retry: () => this.rawClient.getTransaction({ txHash }),
       timeout,
     });
-    return res.getTransaction;
+    return res.getTransaction ?? null;
   }
 
   /**
@@ -135,10 +145,10 @@ export class Client {
    * you can only get a [[Receipt]] when the related [[Transaction]] has been committed/mined
    * @param txHash the target transaction hash, you can call [[sendTransaction]] to send a [[Transaction]] and get its txHash
    */
-  public async getReceipt(txHash: Hash): Promise<Receipt> {
+  public async getReceipt(txHash: Hash): Promise<Maybe<Receipt>> {
     const res = await this.rawClient.getReceipt({ txHash });
 
-    return res.getReceipt;
+    return res.getReceipt ?? null;
   }
 
   /**
@@ -227,7 +237,7 @@ export class Client {
    * @typeparam P generic of object which will be JSON.stringify to payload string in [[Transaction]]
    * @param param your params
    */
-  public async composeTransaction<P extends string | object>(
+  public async composeTransaction<P extends string | Any>(
     param: ComposeTransactionParam<P>,
   ): Promise<Transaction> {
     const {
@@ -274,7 +284,7 @@ export class Client {
    * @param n block count
    * @param options
    */
-  public async waitForNextNBlock(n: number = 1, options: RetryConfig = {}) {
+  async waitForNextNBlock(n = 1, options: RetryConfig = {}): Promise<number> {
     const before = await this.getLatestBlockHeight();
 
     return retry({

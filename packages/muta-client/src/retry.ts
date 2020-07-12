@@ -1,5 +1,5 @@
 function wait(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const DEFAULT_RETRY_TIMEOUT = 100000;
@@ -83,19 +83,22 @@ export interface RetryOptions<T> extends RetryConfig {
   onResolve?: (t: T) => Promise<boolean> | boolean;
 }
 
+const nonNullable = <T>(t: T) => t !== undefined && t !== null;
+
 export function retry<T>(
   options: RetryOptions<T> | PromiseThunk<T>,
-): Promise<T> {
+): Promise<NonNullable<T>> {
   if (typeof options === 'function') {
     return Retry.from(options)
       .withInterval(DEFAULT_RETRY_INTERVAL)
       .withTimeout(DEFAULT_RETRY_TIMEOUT)
-      .start();
+      .withCheck(nonNullable)
+      .start() as Promise<NonNullable<T>>;
   }
 
   return Retry.from(options.retry)
     .withInterval(options.interval || DEFAULT_RETRY_INTERVAL)
     .withTimeout(options.timeout || DEFAULT_RETRY_TIMEOUT)
-    .withCheck(options.onResolve)
-    .start();
+    .withCheck(options.onResolve || nonNullable)
+    .start() as Promise<NonNullable<T>>;
 }

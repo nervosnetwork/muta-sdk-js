@@ -1,12 +1,18 @@
 import { GetReceiptQuery, GetTransactionQuery } from '@mutadev/client-raw';
-import { Hash } from '@mutadev/types';
+import { Hash, Maybe } from '@mutadev/types';
 import { defaults } from 'lodash';
-import { DeepPartial } from 'utility-types';
+import { DeepNonNullable, DeepPartial } from 'utility-types';
 import { ClientOption, getDefaultClientOption } from '../options';
 import { chunkAndBatch } from './batch';
 
-type RawTransaction = Omit<GetTransactionQuery['getTransaction'], '__typename'>;
-type RawReceipt = Omit<GetReceiptQuery['getReceipt'], '__typename'>;
+type RawTransaction = Omit<
+  DeepNonNullable<GetTransactionQuery>['getTransaction'],
+  '__typename'
+>;
+type RawReceipt = Omit<
+  DeepNonNullable<GetReceiptQuery>['getReceipt'],
+  '__typename'
+>;
 
 /**
  * ```
@@ -109,7 +115,7 @@ export class BatchClient {
     });
   }
 
-  async getTransactions(txHashes: Hash[]): Promise<RawTransaction[]> {
+  async getTransactions(txHashes: Hash[]): Promise<Maybe<RawTransaction>[]> {
     const { chunkSize, concurrency } = this.options.batch;
     const endpoint = this.options.client.endpoint;
 
@@ -122,12 +128,12 @@ export class BatchClient {
       generateQuerySegment: generateTransactionQuerySegment,
     });
 
-    return Array.from({ length: txHashes.length }).map<RawTransaction>(
+    return Array.from({ length: txHashes.length }).map<Maybe<RawTransaction>>(
       (_, i) => batched['_' + i],
     );
   }
 
-  async getReceipts(txHashes: Hash[]): Promise<RawReceipt[]> {
+  async getReceipts(txHashes: Hash[]): Promise<Maybe<RawReceipt>[]> {
     const { chunkSize, concurrency } = this.options.batch;
     const endpoint = this.options.client.endpoint;
 
@@ -140,7 +146,7 @@ export class BatchClient {
       generateQuerySegment: generateReceiptQuerySegment,
     });
 
-    return Array.from({ length: txHashes.length }).map<RawReceipt>(
+    return Array.from({ length: txHashes.length }).map<Maybe<RawReceipt>>(
       (_, i) => batched['_' + i],
     );
   }

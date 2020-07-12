@@ -1,13 +1,14 @@
 {
   "name": "@mutadev/types",
-  "version": "0.2.0-dev.0",
+  "version": "0.2.0-dev+pr315.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
   "license": "MIT",
   "keywords": [],
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "dependencies": {
     "bignumber.js": "^9.0.0"

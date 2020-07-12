@@ -7,8 +7,8 @@ test('get block should be correct', async () => {
   const lastBlock = await client.getBlock();
   expect(lastBlock.hash).toBeTruthy();
 
-  const block1 = await client.getBlock('0x01');
-  expect(block1.hash).toBeTruthy();
+  const block1 = await client.getBlock('0x00');
+  expect(block1!.hash).toBeTruthy();
 });
 
 test('test get latest block', async () => {
@@ -25,8 +25,8 @@ test('test get latest block without height', async () => {
 });
 
 test('test get given block without height', async () => {
-  const block = await client.getBlock('0x01');
-  const height = hexToNum(block.header.height);
+  const block = await client.getBlock('0x00');
+  const height = hexToNum(block!.header.height);
   expect(typeof height).toBe('number');
   expect(height >= 0).toBe(true);
 });

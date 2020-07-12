@@ -7,7 +7,7 @@ declare module 'keccak' {
 }
 
 declare module 'json-bigint' {
-  export function parse(str: string): any;
+  export function parse(str: string): Record<string, unknown>;
 
-  export function stringify(obj: any): string;
+  export function stringify(obj: Record<string, unknown>): string;
 }
