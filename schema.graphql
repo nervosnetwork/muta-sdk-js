@@ -49,6 +49,7 @@ type BlockHeader {
 
 type Event {
   data: String!
+  name: String!
   service: String!
 }
 
@@ -78,11 +79,11 @@ type Proof {
 
 type Query {
   "Get the block"
-  getBlock(height: Uint64): Block!
+  getBlock(height: Uint64): Block
   "Get the receipt by transaction hash"
-  getReceipt(txHash: Hash!): Receipt!
+  getReceipt(txHash: Hash!): Receipt
   "Get the transaction by hash"
-  getTransaction(txHash: Hash!): SignedTransaction!
+  getTransaction(txHash: Hash!): SignedTransaction
   "query service"
   queryService(
     caller: Address!
@@ -133,8 +134,8 @@ type SignedTransaction {
 
 "Validator address set"
 type Validator {
-  address: Address!
   proposeWeight: Int!
+  pubkey: Bytes!
   voteWeight: Int!
 }
 
