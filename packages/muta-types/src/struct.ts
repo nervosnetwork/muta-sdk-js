@@ -87,7 +87,7 @@ export interface Proof {
  * Validator public key, contains its propose weight and vote weight
  */
 export interface Validator {
-  pubKey: string;
+  pubkey: string;
   proposeWeight: Int;
   voteWeight: Int;
 }

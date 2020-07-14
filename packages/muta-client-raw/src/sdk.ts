@@ -92,9 +92,9 @@ export type MutationUnsafeSendTransactionArgs = {
 };
 
 
-/** Validator address set */
+/** Validator pubkey set */
 export type Validator = {
-  pubKey: Scalars['Bytes'];
+  pubkey: Scalars['Bytes'];
   proposeWeight: Scalars['Int'];
   voteWeight: Scalars['Int'];
 };
@@ -261,7 +261,7 @@ export type GetBlockQuery = { getBlock: (
     Pick<Block, 'orderedTxHashes' | 'hash'>
     & { header: (
       Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'execHeight' | 'height' | 'orderRoot' | 'orderSignedTransactionsHash' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
-      & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'pubKey' | 'proposeWeight' | 'voteWeight'>> }
+      & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'pubkey' | 'proposeWeight' | 'voteWeight'>> }
     ) }
   ) };
 

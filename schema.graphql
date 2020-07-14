@@ -131,9 +131,9 @@ type SignedTransaction {
   txHash: Hash!
 }
 
-"Validator address set"
+"Validator pubkey set"
 type Validator {
-  address: Bytes!
+  pubkey: Bytes!
   proposeWeight: Int!
   voteWeight: Int!
 }
