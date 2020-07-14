@@ -216,7 +216,7 @@ export type SignedTransaction = {
 
 /** Validator address set */
 export type Validator = {
-  address: Scalars['Address'];
+  pubkey: Scalars['Bytes'];
   proposeWeight: Scalars['Int'];
   voteWeight: Scalars['Int'];
 };
@@ -276,7 +276,7 @@ export type GetBlockQuery = { getBlock?: Maybe<(
     Pick<Block, 'orderedTxHashes' | 'hash'>
     & { header: (
       Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'execHeight' | 'height' | 'orderRoot' | 'orderSignedTransactionsHash' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
-      & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>> }
+      & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'pubkey' | 'proposeWeight' | 'voteWeight'>> }
     ) }
   )> };
 
@@ -365,7 +365,7 @@ export const GetBlockDocument = gql`
       timestamp
       validatorVersion
       validators {
-        address
+        pubkey
         proposeWeight
         voteWeight
       }
