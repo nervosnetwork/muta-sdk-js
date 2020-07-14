@@ -53,8 +53,8 @@ The repo root which organized via monorepo mode, that composed of the following 
 
 ## Links
 
-- [Documentation](docs)
-- [Examples](examples)
+- [Tutorial](./docs/tutorial.md)
+- [Examples](./examples)
 - [API](https://nervosnetwork.github.io/muta-sdk-js)
 - [Muta](https://github.com/nervosnetwork/muta)
 
