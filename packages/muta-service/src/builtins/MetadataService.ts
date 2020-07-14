@@ -1,8 +1,9 @@
-import { Address, Hash, u32, u64, Vec } from '@mutadev/types';
+import { Address, Bytes, Hash, u32, u64, Vec } from '@mutadev/types';
 import { createServiceBindingClass, read } from '../create';
 
 interface ValidatorExtend {
   bls__key: string;
+  pub_key: Bytes;
   address: Address;
   propose_weight: u32;
   vote_weight: u32;
