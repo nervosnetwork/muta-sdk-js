@@ -10,7 +10,7 @@
     "lib"
   ],
   "dependencies": {
-    "@mutadev/types": "^0.2.0-dev",
+    "@mutadev/types": "file:../muta-types",
     "json-bigint": "^0.3.0",
     "keccak": "^3.0.0",
     "randombytes": "^2.1.0",

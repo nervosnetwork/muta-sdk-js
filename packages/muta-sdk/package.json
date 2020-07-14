@@ -10,12 +10,12 @@
     "lib"
   ],
   "dependencies": {
-    "@mutadev/account": "^0.2.0-dev",
-    "@mutadev/client": "^0.2.0-dev",
+    "@mutadev/account": "file:../muta-account",
+    "@mutadev/client": "file:../muta-client",
     "@mutadev/defaults": "^0.2.0-dev",
     "@mutadev/shared": "^0.2.0-dev",
-    "@mutadev/types": "^0.2.0-dev",
-    "@mutadev/wallet": "^0.2.0-dev",
+    "@mutadev/types": "file:../muta-types",
+    "@mutadev/wallet": "file:../muta-wallet",
     "utility-types": "^3.10.0"
   }
 }

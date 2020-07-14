@@ -10,8 +10,8 @@
     "lib"
   ],
   "dependencies": {
-    "@mutadev/account": "^0.2.0-dev",
-    "@mutadev/utils": "^0.2.0-dev",
+    "@mutadev/account": "file:../muta-account",
+    "@mutadev/utils": "file:../muta-utils",
     "bip39": "^3.0.2",
     "hdkey": "^1.1.1"
   },
