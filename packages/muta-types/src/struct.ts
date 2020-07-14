@@ -88,7 +88,7 @@ export interface Proof {
  * Validator address, contains its propose weight and vote weight
  */
 export interface Validator {
-  address: Address;
+  pubkey: Bytes;
   proposeWeight: Int;
   voteWeight: Int;
 }
