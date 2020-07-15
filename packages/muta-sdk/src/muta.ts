@@ -34,11 +34,18 @@ export interface MutaContext {
 }
 
 /**
- * all in one module, use it to interact with muta,
- * and can be used to create wallets, accounts, etc.
+ * DEPRECATED: please use `import { Client, Account } from '@mutadev/muta-sdk'`
+ * to instead
+ * @deprecated
  */
 export class Muta {
+  /**
+   * @deprecated
+   */
   public static hdWallet = HDWallet;
+  /**
+   * @deprecated
+   */
   public static account = Account;
   private readonly context: MutaContext;
 
@@ -68,7 +75,7 @@ export class Muta {
 
   /**
    * create an Account directly from private key
-   * @param privateKey
+   * @deprecated
    */
   public static accountFromPrivateKey(privateKey: string): Account {
     return Account.fromPrivateKey(privateKey);
@@ -76,6 +83,7 @@ export class Muta {
 
   /**
    * get a [[Client]] for communication with chain thru Muta node
+   * @deprecated
    * @param defaultCyclesLimit
    * @param defaultCyclesPrice
    */
