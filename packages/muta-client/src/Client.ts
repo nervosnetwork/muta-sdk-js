@@ -11,9 +11,10 @@ import {
 } from '@mutadev/types';
 import {
   hexToNum,
+  isSignedTransaction,
   randomNonce,
-  safeParseJSON,
-  safeStringifyJSON,
+  separateOutEncryption,
+  separateOutRawTransaction,
   toHex,
 } from '@mutadev/utils';
 import { GraphQLClient } from 'graphql-request';
@@ -126,31 +127,26 @@ export class Client {
    * @return
    */
   public async sendTransaction(
-    signedTransaction: SignedTransaction,
+    tx: SignedTransaction | Transaction,
   ): Promise<Hash> {
-    const inputRaw: InputRawTransaction = {
-      chainId: signedTransaction.chainId,
-      cyclesLimit: signedTransaction.cyclesLimit,
-      cyclesPrice: signedTransaction.cyclesPrice,
-      method: signedTransaction.method,
-      nonce: signedTransaction.nonce,
-      payload: signedTransaction.payload,
-      serviceName: signedTransaction.serviceName,
-      timeout: signedTransaction.timeout,
-      sender: signedTransaction.sender,
-    };
+    let signedTx: SignedTransaction;
 
-    const inputEncryption: InputTransactionEncryption = {
-      pubkey: signedTransaction.pubkey,
-      signature: signedTransaction.signature,
-      txHash: signedTransaction.txHash,
-    };
+    if (isSignedTransaction(tx)) {
+      signedTx = tx;
+    } else if (this.options.account) {
+      signedTx = this.options.account.signTransaction(tx);
+    } else {
+      throw new Error(
+        'sendTransaction allows only signed transaction or ' +
+          'Client constructed with an account like ' +
+          '  `new Client({ account: ... })` ',
+      );
+    }
 
     const res = await this.rawClient.sendTransaction({
-      inputEncryption,
-      inputRaw,
+      inputEncryption: separateOutEncryption(signedTx),
+      inputRaw: separateOutRawTransaction(signedTx),
     });
-
     return res.sendTransaction;
   }
 

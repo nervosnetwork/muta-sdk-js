@@ -1,25 +1,16 @@
-import {
-  DEFAULT_CHAIN_ID,
-  DEFAULT_CONSENSUS_INTERVAL,
-  DEFAULT_ENDPOINT,
-  DEFAULT_TIMEOUT_GAP,
-} from '@mutadev/defaults';
+import { Account } from '@mutadev/account';
+import { DefaultVariables } from '@mutadev/defaults';
 import { Uint64 } from '@mutadev/types';
+import { defaultSerializer, Serializer } from './transform';
 
 /**
- * the preset [[ClientOption]] when you construct [[Client]]
+ * the preset {@link ClientOption} when you construct {@link Client}
  * you may manually construct by Construct
- * or from Muta's [[client]]
+ * or from Muta's {@link Client}
  */
 export interface ClientOption {
-  /**
-   * {@link MutaContext.endpoint}
-   */
   endpoint: string;
 
-  /**
-   * {@link MutaContext.chainId}
-   */
   chainId: string;
 
   /**
@@ -35,29 +26,39 @@ export interface ClientOption {
   defaultCyclesPrice: Uint64;
 
   /**
-   * {@link MutaContext.timeoutGap}
+   * Muta's timeout_gap
    */
   timeoutGap: number;
 
   /**
-   * {@link MutaContext.consensusInterval}
+   * Muta's consensus_interval
    */
   consensusInterval: number;
 
   /**
-   * This value indicates the maximum waiting time for the client to wait for the response
+   * this value indicates the maximum waiting time
+   * for the client to wait for the response
    */
   maxTimeout: number;
+
+  /**
+   * This account will be used to sign the Transaction if it is found
+   * that it has not been signed during {@link Client.sendTransaction}.
+   */
+  account?: Account;
+
+  serializer: Serializer;
 }
 
 export function getDefaultClientOption(): ClientOption {
   return {
-    endpoint: DEFAULT_ENDPOINT,
-    chainId: DEFAULT_CHAIN_ID,
+    endpoint: DefaultVariables.get('MUTA_ENDPOINT'),
+    chainId: DefaultVariables.get('MUTA_CHAIN_ID'),
     defaultCyclesPrice: '0xffff',
     defaultCyclesLimit: '0xffff',
     maxTimeout: 60000,
-    timeoutGap: DEFAULT_TIMEOUT_GAP,
-    consensusInterval: DEFAULT_CONSENSUS_INTERVAL,
+    timeoutGap: DefaultVariables.get('MUTA_TIMEOUT_GAP'),
+    consensusInterval: DefaultVariables.get('MUTA_CONSENSUS_INTERVAL'),
+    serializer: defaultSerializer,
   };
 }
