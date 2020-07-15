@@ -1,4 +1,3 @@
-import { Any, Maybe } from './common';
 import { Address, Bytes, Hash, Hex, Int, Uint64 } from './scalar';
 
 /**
@@ -103,15 +102,15 @@ export interface Validator {
  * you may stuff this by [[prepareTransaction]]
  */
 export interface Transaction {
-  chainId: string;
+  chainId: Hash;
 
-  cyclesLimit: string;
+  cyclesLimit: Uint64;
 
-  cyclesPrice: string;
+  cyclesPrice: Uint64;
 
-  nonce: string;
+  nonce: Hash;
 
-  timeout: string;
+  timeout: Uint64;
 
   serviceName: string;
 
@@ -127,9 +126,9 @@ export interface Transaction {
  * you may sign it by [[signTransaction]]
  */
 export interface TransactionSignature {
-  txHash: string;
-  pubkey: string;
-  signature: string;
+  txHash: Hash;
+  pubkey: Bytes;
+  signature: Bytes;
 }
 
 /**
@@ -137,18 +136,18 @@ export interface TransactionSignature {
  * you may sign it by [[signTransaction]]
  */
 export interface SignedTransaction {
-  chainId: string;
-  cyclesLimit: string;
-  cyclesPrice: string;
-  nonce: string;
-  timeout: string;
+  chainId: Hash;
+  cyclesLimit: Uint64;
+  cyclesPrice: Uint64;
+  nonce: Hash;
+  timeout: Uint64;
   serviceName: string;
   method: string;
   payload: string;
-  txHash: string;
-  pubkey: string;
-  signature: string;
-  sender: string;
+  txHash: Hash;
+  pubkey: Bytes;
+  signature: Bytes;
+  sender: Address;
 }
 
 export interface InputSignedTransaction {
@@ -157,43 +156,15 @@ export interface InputSignedTransaction {
 }
 
 /**
- * data structure when you call [[queryService]] to chain
- * compare to [[ServicePayload]], which enables generic for 'payload'
- */
-export interface QueryServiceParam<P = string> {
-  serviceName: string;
-  method: string;
-  payload: P;
-  height?: Maybe<string>;
-  caller?: Maybe<string>;
-  cyclePrice?: Maybe<string>;
-  cycleLimit?: Maybe<string>;
-}
-
-/**
- * data structure when you call [[getBlock]] to chain
- * @param height , note that this could be null
- */
-export interface QueryBlockParam {
-  height?: Maybe<string>;
-}
-
-/**
- * data structure when you
- */
-
-// export type QueryTransactionParam = Hash;
-
-/**
  * the Receipt data structure, receipt represent a handler or response with submitted transactions
  * see [[Event]] and [[ReceiptResponse]] for more details
  * see [[getReceipt]] for more details
  */
-export interface Receipt<Ret = string | Any> {
-  stateRoot: string;
+export interface Receipt<Ret = string> {
+  stateRoot: Hash;
   height: string;
-  txHash: string;
-  cyclesUsed: string;
+  txHash: Hash;
+  cyclesUsed: Uint64;
   events: Event[];
   response: ReceiptResponse<Ret>;
 }
@@ -202,24 +173,10 @@ export interface Receipt<Ret = string | Any> {
  * the details response for a committed [[Transaction]]
  * serviceName and method should equals submitted [[Transaction]]
  */
-export interface ReceiptResponse<Ret = Any> {
+export interface ReceiptResponse<Ret = string> {
   serviceName: string;
   method: string;
   response: ServiceResponse<Ret>;
-}
-
-/**
- * the ServicePayload data structure when you call [[queryServiceDyn]]
- * compare to [[QueryServiceParam]], which disables generic
- */
-export interface ServicePayload<P> {
-  height?: Uint64;
-  cyclesLimit?: Uint64;
-  cyclesPrice?: Uint64;
-  caller?: Address;
-  serviceName: string;
-  method: string;
-  payload: P;
 }
 
 export interface ServiceResponse<Data = string> {
