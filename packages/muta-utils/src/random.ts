@@ -11,14 +11,14 @@ export function randomHex(n: number): Bytes {
 }
 
 /**
- * generate a random [[Address]]
+ * generate a random {@link Address}
  */
 export function randomAddress(): Address {
   return randomHex(20);
 }
 
 /**
- * generate a random [[Nonce]]
+ * generate a random 32 bytes {@link Bytes}
  */
 export function randomNonce(): Bytes {
   return randomHex(32);
