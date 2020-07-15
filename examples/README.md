@@ -12,8 +12,8 @@ they can auto-complete for you when you try your example code.
 
 ## Start A muta-example Chain
 
-If you are new to Muta, or just want to try out the SDK, 
-we recommend using [Docker](https://docs.docker.com/get-docker/) 
+If you are new to Muta, or just want to try out the SDK,
+we recommend using [Docker](https://docs.docker.com/get-docker/)
 to avoid compile failures caused by different environments.
 
 ```
@@ -32,6 +32,7 @@ yarn build
 ## Run The Example
 
 ```
+export MUTA_PRIVATE_KEY=0x1000000000000000000000000000000000000000000000000000000000000000
 cd examples
 node 001-get-some-block-info.js
 ```
