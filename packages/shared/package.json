@@ -1,6 +1,6 @@
 {
   "name": "@mutadev/shared",
-  "version": "0.2.0-dev+pr315.0",
+  "version": "0.2.0-dev.2",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
