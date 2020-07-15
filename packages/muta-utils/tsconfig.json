@@ -10,6 +10,9 @@
   "references": [
     {
       "path": "../muta-types"
+    },
+    {
+      "path": "../shared"
     }
   ]
 }

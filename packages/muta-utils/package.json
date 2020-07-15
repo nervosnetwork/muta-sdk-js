@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "@mutadev/types": "0.2.0-dev+pr315.0",
+    "@mutadev/shared": "0.2.0-dev+pr315.0",
     "json-bigint": "^0.3.0",
     "keccak": "^3.0.0",
     "randombytes": "^2.1.0",
