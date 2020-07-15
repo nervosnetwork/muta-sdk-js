@@ -3,7 +3,9 @@ import { Client } from '@mutadev/client';
 import { BigNumber } from '@mutadev/shared';
 import { AssetService } from './AssetService';
 
-const account = new Account();
+const account = new Account(
+  '0x1000000000000000000000000000000000000000000000000000000000000000',
+);
 
 const client = new Client();
 

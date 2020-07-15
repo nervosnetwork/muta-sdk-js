@@ -2,7 +2,9 @@ import { Account } from '@mutadev/account';
 import { Client } from '../Client';
 import { BatchClient } from './';
 
-const account = new Account();
+const account = new Account(
+  '0x1000000000000000000000000000000000000000000000000000000000000000',
+);
 
 test('test batch transactions', async () => {
   const client = new Client();

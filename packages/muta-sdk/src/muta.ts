@@ -1,11 +1,6 @@
 import { Account } from '@mutadev/account';
 import { Client } from '@mutadev/client';
-import {
-  DEFAULT_CHAIN_ID,
-  DEFAULT_CONSENSUS_INTERVAL,
-  DEFAULT_ENDPOINT,
-  DEFAULT_TIMEOUT_GAP,
-} from '@mutadev/defaults';
+import { DefaultVariables } from '@mutadev/defaults';
 import { Uint64 } from '@mutadev/types';
 import { HDWallet } from '@mutadev/wallet';
 import { Optional } from 'utility-types';
@@ -21,14 +16,14 @@ export interface MutaContext {
    */
   endpoint: string;
   /**
-   * defaults to {@link DEFAULT_TIMEOUT_GAP}. The {@link Transaction.timeout} in {@link Transaction}
+   * The {@link Transaction.timeout} in {@link Transaction}
    * parameter indicates the maximum waiting block height fot the transaction.
    * and `timeoutGap + currentBlockHeight` is the maximum value of this value
    */
   timeoutGap: number;
 
   /**
-   * defaults to {@link DEFAULT_CONSENSUS_INTERVAL}, block interval
+   * block interval
    */
   consensusInterval: number;
 }
@@ -55,10 +50,10 @@ export class Muta {
    */
   constructor(context: Optional<MutaContext> = {}) {
     this.context = {
-      chainId: DEFAULT_CHAIN_ID,
-      consensusInterval: DEFAULT_CONSENSUS_INTERVAL,
-      endpoint: DEFAULT_ENDPOINT,
-      timeoutGap: DEFAULT_TIMEOUT_GAP,
+      chainId: DefaultVariables.get('MUTA_CHAIN_ID'),
+      consensusInterval: DefaultVariables.get('MUTA_CONSENSUS_INTERVAL'),
+      endpoint: DefaultVariables.get('MUTA_ENDPOINT'),
+      timeoutGap: DefaultVariables.get('MUTA_TIMEOUT_GAP'),
       ...context,
     };
   }
@@ -91,6 +86,10 @@ export class Muta {
     defaultCyclesLimit: Uint64 = '0xffff',
     defaultCyclesPrice: Uint64 = '0xffff',
   ): Client {
+    console.warn(
+      'DEPRECATED: please use `new Client()` instead,' +
+        ' this API will be removed in the future',
+    );
     const { endpoint, chainId, consensusInterval, timeoutGap } = this.context;
 
     return new Client({

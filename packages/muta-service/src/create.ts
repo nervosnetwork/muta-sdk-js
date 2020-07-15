@@ -1,8 +1,9 @@
-import { Account } from '@mutadev/account';
+import { Account, tryGetDefaultAccount } from '@mutadev/account';
 import { Client, retry } from '@mutadev/client';
 import { GetReceiptQuery, QueryServiceQuery } from '@mutadev/client-raw';
+import { invariant } from '@mutadev/shared';
 import { Any, Hash, Transaction } from '@mutadev/types';
-import { capitalize, safeParseJSON, safeStringifyJSON } from '@mutadev/utils';
+import { safeParseJSON, safeStringifyJSON } from '@mutadev/utils';
 import { defaults } from 'lodash';
 import { DeepNonNullable } from 'utility-types';
 
@@ -17,7 +18,7 @@ export function createServiceBindingClass<
 
     write: WritePrototype<W>;
 
-    constructor(client: Client = new Client(), account: Account = new Account()) {
+    constructor(client: Client = new Client(), account?: Account) {
       const model: ServiceModel<R, W> = defaults(options, {
         read: {},
         write: {},
@@ -124,8 +125,23 @@ interface CreateWritePrototypeOption {
 export function createWritePrototype<W extends WriteModel<W>>(
   options: CreateWritePrototypeOption,
 ): WritePrototype<W> {
-  const { model, account, client, serviceName } = options;
-  const sender = account?.address;
+  const { model, client, serviceName } = options;
+
+  let account: Account;
+
+  function getAccount(): Account {
+    if (!account) {
+      try {
+        account = options.account ? options.account : tryGetDefaultAccount();
+      } catch (e) {
+        invariant(
+          account,
+          'account is required when calling #[write] method in service',
+        );
+      }
+    }
+    return account;
+  }
 
   return Object.keys(model).reduce<WritePrototype<W>>((w, method) => {
     const { deserializeReceipt } = model[method];
@@ -133,29 +149,19 @@ export function createWritePrototype<W extends WriteModel<W>>(
     async function composeTransaction<Payload extends string | Any>(
       payload: Payload,
     ): Promise<Transaction> {
-      if (!sender) {
-        throw new Error('sender can not be empty when composeTransaction');
-      }
       return client.composeTransaction({
         serviceName,
         method,
         payload,
-        sender,
+        sender: getAccount().address,
       });
     }
 
     async function sendTransaction<Payload extends Any>(
       payload: Payload,
     ): Promise<Hash> {
-      if (!account) {
-        throw new Error(
-          'Try to call a #[write] method without account is denied,' +
-            ` account is required by ${capitalize(serviceName)}Service`,
-        );
-      }
-
       const tx = await composeTransaction(payload);
-      const signedTx = account.signTransaction(tx);
+      const signedTx = getAccount().signTransaction(tx);
       return client.sendTransaction(signedTx);
     }
 

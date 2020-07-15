@@ -1,7 +1,9 @@
-import { DEFAULT_PRIVATE_KEY } from '@mutadev/defaults';
+import { DefaultVariables } from '@mutadev/defaults';
+import { invariant } from '@mutadev/shared';
 import { Bytes, SignedTransaction, Transaction } from '@mutadev/types';
 import {
   createTransactionSignature,
+  isValidHexString,
   keccak,
   publicKeyCreate,
   separateOutRawTransaction,
@@ -44,8 +46,22 @@ import {
 export class Account {
   private readonly _privateKey: Buffer;
 
-  constructor(privateKey: Buffer | Bytes = DEFAULT_PRIVATE_KEY) {
-    this._privateKey = toBuffer(privateKey);
+  constructor(
+    privateKey: Buffer | Bytes = DefaultVariables.get('MUTA_PRIVATE_KEY'),
+  ) {
+    if (typeof privateKey === 'string') {
+      invariant(
+        privateKey.length === 66 && isValidHexString(privateKey),
+        'create an account with incorrect private key, ' +
+          'only 64-length hex or 32-bytes Buffer is valid',
+      );
+    }
+    privateKey = toBuffer(privateKey);
+    invariant(
+      privateKey.length === 32,
+      'private key should be an 32-bytes Buffer',
+    );
+    this._privateKey = privateKey;
   }
 
   get publicKey(): string {
@@ -85,9 +101,6 @@ export class Account {
 
   /**
    * sign a Muta transaction with this Account's internal private key
-   *
-   * @param tx, [[Transaction]]
-   * @return [[SignedTransaction]]
    */
   public signTransaction(
     tx: Transaction | SignedTransaction,
@@ -104,4 +117,13 @@ export class Account {
       txHash,
     };
   }
+}
+
+/**
+ * try to get a default account
+ * @internal
+ * @throws
+ */
+export function tryGetDefaultAccount(): Account {
+  return new Account();
 }
