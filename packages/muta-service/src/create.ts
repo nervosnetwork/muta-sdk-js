@@ -6,11 +6,9 @@ import { capitalize, safeParseJSON, safeStringifyJSON } from '@mutadev/utils';
 import { defaults } from 'lodash';
 import { DeepNonNullable } from 'utility-types';
 
-type DeserializedPayload = Record<string, unknown>;
-
 export function createServiceBindingClass<
-  R = DeserializedPayload,
-  W = DeserializedPayload
+  R extends ReadModel<R>,
+  W extends WriteModel<W>
 >(options: CreateServiceBindingClassOptions<R, W>): ServiceClass<R, W> {
   const BindingClass = class {
     getServiceName: () => string;
@@ -36,7 +34,7 @@ export function createServiceBindingClass<
       this.write = createWritePrototype({
         account,
         client,
-        model: model.write,
+        model: model.write as WriteRecord,
         serviceName: model.serviceName,
       });
     }
@@ -44,6 +42,20 @@ export function createServiceBindingClass<
 
   return BindingClass as ServiceClass<R, W>;
 }
+
+type ReadModel<R = unknown> = {
+  [key in keyof R]: R[key] extends Read<infer Payload, infer Return>
+    ? Read<Payload, Return>
+    : never;
+};
+type ReadRecord = Record<string, Read>;
+
+type WriteModel<W = unknown> = {
+  [key in keyof W]: W[key] extends Write<infer Payload, infer Receipt>
+    ? Write<Payload, Receipt>
+    : never;
+};
+type WriteRecord = Record<string, Write>;
 
 interface ServiceModel<R, W> {
   serviceName: string;
@@ -57,30 +69,32 @@ type CreateServiceBindingClassOptions<R, W> = Pick<
 > &
   Partial<ServiceModel<R, W>>;
 
-interface CreateReadPrototypeOptions<R> {
-  readonly model: R;
+interface CreateReadPrototypeOptions {
+  readonly model: ReadRecord;
   readonly client: Client;
   readonly serviceName: string;
 }
 
 function createReadPrototype<R>(
-  options: CreateReadPrototypeOptions<R>,
+  options: CreateReadPrototypeOptions,
 ): ReadPrototype<R> {
   const { client, model, serviceName } = options;
   const rawClient = client.getRawClient();
 
   return Object.keys(model).reduce<ReadPrototype<R>>((r, method) => {
-    const query = async <Payload, Return>(
+    const query = async <Payload, Ret>(
       payload: Payload,
-    ): Promise<DeserializedQueryServiceQuery<Return>> => {
+    ): Promise<DeserializedQueryServiceQuery<Ret>> => {
+      const { serializePayload, deserializeRet } = model[method];
+
       const res = await rawClient.queryService({
         serviceName,
         method,
-        payload: payload ? safeStringifyJSON(payload) : '',
+        payload: payload ? serializePayload(payload) : '',
       });
 
       const succeed = res.queryService.succeedData;
-      const succeedData = succeed ? safeParseJSON(succeed) : {};
+      const succeedData = (succeed ? deserializeRet(succeed) : {}) as Ret;
       return {
         ...res.queryService,
         succeedData,
@@ -91,27 +105,31 @@ function createReadPrototype<R>(
   }, {} as ReadPrototype<R>);
 }
 
-export function read<Payload, Return>(): Read<Payload, Return> {
-  return {
+export function read<Payload, Return>(
+  options?: Partial<Read<Payload, Return>>,
+): Read<Payload, Return> {
+  return defaults(options, {
     deserializeRet: safeParseJSON,
     serializePayload: safeStringifyJSON,
-  };
+  });
 }
 
-interface CreateWritePrototypeOption<W> {
-  model: W;
+interface CreateWritePrototypeOption {
+  model: WriteRecord;
   serviceName: string;
   client: Client;
   account?: Account;
 }
 
-export function createWritePrototype<W>(
-  options: CreateWritePrototypeOption<W>,
+export function createWritePrototype<W extends WriteModel<W>>(
+  options: CreateWritePrototypeOption,
 ): WritePrototype<W> {
   const { model, account, client, serviceName } = options;
   const sender = account?.address;
 
   return Object.keys(model).reduce<WritePrototype<W>>((w, method) => {
+    const { deserializeReceipt } = model[method];
+
     async function composeTransaction<Payload extends string | Any>(
       payload: Payload,
     ): Promise<Transaction> {
@@ -147,11 +165,14 @@ export function createWritePrototype<W>(
       const txHash = await sendTransaction(payload);
       const receipt = await retry(() => client.getReceipt(txHash));
       const succeedData = receipt.response.response.succeedData;
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       receipt.response.response.succeedData = succeedData
-        ? safeParseJSON(succeedData)
+        ? deserializeReceipt(succeedData)
         : {};
 
-      return receipt as DeserializedReceipt<Receipt>;
+      return (receipt as unknown) as DeserializedReceipt<Receipt>;
     };
     impl.composeTransaction = composeTransaction;
     impl.sendTransaction = sendTransaction;
@@ -160,11 +181,13 @@ export function createWritePrototype<W>(
   }, {} as WritePrototype<W>);
 }
 
-export function write<Payload, Receipt>(): Write<Payload, Receipt> {
-  return {
+export function write<Payload, Receipt>(
+  options?: Partial<Write<Payload, Receipt>>,
+): Write<Payload, Receipt> {
+  return defaults(options, {
     deserializeReceipt: safeParseJSON,
     serializePayload: safeStringifyJSON,
-  };
+  });
 }
 
 interface ServicePrototype<R, W> {
@@ -186,7 +209,7 @@ type WritePrototype<W> = {
     : never;
 };
 
-export interface Read<Payload, Return> {
+export interface Read<Payload = unknown, Return = unknown> {
   serializePayload(payload: Payload): string;
 
   deserializeRet(ret: string): Return;
