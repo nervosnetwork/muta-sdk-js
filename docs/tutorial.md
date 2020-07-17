@@ -9,13 +9,13 @@ Muta is a high-performance blockchain framework, which helps to build a high-qua
 ### npm
 
 ```
-npm install graphql@14.7 @mutadev/muta-sdk
+npm install graphql@14.7 @mutadev/muta-sdk@dev
 ```
 
 ### yarn
 
 ```
-npm install graphql@14.7 @mutadev/muta-sdk
+yarn add graphql@14.7 @mutadev/muta-sdk@dev
 ```
 
 > The SDK is organized with `monorepo` mode that means the SDK is modular, and the `@mutadev/muta-sdk` is an all-in-one module  containing other modules. Therefore, we generally only need to use `@mutadev/muta-sdk`
@@ -29,7 +29,7 @@ npm install graphql@14.7 @mutadev/muta-sdk
 ```js
 const { Client, Account, retry, /*...*/ } = require('@mutadev/muta-sdk');
 
-function main() {
+async function main() {
     const client = new Client();
 	const block = await client.getBlock();
     console.log(block);
@@ -38,7 +38,7 @@ function main() {
 
 ## The Service 
 
-There is a concept called [service](https://docs.muta.dev/#/service_dev) in Muta. Simply said, service is a class composed of multiple methods, we can call them in the same way like this
+There is a concept called [service](https://docs.muta.dev/#/service_dev) in Muta. Simply said, service is a class composed of multiple methods, we can call them in the same way.
 
 ```json
 {
