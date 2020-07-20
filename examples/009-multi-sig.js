@@ -1,3 +1,7 @@
+// To ensure that this example works,
+// make sure that the running Muta instance is
+// mapped the [MultiSignatureService](https://github.com/nervosnetwork/muta/tree/master/built-in-services/multi-signature)
+
 const { Account, Client, retry, utils } = require('@mutadev/muta-sdk');
 const { MultiSignatureService, AssetService } = require('@mutadev/service');
 
