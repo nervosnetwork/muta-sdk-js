@@ -54,8 +54,8 @@ export function getDefaultClientOption(): ClientOption {
   return {
     endpoint: DefaultVariables.get('MUTA_ENDPOINT'),
     chainId: DefaultVariables.get('MUTA_CHAIN_ID'),
-    defaultCyclesPrice: '0xffff',
-    defaultCyclesLimit: '0xffff',
+    defaultCyclesPrice: '0xffffff',
+    defaultCyclesLimit: '0xffffff',
     maxTimeout: 60000,
     timeoutGap: DefaultVariables.get('MUTA_TIMEOUT_GAP'),
     consensusInterval: DefaultVariables.get('MUTA_CONSENSUS_INTERVAL'),
