@@ -261,7 +261,7 @@ export type GetReceiptQueryVariables = Exact<{
 
 export type GetReceiptQuery = { getReceipt?: Maybe<(
     Pick<Receipt, 'txHash' | 'height' | 'cyclesUsed' | 'stateRoot'>
-    & { events: Array<Pick<Event, 'data' | 'service'>>, response: (
+    & { events: Array<Pick<Event, 'data' | 'name' | 'service'>>, response: (
       Pick<ReceiptResponse, 'serviceName' | 'method'>
       & { response: Pick<ServiceResponse, 'code' | 'errorMessage' | 'succeedData'> }
     ) }
@@ -325,6 +325,7 @@ export const GetReceiptDocument = gql`
     cyclesUsed
     events {
       data
+      name
       service
     }
     stateRoot

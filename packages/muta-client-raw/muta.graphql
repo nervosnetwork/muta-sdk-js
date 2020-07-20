@@ -57,6 +57,7 @@ query getReceipt($txHash: Hash!) {
     cyclesUsed
     events {
       data
+      name
       service
     }
     stateRoot
