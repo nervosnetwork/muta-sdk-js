@@ -75,7 +75,7 @@ interface AddressWithWeight {
 }
 
 export const MultiSignatureService = createServiceBindingClass({
-  serviceName: 'multi-signature',
+  serviceName: 'multi_signature',
   read: {
     get_account_from_address: read<GetMultiSigAccountPayload, GetMultiSigAccountResponse>(),
     verify_signature: read<SignedTransaction, null>(),
