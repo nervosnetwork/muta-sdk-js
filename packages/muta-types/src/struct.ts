@@ -190,6 +190,7 @@ export interface ServiceResponse<Data = string> {
  * or for other purposes. It will be included in {@link Receipt}
  */
 export interface Event<T = string> {
-  service: string;
   data: T;
+  name: string;
+  service: string;
 }
