@@ -83,8 +83,8 @@ export class Muta {
    * @param defaultCyclesPrice
    */
   public client(
-    defaultCyclesLimit: Uint64 = '0xffff',
-    defaultCyclesPrice: Uint64 = '0xffff',
+    defaultCyclesLimit: Uint64 = '0xffffff',
+    defaultCyclesPrice: Uint64 = '0xffffff',
   ): Client {
     console.warn(
       'DEPRECATED: please use `new Client()` instead,' +
