@@ -17,7 +17,7 @@ we recommend using [Docker](https://docs.docker.com/get-docker/)
 to avoid compile failures caused by different environments.
 
 ```
-docker run --rm mutadev/muta
+docker run --rm -p 8000:8000 mutadev/muta
 ```
 
 ## Build The SDK
