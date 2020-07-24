@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ServicePayload | muta-sdk</title>
+	<title>QueryServiceParam | muta-sdk</title>
 	<meta name="description" content="Documentation for muta-sdk">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/muta_types.html">muta-types</a>
+					<a href="../modules/muta_client.html">muta-client</a>
 				</li>
 				<li>
-					<a href="muta_types.servicepayload.html">ServicePayload</a>
+					<a href="muta_client.queryserviceparam.html">QueryServiceParam</a>
 				</li>
 			</ul>
-			<h1>Interface ServicePayload&lt;P&gt;</h1>
+			<h1>Interface QueryServiceParam&lt;P&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,8 +72,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>the ServicePayload data structure when you call <a href="../classes/muta_client.client.html#queryservicedyn">queryServiceDyn</a>
-						compare to <a href="muta_types.queryserviceparam.html">QueryServiceParam</a>, which disables generic</p>
+						<p>data structure when you call <a href="../modules/muta_client_raw.html#query.__type-13.queryservice">queryService</a> to chain
+						compare to [[ServicePayload]], which enables generic for &#39;payload&#39;</p>
 					</div>
 				</div>
 			</section>
@@ -89,7 +89,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ServicePayload</span>
+						<span class="target">QueryServiceParam</span>
 					</li>
 				</ul>
 			</section>
@@ -100,13 +100,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_types.servicepayload.html#caller" class="tsd-kind-icon">caller</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_types.servicepayload.html#cycleslimit" class="tsd-kind-icon">cycles<wbr>Limit</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_types.servicepayload.html#cyclesprice" class="tsd-kind-icon">cycles<wbr>Price</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_types.servicepayload.html#height" class="tsd-kind-icon">height</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_types.servicepayload.html#method" class="tsd-kind-icon">method</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_types.servicepayload.html#payload" class="tsd-kind-icon">payload</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_types.servicepayload.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.queryserviceparam.html#caller" class="tsd-kind-icon">caller</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.queryserviceparam.html#cyclelimit" class="tsd-kind-icon">cycle<wbr>Limit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.queryserviceparam.html#cycleprice" class="tsd-kind-icon">cycle<wbr>Price</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.queryserviceparam.html#height" class="tsd-kind-icon">height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.queryserviceparam.html#method" class="tsd-kind-icon">method</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.queryserviceparam.html#payload" class="tsd-kind-icon">payload</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.queryserviceparam.html#servicename" class="tsd-kind-icon">service<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,40 +117,40 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="caller" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> caller</h3>
-					<div class="tsd-signature tsd-kind-icon">caller<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address" class="tsd-signature-type">Address</a></div>
+					<div class="tsd-signature tsd-kind-icon">caller<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/muta_types.html#address" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-types/src/struct.ts#L228">muta-types/src/struct.ts:228</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/types.ts#L12">muta-client/src/types.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="cycleslimit" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cycles<wbr>Limit</h3>
-					<div class="tsd-signature tsd-kind-icon">cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="cyclelimit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cycle<wbr>Limit</h3>
+					<div class="tsd-signature tsd-kind-icon">cycle<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-types/src/struct.ts#L226">muta-types/src/struct.ts:226</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/types.ts#L14">muta-client/src/types.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="cyclesprice" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cycles<wbr>Price</h3>
-					<div class="tsd-signature tsd-kind-icon">cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<a name="cycleprice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cycle<wbr>Price</h3>
+					<div class="tsd-signature tsd-kind-icon">cycle<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-types/src/struct.ts#L227">muta-types/src/struct.ts:227</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/types.ts#L13">muta-client/src/types.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="height" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> height</h3>
-					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
+					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#maybe" class="tsd-signature-type">Maybe</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-types/src/struct.ts#L225">muta-types/src/struct.ts:225</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/types.ts#L11">muta-client/src/types.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -160,7 +160,7 @@
 					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-types/src/struct.ts#L230">muta-types/src/struct.ts:230</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/types.ts#L9">muta-client/src/types.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -170,7 +170,7 @@
 					<div class="tsd-signature tsd-kind-icon">payload<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">P</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-types/src/struct.ts#L231">muta-types/src/struct.ts:231</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/types.ts#L10">muta-client/src/types.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -180,7 +180,7 @@
 					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-types/src/struct.ts#L229">muta-types/src/struct.ts:229</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/types.ts#L8">muta-client/src/types.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -195,7 +195,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/muta_account.html">muta-<wbr>account</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/muta_client.html">muta-<wbr>client</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -210,7 +210,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/muta_service.html">muta-<wbr>service</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/muta_types.html">muta-<wbr>types</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -223,114 +223,36 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.block.html" class="tsd-kind-icon">Block</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.blockheader.html" class="tsd-kind-icon">Block<wbr>Header</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_types.event.html" class="tsd-kind-icon">Event</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.inputsignedtransaction.html" class="tsd-kind-icon">Input<wbr>Signed<wbr>Transaction</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.proof.html" class="tsd-kind-icon">Proof</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.queryblockparam.html" class="tsd-kind-icon">Query<wbr>Block<wbr>Param</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_types.queryserviceparam.html" class="tsd-kind-icon">Query<wbr>Service<wbr>Param</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_types.receipt.html" class="tsd-kind-icon">Receipt</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_types.receiptresponse.html" class="tsd-kind-icon">Receipt<wbr>Response</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_types.servicepayload.html" class="tsd-kind-icon">Service<wbr>Payload</a>
+						<a href="muta_client.queryserviceparam.html" class="tsd-kind-icon">Query<wbr>Service<wbr>Param</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_types.servicepayload.html#caller" class="tsd-kind-icon">caller</a>
+								<a href="muta_client.queryserviceparam.html#caller" class="tsd-kind-icon">caller</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_types.servicepayload.html#cycleslimit" class="tsd-kind-icon">cycles<wbr>Limit</a>
+								<a href="muta_client.queryserviceparam.html#cyclelimit" class="tsd-kind-icon">cycle<wbr>Limit</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_types.servicepayload.html#cyclesprice" class="tsd-kind-icon">cycles<wbr>Price</a>
+								<a href="muta_client.queryserviceparam.html#cycleprice" class="tsd-kind-icon">cycle<wbr>Price</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_types.servicepayload.html#height" class="tsd-kind-icon">height</a>
+								<a href="muta_client.queryserviceparam.html#height" class="tsd-kind-icon">height</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_types.servicepayload.html#method" class="tsd-kind-icon">method</a>
+								<a href="muta_client.queryserviceparam.html#method" class="tsd-kind-icon">method</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_types.servicepayload.html#payload" class="tsd-kind-icon">payload</a>
+								<a href="muta_client.queryserviceparam.html#payload" class="tsd-kind-icon">payload</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="muta_types.servicepayload.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
+								<a href="muta_client.queryserviceparam.html#servicename" class="tsd-kind-icon">service<wbr>Name</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_types.serviceresponse.html" class="tsd-kind-icon">Service<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.signedtransaction.html" class="tsd-kind-icon">Signed<wbr>Transaction</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.transaction.html" class="tsd-kind-icon">Transaction</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.transactionsignature.html" class="tsd-kind-icon">Transaction<wbr>Signature</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.validator.html" class="tsd-kind-icon">Validator</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#address" class="tsd-kind-icon">Address</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#bytes" class="tsd-kind-icon">Bytes</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#hash" class="tsd-kind-icon">Hash</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#hex" class="tsd-kind-icon">Hex</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#id" class="tsd-kind-icon">ID</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#int" class="tsd-kind-icon">Int</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_types.html#maybe" class="tsd-kind-icon">Maybe</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#uint32" class="tsd-kind-icon">Uint32</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#uint64" class="tsd-kind-icon">Uint64</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_types.html#vec" class="tsd-kind-icon">Vec</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#u32" class="tsd-kind-icon">u32</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#u64" class="tsd-kind-icon">u64</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -341,6 +263,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
@@ -355,6 +278,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 		</div>
 	</div>

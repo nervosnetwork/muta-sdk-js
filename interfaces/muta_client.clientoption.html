@@ -74,7 +74,7 @@
 					<div class="lead">
 						<p>the preset <a href="muta_client.clientoption.html">ClientOption</a> when you construct <a href="../classes/muta_client.client.html">Client</a>
 							you may manually construct by Construct
-						or from Muta&#39;s [[client]]</p>
+						or from Muta&#39;s <a href="../classes/muta_client.client.html">Client</a></p>
 					</div>
 				</div>
 			</section>
@@ -93,12 +93,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#account" class="tsd-kind-icon">account</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#consensusinterval" class="tsd-kind-icon">consensus<wbr>Interval</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#serializer" class="tsd-kind-icon">serializer</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#timeoutgap" class="tsd-kind-icon">timeout<wbr>Gap</a></li>
 							</ul>
 						</section>
@@ -108,19 +110,30 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="account" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> account</h3>
+					<div class="tsd-signature tsd-kind-icon">account<span class="tsd-signature-symbol">:</span> <a href="../classes/muta_account.account.html" class="tsd-signature-type">Account</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L48">muta-client/src/options.ts:48</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>This account will be used to sign the Transaction if it is found
+							that it has not been signed during <a href="../classes/muta_client.client.html#sendtransaction">Client.sendTransaction</a>.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="chainid" class="tsd-anchor"></a>
 					<h3>chain<wbr>Id</h3>
 					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-client/src/options.ts#L23">muta-client/src/options.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L14">muta-client/src/options.ts:14</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p><a href="muta_sdk.mutacontext.html#chainid">MutaContext.chainId</a></p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="consensusinterval" class="tsd-anchor"></a>
@@ -128,12 +141,12 @@
 					<div class="tsd-signature tsd-kind-icon">consensus<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-client/src/options.ts#L45">muta-client/src/options.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L36">muta-client/src/options.ts:36</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p><a href="muta_sdk.mutacontext.html#consensusinterval">MutaContext.consensusInterval</a></p>
+							<p>Muta&#39;s consensus_interval</p>
 						</div>
 					</div>
 				</section>
@@ -143,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-client/src/options.ts#L29">muta-client/src/options.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L20">muta-client/src/options.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -159,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-client/src/options.ts#L35">muta-client/src/options.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L26">muta-client/src/options.ts:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -175,14 +188,9 @@
 					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-client/src/options.ts#L18">muta-client/src/options.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L12">muta-client/src/options.ts:12</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p><a href="muta_sdk.mutacontext.html#endpoint">MutaContext.endpoint</a></p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="maxtimeout" class="tsd-anchor"></a>
@@ -190,14 +198,25 @@
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-client/src/options.ts#L50">muta-client/src/options.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L42">muta-client/src/options.ts:42</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>This value indicates the maximum waiting time for the client to wait for the response</p>
+							<p>this value indicates the maximum waiting time
+							for the client to wait for the response</p>
 						</div>
 					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="serializer" class="tsd-anchor"></a>
+					<h3>serializer</h3>
+					<div class="tsd-signature tsd-kind-icon">serializer<span class="tsd-signature-symbol">:</span> <a href="muta_client.serializer.html" class="tsd-signature-type">Serializer</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L50">muta-client/src/options.ts:50</a></li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="timeoutgap" class="tsd-anchor"></a>
@@ -205,12 +224,12 @@
 					<div class="tsd-signature tsd-kind-icon">timeout<wbr>Gap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-client/src/options.ts#L40">muta-client/src/options.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-client/src/options.ts#L31">muta-client/src/options.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p><a href="muta_sdk.mutacontext.html#timeoutgap">MutaContext.timeoutGap</a></p>
+							<p>Muta&#39;s timeout_gap</p>
 						</div>
 					</div>
 				</section>
@@ -253,26 +272,14 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/muta_client.batchclient.html" class="tsd-kind-icon">Batch<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/muta_client.client.html" class="tsd-kind-icon">Client</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../classes/muta_client.retry.html" class="tsd-kind-icon">Retry</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_client.batchclientoption.html" class="tsd-kind-icon">Batch<wbr>Client<wbr>Option</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="muta_client.chunkandbatchoption.html" class="tsd-kind-icon">Chunk<wbr>And<wbr>Batch<wbr>Option</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="muta_client.clientoption.html" class="tsd-kind-icon">Client<wbr>Option</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="muta_client.clientoption.html#account" class="tsd-kind-icon">account</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="muta_client.clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a>
 							</li>
@@ -292,75 +299,15 @@
 								<a href="muta_client.clientoption.html#maxtimeout" class="tsd-kind-icon">max<wbr>Timeout</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="muta_client.clientoption.html#serializer" class="tsd-kind-icon">serializer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="muta_client.clientoption.html#timeoutgap" class="tsd-kind-icon">timeout<wbr>Gap</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_client.composetransactionparam.html" class="tsd-kind-icon">Compose<wbr>Transaction<wbr>Param</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_client.retryconfig.html" class="tsd-kind-icon">Retry<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_client.retryoptions.html" class="tsd-kind-icon">Retry<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_client.html#batched" class="tsd-kind-icon">Batched</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../modules/muta_client.html#checkpromise" class="tsd-kind-icon">Check<wbr>Promise</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../modules/muta_client.html#promisethunk" class="tsd-kind-icon">Promise<wbr>Thunk</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#rawclient" class="tsd-kind-icon">Raw<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#rawreceipt" class="tsd-kind-icon">Raw<wbr>Receipt</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#rawtransaction" class="tsd-kind-icon">Raw<wbr>Transaction</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#default_retry_interval" class="tsd-kind-icon">DEFAULT_<wbr>RETRY_<wbr>INTERVAL</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#default_retry_timeout" class="tsd-kind-icon">DEFAULT_<wbr>RETRY_<wbr>TIMEOUT</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#receiptfragment" class="tsd-kind-icon">receipt<wbr>Fragment</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="../modules/muta_client.html#txfragment" class="tsd-kind-icon">tx<wbr>Fragment</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#default_resolve_check" class="tsd-kind-icon">DEFAULT_<wbr>RESOLVE_<wbr>CHECK</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_client.html#batchwithsamefragment" class="tsd-kind-icon">batch<wbr>With<wbr>Same<wbr>Fragment</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_client.html#chunkandbatch" class="tsd-kind-icon">chunk<wbr>And<wbr>Batch</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#generatereceiptquerysegment" class="tsd-kind-icon">generate<wbr>Receipt<wbr>Query<wbr>Segment</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#generatetransactionquerysegment" class="tsd-kind-icon">generate<wbr>Transaction<wbr>Query<wbr>Segment</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/muta_client.html#getdefaultclientoption" class="tsd-kind-icon">get<wbr>Default<wbr>Client<wbr>Option</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../modules/muta_client.html#retry-1" class="tsd-kind-icon">retry</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="../modules/muta_client.html#wait" class="tsd-kind-icon">wait</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -371,6 +318,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
@@ -385,6 +333,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 		</div>
 	</div>

@@ -71,6 +71,13 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="muta_utils.html#safeparsejson" class="tsd-kind-icon">safe<wbr>ParseJSON</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="muta_utils.html#safestringifyjson" class="tsd-kind-icon">safe<wbr>StringifyJSON</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a></li>
@@ -80,7 +87,10 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#hextonum" class="tsd-kind-icon">hex<wbr>ToNum</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#issignedtransaction" class="tsd-kind-icon">is<wbr>Signed<wbr>Transaction</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_utils.html#isuint8array" class="tsd-kind-icon">is<wbr>Uint8<wbr>Array</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#isvalidhexstring" class="tsd-kind-icon">is<wbr>Valid<wbr>Hex<wbr>String</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_utils.html#isvalidnumber" class="tsd-kind-icon">is<wbr>Valid<wbr>Number</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#keccak" class="tsd-kind-icon">keccak</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_utils.html#pad0x" class="tsd-kind-icon">pad0x</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#publickeycreate" class="tsd-kind-icon">public<wbr>Key<wbr>Create</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#randomaddress" class="tsd-kind-icon">random<wbr>Address</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#randomhex" class="tsd-kind-icon">random<wbr>Hex</a></li>
@@ -89,11 +99,44 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#separateoutencryption" class="tsd-kind-icon">separate<wbr>Out<wbr>Encryption</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#separateoutrawtransaction" class="tsd-kind-icon">separate<wbr>Out<wbr>Raw<wbr>Transaction</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_utils.html#startswith0x" class="tsd-kind-icon">starts<wbr>With0x</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#tobuffer" class="tsd-kind-icon">to<wbr>Buffer</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="muta_utils.html#tohex" class="tsd-kind-icon">to<wbr>Hex</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="muta_utils.html#warning" class="tsd-kind-icon">warning</a></li>
 							</ul>
 						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="safeparsejson" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> safe<wbr>ParseJSON</h3>
+					<div class="tsd-signature tsd-kind-icon">safe<wbr>ParseJSON<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">parse</span><span class="tsd-signature-symbol"> = parse</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/common.ts#L17">muta-utils/src/common.ts:17</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A safe alternative to <code>JSON.parse</code></p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="safestringifyjson" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> safe<wbr>StringifyJSON</h3>
+					<div class="tsd-signature tsd-kind-icon">safe<wbr>StringifyJSON<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">stringify</span><span class="tsd-signature-symbol"> = stringify</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/common.ts#L22">muta-utils/src/common.ts:22</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A safe alternative to <code>JSON.stringify</code></p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -109,7 +152,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/account.ts#L18">muta-utils/src/account.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/account.ts#L18">muta-utils/src/account.ts:18</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -139,7 +182,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/transaction.ts#L50">muta-utils/src/transaction.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/transaction.ts#L50">muta-utils/src/transaction.ts:50</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -165,7 +208,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/common.ts#L12">muta-utils/src/common.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/common.ts#L9">muta-utils/src/common.ts:9</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -200,7 +243,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/transaction.ts#L17">muta-utils/src/transaction.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/transaction.ts#L17">muta-utils/src/transaction.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -233,7 +276,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/bytes.ts#L56">muta-utils/src/bytes.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L88">muta-utils/src/bytes.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -263,7 +306,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/transaction.ts#L80">muta-utils/src/transaction.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/transaction.ts#L80">muta-utils/src/transaction.ts:80</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -280,22 +323,68 @@
 					<a name="isuint8array" class="tsd-anchor"></a>
 					<h3>is<wbr>Uint8<wbr>Array</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Uint8<wbr>Array<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Uint8Array</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Uint8<wbr>Array<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Uint8Array</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/bytes.ts#L37">muta-utils/src/bytes.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L69">muta-utils/src/bytes.ts:69</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>x: <span class="tsd-signature-type">any</span></h5>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Uint8Array</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isvalidhexstring" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid<wbr>Hex<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<wbr>Hex<wbr>String<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L26">muta-utils/src/bytes.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="isvalidnumber" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid<wbr>Number</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<wbr>Number<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L30">muta-utils/src/bytes.ts:30</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -309,7 +398,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/hash.ts#L7">muta-utils/src/hash.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/hash.ts#L7">muta-utils/src/hash.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -329,6 +418,29 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="pad0x" class="tsd-anchor"></a>
+					<h3>pad0x</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">pad0x<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L16">muta-utils/src/bytes.ts:16</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="publickeycreate" class="tsd-anchor"></a>
 					<h3>public<wbr>Key<wbr>Create</h3>
@@ -339,7 +451,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/account.ts#L5">muta-utils/src/account.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/account.ts#L5">muta-utils/src/account.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -359,13 +471,13 @@
 					<a name="randomaddress" class="tsd-anchor"></a>
 					<h3>random<wbr>Address</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">random<wbr>Address<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">random<wbr>Address<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="muta_types.html#address" class="tsd-signature-type">Address</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/random.ts#L15">muta-utils/src/random.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/random.ts#L16">muta-utils/src/random.ts:16</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -373,7 +485,7 @@
 									<p>generate a random <a href="muta_types.html#address">Address</a></p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="muta_types.html#address" class="tsd-signature-type">Address</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -381,13 +493,13 @@
 					<a name="randomhex" class="tsd-anchor"></a>
 					<h3>random<wbr>Hex</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">random<wbr>Hex<span class="tsd-signature-symbol">(</span>n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">random<wbr>Hex<span class="tsd-signature-symbol">(</span>n<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="muta_types.html#bytes" class="tsd-signature-type">Bytes</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/random.ts#L8">muta-utils/src/random.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/random.ts#L9">muta-utils/src/random.ts:9</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -403,7 +515,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="muta_types.html#bytes" class="tsd-signature-type">Bytes</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -411,21 +523,21 @@
 					<a name="randomnonce" class="tsd-anchor"></a>
 					<h3>random<wbr>Nonce</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">random<wbr>Nonce<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">random<wbr>Nonce<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="muta_types.html#bytes" class="tsd-signature-type">Bytes</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/random.ts#L22">muta-utils/src/random.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/random.ts#L23">muta-utils/src/random.ts:23</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>generate a random [[Nonce]]</p>
+									<p>generate a random 32 bytes <a href="muta_types.html#bytes">Bytes</a></p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="muta_types.html#bytes" class="tsd-signature-type">Bytes</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -439,7 +551,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/bytes.ts#L6">muta-utils/src/bytes.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L12">muta-utils/src/bytes.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -471,7 +583,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/transaction.ts#L102">muta-utils/src/transaction.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/transaction.ts#L102">muta-utils/src/transaction.ts:102</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -494,7 +606,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/transaction.ts#L86">muta-utils/src/transaction.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/transaction.ts#L86">muta-utils/src/transaction.ts:86</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -517,7 +629,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/transaction.ts#L117">muta-utils/src/transaction.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/transaction.ts#L117">muta-utils/src/transaction.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -540,6 +652,29 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="startswith0x" class="tsd-anchor"></a>
+					<h3>starts<wbr>With0x</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">starts<wbr>With0x<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L3">muta-utils/src/bytes.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="tobuffer" class="tsd-anchor"></a>
 					<h3>to<wbr>Buffer</h3>
@@ -550,7 +685,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/bytes.ts#L45">muta-utils/src/bytes.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L77">muta-utils/src/bytes.ts:77</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -575,53 +710,35 @@
 					<a name="tohex" class="tsd-anchor"></a>
 					<h3>to<wbr>Hex</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>Hex<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Hex<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">BigNumber</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/bytes.ts#L19">muta-utils/src/bytes.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-utils/src/bytes.ts#L44">muta-utils/src/bytes.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>parse to hex string</p>
+									<p>convert a string to an even length hexadecimal representation string</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript">toHex(<span class="hljs-string">'0xff'</span>) <span class="hljs-comment">// '0xff'</span>
+toHex(<span class="hljs-string">'0x000ff'</span>) <span class="hljs-comment">// '0xff'</span>
+toHex(<span class="hljs-string">'0xfff'</span>) <span class="hljs-comment">// '0x0fff'</span>
+toHex(<span class="hljs-string">'99'</span>) <span class="hljs-comment">// '0x99'</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>x: <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>, may be Buffer, number or string(add 0x if needed or do nothing if already find 0x)</p>
-									</div>
+									<h5>x: <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">BigNumber</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-					<a name="warning" class="tsd-anchor"></a>
-					<h3>warning</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">warning<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c4f6c15/packages/muta-utils/src/bytes.ts#L10">muta-utils/src/bytes.ts:10</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>x: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -664,6 +781,12 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="muta_utils.html#safeparsejson" class="tsd-kind-icon">safe<wbr>ParseJSON</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="muta_utils.html#safestringifyjson" class="tsd-kind-icon">safe<wbr>StringifyJSON</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="muta_utils.html#addressfrompublickey" class="tsd-kind-icon">address<wbr>From<wbr>Public<wbr>Key</a>
 					</li>
@@ -686,7 +809,16 @@
 						<a href="muta_utils.html#isuint8array" class="tsd-kind-icon">is<wbr>Uint8<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="muta_utils.html#isvalidhexstring" class="tsd-kind-icon">is<wbr>Valid<wbr>Hex<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_utils.html#isvalidnumber" class="tsd-kind-icon">is<wbr>Valid<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="muta_utils.html#keccak" class="tsd-kind-icon">keccak</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_utils.html#pad0x" class="tsd-kind-icon">pad0x</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="muta_utils.html#publickeycreate" class="tsd-kind-icon">public<wbr>Key<wbr>Create</a>
@@ -712,14 +844,14 @@
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="muta_utils.html#signtransaction" class="tsd-kind-icon">sign<wbr>Transaction</a>
 					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="muta_utils.html#startswith0x" class="tsd-kind-icon">starts<wbr>With0x</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="muta_utils.html#tobuffer" class="tsd-kind-icon">to<wbr>Buffer</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="muta_utils.html#tohex" class="tsd-kind-icon">to<wbr>Hex</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="muta_utils.html#warning" class="tsd-kind-icon">warning</a>
 					</li>
 				</ul>
 			</nav>
@@ -731,6 +863,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
@@ -744,6 +877,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 		</div>
 	</div>
