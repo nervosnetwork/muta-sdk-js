@@ -17,7 +17,7 @@ const account3 = new Account(
 );
 
 const multiSigService = new MultiSignatureService(client, account1);
-const accountService = new AssetService(client, account1);
+const assetService = new AssetService(client, account1);
 
 async function main() {
   console.log(`creating multi-sig account`);
@@ -35,7 +35,7 @@ async function main() {
   const multiSigAddress = multiSigReceipt.response.response.succeedData.address;
   console.log(`created an multi-sig account ${multiSigAddress}`);
 
-  const rawTx = await accountService.write.create_asset.composeTransaction({
+  const rawTx = await assetService.write.create_asset.composeTransaction({
     name: 'MultiSigToken' + Math.random(),
     supply: 10000000,
     symbol: 'MST',
