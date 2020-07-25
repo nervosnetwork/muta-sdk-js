@@ -117,8 +117,8 @@ type SignedTransaction {
 
 "Validator address set"
 type Validator {
-  address: Address!
   proposeWeight: Int!
+  pubkey: Bytes!
   voteWeight: Int!
 }
 
