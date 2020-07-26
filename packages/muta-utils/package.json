@@ -11,8 +11,10 @@
     "src"
   ],
   "dependencies": {
+    "@mutadev/defaults": "0.2.0-dev.2",
     "@mutadev/shared": "0.2.0-dev.2",
     "@mutadev/types": "0.2.0-dev.2",
+    "bech32": "^1.1.4",
     "json-bigint": "^0.3.0",
     "keccak": "^3.0.0",
     "randombytes": "^2.1.0",

@@ -1,4 +1,5 @@
 import { BigNumber, invariant } from '@mutadev/shared';
+import { Bytes, Hex } from '@mutadev/types';
 
 function startsWith0x(x: string): boolean {
   return x.startsWith('0x') || x.startsWith('0X');
@@ -23,7 +24,10 @@ function pad0x(x: string): string {
   return '0x0' + x;
 }
 
-export function isValidHexString(x: string): boolean {
+export function isValidHexString(x: unknown): x is Hex {
+  if (typeof x !== 'string') {
+    return false;
+  }
   return /^(0x)?[a-f0-9]+$/i.test(x);
 }
 
@@ -87,4 +91,9 @@ export function toBuffer(x: string | Buffer | Uint8Array): Buffer {
  */
 export function hexToNum(x: string): number {
   return Number(toHex(x));
+}
+
+export function toUint8Array(x: Bytes | Buffer | Uint8Array): Uint8Array {
+  if (isUint8Array(x)) return x;
+  return new Uint8Array(toBuffer(x));
 }
