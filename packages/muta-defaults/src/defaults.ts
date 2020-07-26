@@ -16,7 +16,8 @@ type VariablesCache = VariableEntry<'MUTA_TIMEOUT_GAP', number> &
   VariableEntry<'MUTA_CHAIN_ID', string> &
   VariableEntry<'MUTA_CONSENSUS_INTERVAL', number> &
   VariableEntry<'MUTA_ENDPOINT', string> &
-  VariableEntry<'MUTA_PRIVATE_KEY', string>;
+  VariableEntry<'MUTA_PRIVATE_KEY', string> &
+  VariableEntry<'MUTA_ADDRESS_HRP', string>;
 
 const DefaultVariables: VariablesCache = new Map();
 
@@ -37,4 +38,6 @@ DefaultVariables.set(
   ),
 );
 DefaultVariables.set('MUTA_PRIVATE_KEY', envStr('MUTA_PRIVATE_KEY', ''));
+DefaultVariables.set('MUTA_ADDRESS_HRP', envStr('MUTA_ADDRESS_HRP', 'muta'));
+
 export { DefaultVariables };
