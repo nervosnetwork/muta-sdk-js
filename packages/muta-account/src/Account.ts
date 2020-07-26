@@ -1,10 +1,10 @@
 import { DefaultVariables } from '@mutadev/defaults';
 import { invariant } from '@mutadev/shared';
-import { Bytes, SignedTransaction, Transaction } from '@mutadev/types';
+import { Address, Bytes, SignedTransaction, Transaction } from '@mutadev/types';
 import {
+  addressFromPublicKey,
   createTransactionSignature,
   isValidHexString,
-  keccak,
   publicKeyCreate,
   separateOutRawTransaction,
   toBuffer,
@@ -69,15 +69,15 @@ export class Account {
   }
 
   get address(): string {
-    return toHex(this._address);
+    return this._address;
   }
 
   private get _publicKey(): Buffer {
     return publicKeyCreate(this._privateKey);
   }
 
-  private get _address(): Buffer {
-    return Account.addressFromPublicKey(this._publicKey);
+  private get _address(): Address {
+    return addressFromPublicKey(this._publicKey);
   }
 
   /**
@@ -87,16 +87,6 @@ export class Account {
    */
   public static fromPrivateKey(privateKey: string): Account {
     return new Account(toBuffer(privateKey));
-  }
-
-  /**
-   * get the account address from a public key
-   * @param publicKey, string | Buffer,
-   * @return Buffer,
-   */
-  public static addressFromPublicKey(publicKey: Buffer | string): Buffer {
-    const hashed = keccak(toBuffer(publicKey));
-    return hashed.slice(0, 20);
   }
 
   /**
