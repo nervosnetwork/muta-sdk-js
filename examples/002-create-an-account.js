@@ -9,7 +9,7 @@ const PRIVATE_KEY =
 // 0x0000000000000000000000000000000000000000000000000000000000000001
 const account = new Account(PRIVATE_KEY);
 
-console.log(`private key: [${PRIVATE_KEY}]`)
+console.log(`private key: [${PRIVATE_KEY}]`);
 console.log(`address: [${account.address}]`);
 console.log(`public key: [${account.publicKey}]`);
 

@@ -18,7 +18,7 @@ async function main() {
   const signedTx = account.signTransaction(tx);
 
   const txHash = await client.sendTransaction(signedTx);
-  console.log(`txHash: [${txHash}]`)
+  console.log(`txHash: [${txHash}]`);
 }
 
 main();
