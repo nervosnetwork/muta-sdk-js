@@ -3,7 +3,7 @@ query queryService(
   $method: String!
   $payload: String!
   $height: Uint64
-  $caller: Address = "0x0000000000000000000000000000000000000000"
+  $caller: Address = "muta1ef58dnhean6ugl7s672ya3tre4h0qgx63nas54"
   $cyclePrice: Uint64
   $cycleLimit: Uint64
 ) {

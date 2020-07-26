@@ -216,7 +216,7 @@ export type SignedTransaction = {
 
 /** Validator address set */
 export type Validator = {
-  address: Scalars['Address'];
+  pubkey: Scalars['Bytes'];
   proposeWeight: Scalars['Int'];
   voteWeight: Scalars['Int'];
 };
@@ -276,7 +276,7 @@ export type GetBlockQuery = { getBlock?: Maybe<(
     Pick<Block, 'orderedTxHashes' | 'hash'>
     & { header: (
       Pick<BlockHeader, 'chainId' | 'confirmRoot' | 'cyclesUsed' | 'execHeight' | 'height' | 'orderRoot' | 'orderSignedTransactionsHash' | 'prevHash' | 'proposer' | 'receiptRoot' | 'stateRoot' | 'timestamp' | 'validatorVersion'>
-      & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'address' | 'proposeWeight' | 'voteWeight'>> }
+      & { proof: Pick<Proof, 'bitmap' | 'blockHash' | 'height' | 'round' | 'signature'>, validators: Array<Pick<Validator, 'pubkey' | 'proposeWeight' | 'voteWeight'>> }
     ) }
   )> };
 
@@ -288,7 +288,7 @@ export const ServicePayloadFragmentDoc = gql`
 }
     `;
 export const QueryServiceDocument = gql`
-    query queryService($serviceName: String!, $method: String!, $payload: String!, $height: Uint64, $caller: Address = "0x0000000000000000000000000000000000000000", $cyclePrice: Uint64, $cycleLimit: Uint64) {
+    query queryService($serviceName: String!, $method: String!, $payload: String!, $height: Uint64, $caller: Address = "muta1ef58dnhean6ugl7s672ya3tre4h0qgx63nas54", $cyclePrice: Uint64, $cycleLimit: Uint64) {
   queryService(height: $height, serviceName: $serviceName, method: $method, payload: $payload, caller: $caller, cyclesPrice: $cyclePrice, cyclesLimit: $cycleLimit) {
     code
     errorMessage
@@ -366,7 +366,7 @@ export const GetBlockDocument = gql`
       timestamp
       validatorVersion
       validators {
-        address
+        pubkey
         proposeWeight
         voteWeight
       }
