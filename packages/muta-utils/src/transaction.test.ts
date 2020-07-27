@@ -1,5 +1,5 @@
 import { Transaction } from '@mutadev/types';
-import { addressFromPublicKey, publicKeyCreate } from './account';
+import { addressFromPublicKey, privateKeyToPublicKey } from './account';
 import { toBuffer } from './bytes';
 import {
   createTransactionSignature,
@@ -23,13 +23,13 @@ const pk1 = Buffer.from(
   '0000000000000000000000000000000000000000000000000000000000000001',
   'hex',
 );
-const address1 = addressFromPublicKey(publicKeyCreate(pk1));
+const address1 = addressFromPublicKey(privateKeyToPublicKey(pk1));
 
 const pk2 = Buffer.from(
   '0000000000000000000000000000000000000000000000000000000000000002',
   'hex',
 );
-const address2 = addressFromPublicKey(publicKeyCreate(pk2));
+const address2 = addressFromPublicKey(privateKeyToPublicKey(pk2));
 
 test('verify single transaction', () => {
   const encryption = createTransactionSignature(tx, pk1);

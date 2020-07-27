@@ -8,13 +8,8 @@ import {
 import { toBuffer, toUint8Array } from './bytes';
 import { keccak } from './hash';
 
-export function publicKeyCreate(
-  privateKey: Buffer | Uint8Array,
-  compressed?: boolean,
-): Buffer {
-  return Buffer.from(
-    rawPublicKeyCreate(Uint8Array.from(privateKey), compressed),
-  );
+export function privateKeyToPublicKey(privateKey: Buffer | Uint8Array): Buffer {
+  return Buffer.from(rawPublicKeyCreate(Uint8Array.from(privateKey)));
 }
 
 /**
@@ -24,7 +19,7 @@ export function addressBufferFromPublicKey(
   publicKey: Uint8Array | Buffer | string,
 ): Buffer {
   const uncompressedPublicKey = toBuffer(
-    publicKeyConvert(toUint8Array(publicKey), false),
+    publicKeyConvert(toUint8Array(publicKey), false).slice(1),
   );
   return keccak(uncompressedPublicKey).slice(-20);
 }
