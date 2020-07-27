@@ -9,11 +9,11 @@ const Account = require('@mutadev/account');
 
 const account = new Account('0x...');
 account.signTransaction({
-    service: '...',
-    method: '...',
-    payload: '{...}',
-    sender: '0x...'
-})
+  service: '...',
+  method: '...',
+  payload: '{...}',
+  sender: '0x...',
+});
 ```
 
 ## Multi-signature
@@ -25,5 +25,5 @@ const account = new Account('0x...');
 // a signed transaction from another account
 const signedTransaction = {};
 
-account.signTransaction(signedTransaction)
+account.signTransaction(signedTransaction);
 ```

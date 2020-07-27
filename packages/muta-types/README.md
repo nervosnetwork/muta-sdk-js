@@ -13,4 +13,3 @@ Muta service binding types for TypeScript definition.
 | u64     | u64        |
 | Vec     | Vec        |
 | Hex     | Hex        |
-

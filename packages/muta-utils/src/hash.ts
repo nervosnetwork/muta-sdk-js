@@ -5,7 +5,5 @@ import createKeccakHash from 'keccak';
  * @param buffer
  */
 export function keccak(buffer: Buffer): Buffer {
-  return createKeccakHash('keccak256')
-    .update(buffer)
-    .digest();
+  return createKeccakHash('keccak256').update(buffer).digest();
 }
