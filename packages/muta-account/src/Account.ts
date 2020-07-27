@@ -5,7 +5,7 @@ import {
   addressFromPublicKey,
   createTransactionSignature,
   isValidHexString,
-  publicKeyCreate,
+  privateKeyToPublicKey,
   separateOutRawTransaction,
   toBuffer,
   toHex,
@@ -73,7 +73,7 @@ export class Account {
   }
 
   private get _publicKey(): Buffer {
-    return publicKeyCreate(this._privateKey);
+    return privateKeyToPublicKey(this._privateKey);
   }
 
   private get _address(): Address {
