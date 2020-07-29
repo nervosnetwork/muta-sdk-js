@@ -1,5 +1,6 @@
 import {
   Address,
+  Bytes,
   SignedTransaction,
   Transaction,
   TransactionSignature,
@@ -14,6 +15,28 @@ import {
 import { addressFromPublicKey, addressToBuffer } from './account';
 import { toBuffer, toHex, toUint8Array } from './bytes';
 import { keccak } from './hash';
+
+interface DecodedEncryption {
+  pubkeys: Bytes[];
+  signatures: Bytes[];
+}
+
+export function decodeEncryption(
+  encryption: TransactionSignature,
+): DecodedEncryption {
+  const signaturesBuf = rlpDecode(toBuffer(encryption.signature));
+  const pubkeysBuf = rlpDecode(toBuffer(encryption.pubkey));
+
+  const signatures: Bytes[] = Array.isArray(signaturesBuf)
+    ? signaturesBuf.map((s) => toHex(s))
+    : [signaturesBuf.toString('hex')];
+
+  const pubkeys: Bytes[] = Array.isArray(pubkeysBuf)
+    ? pubkeysBuf.map((s) => toHex(s))
+    : [pubkeysBuf.toString('hex')];
+
+  return { signatures, pubkeys };
+}
 
 export function toTxHash(tx: Transaction): Buffer {
   const orderedTx = [

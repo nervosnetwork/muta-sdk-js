@@ -3,6 +3,7 @@ import { addressFromPublicKey, privateKeyToPublicKey } from './account';
 import { toBuffer } from './bytes';
 import {
   createTransactionSignature,
+  decodeEncryption,
   signTransaction,
   verifyTransaction,
 } from './transaction';
@@ -52,4 +53,24 @@ test('test verify multi transaction', () => {
   ]);
 
   expect(result).toBe(true);
+});
+
+test('decode transaction encryption', () => {
+  const decoded = decodeEncryption({
+    pubkey:
+      '0xe2a10245c12e97900ff554f992225a24db6b678ee5e1a4e94da40691f0495d5757398f',
+    signature:
+      '0xf842b840c7d902a89a2b6c93be42c1ea1d2ece4a57efcf29297b485dd8c5413d76c50ec94800a34b1dc5bb966819959b086ad088292f44910088214cd1d4a33672971cc3',
+    txHash:
+      '0x48ba8a36271b1182f2ff7ae2343ba894c03fb623d6c642119a98292be75042ca',
+  });
+
+  expect(decoded).toEqual({
+    signatures: [
+      '0xc7d902a89a2b6c93be42c1ea1d2ece4a57efcf29297b485dd8c5413d76c50ec94800a34b1dc5bb966819959b086ad088292f44910088214cd1d4a33672971cc3',
+    ],
+    pubkeys: [
+      '0x0245c12e97900ff554f992225a24db6b678ee5e1a4e94da40691f0495d5757398f',
+    ],
+  });
 });
