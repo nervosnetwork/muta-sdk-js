@@ -1,13 +1,36 @@
 import {
-  InputSignedTransaction,
+  Address,
   SignedTransaction,
   Transaction,
   TransactionSignature,
 } from '@mutadev/types';
-import { decode, encode } from 'rlp';
-import { ecdsaSign, publicKeyCreate } from 'secp256k1';
-import { toBuffer, toHex } from './bytes';
+import { decode as rlpDecode, encode as rlpEncode } from 'rlp';
+import {
+  ecdsaRecover,
+  ecdsaSign,
+  ecdsaVerify,
+  publicKeyCreate,
+} from 'secp256k1';
+import { addressFromPublicKey, addressToBuffer } from './account';
+import { toBuffer, toHex, toUint8Array } from './bytes';
 import { keccak } from './hash';
+
+export function toTxHash(tx: Transaction): Buffer {
+  const orderedTx = [
+    tx.chainId,
+    tx.cyclesLimit,
+    tx.cyclesPrice,
+    tx.nonce,
+    tx.method,
+    tx.serviceName,
+    tx.payload,
+    tx.timeout,
+    [toUint8Array(addressToBuffer(tx.sender))],
+  ];
+
+  const encoded = rlpEncode(orderedTx);
+  return keccak(encoded);
+}
 
 /**
  * create a transaction signature
@@ -22,27 +45,14 @@ export function createTransactionSignature(
     return separateOutEncryption(appendTransactionSignature(tx, privateKey));
   }
 
-  const orderedTx = [
-    tx.chainId,
-    tx.cyclesLimit,
-    tx.cyclesPrice,
-    tx.nonce,
-    tx.method,
-    tx.serviceName,
-    tx.payload,
-    tx.timeout,
-    [Uint8Array.from(toBuffer(tx.sender))],
-  ];
-
   const uint8PrivateKey = Uint8Array.from(privateKey);
-  const encoded = encode(orderedTx);
-  const txHash = keccak(encoded);
+  const txHash = toTxHash(tx);
 
   const { signature } = ecdsaSign(txHash, uint8PrivateKey);
 
   return {
-    pubkey: toHex(encode([publicKeyCreate(uint8PrivateKey)])),
-    signature: toHex(encode([signature])),
+    pubkey: toHex(rlpEncode([publicKeyCreate(uint8PrivateKey)])),
+    signature: toHex(rlpEncode([signature])),
     txHash: toHex(txHash),
   };
 }
@@ -56,14 +66,14 @@ export function appendTransactionSignature(
 
   const { signature } = ecdsaSign(uint8TxHash, uint8PrivateKey);
 
-  const pubkeys = decode(toBuffer(stx.pubkey));
+  const pubkeys = rlpDecode(toBuffer(stx.pubkey));
   if (Array.isArray(pubkeys)) {
     pubkeys.push(publicKeyCreate(uint8PrivateKey));
   } else {
     throw 'MultiSigs pubkey should be rlp encoded list';
   }
 
-  const multiSigs = decode(toBuffer(stx.signature));
+  const multiSigs = rlpDecode(toBuffer(stx.signature));
   if (Array.isArray(multiSigs)) {
     multiSigs.push(signature);
   } else {
@@ -72,8 +82,8 @@ export function appendTransactionSignature(
 
   return {
     ...stx,
-    pubkey: toHex(encode(pubkeys)),
-    signature: toHex(encode(multiSigs)),
+    pubkey: toHex(rlpEncode(pubkeys)),
+    signature: toHex(rlpEncode(multiSigs)),
   };
 }
 
@@ -117,15 +127,60 @@ export function separateOutEncryption(
 export function signTransaction(
   tx: Transaction | SignedTransaction,
   privateKey: Buffer,
-): InputSignedTransaction {
+): SignedTransaction {
   if (isSignedTransaction(tx)) {
-    const signed = appendTransactionSignature(tx, privateKey);
-    return {
-      inputEncryption: separateOutEncryption(signed),
-      inputRaw: separateOutRawTransaction(signed),
-    };
+    return appendTransactionSignature(tx, privateKey);
   }
 
   const inputEncryption = createTransactionSignature(tx, privateKey);
-  return { inputEncryption, inputRaw: tx };
+  return { ...tx, ...inputEncryption };
+}
+
+const RECIDS = [0, 1, 2, 3];
+
+/**
+ * verify a signature is signed by an address,
+ * will only verify the signature and the transaction when the address is not provided.
+ * This method only provides an **offline** signature verification algorithm,
+ * so it does not support scenarios like
+ * [MultiSignatureService](https://github.com/nervosnetwork/muta/tree/master/built-in-services/multi-signature)
+ * where weighted and weighted verification is handled on the server side.
+ */
+export function verifyTransaction(
+  signature: Buffer,
+  tx: Transaction,
+  address?: Address | Address[],
+): boolean {
+  const txHashBytes = toUint8Array(toTxHash(tx));
+  const decodedSignature = rlpDecode(toBuffer(signature));
+
+  if (!Array.isArray(decodedSignature)) return false;
+  if (decodedSignature.length < 1) return false;
+
+  return (decodedSignature as Buffer[]).every((sigBuf, i) => {
+    const signatureBytes = toUint8Array(sigBuf);
+
+    return RECIDS.some((recid) => {
+      let publicKey;
+      try {
+        publicKey = ecdsaRecover(signatureBytes, recid, txHashBytes);
+      } catch {
+        return false;
+      }
+
+      if (address) {
+        const actualAddress = addressFromPublicKey(publicKey);
+
+        if (Array.isArray(address)) {
+          if (actualAddress !== address[i]) {
+            return false;
+          }
+        } else if (actualAddress !== address) {
+          return false;
+        }
+      }
+
+      return ecdsaVerify(signatureBytes, txHashBytes, publicKey);
+    });
+  });
 }

@@ -17,7 +17,7 @@ export type Uint32 = string;
  */
 export type Hash = string;
 /**
- * an address, represented by string, normally 42 char-length ('0x' takes 2 and the paylaod 20 bytes takes 40) for secp256k1
+ * an address, encoded by bech32
  */
 export type Address = string;
 /**

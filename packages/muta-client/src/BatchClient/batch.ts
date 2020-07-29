@@ -45,14 +45,14 @@ export async function chunkAndBatch<Result, Source = string>(
   } = options;
 
   const queries = taskSource.map(generateQuerySegment);
-  const chunkedQueries = chunk(queries, chunkSize).map(chunkedQueryString =>
+  const chunkedQueries = chunk(queries, chunkSize).map((chunkedQueryString) =>
     chunkedQueryString.join('\n'),
   );
 
   const limit = plimit(concurrency);
 
   const chunkedAndBatched = await Promise.all(
-    chunkedQueries.map(queries =>
+    chunkedQueries.map((queries) =>
       limit(() =>
         batchWithSameFragment<Result>(options.endpoint, queries, fragment),
       ),

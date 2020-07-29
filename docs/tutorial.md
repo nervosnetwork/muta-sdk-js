@@ -60,7 +60,7 @@ await client.queryService({
     method: 'get_balance',
     payload: JSON.stringify({ 
         asset_id: '0x0000000000000000000000000000000000000000000000000000000000000000', 
-        user: '0x0000000000000000000000000000000000000000' 
+        user: 'muta1qqqqqqqqqqqqqqqqqqqqryjpvp'
     })
 });
 ```
@@ -75,7 +75,7 @@ The following code shows how to create a raw transaction, that used to call the 
 await client.composeTransaction({
     service: 'asset',
     method: 'transfer',
-    payload: "{ \"user\": \"0x0000000000000000000000000000000000000000\", \"value\": 1 }"
+    payload: "{ \"user\": \"muta1qqqqqqqqqqqqqqqqqqqqryjpvp", \"value\": 1 }"
 });
 ```
 

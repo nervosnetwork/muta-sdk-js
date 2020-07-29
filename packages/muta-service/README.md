@@ -8,9 +8,9 @@ This module provides a serial tools for creating bindings for [Muta service](htt
 
 Muta is a Blockchain framework, and the **services** is a layer for customizing business. There are 3 important concept for **service**
 
-- **namespace**: we can define many services in a system,  and each service owns its state, for example, `AssetService` for minting tokens, `DexService` for exchanging tokens).
+- **namespace**: we can define many services in a system, and each service owns its state, for example, `AssetService` for minting tokens, `DexService` for exchanging tokens).
 - **read**: we can define many **read** methods in a **service** to get its state
-- **write**: we can define many **write** method to mutate its state. Unlike **read**, a successful state change must be consensus, so we need to wait for the receipt 
+- **write**: we can define many **write** method to mutate its state. Unlike **read**, a successful state change must be consensus, so we need to wait for the receipt
 
 ## A Quick Glance
 
@@ -35,13 +35,13 @@ impl ServiceMapping for DefaultServiceMapping {
 }
 ```
 
-### 2. Overview The Service Definition 
+### 2. Overview The Service Definition
 
 ```rust
 impl AssetService {
     #[read]
     fn get_asset(&self, ctx: ServiceContext, payload: GetAssetPayload) -> ServiceResponse<Asset> {}
-    
+
     #[write]
     fn create_asset(&mut self, ctx: ServiceContext, payload: CreateAssetPayload) -> ServiceResponse<Asset> {}
 }
@@ -50,16 +50,16 @@ impl AssetService {
 ### 3. Mapping The Service To TypeScript
 
 ```ts
-import { createServiceBindingClass, read, write } from '@mutadev/service'
+import { createServiceBindingClass, read, write } from '@mutadev/service';
 
 const AssetService = createServiceBindingClass({
-    serviceName: 'asset',
-    read: {
-        get_asset: read<GetAssetPayload, Asset>(),
-    },
-    write: {
-        create_asset: write<CreateAssetPayload, Asset>(),
-    },
+  serviceName: 'asset',
+  read: {
+    get_asset: read<GetAssetPayload, Asset>(),
+  },
+  write: {
+    create_asset: write<CreateAssetPayload, Asset>(),
+  },
 });
 ```
 
@@ -93,21 +93,21 @@ Follow the [types mapping](../muta-types), we could bind the Rust types on TypeS
 import { Hash, u64, Address } from '@mutadev/types';
 
 interface GetAssetPayload {
-   id: Hash,
+  id: Hash;
 }
 
 interface Asset {
-    id:     Hash,
-    name:   string,
-    symbol: string,
-    supply: u64,
-    issuer: Address,
+  id: Hash;
+  name: string;
+  symbol: string;
+  supply: u64;
+  issuer: Address;
 }
 
 interface CreateAssetPayload {
-    name:   string,
-    symbol: string,
-    supply: u64,
+  name: string;
+  symbol: string;
+  supply: u64;
 }
 ```
 
@@ -118,29 +118,29 @@ import { Client } from '@mutadev/client';
 import { Account } from '@mutadev/account';
 
 async function main() {
-    const service = new AssetService(new Client(), new Account('0x...'));
-    const createdAsset = await service.write.create_asset({
-        name: 'MyCoin',
-        symbol: 'MC',
-        supply: 100000,
-    });
-    
-    const assetId = createdAsset.response.response.succeedData.id;
-    console.log(assetId);
-    
-    const asset = await service.get.get_asset({ id: assetId });
-    console.log(asset);
+  const service = new AssetService(new Client(), new Account('0x...'));
+  const createdAsset = await service.write.create_asset({
+    name: 'MyCoin',
+    symbol: 'MC',
+    supply: 100000,
+  });
+
+  const assetId = createdAsset.response.response.succeedData.id;
+  console.log(assetId);
+
+  const asset = await service.get.get_asset({ id: assetId });
+  console.log(asset);
 }
 
 main();
 ```
 
-### I Don't Want To Wait For  The Receipt
+### I Don't Want To Wait For The Receipt
 
 ```ts
-await service.write.create_asset.composeTransaction()
+await service.write.create_asset.composeTransaction();
 ```
 
 ```ts
-await service.write.create_asset.sendTransaction()
+await service.write.create_asset.sendTransaction();
 ```
