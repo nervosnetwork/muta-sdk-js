@@ -12,14 +12,14 @@ interface VariableEntry<Key, Value> {
   set(key: Key, value: Value): void;
 }
 
-type VariablesCache = VariableEntry<'MUTA_TIMEOUT_GAP', number> &
+export type DefaultVariableMap = VariableEntry<'MUTA_TIMEOUT_GAP', number> &
   VariableEntry<'MUTA_CHAIN_ID', string> &
   VariableEntry<'MUTA_CONSENSUS_INTERVAL', number> &
   VariableEntry<'MUTA_ENDPOINT', string> &
   VariableEntry<'MUTA_PRIVATE_KEY', string> &
   VariableEntry<'MUTA_ADDRESS_HRP', string>;
 
-const DefaultVariables: VariablesCache = new Map();
+const DefaultVariables: DefaultVariableMap = new Map();
 
 DefaultVariables.set('MUTA_TIMEOUT_GAP', envNum('MUTA_TIMEOUT_GAP', 20));
 DefaultVariables.set(
