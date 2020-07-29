@@ -1,9 +1,15 @@
 import { Account } from '@mutadev/account';
 import { Client } from '@mutadev/client';
-import { DefaultVariables } from '@mutadev/defaults';
+import { DefaultVariableMap, DefaultVariables } from '@mutadev/defaults';
 import { Uint64 } from '@mutadev/types';
 import { HDWallet } from '@mutadev/wallet';
 import { Optional } from 'utility-types';
+
+export const getDefaultVariables: DefaultVariableMap['get'] =
+  DefaultVariables.get;
+
+export const setDefaultVariables: DefaultVariableMap['set'] =
+  DefaultVariables.set;
 
 export interface MutaContext {
   /**
