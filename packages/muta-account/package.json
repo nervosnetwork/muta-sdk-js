@@ -1,6 +1,6 @@
 {
   "name": "@mutadev/account",
-  "version": "0.2.0-pr374.1",
+  "version": "0.2.0-pr374.2",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -11,7 +11,7 @@
     "src"
   ],
   "dependencies": {
-    "@mutadev/defaults": "0.2.0-pr374.0",
-    "@mutadev/utils": "0.2.0-pr374.1"
+    "@mutadev/defaults": "0.2.0-pr374.2",
+    "@mutadev/utils": "0.2.0-pr374.2"
   }
 }
