@@ -93,13 +93,12 @@ export interface Validator {
 }
 
 /**
- * A transaction often require computing resources or write data to chain,
- * these resources are valuable so we need to pay some token for them.
- * Transaction describes information above
+ * Transaction is a means of changing the state of the chain, for example,
+ * Alice transfers to Bob, which actually decreases an asset in Alice's account
+ * and increases an asset in Bob's account.
  *
- * The transaction is not signed yet
- *
- * you may stuff this by [[prepareTransaction]]
+ * Each Transaction is atomic, i.e., either all state changes caused by
+ * this Transaction are executed or none are executed
  */
 export interface Transaction {
   chainId: Hash;
