@@ -1,4 +1,4 @@
-import { Address, Bytes, Hash, Hex, Int, Uint64 } from './scalar';
+import { Address, Bytes, Hash, Int, Uint64 } from './scalar';
 
 /**
  * The Block struct
@@ -76,15 +76,15 @@ export interface BlockHeader {
  * Overload runs likes tendermint, which means in one Block, there may be more than one **round** to achieve consensus,
  */
 export interface Proof {
-  height: Hex;
-  round: Hex;
+  height: Uint64;
+  round: Uint64;
   blockHash: Hash;
   signature: Bytes;
   bitmap: Bytes;
 }
 
 /**
- * Validator address, contains its propose weight and vote weight
+ * Validator
  */
 export interface Validator {
   pubkey: Bytes;
@@ -147,11 +147,6 @@ export interface SignedTransaction {
   pubkey: Bytes;
   signature: Bytes;
   sender: Address;
-}
-
-export interface InputSignedTransaction {
-  inputRaw: Transaction;
-  inputEncryption: TransactionSignature;
 }
 
 /**

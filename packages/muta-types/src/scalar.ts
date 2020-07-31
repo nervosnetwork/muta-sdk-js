@@ -1,17 +1,8 @@
-import BigNumber from 'bignumber.js';
-
-/**
- * ID, string
- */
-export type ID = string;
 /**
  * a 64bits number, represented by string
  */
 export type Uint64 = string;
-/**
- * a 32bits number, represented by string
- */
-export type Uint32 = string;
+
 /**
  * a hash, represented by string, not sure the real length
  */
@@ -24,24 +15,8 @@ export type Address = string;
  * a short hand for string
  */
 export type Bytes = string;
-/**
- * A hexadecimal string
- */
-export type Hex = string;
+
 /**
  * a short hand for number
  */
 export type Int = number;
-
-/**
- * uint32
- */
-export type u32 = number;
-/**
- * uint64
- */
-export type u64 = number | BigNumber;
-/**
- * vector
- */
-export type Vec<T> = T[];
