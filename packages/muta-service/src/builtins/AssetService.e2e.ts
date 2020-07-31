@@ -26,7 +26,7 @@ test('test AssetService', async () => {
 
   await service.write.transfer({
     asset_id: asset.id,
-    to: 'muta1qqqqqqqqqqqqqqqqqqqqryjpvp',
+    to: 'muta1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqggfy0d',
     value: 123,
   });
 
