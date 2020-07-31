@@ -12,16 +12,16 @@ export function privateKeyToPublicKey(privateKey: Buffer | Uint8Array): Buffer {
   return Buffer.from(rawPublicKeyCreate(Uint8Array.from(privateKey)));
 }
 
-/**
- * generate an address buffer from a public key,
- */
-export function addressBufferFromPublicKey(
-  publicKey: Uint8Array | Buffer | string,
-): Buffer {
-  const uncompressedPublicKey = toBuffer(
-    publicKeyConvert(toUint8Array(publicKey), false).slice(1),
-  );
-  return keccak(uncompressedPublicKey).slice(-20);
+export function decodeAddress(
+  addressBuf: Buffer,
+  prefix = DefaultVariables.get('MUTA_ADDRESS_HRP'),
+): Address {
+  return encode(prefix, toWords(addressBuf));
+}
+
+export function encodeAddress(address: Address): Buffer {
+  const { words } = decode(address);
+  return Buffer.from(fromWords(words));
 }
 
 /**
@@ -31,11 +31,9 @@ export function addressFromPublicKey(
   publicKey: Uint8Array | Buffer | Bytes,
   prefix = DefaultVariables.get('MUTA_ADDRESS_HRP'),
 ): Address {
-  const address = addressBufferFromPublicKey(publicKey);
-  return encode(prefix, toWords(address));
-}
-
-export function addressToBuffer(address: Address): Buffer {
-  const { words } = decode(address);
-  return Buffer.from(fromWords(words));
+  const uncompressedPublicKey = toBuffer(
+    publicKeyConvert(toUint8Array(publicKey), false).slice(1),
+  );
+  const addressBuf = keccak(uncompressedPublicKey).slice(-20);
+  return decodeAddress(addressBuf, prefix);
 }
