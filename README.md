@@ -21,19 +21,17 @@ yarn add graphql@14 @mutadev/muta-sdk
 ## Usage
 
 ```js
-var sdk = require('@mutadev/muta-sdk');
+const muta = require('@mutadev/muta-sdk');
 
-var muta = new sdk.Muta();
+// muta.setDefaultVariables('MUTA_ENDPOINT', 'http://localhost:8000/graphql');
 
-// Muta {
-//   context: {
-//     chainId: '0x...',
-//     consensusInterval: 3000,
-//     endpoint: 'http://127.0.0.1:8000/graphql',
-//     timeoutGap: 20
-//   }
-// }
-console.log(muta);
+async function main() {
+  const client = new muta.Client();
+  const height = await client.getLatestBlockHeight();
+  console.log(height);
+}
+
+main();
 ```
 
 ## Modules
