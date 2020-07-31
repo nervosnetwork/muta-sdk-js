@@ -1,5 +1,5 @@
 import { BigNumber, invariant } from '@mutadev/shared';
-import { Bytes, Hex } from '@mutadev/types';
+import { Bytes } from '@mutadev/types';
 
 function startsWith0x(x: string): boolean {
   return x.startsWith('0x') || x.startsWith('0X');
@@ -24,7 +24,7 @@ function pad0x(x: string): string {
   return '0x0' + x;
 }
 
-export function isValidHexString(x: unknown): x is Hex {
+export function isValidHexString(x: unknown): boolean {
   if (typeof x !== 'string') {
     return false;
   }
