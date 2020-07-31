@@ -1,3 +1,4 @@
+import { invariant } from '@mutadev/shared';
 import {
   Address,
   Bytes,
@@ -12,33 +13,77 @@ import {
   ecdsaVerify,
   publicKeyCreate,
 } from 'secp256k1';
-import { addressFromPublicKey, addressToBuffer } from './account';
+import {
+  addressFromPublicKey,
+  decodeAddress,
+  encodeAddress,
+  privateKeyToPublicKey,
+} from './account';
 import { toBuffer, toHex, toUint8Array } from './bytes';
 import { keccak } from './hash';
 
-interface DecodedEncryption {
-  pubkeys: Bytes[];
-  signatures: Bytes[];
+interface DecodedEncryption<T> {
+  pubkeys: T[];
+  signatures: T[];
 }
 
-export function decodeEncryption(
-  encryption: TransactionSignature,
-): DecodedEncryption {
+interface Transformer<T> {
+  (buf: Buffer): T;
+}
+
+interface EncodedEncryption {
+  pubkey: Bytes;
+  signature: Bytes;
+}
+
+/**
+ * decode RPL encoded encryption
+ * @example
+ *
+ * // decode signed transaction encryption
+ * const signedTransaction = signTransaction(...);
+ * const decoded1 = decodeEncryption(signedTransaction)
+ *
+ * // or just pass the signature and pubkey manually
+ * const decoded2 = decodeEncryption({
+ *   signature: '0x...',
+ *   pubkey: '0x...',
+ * }, toHex)
+ *
+ * @throws Error
+ */
+export function decodeEncryption<T = Buffer>(
+  encryption: EncodedEncryption,
+  transformer?: Transformer<T>,
+): DecodedEncryption<T> {
   const signaturesBuf = rlpDecode(toBuffer(encryption.signature));
   const pubkeysBuf = rlpDecode(toBuffer(encryption.pubkey));
 
-  const signatures: Bytes[] = Array.isArray(signaturesBuf)
-    ? signaturesBuf.map((s) => toHex(s))
-    : [signaturesBuf.toString('hex')];
+  invariant(
+    Array.isArray(signaturesBuf),
+    `wrong signature format, signature is not an array`,
+  );
+  invariant(
+    Array.isArray(pubkeysBuf),
+    `wrong pubkey format, pubkey is not an array`,
+  );
 
-  const pubkeys: Bytes[] = Array.isArray(pubkeysBuf)
-    ? pubkeysBuf.map((s) => toHex(s))
-    : [pubkeysBuf.toString('hex')];
+  if (!transformer) {
+    return {
+      signatures: signaturesBuf,
+      pubkeys: pubkeysBuf,
+    };
+  }
 
-  return { signatures, pubkeys };
+  return {
+    signatures: signaturesBuf.map(transformer),
+    pubkeys: pubkeysBuf.map(transformer),
+  };
 }
 
-export function toTxHash(tx: Transaction): Buffer {
+export function encodeTransaction(tx: Transaction): Buffer {
+  invariant(tx.sender, `empty sender is found in transaction`);
+
   const orderedTx = [
     tx.chainId,
     tx.cyclesLimit,
@@ -48,10 +93,46 @@ export function toTxHash(tx: Transaction): Buffer {
     tx.serviceName,
     tx.payload,
     tx.timeout,
-    [toUint8Array(addressToBuffer(tx.sender))],
+    [toBuffer(encodeAddress(tx.sender))],
   ];
 
-  const encoded = rlpEncode(orderedTx);
+  return rlpEncode(orderedTx);
+}
+
+export function decodeTransaction(buf: Buffer): Transaction {
+  const [
+    chainId,
+    cyclesLimit,
+    cyclesPrice,
+    nonce,
+    method,
+    serviceName,
+    payload,
+    timeout,
+    senders,
+  ] = rlpDecode(buf);
+
+  invariant(Array.isArray(senders) && senders.length > 0, 'sender decode fail');
+
+  return {
+    chainId: toHex(chainId),
+    cyclesLimit: toHex(cyclesLimit),
+    cyclesPrice: toHex(cyclesPrice),
+    nonce: toHex(nonce),
+    method: method.toString(),
+    serviceName: serviceName.toString(),
+    payload: payload.toString(),
+    timeout: toHex(timeout),
+    sender: decodeAddress(senders[0]),
+  };
+}
+
+/**
+ *
+ * @throws Error
+ */
+export function toTxHash(tx: Transaction): Buffer {
+  const encoded = encodeTransaction(tx);
   return keccak(encoded);
 }
 
@@ -84,29 +165,19 @@ export function appendTransactionSignature(
   stx: SignedTransaction,
   privateKey: Buffer,
 ): SignedTransaction {
-  const uint8PrivateKey = Uint8Array.from(privateKey);
-  const uint8TxHash = Uint8Array.from(toBuffer(stx.txHash));
+  const uint8PrivateKey = toUint8Array(privateKey);
 
+  const uint8TxHash = toUint8Array(stx.txHash);
   const { signature } = ecdsaSign(uint8TxHash, uint8PrivateKey);
 
-  const pubkeys = rlpDecode(toBuffer(stx.pubkey));
-  if (Array.isArray(pubkeys)) {
-    pubkeys.push(publicKeyCreate(uint8PrivateKey));
-  } else {
-    throw 'MultiSigs pubkey should be rlp encoded list';
-  }
-
-  const multiSigs = rlpDecode(toBuffer(stx.signature));
-  if (Array.isArray(multiSigs)) {
-    multiSigs.push(signature);
-  } else {
-    throw 'MultiSigs signature should be rlp encoded list';
-  }
+  const { signatures, pubkeys } = decodeEncryption(stx);
+  pubkeys.push(privateKeyToPublicKey(privateKey));
+  signatures.push(toBuffer(signature));
 
   return {
     ...stx,
     pubkey: toHex(rlpEncode(pubkeys)),
-    signature: toHex(rlpEncode(multiSigs)),
+    signature: toHex(rlpEncode(signatures)),
   };
 }
 
