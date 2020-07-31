@@ -1,5 +1,6 @@
 import { Address, Bytes } from '@mutadev/types';
 import randomBytes from 'randombytes';
+import { decodeAddress } from './account';
 import { toHex } from './bytes';
 
 /**
@@ -13,8 +14,8 @@ export function randomHex(n: number): Bytes {
 /**
  * generate a random {@link Address}
  */
-export function randomAddress(): Address {
-  return randomHex(20);
+export function randomAddress(prefix?: string): Address {
+  return decodeAddress(randomBytes(20), prefix);
 }
 
 /**
