@@ -44,7 +44,7 @@ import {
  * ```
  */
 export class Account {
-  private readonly _privateKey: Buffer;
+  #privateKey: Buffer;
 
   constructor(
     privateKey: Buffer | Bytes = DefaultVariables.get('MUTA_PRIVATE_KEY'),
@@ -61,7 +61,7 @@ export class Account {
       privateKey.length === 32,
       'private key should be an 32-bytes Buffer',
     );
-    this._privateKey = privateKey;
+    this.#privateKey = privateKey;
   }
 
   get publicKey(): string {
@@ -73,7 +73,7 @@ export class Account {
   }
 
   private get _publicKey(): Buffer {
-    return privateKeyToPublicKey(this._privateKey);
+    return privateKeyToPublicKey(this.#privateKey);
   }
 
   private get _address(): Address {
@@ -97,7 +97,7 @@ export class Account {
   ): SignedTransaction {
     const { txHash, signature, pubkey } = createTransactionSignature(
       tx,
-      this._privateKey,
+      this.#privateKey,
     );
 
     return {
