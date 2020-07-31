@@ -29,7 +29,7 @@ export function encodeAddress(address: Address): Buffer {
  */
 export function addressFromPublicKey(
   publicKey: Uint8Array | Buffer | Bytes,
-  prefix = DefaultVariables.get('MUTA_ADDRESS_HRP'),
+  prefix?: string,
 ): Address {
   const uncompressedPublicKey = toBuffer(
     publicKeyConvert(toUint8Array(publicKey), false).slice(1),
