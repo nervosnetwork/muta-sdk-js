@@ -2,6 +2,7 @@ import { Address, SignedTransaction, Vec, u32 } from '@mutadev/types';
 import { createServiceBindingClass, read, write } from '../create';
 
 interface GenerateMultiSigAccountPayload {
+  autonomy: boolean;
   owner: Address;
   addr_with_weight: Vec<AddressWithWeight>;
   threshold: u32;
