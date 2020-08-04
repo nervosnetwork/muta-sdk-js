@@ -22,6 +22,7 @@ const assetService = new AssetService(client, account1);
 async function main() {
   console.log(`creating multi-sig account`);
   const multiSigReceipt = await multiSigService.write.generate_account({
+    autonomy: false,
     addr_with_weight: [
       { address: account1.address, weight: 1 },
       { address: account2.address, weight: 1 },
