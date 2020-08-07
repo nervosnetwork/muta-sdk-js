@@ -72,12 +72,12 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A transaction often require computing resources or write data to chain,
-							these resources are valuable so we need to pay some token for them.
-						Transaction describes information above</p>
+						<p>Transaction is a means of changing the state of the chain, for example,
+							Alice transfers to Bob, which actually decreases an asset in Alice&#39;s account
+						and increases an asset in Bob&#39;s account.</p>
 					</div>
-					<p>The transaction is not signed yet</p>
-					<p>you may stuff this by [[prepareTransaction]]</p>
+					<p>Each Transaction is atomic, i.e., either all state changes caused by
+					this Transaction are executed or none are executed</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -117,7 +117,7 @@
 					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#hash" class="tsd-signature-type">Hash</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L105">muta-types/src/struct.ts:105</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L104">muta-types/src/struct.ts:104</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -127,7 +127,7 @@
 					<div class="tsd-signature tsd-kind-icon">cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L107">muta-types/src/struct.ts:107</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L106">muta-types/src/struct.ts:106</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -137,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L109">muta-types/src/struct.ts:109</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L108">muta-types/src/struct.ts:108</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,7 +147,7 @@
 					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L117">muta-types/src/struct.ts:117</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L116">muta-types/src/struct.ts:116</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">nonce<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#hash" class="tsd-signature-type">Hash</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L111">muta-types/src/struct.ts:111</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L110">muta-types/src/struct.ts:110</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,7 +167,7 @@
 					<div class="tsd-signature tsd-kind-icon">payload<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L119">muta-types/src/struct.ts:119</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L118">muta-types/src/struct.ts:118</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,7 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">sender<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address" class="tsd-signature-type">Address</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L121">muta-types/src/struct.ts:121</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L120">muta-types/src/struct.ts:120</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -187,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">service<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L115">muta-types/src/struct.ts:115</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L114">muta-types/src/struct.ts:114</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -197,7 +197,7 @@
 					<div class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-types/src/struct.ts#L113">muta-types/src/struct.ts:113</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-types/src/struct.ts#L112">muta-types/src/struct.ts:112</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -240,6 +240,12 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/muta_types.html#address" class="tsd-kind-icon">Address</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/muta_types.html#hash" class="tsd-kind-icon">Hash</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="muta_types.block.html" class="tsd-kind-icon">Block</a>
 					</li>
@@ -248,9 +254,6 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="muta_types.event.html" class="tsd-kind-icon">Event</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="muta_types.inputsignedtransaction.html" class="tsd-kind-icon">Input<wbr>Signed<wbr>Transaction</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="muta_types.proof.html" class="tsd-kind-icon">Proof</a>
@@ -310,7 +313,7 @@
 						<a href="muta_types.validator.html" class="tsd-kind-icon">Validator</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#address" class="tsd-kind-icon">Address</a>
+						<a href="../modules/muta_types.html#address-1" class="tsd-kind-icon">Address</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../modules/muta_types.html#any" class="tsd-kind-icon">Any</a>
@@ -319,22 +322,13 @@
 						<a href="../modules/muta_types.html#bytes" class="tsd-kind-icon">Bytes</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#hash" class="tsd-kind-icon">Hash</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#hex" class="tsd-kind-icon">Hex</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#id" class="tsd-kind-icon">ID</a>
+						<a href="../modules/muta_types.html#hash-1" class="tsd-kind-icon">Hash</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../modules/muta_types.html#int" class="tsd-kind-icon">Int</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../modules/muta_types.html#maybe" class="tsd-kind-icon">Maybe</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/muta_types.html#uint32" class="tsd-kind-icon">Uint32</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../modules/muta_types.html#uint64" class="tsd-kind-icon">Uint64</a>

@@ -85,7 +85,11 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.updateaccountpayload.html#account_address" class="tsd-kind-icon">account_<wbr>address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.updateaccountpayload.html#addr_with_weight" class="tsd-kind-icon">addr_<wbr>with_<wbr>weight</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.updateaccountpayload.html#memo" class="tsd-kind-icon">memo</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.updateaccountpayload.html#new_account_info" class="tsd-kind-icon">new_<wbr>account_<wbr>info</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.updateaccountpayload.html#owner" class="tsd-kind-icon">owner</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="muta_service.updateaccountpayload.html#threshold" class="tsd-kind-icon">threshold</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,10 +100,30 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
 					<a name="account_address" class="tsd-anchor"></a>
 					<h3>account_<wbr>address</h3>
-					<div class="tsd-signature tsd-kind-icon">account_<wbr>address<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address" class="tsd-signature-type">Address</a></div>
+					<div class="tsd-signature tsd-kind-icon">account_<wbr>address<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address-1" class="tsd-signature-type">Address</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-service/src/builtins/MultiSignatureService.ts#L55">muta-service/src/builtins/MultiSignatureService.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-service/src/builtins/MultiSignatureService.ts#L56">muta-service/src/builtins/MultiSignatureService.ts:56</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="addr_with_weight" class="tsd-anchor"></a>
+					<h3>addr_<wbr>with_<wbr>weight</h3>
+					<div class="tsd-signature tsd-kind-icon">addr_<wbr>with_<wbr>weight<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#vec" class="tsd-signature-type">Vec</a><span class="tsd-signature-symbol">&lt;</span><a href="muta_service.addresswithweight.html" class="tsd-signature-type">AddressWithWeight</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-service/src/builtins/MultiSignatureService.ts#L59">muta-service/src/builtins/MultiSignatureService.ts:59</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="memo" class="tsd-anchor"></a>
+					<h3>memo</h3>
+					<div class="tsd-signature tsd-kind-icon">memo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-service/src/builtins/MultiSignatureService.ts#L61">muta-service/src/builtins/MultiSignatureService.ts:61</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -109,7 +133,27 @@
 					<div class="tsd-signature tsd-kind-icon">new_<wbr>account_<wbr>info<span class="tsd-signature-symbol">:</span> <a href="muta_service.generatemultisigaccountpayload.html" class="tsd-signature-type">GenerateMultiSigAccountPayload</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/c9a50dd/packages/muta-service/src/builtins/MultiSignatureService.ts#L56">muta-service/src/builtins/MultiSignatureService.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-service/src/builtins/MultiSignatureService.ts#L57">muta-service/src/builtins/MultiSignatureService.ts:57</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="owner" class="tsd-anchor"></a>
+					<h3>owner</h3>
+					<div class="tsd-signature tsd-kind-icon">owner<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address-1" class="tsd-signature-type">Address</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-service/src/builtins/MultiSignatureService.ts#L58">muta-service/src/builtins/MultiSignatureService.ts:58</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="threshold" class="tsd-anchor"></a>
+					<h3>threshold</h3>
+					<div class="tsd-signature tsd-kind-icon">threshold<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#u32" class="tsd-signature-type">u32</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-service/src/builtins/MultiSignatureService.ts#L60">muta-service/src/builtins/MultiSignatureService.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -161,7 +205,19 @@
 								<a href="muta_service.updateaccountpayload.html#account_address" class="tsd-kind-icon">account_<wbr>address</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.updateaccountpayload.html#addr_with_weight" class="tsd-kind-icon">addr_<wbr>with_<wbr>weight</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.updateaccountpayload.html#memo" class="tsd-kind-icon">memo</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
 								<a href="muta_service.updateaccountpayload.html#new_account_info" class="tsd-kind-icon">new_<wbr>account_<wbr>info</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.updateaccountpayload.html#owner" class="tsd-kind-icon">owner</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="muta_service.updateaccountpayload.html#threshold" class="tsd-kind-icon">threshold</a>
 							</li>
 						</ul>
 					</li>
