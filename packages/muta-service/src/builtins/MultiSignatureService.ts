@@ -1,4 +1,4 @@
-import { Address, SignedTransaction, Vec, u32 } from '@mutadev/types';
+import { Address, SignedTransaction, u32, Vec } from '@mutadev/types';
 import { createServiceBindingClass, read, write } from '../create';
 
 interface GenerateMultiSigAccountPayload {
@@ -55,6 +55,10 @@ interface SetThresholdPayload {
 interface UpdateAccountPayload {
   account_address: Address;
   new_account_info: GenerateMultiSigAccountPayload;
+  owner: Address;
+  addr_with_weight: Vec<AddressWithWeight>;
+  threshold: u32;
+  memo: string;
 }
 
 interface MultiSigPermission {
