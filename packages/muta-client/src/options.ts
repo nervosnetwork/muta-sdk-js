@@ -1,6 +1,6 @@
 import { Account } from '@mutadev/account';
 import { DefaultVariables } from '@mutadev/defaults';
-import { Uint64 } from '@mutadev/types';
+import { Address, Uint64 } from '@mutadev/types';
 import { defaultSerializer, Serializer } from './transform';
 
 /**
@@ -12,6 +12,11 @@ export interface ClientOption {
   endpoint: string;
 
   chainId: string;
+
+  /**
+   * default caller field in {@link Client.queryService}
+   */
+  defaultCaller: Address;
 
   /**
    * Warning, this configuration is likely to be deprecated in the future.
@@ -56,6 +61,7 @@ export function getDefaultClientOption(): ClientOption {
     chainId: DefaultVariables.get('MUTA_CHAIN_ID'),
     defaultCyclesPrice: '0xffffff',
     defaultCyclesLimit: '0xffffff',
+    defaultCaller: DefaultVariables.get('MUTA_GRAPHQL_CALLER'),
     maxTimeout: 60000,
     timeoutGap: DefaultVariables.get('MUTA_TIMEOUT_GAP'),
     consensusInterval: DefaultVariables.get('MUTA_CONSENSUS_INTERVAL'),

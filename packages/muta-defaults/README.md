@@ -38,3 +38,10 @@ The HRP(human-readable partition) of [bech32](https://en.bitcoin.it/wiki/Bech32)
 
 - type: string
 - default: muta
+
+### MUTA_GRAPHQL_CALLER
+
+The default GraphQL caller when calling `queryService`
+
+- type: string
+- default: muta1ef58dnhean6ugl7s672ya3tre4h0qgx63nas54

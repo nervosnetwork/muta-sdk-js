@@ -114,7 +114,10 @@ export class Client {
   public async queryService(
     param: QueryServiceParam,
   ): Promise<ServiceResponse> {
-    const res = await this.rawClient.queryService(param);
+    const res = await this.rawClient.queryService({
+      ...param,
+      caller: param.caller ?? this.options.defaultCaller,
+    });
 
     return res.queryService;
   }

@@ -17,7 +17,8 @@ export type DefaultVariableMap = VariableEntry<'MUTA_TIMEOUT_GAP', number> &
   VariableEntry<'MUTA_CONSENSUS_INTERVAL', number> &
   VariableEntry<'MUTA_ENDPOINT', string> &
   VariableEntry<'MUTA_PRIVATE_KEY', string> &
-  VariableEntry<'MUTA_ADDRESS_HRP', string>;
+  VariableEntry<'MUTA_ADDRESS_HRP', string> &
+  VariableEntry<'MUTA_GRAPHQL_CALLER', string>;
 
 const DefaultVariables: DefaultVariableMap = new Map();
 
@@ -38,6 +39,13 @@ DefaultVariables.set(
   ),
 );
 DefaultVariables.set('MUTA_PRIVATE_KEY', envStr('MUTA_PRIVATE_KEY', ''));
-DefaultVariables.set('MUTA_ADDRESS_HRP', envStr('MUTA_ADDRESS_HRP', 'muta'));
+
+const MUTA_ADDRESS_HRP = envStr('MUTA_ADDRESS_HRP', 'muta');
+DefaultVariables.set('MUTA_ADDRESS_HRP', MUTA_ADDRESS_HRP);
+
+DefaultVariables.set(
+  'MUTA_GRAPHQL_CALLER',
+  envStr('MUTA_GRAPHQL_CALLER', 'muta1ef58dnhean6ugl7s672ya3tre4h0qgx63nas54'),
+);
 
 export { DefaultVariables };

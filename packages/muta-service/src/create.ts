@@ -80,7 +80,6 @@ function createReadPrototype<R>(
   options: CreateReadPrototypeOptions,
 ): ReadPrototype<R> {
   const { client, model, serviceName } = options;
-  const rawClient = client.getRawClient();
 
   return Object.keys(model).reduce<ReadPrototype<R>>((r, method) => {
     const query = async <Payload, Ret>(
@@ -88,16 +87,16 @@ function createReadPrototype<R>(
     ): Promise<DeserializedQueryServiceQuery<Ret>> => {
       const { serializePayload, deserializeRet } = model[method];
 
-      const res = await rawClient.queryService({
+      const res = await client.queryService({
         serviceName,
         method,
         payload: payload ? serializePayload(payload) : '',
       });
 
-      const succeed = res.queryService.succeedData;
+      const succeed = res.succeedData;
       const succeedData = (succeed ? deserializeRet(succeed) : {}) as Ret;
       return {
-        ...res.queryService,
+        ...res,
         succeedData,
       };
     };
