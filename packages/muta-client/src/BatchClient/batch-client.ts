@@ -77,6 +77,7 @@ fragment receiptKeys on Receipt {
     events {
       data
       service
+      name
     }
     stateRoot
     response {

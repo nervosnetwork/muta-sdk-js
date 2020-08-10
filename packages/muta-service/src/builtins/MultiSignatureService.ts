@@ -54,7 +54,6 @@ interface SetThresholdPayload {
 
 interface UpdateAccountPayload {
   account_address: Address;
-  new_account_info: GenerateMultiSigAccountPayload;
   owner: Address;
   addr_with_weight: Vec<AddressWithWeight>;
   threshold: u32;
