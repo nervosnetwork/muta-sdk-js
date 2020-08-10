@@ -3,6 +3,7 @@ import { createServiceBindingClass, read } from '../create';
 
 interface ValidatorExtend {
   bls__key: string;
+  pub_key: string;
   address: Address;
   propose_weight: u32;
   vote_weight: u32;
