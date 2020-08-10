@@ -10,6 +10,7 @@ interface ValidatorExtend {
 
 interface Metadata {
   chain_id: Hash;
+  bech32_address_hrp: string;
   common_ref: string;
   timeout_gap: u64;
   cycles_limit: u64;
@@ -20,6 +21,8 @@ interface Metadata {
   prevote_ratio: u64;
   precommit_ratio: u64;
   brake_ratio: u64;
+  tx_num_limit: u64;
+  max_tx_size: u64;
 }
 
 export const MetadataService = createServiceBindingClass({
