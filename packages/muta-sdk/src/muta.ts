@@ -5,11 +5,13 @@ import { Uint64 } from '@mutadev/types';
 import { HDWallet } from '@mutadev/wallet';
 import { Optional } from 'utility-types';
 
-export const getDefaultVariables: DefaultVariableMap['get'] =
-  DefaultVariables.get;
+export const getDefaultVariables: DefaultVariableMap['get'] = DefaultVariables.get.bind(
+  DefaultVariables,
+);
 
-export const setDefaultVariables: DefaultVariableMap['set'] =
-  DefaultVariables.set;
+export const setDefaultVariables: DefaultVariableMap['set'] = DefaultVariables.set.bind(
+  DefaultVariables,
+);
 
 export interface MutaContext {
   /**
