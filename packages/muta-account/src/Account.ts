@@ -44,7 +44,7 @@ import {
  * ```
  */
 export class Account {
-  #privateKey: Buffer;
+  readonly #privateKey: Buffer;
 
   constructor(
     privateKey: Buffer | Bytes = DefaultVariables.get('MUTA_PRIVATE_KEY'),
