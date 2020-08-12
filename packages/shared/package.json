@@ -12,7 +12,9 @@
   ],
   "dependencies": {
     "@types/invariant": "^2.2.4",
+    "@types/warning": "^3.0.0",
     "bignumber.js": "^9.0.0",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "warning": "^4.0.3"
   }
 }
