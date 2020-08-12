@@ -25,5 +25,5 @@ export interface ComposeTransactionParam<P> {
   serviceName: string;
   method: string;
   payload: P;
-  sender: Address;
+  sender?: Address;
 }

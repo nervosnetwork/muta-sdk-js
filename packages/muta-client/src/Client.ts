@@ -1,4 +1,6 @@
+import { Account } from '@mutadev/account';
 import { getSdk } from '@mutadev/client-raw';
+import { invariant } from '@mutadev/shared';
 import {
   Block,
   Hash,
@@ -53,6 +55,10 @@ export class Client {
         cache: 'no-cache',
       }),
     );
+  }
+
+  getAccount(): Account | undefined {
+    return this.options.account;
   }
 
   /**
@@ -174,7 +180,11 @@ export class Client {
       ? param.timeout
       : toHex((await this.getLatestBlockHeight()) + timeoutGap - 1);
 
-    const sender = param.sender;
+    const sender = param.sender ?? this.options.account?.address;
+    invariant(
+      sender !== undefined,
+      `The sender is required when composeTransaction, pass the sender or use the new Client({ account: ... }).composeTransaction without sender`,
+    );
 
     return {
       chainId,
