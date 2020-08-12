@@ -1,5 +1,5 @@
-import { Client } from '@mutadev/client';
 import { Account } from '@mutadev/account';
+import { Client } from '@mutadev/client';
 import { MultiSignatureService } from './MultiSignatureService';
 
 const client = new Client();

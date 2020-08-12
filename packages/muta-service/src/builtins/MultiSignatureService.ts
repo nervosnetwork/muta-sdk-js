@@ -1,103 +1,132 @@
-import { Address, SignedTransaction, u32, Vec } from '@mutadev/types';
-import { createServiceBindingClass, read, write } from '../create';
+import {
+  Address,
+  bool,
+  createServiceClass,
+  Hash,
+  read,
+  String,
+  u32,
+  Vec,
+  write,
+} from '../';
+import { Bytes, u64 } from '../types';
 
-interface GenerateMultiSigAccountPayload {
-  autonomy: boolean;
-  owner: Address;
-  addr_with_weight: Vec<AddressWithWeight>;
-  threshold: u32;
-  memo: string;
-}
+const Account = {
+  address: Address,
+  weight: u32,
+  is_multiple: bool,
+};
 
-interface GenerateMultiSigAccountResponse {
-  address: Address;
-}
+const AddressWithWeight = {
+  address: Address,
+  weight: u32,
+};
 
-interface GetMultiSigAccountPayload {
-  multi_sig_address: Address;
-}
+const GenerateMultiSigAccountPayload = {
+  autonomy: bool,
+  owner: Address,
+  addr_with_weight: Vec(AddressWithWeight),
+  threshold: u32,
+  memo: String,
+};
 
-interface GetMultiSigAccountResponse {
-  permission: MultiSigPermission;
-}
+const GenerateMultiSigAccountResponse = {
+  address: Address,
+};
 
-interface ChangeOwnerPayload {
-  multi_sig_address: Address;
-  new_owner: Address;
-}
+const GetMultiSigAccountPayload = {
+  multi_sig_address: Address,
+};
 
-interface ChangeMemoPayload {
-  multi_sig_address: Address;
-  new_memo: string;
-}
+const MultiSigPermission = {
+  owner: Address,
+  accounts: Vec(Account),
+  threshold: u32,
+  memo: String,
+};
 
-interface AddAccountPayload {
-  multi_sig_address: Address;
-  new_account: Account;
-}
+const GetMultiSigAccountResponse = {
+  permission: MultiSigPermission,
+};
 
-interface RemoveAccountPayload {
-  multi_sig_address: Address;
-  account_address: Address;
-}
+const ChangeOwnerPayload = {
+  multi_sig_address: Address,
+  new_owner: Address,
+};
 
-interface SetAccountWeightPayload {
-  multi_sig_address: Address;
-  account_address: Address;
-  new_weight: number;
-}
+const ChangeMemoPayload = {
+  multi_sig_address: Address,
+  new_memo: String,
+};
 
-interface SetThresholdPayload {
-  multi_sig_address: Address;
-  new_threshold: u32;
-}
+const AddAccountPayload = {
+  multi_sig_address: Address,
+  new_account: Account,
+};
 
-interface UpdateAccountPayload {
-  account_address: Address;
-  owner: Address;
-  addr_with_weight: Vec<AddressWithWeight>;
-  threshold: u32;
-  memo: string;
-}
+const RemoveAccountPayload = {
+  multi_sig_address: Address,
+  account_address: Address,
+};
 
-interface MultiSigPermission {
-  owner: Address;
-  accounts: Vec<Account>;
-  threshold: u32;
-  memo: string;
-}
+const SetAccountWeightPayload = {
+  multi_sig_address: Address,
+  account_address: Address,
+  new_weight: u32,
+};
 
-interface Account {
-  address: Address;
-  weight: number;
-  is_multiple: boolean;
-}
+const SetThresholdPayload = {
+  multi_sig_address: Address,
+  new_threshold: u32,
+};
 
-interface AddressWithWeight {
-  address: Address;
-  weight: number;
-}
+const UpdateAccountPayload = {
+  account_address: Address,
+  owner: Address,
+  addr_with_weight: Vec(AddressWithWeight),
+  threshold: u32,
+  memo: String,
+};
 
-export const MultiSignatureService = createServiceBindingClass({
-  serviceName: 'multi_signature',
-  read: {
-    get_account_from_address: read<
-      GetMultiSigAccountPayload,
-      GetMultiSigAccountResponse
-    >(),
-    verify_signature: read<SignedTransaction, null>(),
-  },
-  write: {
-    generate_account: write<
-      GenerateMultiSigAccountPayload,
-      GenerateMultiSigAccountResponse
-    >(),
-    update_account: write<UpdateAccountPayload, null>(),
-    change_owner: write<ChangeOwnerPayload, null>(),
-    change_memo: write<ChangeMemoPayload, null>(),
-    add_account: write<AddAccountPayload, null>(),
-    remove_account: write<RemoveAccountPayload, Account>(),
-    set_account_weight: write<SetAccountWeightPayload, null>(),
-    set_threshold: write<SetThresholdPayload, null>(),
-  },
+const TransactionRequest = {
+  method: String,
+  service_name: String,
+  payload: String,
+};
+
+const RawTransaction = {
+  chain_id: Hash,
+  cycles_price: u64,
+  cycles_limit: u64,
+  nonce: Hash,
+  request: TransactionRequest,
+  timeout: u64,
+  sender: Address,
+};
+
+const SignedTransaction = {
+  raw: RawTransaction,
+  tx_hash: Hash,
+  pubkey: Bytes,
+  signature: Bytes,
+};
+
+export const MultiSignatureService = createServiceClass('multi_signature', {
+  get_account_from_address: read(
+    GetMultiSigAccountPayload,
+    GetMultiSigAccountResponse,
+  ),
+  verify_signature: read(SignedTransaction, null),
+
+  generate_account: write(
+    GenerateMultiSigAccountPayload,
+    GenerateMultiSigAccountResponse,
+  ),
+  update_account: write(UpdateAccountPayload, null),
+  change_owner: write(ChangeOwnerPayload, null),
+  change_memo: write(ChangeMemoPayload, null),
+  add_account: write(AddAccountPayload, null),
+  remove_account: write(RemoveAccountPayload, Account),
+  set_account_weight: write(SetAccountWeightPayload, null),
+  set_threshold: write(SetThresholdPayload, null),
 });

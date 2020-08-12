@@ -1,74 +1,77 @@
-import { Address, Hash, u64 } from '@mutadev/types';
-import { createServiceBindingClass, read, write } from '../create';
+import {
+  createServiceClass,
+  read,
+  write,
+  Address,
+  Hash,
+  String,
+  u64,
+} from '../';
 
-interface CreateAssetPayload {
-  name: string;
-  symbol: string;
-  supply: u64;
-}
+const CreateAssetPayload = {
+  name: String,
+  symbol: String,
+  supply: u64,
+};
 
-interface GetAssetPayload {
-  id: Hash;
-}
+const GetAssetPayload = {
+  id: Hash,
+};
 
-interface TransferPayload {
-  asset_id: Hash;
-  to: Address;
-  value: u64;
-}
+const TransferPayload = {
+  asset_id: Hash,
+  to: Address,
+  value: u64,
+};
 
-type ApprovePayload = TransferPayload;
+const ApprovePayload = TransferPayload;
 
-interface TransferFromPayload {
-  asset_id: Hash;
-  sender: Address;
-  recipient: Address;
-  value: u64;
-}
+const TransferFromPayload = {
+  asset_id: Hash,
+  sender: Address,
+  recipient: Address,
+  value: u64,
+};
 
-interface GetBalancePayload {
-  asset_id: Hash;
-  user: Address;
-}
+const GetBalancePayload = {
+  asset_id: Hash,
+  user: Address,
+};
 
-interface GetBalanceResponse {
-  asset_id: Hash;
-  user: Address;
-  balance: u64;
-}
+const GetBalanceResponse = {
+  asset_id: Hash,
+  user: Address,
+  balance: u64,
+};
 
-interface GetAllowancePayload {
-  asset_id: Hash;
-  grantor: Address;
-  grantee: Address;
-}
+const GetAllowancePayload = {
+  asset_id: Hash,
+  grantor: Address,
+  grantee: Address,
+};
 
-interface GetAllowanceResponse {
-  asset_id: Hash;
-  grantor: Address;
-  grantee: Address;
-  value: u64;
-}
+const GetAllowanceResponse = {
+  asset_id: Hash,
+  grantor: Address,
+  grantee: Address,
+  value: u64,
+};
 
-interface Asset {
-  id: Hash;
-  name: string;
-  symbol: string;
-  supply: u64;
-  issuer: Address;
-}
+const Asset = {
+  id: Hash,
+  name: String,
+  symbol: String,
+  supply: u64,
+  issuer: Address,
+};
 
-export const AssetService = createServiceBindingClass({
-  serviceName: 'asset',
-  read: {
-    get_asset: read<GetAssetPayload, Asset>(),
-    get_balance: read<GetBalancePayload, GetBalanceResponse>(),
-    get_allowance: read<GetAllowancePayload, GetAllowanceResponse>(),
-  },
-  write: {
-    create_asset: write<CreateAssetPayload, Asset>(),
-    transfer: write<TransferPayload, null>(),
-    approve: write<ApprovePayload, null>(),
-    transfer_from: write<TransferFromPayload, null>(),
-  },
+export const AssetService = createServiceClass('asset', {
+  get_asset: read(GetAssetPayload, Asset),
+  get_balance: read(GetBalancePayload, GetBalanceResponse),
+  get_allowance: read(GetAllowancePayload, GetAllowanceResponse),
+
+  create_asset: write(CreateAssetPayload, Asset),
+  transfer: write(TransferPayload, null),
+  approve: write(ApprovePayload, null),
+  transfer_from: write(TransferFromPayload, null),
 });

@@ -13,6 +13,15 @@ test('test AssetService', async () => {
   const service = new AssetService(client, account);
 
   const supply = 10000;
+
+  await expect(() =>
+    service.write.create_asset({
+      name: '',
+      supply: -1,
+      symbol: '',
+    }),
+  ).rejects.toThrow();
+
   const res = await service.write.create_asset({
     name: Math.random().toString(),
     supply,

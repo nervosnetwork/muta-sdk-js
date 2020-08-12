@@ -16,26 +16,33 @@ export type u64 = typeof u64;
 export const u32 = 'u32' as const;
 export type u32 = typeof u32;
 
-const VecSymbol = Symbol('Vec');
+export const bool = 'bool' as const;
+export type bool = typeof bool;
 
-export type Vec<T> = {
-  [VecSymbol]: true;
+const VecType = 'Vec' as const;
+
+export type Vec<T extends ServiceType> = {
+  [VecType]: true;
   type: T;
 };
 
+export function Vec<T extends ServiceType>(type: T): Vec<T> {
+  return { [VecType]: true, type };
+}
+
+export function isVecType<T>(x: unknown): x is Vec<T> {
+  return (x as Vec<T>)?.[VecType] === true;
+}
+
 type Nested<T> = {
-  [key in keyof T]: ServiceTypes;
+  [key in keyof T]: ServiceType;
 };
 
-export function Vec<T extends ServiceTypes>(type: T): Vec<T> {
-  return { [VecSymbol]: true, type };
+export function isNested(x: unknown): x is Nested<unknown> {
+  return x && typeof x === 'object' && !Array.isArray(x);
 }
 
-export function isVec<T>(x: unknown): x is Vec<T> {
-  return (x as Vec<T>)?.[VecSymbol] === true;
-}
-
-export type ServiceTypes<T = unknown> =
+export type ServiceType<T = unknown> =
   | Bytes
   | Hash
   | u64
