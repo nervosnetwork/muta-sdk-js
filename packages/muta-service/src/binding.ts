@@ -11,7 +11,7 @@ import {
   IWrite,
   IWriteDef,
   ReadMap,
-  ServiceToTS,
+  RustToTS,
   WriteMap,
 } from './def';
 import { ServiceType } from './types';
@@ -52,7 +52,7 @@ function createReadMethods<T>(
   return mapValues<Def<T, IReadDef>, IRead>(defs, (def, method: string) => {
     return async (
       payload: unknown,
-    ): Promise<ServiceResponse<ServiceToTS<unknown>>> => {
+    ): Promise<ServiceResponse<RustToTS<unknown>>> => {
       _validate(def.payloadType, payload);
 
       const res = await client.queryService({
@@ -64,7 +64,7 @@ function createReadMethods<T>(
       const succeed = res.succeedData;
       const succeedData = (succeed
         ? def.deserialize(succeed)
-        : {}) as ServiceToTS<unknown>;
+        : {}) as RustToTS<unknown>;
       return {
         ...res,
         succeedData,
@@ -131,7 +131,7 @@ function createWriteMethods<T>(
     const mutate = (async (
       payload: unknown,
       skipCheck = false,
-    ): Promise<Receipt<ServiceToTS<unknown>>> => {
+    ): Promise<Receipt<RustToTS<unknown>>> => {
       if (!skipCheck) _validate(def.payloadType, payload);
 
       const txHash = await sendTransaction(payload, true);

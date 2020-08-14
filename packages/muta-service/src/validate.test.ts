@@ -1,5 +1,13 @@
 import { BigNumber } from '@mutadev/shared';
-import { Address, ServiceType, String, u64, Vec } from './types';
+import {
+  Address,
+  HashMap,
+  Option,
+  ServiceType,
+  String,
+  u64,
+  Vec,
+} from './types';
 import { validate } from './validate';
 
 function containsErrorMessage(schema: ServiceType, value: unknown): string {
@@ -35,6 +43,21 @@ test('validate with schema', () => {
   containsErrorMessage({ name: String }, { name: '', other: '' });
 });
 
+test('validate Option<T>', () => {
+  withoutErrorMessage(Option(String), null);
+  withoutErrorMessage(Option(String), 'string');
+
+  containsErrorMessage(Option(String), 1);
+});
+
+test('validate HashMap<T>', () => {
+  withoutErrorMessage(HashMap(String), { key: 'value' });
+  withoutErrorMessage(HashMap(String), {});
+
+  containsErrorMessage(HashMap(String), { key: 2 });
+  containsErrorMessage(HashMap(String), { key: undefined });
+});
+
 test('validate with complex schema', () => {
   const schema1 = {
     name: String,
@@ -44,6 +67,7 @@ test('validate with complex schema', () => {
       name: String,
       value: u64,
       vec: Vec({ name: String, value: u64 }),
+      option: Option(String),
     },
   };
   const value1 = {
@@ -54,6 +78,7 @@ test('validate with complex schema', () => {
       name: 'String',
       value: new BigNumber('18446744073709551615'),
       vec: [{ name: 'String', value: 1 }],
+      option: 'string',
     },
   };
 
@@ -64,10 +89,12 @@ test('validate with complex schema', () => {
     nested: {
       name: 'String',
       value: new BigNumber('18446744073709551615'),
-      vec: [{ name: 'String', value: '1' }],
+      vec: [{ name: 'String', value: 'should be number' }],
+      option: 1, // should be string
     },
   };
 
   expect(validate(schema1, value1)).toBeUndefined();
+  console.log(validate(schema1, value2));
   expect(validate(schema1, value2)).not.toBeUndefined();
 });

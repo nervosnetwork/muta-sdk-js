@@ -5,7 +5,9 @@ import {
   Address,
   Bytes,
   Hash,
-  isNested,
+  isHashMapType,
+  isNestedType,
+  isOptionType,
   isVecType,
   ServiceType,
   String,
@@ -51,6 +53,9 @@ export function validate(
     if (!(isValidHexString(value) || (value as string).length === 66)) {
       return `${value} should be a 32 bytes hash formatted as 66 length hex string starts with 0x`;
     }
+  } else if (isOptionType(schema)) {
+    if (value == null) return undefined;
+    return validate(schema.type as ServiceType, value);
   } else if (isVecType(schema)) {
     if (!Array.isArray(value)) {
       return `${value} should be an array`;
@@ -60,7 +65,14 @@ export function validate(
       if (error) return `invalid value in Vec: ${error}`;
       return validate(schema.type as ServiceType, item);
     }, undefined);
-  } else if (isNested(schema)) {
+  } else if (isHashMapType(schema)) {
+    return Object.values(value as Record<string, unknown>).reduce<
+      string | undefined
+    >((error, item) => {
+      if (error) return `invalid value in HashMap: ${error}`;
+      return validate(schema.type as ServiceType, item);
+    }, undefined);
+  } else if (isNestedType(schema)) {
     const types = Object.entries(schema as Record<string, ServiceType>);
     const values = Object.entries(value as Record<string, unknown>);
 
@@ -74,10 +86,12 @@ export function validate(
       return message;
     }
 
+    let nest = 0;
     return types.reduce<undefined | string>((error, [key, type]) => {
       const message = validate(type, (value as Record<string, unknown>)[key]);
       if (message) {
-        error = (error ?? '') + `${key} is invalid: ${message}`;
+        const pad = `${'  '.repeat(nest++)}`;
+        error = (error ?? '') + `\n${pad}${key} is invalid: ${message}`;
       }
       return error;
     }, undefined);

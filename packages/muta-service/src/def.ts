@@ -1,34 +1,60 @@
 import { BigNumber } from '@mutadev/shared';
-import { Receipt, ServiceResponse, Transaction } from '@mutadev/types';
+import { Maybe, Receipt, ServiceResponse, Transaction } from '@mutadev/types';
 import { safeParseJSON, safeStringifyJSON } from '@mutadev/utils';
-import { Address, bool, Bytes, Hash, String, u32, u64, Vec } from './types';
+import {
+  Address,
+  bool,
+  Bytes,
+  Hash,
+  HashMap,
+  Option,
+  String,
+  u32,
+  u64,
+  Vec,
+} from './types';
 
 // eslint-disable-next-line
-type JSONString = Hash | Bytes | Address | String;
+type StringType = Hash | Bytes | Address | String;
+
+type _DynType =
+  | string
+  | number
+  | BigNumber
+  | boolean
+  | _DynType[]
+  | { [key: string]: _DynType };
 
 // @formatter:off
 // prettier-ignore
 // mapping Rust service type definition to TypeScript definition
-export type ServiceToTS<T> =
-     T extends JSONString ? string
+export type RustToTS<T> =
+     T extends StringType ? string
    : T extends u32 ? number
    : T extends u64 ? BigNumber | number
    : T extends bool ? boolean
-   : T extends Vec<infer P> ? ServiceToTS<P>[]
-   : T extends Record<keyof T, unknown> ? {[key in keyof T] : ServiceToTS<T[key]>}
+   // TODO wait for this PR merged
+   //  https://github.com/microsoft/TypeScript/pull/40002
+   // : T extends Option<infer P> ? Maybe<RustToTS<P>>
+   : T extends Option<unknown> ? Maybe<_DynType>
+   : T extends Vec<infer P> ? RustToTS<P>[]
+   : T extends HashMap<infer P> ? {[key: string]: RustToTS<P>}
+   : T extends Record<keyof T, unknown> ? {[key in keyof T] : RustToTS<T[key]>}
    : unknown;
 // @formatter:on
 
 export type IRead<P = unknown, R = unknown> = P extends null
-  ? () => Promise<ServiceResponse<ServiceToTS<R>>>
-  : (p: ServiceToTS<P>) => Promise<ServiceResponse<ServiceToTS<R>>>;
+  ? () => Promise<ServiceResponse<RustToTS<R>>>
+  : (p: RustToTS<P>) => Promise<ServiceResponse<RustToTS<R>>>;
 
 type SendTransactionAndWaitReceipt<P, R> = P extends null
   ? () => Promise<Receipt<R>>
-  : (payload: ServiceToTS<P>) => Promise<Receipt<R>>;
+  : (payload: RustToTS<P>) => Promise<Receipt<R>>;
 
-export type IWrite<P = unknown, R = unknown> =
-  SendTransactionAndWaitReceipt<P, R> & {
+export type IWrite<P = unknown, R = unknown> = SendTransactionAndWaitReceipt<
+  P,
+  R
+> & {
   sendTransaction: (payload: P) => Promise<string>;
   composeTransaction: (payload: P) => Promise<Transaction>;
 };
