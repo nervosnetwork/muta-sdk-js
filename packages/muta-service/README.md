@@ -50,16 +50,11 @@ impl AssetService {
 ### 3. Mapping The Service To TypeScript
 
 ```ts
-import { createServiceBindingClass, read, write } from '@mutadev/service';
+import { createServiceClass, read, write } from '@mutadev/service';
 
-const AssetService = createServiceBindingClass({
-  serviceName: 'asset',
-  read: {
-    get_asset: read<GetAssetPayload, Asset>(),
-  },
-  write: {
-    create_asset: write<CreateAssetPayload, Asset>(),
-  },
+const AssetService = createServiceBindingClass('asset', {
+  get_asset: read(GetAssetPayload, Asset),
+  create_asset: write(CreateAssetPayload, Asset),
 });
 ```
 
@@ -87,27 +82,41 @@ pub struct CreateAssetPayload {
 
 ### 5. Mapping Types From Rust To TypeScript
 
-Follow the [types mapping](../muta-types), we could bind the Rust types on TypeScript
+Follow the types mapping we can bind the Rust types on TypeScript
+
+| Rust           | Definition     | Payload(JSON)         |
+| -------------- | -------------- | --------------------- |
+| u32            | u32            | Number                |
+| u64            | u64            | Number                |
+| String         | Bytes          | String                |
+| Bytes          | String         | String(hex formatted) |
+| Address        | String         | String(hex formatted) |
+| Hash           | String         | String(hex formatted) |
+| Vec\<T>        | Vec\<T>        | Array                 |
+| HashMap\<K, V> | HashMap\<K, V> | Object                |
+
+
+
 
 ```ts
-import { Hash, u64, Address } from '@mutadev/types';
+import { Hash, u64, Address, String } from '@mutadev/service';
 
-interface GetAssetPayload {
-  id: Hash;
+const GetAssetPayload = {
+  id: Hash,
+};
+
+const Asset = {
+  id: Hash,
+  name: String,
+  symbol: String,
+  supply: u64,
+  issuer: Address,
 }
 
-interface Asset {
-  id: Hash;
-  name: string;
-  symbol: string;
-  supply: u64;
-  issuer: Address;
-}
-
-interface CreateAssetPayload {
-  name: string;
-  symbol: string;
-  supply: u64;
+const CreateAssetPayload = {
+  name: String,
+  symbol: String,
+  supply: u64,
 }
 ```
 
