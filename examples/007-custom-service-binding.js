@@ -1,14 +1,35 @@
-const { createServiceBindingClass, read, write } = require('@mutadev/service');
+const {
+  createServiceClass,
+  read,
+  write,
+  Hash,
+  u64,
+  Address,
+  String,
+} = require('@mutadev/service');
+
+const GetAssetPayload = {
+  id: Hash,
+};
+
+const Asset = {
+  id: Hash,
+  name: String,
+  symbol: String,
+  supply: u64,
+  issuer: Address,
+};
+
+const CreateAssetPayload = {
+  name: String,
+  symbol: String,
+  supply: u64,
+};
 
 // recommend using TypeScript to create binding
-const AssetService = createServiceBindingClass({
-  serviceName: 'asset',
-  read: {
-    get_asset: read(),
-  },
-  write: {
-    create_asset: write(),
-  },
+const AssetService = createServiceClass('asset', {
+  get_asset: read(),
+  create_asset: write(),
 });
 
 // same with example-006
