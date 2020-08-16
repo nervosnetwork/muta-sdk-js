@@ -48,8 +48,8 @@ export type IRead<P = unknown, R = unknown> = P extends null
   : (p: RustToTS<P>) => Promise<ServiceResponse<RustToTS<R>>>;
 
 type SendTransactionAndWaitReceipt<P, R> = P extends null
-  ? () => Promise<Receipt<R>>
-  : (payload: RustToTS<P>) => Promise<Receipt<R>>;
+  ? () => Promise<Receipt<RustToTS<R>>>
+  : (payload: RustToTS<P>) => Promise<Receipt<RustToTS<R>>>;
 
 export type IWrite<P = unknown, R = unknown> = SendTransactionAndWaitReceipt<
   P,
