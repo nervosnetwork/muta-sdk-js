@@ -28,8 +28,8 @@ const CreateAssetPayload = {
 
 // recommend using TypeScript to create binding
 const AssetService = createServiceClass('asset', {
-  get_asset: read(),
-  create_asset: write(),
+  get_asset: read(GetAssetPayload, Asset),
+  create_asset: write(CreateAssetPayload, Asset),
 });
 
 // same with example-006
