@@ -39,7 +39,7 @@ interface EncodedEncryption {
 /**
  * decode RPL encoded encryption
  * @example
- *
+ * ```javascript
  * // decode signed transaction encryption
  * const signedTransaction = signTransaction(...);
  * const decoded1 = decodeEncryption(signedTransaction)
@@ -49,7 +49,7 @@ interface EncodedEncryption {
  *   signature: '0x...',
  *   pubkey: '0x...',
  * }, toHex)
- *
+ *```
  * @throws Error
  */
 export function decodeEncryption<T = Buffer>(
