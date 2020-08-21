@@ -1,3 +1,4 @@
+import { BigNumber } from '@mutadev/shared';
 import { toHex } from './bytes';
 
 test('test toHex', () => {
@@ -15,6 +16,10 @@ test('test toHex', () => {
   expect(toHex(16)).toBe('0x10');
   expect(() => toHex(NaN)).toThrow();
   expect(() => toHex(Infinity)).toThrow();
+
+  expect(toHex(new BigNumber('1'))).toBe('0x01');
+  expect(toHex(new BigNumber(16))).toBe('0x10');
+  expect(toHex(new BigNumber('0xfff'))).toBe('0x0fff');
 
   expect(toHex(Buffer.from('ffff', 'hex'))).toBe('0xffff');
 });

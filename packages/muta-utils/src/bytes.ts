@@ -14,6 +14,18 @@ export function rm0x(hex: string): string {
   return startsWith0x(hex) ? hex.slice(2) : hex;
 }
 
+/**
+ * pad a hex string to an even length
+ *
+ * @example
+ * ```js
+ * pad0x('1') // 0x01
+ * pad0x('001') // 0x0001
+ * pad0x('10') // 0x10
+ * ```
+ *
+ * @param x
+ */
 function pad0x(x: string): string {
   const isEven = x.length % 2 === 0;
   const isStartsWith0x = startsWith0x(x);
@@ -66,6 +78,7 @@ export function toHex(
       !x.isNaN() && x.isFinite(),
       `can't parse BigNumber(${x}) to Hex, it is not a valid BigNumber`,
     );
+    return pad0x(x.toString(16));
   }
   return pad0x(Buffer.from(x).toString('hex'));
 }
