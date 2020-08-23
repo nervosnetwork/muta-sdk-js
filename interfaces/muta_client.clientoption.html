@@ -96,6 +96,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#account" class="tsd-kind-icon">account</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#chainid" class="tsd-kind-icon">chain<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#consensusinterval" class="tsd-kind-icon">consensus<wbr>Interval</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#defaultcaller" class="tsd-kind-icon">default<wbr>Caller</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#defaultcyclesprice" class="tsd-kind-icon">default<wbr>Cycles<wbr>Price</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="muta_client.clientoption.html#endpoint" class="tsd-kind-icon">endpoint</a></li>
@@ -115,7 +116,7 @@
 					<div class="tsd-signature tsd-kind-icon">account<span class="tsd-signature-symbol">:</span> <a href="../classes/muta_account.account.html" class="tsd-signature-type">Account</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L48">muta-client/src/options.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L53">muta-client/src/options.ts:53</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -131,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">chain<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L14">muta-client/src/options.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L14">muta-client/src/options.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -141,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">consensus<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L36">muta-client/src/options.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L41">muta-client/src/options.ts:41</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -151,12 +152,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="defaultcaller" class="tsd-anchor"></a>
+					<h3>default<wbr>Caller</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Caller<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#address-1" class="tsd-signature-type">Address</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L19">muta-client/src/options.ts:19</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>default caller field in <a href="../classes/muta_client.client.html#queryservice">Client.queryService</a></p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="defaultcycleslimit" class="tsd-anchor"></a>
 					<h3>default<wbr>Cycles<wbr>Limit</h3>
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Limit<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L20">muta-client/src/options.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L25">muta-client/src/options.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Cycles<wbr>Price<span class="tsd-signature-symbol">:</span> <a href="../modules/muta_types.html#uint64" class="tsd-signature-type">Uint64</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L26">muta-client/src/options.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L31">muta-client/src/options.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +204,7 @@
 					<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L12">muta-client/src/options.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L12">muta-client/src/options.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -198,7 +214,7 @@
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L42">muta-client/src/options.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L47">muta-client/src/options.ts:47</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -214,7 +230,7 @@
 					<div class="tsd-signature tsd-kind-icon">serializer<span class="tsd-signature-symbol">:</span> <a href="muta_client.serializer.html" class="tsd-signature-type">Serializer</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L50">muta-client/src/options.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L55">muta-client/src/options.ts:55</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -224,7 +240,7 @@
 					<div class="tsd-signature tsd-kind-icon">timeout<wbr>Gap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-client/src/options.ts#L31">muta-client/src/options.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-client/src/options.ts#L36">muta-client/src/options.ts:36</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -285,6 +301,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="muta_client.clientoption.html#consensusinterval" class="tsd-kind-icon">consensus<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="muta_client.clientoption.html#defaultcaller" class="tsd-kind-icon">default<wbr>Caller</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="muta_client.clientoption.html#defaultcycleslimit" class="tsd-kind-icon">default<wbr>Cycles<wbr>Limit</a>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ServiceClass | muta-sdk</title>
+	<title>IServiceConstructor | muta-sdk</title>
 	<meta name="description" content="Documentation for muta-sdk">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/muta_service.html">muta-service</a>
 				</li>
 				<li>
-					<a href="muta_service.serviceclass.html">ServiceClass</a>
+					<a href="muta_service.iserviceconstructor.html">IServiceConstructor</a>
 				</li>
 			</ul>
-			<h1>Interface ServiceClass&lt;R, W&gt;</h1>
+			<h1>Interface IServiceConstructor&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -73,10 +73,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>R</h4>
-					</li>
-					<li>
-						<h4>W</h4>
+						<h4>T</h4>
 					</li>
 				</ul>
 			</section>
@@ -84,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ServiceClass</span>
+						<span class="target">IServiceConstructor</span>
 					</li>
 				</ul>
 			</section>
@@ -95,7 +92,7 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-interface"><a href="muta_service.serviceclass.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-interface"><a href="muta_service.iserviceconstructor.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 					</div>
@@ -107,13 +104,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Service<wbr>Class<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">?: </span><a href="../classes/muta_client.client.html" class="tsd-signature-type">Client</a>, account<span class="tsd-signature-symbol">?: </span><a href="muta_service.account.html" class="tsd-signature-type">Account</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="muta_service.serviceprototype.html" class="tsd-signature-type">ServicePrototype</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">W</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">new IService<wbr>Constructor<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">?: </span><a href="../classes/muta_client.client.html" class="tsd-signature-type">Client</a>, account<span class="tsd-signature-symbol">?: </span><a href="../modules/muta_service.html#account" class="tsd-signature-type">Account</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/muta_service.html#iservice" class="tsd-signature-type">IService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/db350c5/packages/muta-service/src/create.ts#L277">muta-service/src/create.ts:277</a></li>
+									<li>Defined in <a href="https://github.com/nervosnetwork/muta-sdk-js/blob/f7d28f8/packages/muta-service/src/binding.ts#L22">muta-service/src/binding.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -122,10 +119,10 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> client: <a href="../classes/muta_client.client.html" class="tsd-signature-type">Client</a></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> account: <a href="muta_service.account.html" class="tsd-signature-type">Account</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> account: <a href="../modules/muta_service.html#account" class="tsd-signature-type">Account</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="muta_service.serviceprototype.html" class="tsd-signature-type">ServicePrototype</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">W</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/muta_service.html#iservice" class="tsd-signature-type">IService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -171,10 +168,10 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="muta_service.serviceclass.html" class="tsd-kind-icon">Service<wbr>Class</a>
+						<a href="muta_service.iserviceconstructor.html" class="tsd-kind-icon">IService<wbr>Constructor</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-interface">
-								<a href="muta_service.serviceclass.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="muta_service.iserviceconstructor.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 						</ul>
 					</li>
