@@ -1,6 +1,6 @@
 {
   "name": "@mutadev/utils",
-  "version": "0.2.0-rc.0",
+  "version": "0.2.0-rc.0.1",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -11,9 +11,9 @@
     "src"
   ],
   "dependencies": {
-    "@mutadev/defaults": "0.2.0-rc.0",
-    "@mutadev/shared": "0.2.0-rc.0",
-    "@mutadev/types": "0.2.0-rc.0",
+    "@mutadev/defaults": "0.2.0-rc.0.1",
+    "@mutadev/shared": "0.2.0-rc.0.1",
+    "@mutadev/types": "0.2.0-rc.0.1",
     "bech32": "^1.1.4",
     "json-bigint": "^0.3.0",
     "keccak": "^3.0.0",
