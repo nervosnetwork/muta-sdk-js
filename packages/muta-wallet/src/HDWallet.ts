@@ -1,10 +1,14 @@
-import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
-import HDKey from 'hdkey';
 import { Account } from '@mutadev/account';
 import { toHex } from '@mutadev/utils';
+import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
+import HDKey from 'hdkey';
 import { SyncWallet } from './SyncWallet';
 
-export const COIN_TYPE = 918;
+export const DEFAULT_COIN_TYPE = 918;
+
+export interface HDWalletOptions {
+  coinType?: number;
+}
 
 /**
  * An HDWallet inside Muta JS SDK.
@@ -37,21 +41,25 @@ export class HDWallet implements SyncWallet {
     return generateMnemonic();
   }
 
-  private static getHDPath(accountIndex: number): string {
-    return `m/44'/${COIN_TYPE}'/${accountIndex}'/0/0`;
+  private static getHDPath(
+    accountIndex: number,
+    coinType = DEFAULT_COIN_TYPE,
+  ): string {
+    return `m/44'/${coinType}'/${accountIndex}'/0/0`;
   }
 
-  private readonly mnemonic: string;
-  private readonly masterNode: HDKey;
+  readonly #masterNode: HDKey;
+  private readonly coinType: number;
 
   /**
    * generate an HDWallet from given mnemonic
    * @param mnemonic string, 12 English word split by space
+   * @param options
    */
-  constructor(mnemonic: string) {
-    this.mnemonic = mnemonic;
-    const seed = mnemonicToSeedSync(this.mnemonic);
-    this.masterNode = HDKey.fromMasterSeed(seed);
+  constructor(mnemonic: string, options?: HDWalletOptions) {
+    const seed = mnemonicToSeedSync(mnemonic);
+    this.#masterNode = HDKey.fromMasterSeed(seed);
+    this.coinType = options?.coinType ?? DEFAULT_COIN_TYPE;
   }
 
   /**
@@ -60,13 +68,14 @@ export class HDWallet implements SyncWallet {
    * @param accountIndex the accountIndex in the Path, please refer to bip-0044
    */
   public derivePrivateKey(accountIndex: number): Buffer {
-    const hdNode = this.masterNode.derive(HDWallet.getHDPath(accountIndex));
+    const hdPath = HDWallet.getHDPath(accountIndex, this.coinType);
+    const hdNode = this.#masterNode.derive(hdPath);
     return hdNode.privateKey;
   }
 
   /**
    * Get the Account with with accountIndex in the `m/44'/${COIN_TYPE}'/${accountIndex}'/0/0`
-   * the private key is in the return [[Account]]
+   * the private key is in the return {@link Account}
    * @param accountIndex the accountIndex in the Path, please refer to bip-0044
    */
   public deriveAccount(accountIndex: number): Account {
