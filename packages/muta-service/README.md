@@ -95,9 +95,6 @@ Follow the types mapping we can bind the Rust types on TypeScript
 | Vec\<T>        | Vec\<T>        | Array                 |
 | HashMap\<K, V> | HashMap\<K, V> | Object                |
 
-
-
-
 ```ts
 import { Hash, u64, Address, String } from '@mutadev/service';
 
@@ -111,13 +108,13 @@ const Asset = {
   symbol: String,
   supply: u64,
   issuer: Address,
-}
+};
 
 const CreateAssetPayload = {
   name: String,
   symbol: String,
   supply: u64,
-}
+};
 ```
 
 ### Finally, Try Our Binding

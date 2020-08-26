@@ -62,9 +62,9 @@ function createReadMethods<T>(
       });
 
       const succeed = res.succeedData;
-      const succeedData = (succeed
-        ? def.deserialize(succeed)
-        : {}) as RustToTS<unknown>;
+      const succeedData = (succeed ? def.deserialize(succeed) : {}) as RustToTS<
+        unknown
+      >;
       return {
         ...res,
         succeedData,
