@@ -1,16 +1,11 @@
 import { Account } from '@mutadev/account';
-import { Client } from '@mutadev/client';
 import { BigNumber } from '@mutadev/shared';
 import { AssetService } from './AssetService';
 
-const account = new Account(
-  '0x1000000000000000000000000000000000000000000000000000000000000000',
-);
-
-const client = new Client();
+const account = new Account();
 
 test('test AssetService', async () => {
-  const service = new AssetService(client, account);
+  const service = new AssetService();
 
   const supply = 10000;
 

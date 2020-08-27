@@ -1,12 +1,7 @@
 import { Account } from '@mutadev/account';
-import { Client } from '@mutadev/client';
 import { MultiSignatureService } from './MultiSignatureService';
 
-const client = new Client();
-
-const account1 = new Account(
-  '0x0000000000000000000000000000000000000000000000000000000000000001',
-);
+const account1 = new Account();
 const account2 = new Account(
   '0x0000000000000000000000000000000000000000000000000000000000000002',
 );
@@ -15,7 +10,7 @@ const account3 = new Account(
 );
 
 test('test MultiSignatureService', async () => {
-  const service = new MultiSignatureService(client, account1);
+  const service = new MultiSignatureService();
   const receipt = await service.write.generate_account({
     autonomy: false,
     addr_with_weight: [

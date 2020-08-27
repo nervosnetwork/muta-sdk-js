@@ -1,3 +1,5 @@
+const { join } = require('path');
+
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -5,7 +7,8 @@ module.exports = {
   testMatch: ['<rootDir>/**/*.(test|e2e).ts'],
   globals: {
     'ts-jest': {
-      tsConfig: 'tsconfig.test.json'
-    }
+      tsConfig: 'tsconfig.test.json',
+    },
   },
+  globalSetup: join(__dirname, 'jest.setup.js'),
 };
