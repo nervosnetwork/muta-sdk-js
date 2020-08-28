@@ -95,6 +95,5 @@ test('validate with complex schema', () => {
   };
 
   expect(validate(schema1, value1)).toBeUndefined();
-  console.log(validate(schema1, value2));
   expect(validate(schema1, value2)).not.toBeUndefined();
 });
