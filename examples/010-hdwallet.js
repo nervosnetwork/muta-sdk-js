@@ -5,7 +5,9 @@ const { HDWallet } = require('@mutadev/wallet');
 // muta.setDefaultVariables('MUTA_ADDRESS_HRP', 'mc');
 
 function main() {
-  const wallet = new HDWallet(HDWallet.generateMnemonic());
+  const mnemonic = HDWallet.generateMnemonic();
+  console.log('mnemonic :[' + mnemonic + ']');
+  const wallet = new HDWallet(mnemonic);
   const account0 = wallet.deriveAccount(0);
   console.log('my address0 is: ' + account0.address);
 
