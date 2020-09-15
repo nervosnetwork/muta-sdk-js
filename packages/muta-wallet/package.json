@@ -1,6 +1,6 @@
 {
   "name": "@mutadev/wallet",
-  "version": "0.2.0-rc.2",
+  "version": "0.2.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "author": "homura <homura.dev@gmail.com>",
@@ -11,8 +11,8 @@
     "src"
   ],
   "dependencies": {
-    "@mutadev/account": "0.2.0-rc.2",
-    "@mutadev/utils": "0.2.0-rc.2",
+    "@mutadev/account": "0.2.0",
+    "@mutadev/utils": "0.2.0",
     "bip39": "^3.0.2",
     "hdkey": "^1.1.1"
   },
