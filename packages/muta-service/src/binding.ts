@@ -1,8 +1,8 @@
-import { Account, tryGetDefaultAccount } from '@mutadev/account';
+import { Account } from '@mutadev/account';
 import { Client, retry } from '@mutadev/client';
 import { invariant, warning } from '@mutadev/shared';
 import { Receipt, ServiceResponse, Transaction } from '@mutadev/types';
-import { mapValues, pickBy } from 'lodash';
+import { mapValues, pickBy, upperFirst } from 'lodash';
 import {
   IRead,
   IReadDef,
@@ -86,22 +86,6 @@ function createWriteMethods<T>(
   const { serviceName, client, defs } = options;
 
   return mapValues(defs, (def, method: string) => {
-    function getAccount(): Account {
-      let account;
-      if (!account) {
-        try {
-          account =
-            options.account ?? client.getAccount() ?? tryGetDefaultAccount();
-        } catch (e) {
-          invariant(
-            account,
-            'account is required when calling #[write] method in service',
-          );
-        }
-      }
-      return account;
-    }
-
     async function composeTransaction<Payload>(
       payload: Payload,
       skipCheck = false,
@@ -112,7 +96,7 @@ function createWriteMethods<T>(
         serviceName,
         method,
         payload,
-        sender: getAccount().address,
+        sender: options.account?.address,
       });
     }
 
@@ -121,9 +105,14 @@ function createWriteMethods<T>(
       skipCheck = false,
     ): Promise<string> {
       if (!skipCheck) _validate(def.payloadType, payload);
+      const account = options.account;
+      invariant(
+        account !== undefined,
+        'An account is required when sendTransaction via service',
+      );
 
       const tx = await composeTransaction(payload, true);
-      const signedTx = getAccount().signTransaction(tx);
+      const signedTx = account.signTransaction(tx);
 
       return client.sendTransaction(signedTx);
     }
@@ -164,9 +153,11 @@ export function createServiceClass<
     write = {} as WriteMap<Defs>;
 
     constructor(client: Client = new Client(), account?: Account) {
+      const clientAddress = client.getAccount()?.address;
+      const serviceClassName = upperFirst(serviceName);
       warning(
-        account === undefined,
-        `DEPRECATED: new SomeService(client, account) will be deprecated in the future, please migrate to new SomeService(new Client({ account: ... }))`,
+        account === undefined || account.address !== clientAddress,
+        `DEPRECATED: new ${serviceClassName}Service(client, account) will be deprecated in the future, please migrate to new SomeService(new Client({ account: ... }))`,
       );
 
       Object.assign(
@@ -181,7 +172,7 @@ export function createServiceClass<
         this.write,
         createWriteMethods({
           defs: pickBy(serviceDef, isWriteDef),
-          account,
+          account: account ?? client.getAccount(),
           client,
           serviceName,
         }),
