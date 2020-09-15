@@ -1,1 +1,1 @@
-export { Account, tryGetDefaultAccount } from './Account';
+export { Account } from './Account';

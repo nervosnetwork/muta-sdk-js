@@ -83,7 +83,7 @@ export class Account {
   /**
    *
    * @param privateKey, hex string starts with 0x, the private is 32 bytes
-   * @return [[Account]]
+   * @return {@link Account}
    */
   public static fromPrivateKey(privateKey: string): Account {
     return new Account(toBuffer(privateKey));
@@ -107,13 +107,4 @@ export class Account {
       txHash,
     };
   }
-}
-
-/**
- * try to get a default account
- * @internal
- * @throws
- */
-export function tryGetDefaultAccount(): Account {
-  return new Account();
 }
