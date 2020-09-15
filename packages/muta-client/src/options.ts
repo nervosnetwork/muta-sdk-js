@@ -56,7 +56,16 @@ export interface ClientOption {
 }
 
 export function getDefaultClientOption(): ClientOption {
+  let account: Account | undefined;
+
+  try {
+    account = new Account();
+  } catch {
+    account = undefined;
+  }
+
   return {
+    account,
     endpoint: DefaultVariables.get('MUTA_ENDPOINT'),
     chainId: DefaultVariables.get('MUTA_CHAIN_ID'),
     defaultCyclesPrice: '0xffffff',
