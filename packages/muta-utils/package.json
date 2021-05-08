@@ -15,7 +15,7 @@
     "@mutadev/shared": "0.2.0",
     "@mutadev/types": "0.2.0",
     "bech32": "^1.1.4",
-    "json-bigint": "^0.3.0",
+    "json-bigint": "^1.0.0",
     "keccak": "^3.0.0",
     "randombytes": "^2.1.0",
     "rlp": "^2.2.5",
